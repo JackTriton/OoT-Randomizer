@@ -81,9 +81,6 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
     if world.no_collectible_hearts:
         rom.write_byte(0xA895B7, 0x2E)
 
-    # Force language to be English in the event a Japanese rom was submitted
-    rom.write_byte(0x3E, 0x45)
-    rom.force_patch.append(0x3E)
 
     # Increase the instance size of Bombchus prevent the heap from becoming corrupt when
     # a Dodongo eats a Bombchu. Does not fix stale pointer issues with the animation
@@ -709,7 +706,7 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
         rom.write_byte(address,0x01)
 
     # Allow Warp Songs in additional places
-    rom.write_byte(0xB6D3D2, 0x00) # Gerudo Training Ground
+    rom.write_byte(0xB6D3D2, 0x00) # Gerudo Training Grounds
     rom.write_byte(0xB6D42A, 0x00) # Inside Ganon's Castle
 
     #Tell Sheik at Ice Cavern we are always an Adult
@@ -718,10 +715,10 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
     rom.write_int32(0xc7BCA4, 0x00000000)
 
     # Allow Farore's Wind in dungeons where it's normally forbidden
-    rom.write_byte(0xB6D3D3, 0x00) # Gerudo Training Ground
+    rom.write_byte(0xB6D3D3, 0x00) # Gerudo Training Grounds
     rom.write_byte(0xB6D42B, 0x00) # Inside Ganon's Castle
 
-    # Remove disruptive text from Gerudo Training Ground and early Shadow Temple (vanilla)
+    # Remove disruptive text from Gerudo Training Grounds and early Shadow Temple (vanilla)
     Wonder_text = [0x27C00BC, 0x27C00CC, 0x27C00DC, 0x27C00EC, 0x27C00FC, 0x27C010C, 0x27C011C, 0x27C012C, 0x27CE080,
                    0x27CE090, 0x2887070, 0x2887080, 0x2887090, 0x2897070, 0x28C7134, 0x28D91BC, 0x28A60F4, 0x28AE084,
                    0x28B9174, 0x28BF168, 0x28BF178, 0x28BF188, 0x28A1144, 0x28A6104, 0x28D0094]
@@ -1003,10 +1000,7 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
 
     if world.skip_child_zelda:
         save_context.give_item('Zeldas Letter')
-        for w in spoiler.worlds:
-            item = w.get_location('Song from Impa').item
-            if world.id == item.world.id:
-                save_context.give_raw_item(item.name)
+        save_context.give_raw_item(world.get_location('Song from Impa').item.name)
         save_context.write_bits(0x0ED7, 0x04) # "Obtained Malon's Item"
         save_context.write_bits(0x0ED7, 0x08) # "Woke Talon in castle"
         save_context.write_bits(0x0ED7, 0x10) # "Talon has fled castle"
@@ -1196,7 +1190,7 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
     if world.dungeon_mq['Ice Cavern']:
         mq_scenes.append(9)
     # Scene 10 has no layout changes, so it doesn't need to be patched
-    if world.dungeon_mq['Gerudo Training Ground']:
+    if world.dungeon_mq['Gerudo Training Grounds']:
         mq_scenes.append(11)
     if world.dungeon_mq['Ganons Castle']:
         mq_scenes.append(13)
@@ -1273,20 +1267,6 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
     new_message = "\x08What should I do!?\x01My \x05\x41Cuccos\x05\x40 have all flown away!\x04You, little boy, please!\x01Please gather at least \x05\x41%d Cuccos\x05\x40\x01for me.\x02" % world.chicken_count
     update_message_by_id(messages, 0x5036, new_message)
 
-    # Update "Princess Ruto got the Spiritual Stone!" text before the midboss in Jabu
-    reward_text = {'Kokiri Emerald':   "\x05\x42Kokiri Emerald\x05\x40",
-                   'Goron Ruby':       "\x05\x41Goron Ruby\x05\x40",
-                   'Zora Sapphire':    "\x05\x43Zora Sapphire\x05\x40",
-                   'Forest Medallion': "\x05\x42Forest Medallion\x05\x40",
-                   'Fire Medallion':   "\x05\x41Fire Medallion\x05\x40",
-                   'Water Medallion':  "\x05\x43Water Medallion\x05\x40",
-                   'Spirit Medallion': "\x05\x46Spirit Medallion\x05\x40",
-                   'Shadow Medallion': "\x05\x45Shadow Medallion\x05\x40",
-                   'Light Medallion':  "\x05\x44Light Medallion\x05\x40"
-    }
-    new_message = "\x1a\x08Princess Ruto got the \x01%s!\x09\x01\x14\x02But\x14\x00 why Princess Ruto?\x02" % reward_text[world.get_location('Barinade').item.name]
-    update_message_by_id(messages, 0x4050, new_message)
-
     # use faster jabu elevator
     if not world.dungeon_mq['Jabu Jabus Belly'] and world.shuffle_scrubs == 'off':
         symbol = rom.sym('JABU_ELEVATOR_ENABLE')
@@ -1316,8 +1296,7 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
 
 
     # build silly ganon lines
-    if world.misc_hints:
-        buildGanonText(world, messages)
+    buildGanonText(world, messages)
 
     # Write item overrides
     override_table = get_override_table(world)
@@ -1549,11 +1528,8 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
         set_deku_salesman_data(rom)
 
     # Update scrub messages.
-    shuffle_messages.scrubs_message_ids = []
     for text_id, message in scrub_message_dict.items():
         update_message_by_id(messages, text_id, message)
-        if world.shuffle_scrubs == 'random':
-            shuffle_messages.scrubs_message_ids.append(text_id)
 
     if world.shuffle_grotto_entrances:
         # Build the Grotto Load Table based on grotto entrance data
@@ -1665,7 +1641,7 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
                         'Shadow Temple':      ("the \x05\x45Shadow Temple", 'Bongo Bongo', 0x7f, 0xa3),
         }
         for dungeon in world.dungeon_mq:
-            if dungeon in ['Gerudo Training Ground', 'Ganons Castle']:
+            if dungeon in ['Gerudo Training Grounds', 'Ganons Castle']:
                 pass
             elif dungeon in ['Bottom of the Well', 'Ice Cavern']:
                 dungeon_name, boss_name, compass_id, map_id = dungeon_list[dungeon]
@@ -1694,7 +1670,7 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
     # Set hints on the altar inside ToT
     rom.write_int16(0xE2ADB2, 0x707A)
     rom.write_int16(0xE2ADB6, 0x7057)
-    buildAltarHints(world, messages, include_rewards=world.misc_hints and not world.enhance_map_compass, include_wincons=world.misc_hints)
+    buildAltarHints(world, messages, include_rewards=not world.enhance_map_compass)
 
     # Set Dungeon Reward actors in Jabu Jabu to be accurate
     jabu_actor_type = world.get_location('Barinade').item.special['actor_type']
@@ -1750,7 +1726,7 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
         rom.write_byte(symbol, 0x01)
 
     if world.ocarina_songs:
-        replace_songs(world, rom)
+        replace_songs(rom)
 
     # actually write the save table to rom
     world.distribution.give_items(save_context)
@@ -2151,13 +2127,12 @@ def configure_dungeon_info(rom, world):
     codes = ['Deku Tree', 'Dodongos Cavern', 'Jabu Jabus Belly', 'Forest Temple',
              'Fire Temple', 'Water Temple', 'Spirit Temple', 'Shadow Temple',
              'Bottom of the Well', 'Ice Cavern', 'Tower (N/A)',
-             'Gerudo Training Ground', 'Hideout (N/A)', 'Ganons Castle']
+             'Gerudo Training Grounds', 'Hideout (N/A)', 'Ganons Castle']
     dungeon_is_mq = [1 if world.dungeon_mq.get(c) else 0 for c in codes]
 
     rom.write_int32(rom.sym('cfg_dungeon_info_enable'), 1)
     rom.write_int32(rom.sym('cfg_dungeon_info_mq_enable'), int(mq_enable))
     rom.write_int32(rom.sym('cfg_dungeon_info_mq_need_map'), int(enhance_map_compass))
-    rom.write_int32(rom.sym('cfg_dungeon_info_reward_enable'), int(world.misc_hints or enhance_map_compass))
     rom.write_int32(rom.sym('cfg_dungeon_info_reward_need_compass'), int(enhance_map_compass))
     rom.write_int32(rom.sym('cfg_dungeon_info_reward_need_altar'), int(not enhance_map_compass))
     rom.write_bytes(rom.sym('cfg_dungeon_rewards'), dungeon_rewards)
