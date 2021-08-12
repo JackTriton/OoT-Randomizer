@@ -365,10 +365,11 @@
       "sections": [
         {
           "name": "generalcosmetics_section",
-          "col_span": 4,
+          "col_span": 5,
           "row_span": [2,2,2],
           "settings": [
             "default_targeting",
+            "default_language",
             "display_dpad",
             "correct_model_colors",
             "randomize_all_cosmetics"
