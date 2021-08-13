@@ -3774,6 +3774,7 @@ setting_infos = [
             'hold':   'Hold',
             'switch': 'Switch',
         },
+    ),
     Combobox(
         name           = 'default_language',
         gui_text       = 'Language Option',
