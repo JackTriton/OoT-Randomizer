@@ -1,7 +1,14 @@
-# OoTRandomizer
+# OoTRandomizer + JPN language
 
-This is a randomizer for _The Legend of Zelda: Ocarina of Time_ for the Nintendo 64.
+This is a fork project for the randomizer for _The Legend of Zelda: Ocarina of Time_ for the Nintendo 64.
 
+# Need Co-developers for this project!
+# If you have some techniques for programing OOT Randomizer, Please consider it.
+
+* [Files](#files)
+* [Need to do](#need-to-do)
+* [Process](#process)
+* [Needed Changes](#needed-changes)
 * [Installation](#installation)
 * [General Description](#general-description)
   * [Getting Stuck](#getting-stuck)
@@ -13,6 +20,42 @@ This is a randomizer for _The Legend of Zelda: Ocarina of Time_ for the Nintendo
   * [5.1](#51)
   * [5.0](#50)
   * [4.0](#40)
+
+## Files
+
+MessagesJP.py - _Store MESSAGES and JPencode feature_
+
+## Need to do
+
+Make patch_rom_jp in Patches.py
+Translate JPN Text(cp932,shift-jis) to Binary -- Done!
+Make its own parse_code, Message class, Text Code class in MessagesJP.py
+Make new update dialog features just for JPN Texts
+    Example:update_message_jp
+            JPencode   etc..
+Write all ITEM_MESSAGES, KEYSANITY_MESSAGES, MISC_MESSAGES and GOSSIPSTONE_MESSAGES in JPN -- Done!
+Remove Text speed differences >> _Make all dialogs instant_
+
+## Process
+
+If the rom is NTSC >> give option language
+else >> disable the option
+If language option == 'japanese' >> execute patch_rom_jp on Main.py
+For the dialogs:
+    If the dialog has Random number(mostly for Prices), Translate the number to Full width(1 >> １)
+    Execute update_message_jp and make temporal.py to store all dialogs
+    Read the rom and save all dialogs except those already filled inside temporal.py
+    Execute parse_code_jp for the dialogs in temporal.py
+    Transform dialogs inside temporal.py after parse the dialog
+    After that, Execute redialog(messages) to repack all messages inside temporal.py        
+After repack messages, delete temporal.py
+
+## Needed Changes
+
+Delete force-language option
+Make language option on GUI
+Make original Gossip stone dialogs
+Change y cordinate for title.bin
 
 ## Installation
 
