@@ -3,7 +3,7 @@
 This is a fork project for the randomizer for _The Legend of Zelda: Ocarina of Time_ for the Nintendo 64.
 
 # Need Co-developers for this project!
-# If you have some techniques for programing OOT Randomizer, Please consider it.
+**If you have some techniques for programing OOT Randomizer, Please lend me help.**
 
 * [Files](#files)
 * [Need to do](#need-to-do)
@@ -52,9 +52,9 @@ After repack messages, delete temporal.py
 
 ## Needed Changes
 
-Delete force-language option
+Delete force-language option -- Done!
 Make language option on GUI
-Make original Gossip stone dialogs
+Make original Gossip stone dialogs for JP Users
 Change y cordinate for title.bin
 
 ## Installation
