@@ -685,3 +685,4 @@ def create_playthrough(spoiler):
 
     if worlds[0].entrance_shuffle:
         spoiler.entrance_playthrough = OrderedDict((str(i + 1), list(sphere)) for i, sphere in enumerate(entrance_spheres))
+        
