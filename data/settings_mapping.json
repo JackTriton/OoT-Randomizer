@@ -32,7 +32,8 @@
             "show_seed_info",
             "user_message",
             "open_output_dir",
-            "open_python_dir"
+            "open_python_dir",
+            "language_selection"
           ]
         },
         {
@@ -274,7 +275,6 @@
           "text": "Enable Tricks",
           "row_span": [8,10,10],
           "settings": [
-            "advanced_allowed_tricks",
             "allowed_tricks",
             "tricks_list_msg"
           ]
