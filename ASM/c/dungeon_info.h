@@ -13,7 +13,8 @@ typedef struct {
         uint8_t has_map : 1;
     };
     uint8_t skulltulas;
-    char name[11];
+    char en_name[11];
+    char jp_name[16];
     uint8_t silver_rupee_puzzles_vanilla[4];
     uint8_t silver_rupee_puzzles_mq[4];
 } dungeon_entry_t;
