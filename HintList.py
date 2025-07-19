@@ -2,6 +2,7 @@ from __future__ import annotations
 import random
 from collections.abc import Callable, Collection
 from typing import TYPE_CHECKING, Optional, Any
+from Language import Language
 
 if TYPE_CHECKING:
     from World import World
@@ -48,8 +49,9 @@ class Multi:
         self.locations: list[str] = locations
 
 
-def get_hint(name: str, clearer_hint: bool = False) -> Hint:
-    text_options, clear_text, hint_type = hintTable[name]
+def get_hint(name: str, lang: Language, clearer_hint: bool = False) -> Hint:
+    text_options, clear_text, _ = lang.hintTable[name]
+    _, _, hint_type = hintTable[name]
     if clearer_hint:
         if clear_text is None:
             return Hint(name, text_options, hint_type, 0)
@@ -66,8 +68,7 @@ def get_multi(name: str) -> Multi:
 def get_hint_group(group: str, world: World) -> list[Hint]:
     ret = []
     for name in hintTable:
-
-        hint = get_hint(name, world.settings.clearer_hints)
+        hint = get_hint(name, world.language, world.settings.clearer_hints)
 
         if hint.name in world.always_hints and group == 'always':
             hint.type = 'always'
@@ -122,7 +123,7 @@ def get_hint_group(group: str, world: World) -> list[Hint]:
 def get_required_hints(world: World) -> list[Hint]:
     ret = []
     for name in hintTable:
-        hint = get_hint(name)
+        hint = get_hint(name, world.language)
         if 'always' in hint.type or hint.name in conditional_always and conditional_always[hint.name](world):
             ret.append(hint)
     return ret
@@ -133,7 +134,7 @@ def get_upgrade_hint_list(world: World, locations: list[str]) -> list[Hint]:
     ret = []
     for name in multiTable:
         if name not in hint_exclusions(world):
-            hint = get_hint(name, world.settings.clearer_hints)
+            hint = get_hint(name, world.language, world.settings.clearer_hints)
             multi = get_multi(name)
 
             if len(locations) < len(multi.locations) and all(location in multi.locations for location in locations) and (hint.name not in conditional_sometimes.keys() or conditional_sometimes[hint.name](world)):
@@ -248,7 +249,7 @@ def rainbow_bridge_hint_kind(world: World) -> str:
 
 # Entrance hints required under certain settings
 conditional_entrance_always: dict[str, Callable[[World], bool]] = {
-    'Ganons Castle Ledge -> Ganons Castle Lobby': lambda world: rainbow_bridge_hint_kind(world) == 'always',
+    'Ganons Castle Grounds -> Ganons Castle Lobby': lambda world: rainbow_bridge_hint_kind(world) == 'always',
     'Ganons Castle Main -> Ganons Castle Tower': lambda world: world.settings.trials > 3 or (rainbow_bridge_hint_kind(world) == 'always' and not world.shuffle_special_dungeon_entrances),
 }
 
@@ -291,7 +292,7 @@ conditional_sometimes: dict[str, Callable[[World], bool]] = {
     'Twinrova Rewards':                         lambda world: world.settings.shuffle_dungeon_rewards not in ('vanilla', 'reward'),
 
     # Conditional entrance hints
-    'Ganons Castle Ledge -> Ganons Castle Lobby': lambda world: rainbow_bridge_hint_kind(world) != 'never',
+    'Ganons Castle Grounds -> Ganons Castle Lobby': lambda world: rainbow_bridge_hint_kind(world) != 'never',
     'Ganons Castle Main -> Ganons Castle Tower': lambda world: world.settings.trials > 0 or (rainbow_bridge_hint_kind(world) != 'never' and not world.shuffle_special_dungeon_entrances),
 }
 
@@ -1405,7 +1406,7 @@ hintTable: dict[str, tuple[list[str] | str, Optional[str], str | list[str]]] = {
     'Zoras Fountain -> Jabu Jabus Belly Beginning':             ("inside #Jabu Jabu#, one can find", None, 'entrance'),
     'Kakariko Village -> Bottom of the Well':                   ("a #village well# leads to", None, 'entrance'),
 
-    'Ganons Castle Ledge -> Ganons Castle Lobby':               ("the #rainbow bridge# leads to", None, 'entrance'),
+    'Ganons Castle Grounds -> Ganons Castle Lobby':             ("the #rainbow bridge# leads to", None, 'entrance'),
     'Ganons Castle Main -> Ganons Castle Tower':                ("a #castle barrier# protects the way to", "#Ganon's trials# protect the way to", 'entrance'),
 
     'KF Links House':                                           ("Link's House", None, 'region'),
@@ -2011,7 +2012,7 @@ def hint_exclusions(world: World, clear_cache: bool = False) -> list[str]:
 
     location_hints = []
     for name in hintTable:
-        hint = get_hint(name, world.settings.clearer_hints)
+        hint = get_hint(name, world.language, world.settings.clearer_hints)
         if any(item in hint.type for item in
                 ['always',
                  'dual_always',
