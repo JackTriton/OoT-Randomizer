@@ -9545,7 +9545,7 @@
         "bridge_open": "目覚めし者により　悪しき者への橋は　#すでにかけられている#",
         "bridge_vague": "勇者が{item_req}集める時を　目覚めし者は待つ",
         "bridge_vanilla": "#闇と魂のメダル#　そして#光の矢#",
-        "cbf": "#{item_text}#は{location_text}にある",
+        "cbf": "#{item_text}#は{location_text}ある",
         "conjunction": "そして",
         "conjunction_more": "、",
         "dual_always": "{location}　#{first_item}#と#{second_item}#",
