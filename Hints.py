@@ -91,7 +91,7 @@ class GossipText:
         text = prefix + text
         if capitalize:
             text = text[:1].upper() + text[1:]
-        self.lang = lang.base
+        self.lang = lang
         self.text: str = text
         self.colors: Optional[list[str]] = colors
         self.hinted_locations: Optional[list[str]] = hinted_locations
@@ -101,7 +101,7 @@ class GossipText:
         return {'text': self.text, 'colors': self.colors, 'hinted_locations': self.hinted_locations, 'hinted_items': self.hinted_items}
 
     def __str__(self) -> str:
-        return get_raw_text(line_wrap(color_text(self, self.lang), self.lang), self.lang)
+        return get_raw_text(line_wrap(color_text(self, self.lang), self.lang.base), self.lang.base)
 
 
 #   Abbreviations
@@ -343,11 +343,11 @@ def get_simple_hint_no_prefix(item: Item, lang: Language) -> Hint:
     return hint
 
 
-def color_text(gossip_text: GossipText, lang: str) -> str:
+def color_text(gossip_text: GossipText, lang: Language) -> str:
     text = gossip_text.text
     colors = list(gossip_text.colors) if gossip_text.colors is not None else []
     color = 'White'
-    if lang=="en":
+    if lang.base=="en":
         while '#' in text:
             split_text = text.split('#', 2)
             if len(colors) > 0:
@@ -427,7 +427,7 @@ class HintArea(Enum):
     # Performs a breadth first search to find the closest hint area from a given spot (region, location, or entrance).
     # May fail to find a hint if the given spot is only accessible from the root and not from any other region with a hint area
     @staticmethod
-    def at(spot: Spot, use_alt_hint: bool = False) -> HintArea:
+    def at(spot: Spot, use_alt_hint: bool = False, get_name: bool = False):
         if isinstance(spot, Region):
             original_parent = spot
         else:
@@ -450,7 +450,9 @@ class HintArea(Enum):
 
             if (parent_region.hint or (use_alt_hint and parent_region.alt_hint)) and (original_parent.name == 'Root' or parent_region.name != 'Root'):
                 if use_alt_hint and parent_region.alt_hint:
+                    if get_name : return parent_region.alt_hint_name
                     return parent_region.alt_hint
+                if get_name : return parent_region.hint_name or parent_region.dungeon.hint
                 return parent_region.hint
 
             for entrance in parent_region.entrances:

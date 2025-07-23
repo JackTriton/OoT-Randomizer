@@ -20,4 +20,4 @@ def get_ia4(frm, export, start=0, size=0):
 
 get_ia4("baserom-decomp.z64","blue_fire_arrow_item_name_jap.ia4",0x883000,0x400)
 
-make_diff("baserom-decomp.z64","editedrom-decomp.z64","TitleTitleJP.bin",0x017B3C40,0x017B4440)
+make_diff("baserom-decomp.z64","editedrom-decomp.z64","TitleTitleJP.bin",0x01795300,0x017B4440)
