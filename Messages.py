@@ -425,7 +425,7 @@ class TextCode:
             else:
                 name, ext_len, _, literal=self.CC[self.code]
                 if name == "color": subdata -= 0x0C00
-                width = ceil(ext_len/2) * 2
+                width = ext_len * 2
                 return literal+f"{subdata:0{width}X}" if ext_len!=0 else literal
         else:
             # raise ValueError(repr(REVERSE_MAP))
@@ -505,6 +505,12 @@ class Message:
         ret = ''
         for code in self.text_codes:
             ret = ret + code.get_python_string()
+        return ret
+    
+    def get_string(self) -> str:
+        ret = ''
+        for code in self.text_codes:
+            ret = ret + code.get_string()
         return ret
 
     # check if this is an unused message that just contains it's own id as text
@@ -589,9 +595,12 @@ class Message:
             text_codes.append(instant_text_code) # allow instant
 
         # write the message
-        for code in self.text_codes:
+        for i, code in enumerate(self.text_codes):
+            # ignore the color change if the next code is color as well
+            if code.code == [0x0B, 0x05][self.lang] and self.text_codes[i+1].code == code.code:
+                pass
             # ignore ending codes if it's going to be replaced
-            if replace_ending and code.code in ending_codes:
+            elif replace_ending and code.code in ending_codes:
                 pass
             # ignore the "make unskippable flag"
             elif always_allow_skip and code.code == [0x8199, 0x1A][self.lang]:
@@ -691,7 +700,7 @@ class Message:
 # if the id does not exist in the list, then it will add it
 # Checks if the message being updated is a newly added message in order to prevent duplicates.
 # Use allow_duplicates=True if the same message is purposely updated multiple times
-def update_message_by_id(messages: list[Message], id: int, text: bytearray | str, lang: str, opts: Optional[int] = None, allow_duplicates: bool = False):
+def update_message_by_id(messages: list[Message], id: int, text: bytearray | str, lang: Language, opts: Optional[int] = None, allow_duplicates: bool = False, force_left: bool = False):
     # Check is we have previously added/modified this message.
     if id in new_messages and not allow_duplicates:
         raise Exception(f'Attempting to add duplicate message {hex(id)}')
@@ -699,6 +708,11 @@ def update_message_by_id(messages: list[Message], id: int, text: bytearray | str
     new_messages.append(id)
     # get the message index
     index = next( (m.index for m in messages if m.id == id), -1)
+    
+    # align the text when the proposed align text by the language isn't "Left"
+    if lang.lang_property["align_text"] != "Left" and not force_left:
+        text = line_wrap(text, lang.base, align=lang.lang_property["align_text"])
+    
     # update if it was found
     if index >= 0:
         update_message_by_index(messages, index, text, lang, opts)
@@ -717,7 +731,7 @@ def get_message_by_id(messages: list[Message], id: int) -> Optional[Message]:
 
 
 # wrapper for updating the text of a message, given its index in the list
-def update_message_by_index(messages: list[Message], index: int, text: bytearray | str, lang: str, opts: Optional[int] = None) -> None:
+def update_message_by_index(messages: list[Message], index: int, text: bytearray | str, lang: Language, opts: Optional[int] = None) -> None:
     if opts is None:
         opts = messages[index].opts
 
@@ -729,7 +743,7 @@ def update_message_by_index(messages: list[Message], index: int, text: bytearray
 
 
 # wrapper for adding a string message to a list of messages
-def add_message(messages: list[Message], text: bytearray | str, lang: str, id: int = 0, opts: int = 0x00) -> None:
+def add_message(messages: list[Message], text: bytearray | str, lang: Language, id: int = 0, opts: int = 0x00) -> None:
     if isinstance(text, bytearray):
         messages.append(Message.from_bytearray(text, lang, id, opts))
     else:
@@ -894,25 +908,26 @@ def make_player_message(text: str, lang: Language) -> str:
 
 # reduce item message sizes and add new item messages
 # make sure to call this AFTER move_shop_item_messages()
-def update_item_messages(messages: list[Message], world: World, lang: Language) -> None:
+def update_item_messages(messages: list[Message], world: World) -> None:
+    lang = world.language
     if lang.PLANE_TEXTS!=[]:
         for id, (text, opt) in lang.PLANE_TEXTS:
-            update_message_by_id(messages, id, text, lang.base, opt)
+            update_message_by_id(messages, id, text, lang, opt)
 
     new_item_messages = lang.ITEM_MESSAGES + lang.KEYSANITY_MESSAGES
     for id, text in new_item_messages:
         if world.settings.world_count > 1:
-            update_message_by_id(messages, id, make_player_message(text, lang), lang.lang_property["base"], 0x23)
+            update_message_by_id(messages, id, make_player_message(text, lang), lang, 0x23)
         else:
-            update_message_by_id(messages, id, text, lang.base, 0x23)
+            update_message_by_id(messages, id, text, lang, 0x23)
 
     for id, (text, opt) in lang.MISC_MESSAGES:
-        update_message_by_id(messages, id, text, lang.base, opt)
+        update_message_by_id(messages, id, text, lang, opt)
 
 # run all keysanity related patching to add messages for dungeon specific items
-def add_item_messages(messages: list[Message], shop_items: Iterable[ShopItem], world: World, lang: Language) -> None:
+def add_item_messages(messages: list[Message], shop_items: Iterable[ShopItem], world: World) -> None:
     move_shop_item_messages(messages, shop_items)
-    update_item_messages(messages, world, lang)
+    update_item_messages(messages, world)
 
 
 # reads each of the game's messages into a list of Message objects
@@ -1145,7 +1160,7 @@ def update_warp_song_text(messages: list[Message], world: World) -> None:
                 color = COLOR_MAP['White'][lang_num]
 
             new_msg = lang.format_from_id("PATCH_TEXTS.warp_msg",{"destination_name":destination_name, "color":color})
-            update_message_by_id(messages, id, new_msg, world.language.base)
+            update_message_by_id(messages, id, new_msg, world.language)
 
     if world.settings.owl_drops:
         for id, entr in owl_messages.items():
@@ -1160,4 +1175,4 @@ def update_warp_song_text(messages: list[Message], world: World) -> None:
                 color = COLOR_MAP['White'][lang_num]
 
             new_msg = lang.format_from_id("PATCH_TEXTS.warp_owl",{"destination_name":destination_name, "color":color})
-            update_message_by_id(messages, id, new_msg, world.language.base)
+            update_message_by_id(messages, id, new_msg, world.language)

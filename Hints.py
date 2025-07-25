@@ -322,7 +322,7 @@ def can_reach_hint(worlds: list[World], hint_location: Location, location: Locat
 def write_gossip_stone_hints(spoiler: Spoiler, world: World, messages: list[Message]) -> None:
     lang = world.language
     for id, gossip_text in spoiler.hints[world.id].items():
-        update_message_by_id(messages, id, str(gossip_text), lang.base, 0x23)
+        update_message_by_id(messages, id, str(gossip_text), lang, 0x23)
 
 
 def filter_trailing_space(text: str) -> str:
@@ -1903,7 +1903,7 @@ def build_altar_hints(world: World, messages: list[Message], include_rewards: bo
             child_text += build_boss_string(reward, color, world)
     child_text += get_hint('Child Altar Text End', world.language, world.settings.clearer_hints).text
     child_text += '\x0B' if world.language.base=="en" else "◆"
-    update_message_by_id(messages, 0x707A, get_raw_text(child_text, world.language.base), world.language.base, 0x20)
+    update_message_by_id(messages, 0x707A, get_raw_text(child_text, world.language.base), world.language, 0x20)
 
     # text that appears at altar as an adult.
     adult_text = '\x08' if world.language.base == "en" else "♂"
@@ -1926,7 +1926,7 @@ def build_altar_hints(world: World, messages: list[Message], include_rewards: bo
     else:
         adult_text += get_hint('Adult Altar Text End', world.language, world.settings.clearer_hints).text
     adult_text += '\x0B' if world.language.base=="en" else "◆"
-    update_message_by_id(messages, 0x7057, get_raw_text(adult_text, world.language.base), world.language.base, 0x20)
+    update_message_by_id(messages, 0x7057, get_raw_text(adult_text, world.language.base), world.language, 0x20)
 
 
 # pulls text string from hintlist for reward after sending the location to hintlist.
@@ -2070,15 +2070,15 @@ def build_ganon_boss_key_string(world: World) -> str:
 def build_ganon_text(world: World, messages: list[Message]) -> None:
     # empty now unused messages to make space for ganon lines
     empty_word = ' ' if world.language.base == "en" else "　"
-    update_message_by_id(messages, 0x70C8, empty_word, world.language.base)
-    update_message_by_id(messages, 0x70C9, empty_word, world.language.base)
-    update_message_by_id(messages, 0x70CA, empty_word, world.language.base)
+    update_message_by_id(messages, 0x70C8, empty_word, world.language, force_left=True)
+    update_message_by_id(messages, 0x70C9, empty_word, world.language, force_left=True)
+    update_message_by_id(messages, 0x70CA, empty_word, world.language, force_left=True)
 
     # lines before battle
     ganonLines = get_hint_group('ganonLine', world)
     random.shuffle(ganonLines)
     text = get_raw_text(ganonLines.pop().text, world.language.base)
-    update_message_by_id(messages, 0x70CB, text, world.language.base)
+    update_message_by_id(messages, 0x70CB, text, world.language)
 
 
 def build_misc_item_hints(world: World, messages: list[Message], allow_duplicates: bool = False) -> None:
@@ -2118,7 +2118,7 @@ def build_misc_item_hints(world: World, messages: list[Message], allow_duplicate
             for find, replace in d.get('replace', {}).items():
                 text = text.replace(find, replace)
 
-            update_message_by_id(messages, data['id'], str(GossipText(text, world.language, ['Green'], prefix='')), world.language.base, allow_duplicates=allow_duplicates)
+            update_message_by_id(messages, data['id'], str(GossipText(text, world.language, ['Green'], prefix='')), world.language, allow_duplicates=allow_duplicates)
 
 
 def build_misc_location_hints(world: World, messages: list[Message]) -> None:
@@ -2141,7 +2141,7 @@ def build_misc_location_hints(world: World, messages: list[Message]) -> None:
                 )
             else:
                 text = world.language.format_from_text(d['location_fallback'],{"poe_points":poe_points})
-            update_message_by_id(messages, data['id'], text, world.language.base, data['text_style'])
+            update_message_by_id(messages, data['id'], text, world.language, data['text_style'])
             return
         else:
             if hint_type in world.settings.misc_hints:
@@ -2153,7 +2153,7 @@ def build_misc_location_hints(world: World, messages: list[Message]) -> None:
                         "item":get_hint(get_item_generic_name(item), world.language, world.settings.clearer_hints).text,
                     }
                 )
-            update_message_by_id(messages, data['id'], str(GossipText(text, world.language, ['Green'], prefix='')), world.language.base, data['text_style'])
+            update_message_by_id(messages, data['id'], str(GossipText(text, world.language, ['Green'], prefix='')), world.language, data['text_style'])
 
 
 def build_misc_dual_hints(world: World, messages: list[Message]) -> None:
@@ -2188,7 +2188,7 @@ def build_misc_dual_hints(world: World, messages: list[Message]) -> None:
                 )
             else:
                 text = d['location_fallback']
-    update_message_by_id(messages, data['id'], str(GossipText(text, world.language, ['Green'], prefix='')), world.language.base, data['text_style'])
+    update_message_by_id(messages, data['id'], str(GossipText(text, world.language, ['Green'], prefix='')), world.language, data['text_style'])
 
 
 def get_raw_text(string: str, lang: str) -> str:

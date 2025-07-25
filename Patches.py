@@ -14,7 +14,7 @@ from typing import Optional, Any
 from Cutscenes import patch_cutscenes, patch_wondertalk2
 from Entrance import Entrance
 from HintList import get_hint
-from Hints import GossipText, HintArea, write_gossip_stone_hints, build_altar_hints, \
+from Hints import GossipText, HintArea, write_gossip_stone_hints, build_altar_hints, HintAreaDefault, \
         build_ganon_text, build_misc_item_hints, build_misc_location_hints, build_misc_dual_hints, get_simple_hint_no_prefix, get_item_generic_name
 from Item import Item
 from ItemList import REWARD_COLORS
@@ -1154,7 +1154,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     shop_items = read_shop_items(rom, shop_item_file.start + 0x1DEC)
 
     # Less misleading dialog from Biggoron after turning in eyedrops
-    update_message_by_id(messages, 0x305C, lang.format_from_id("PATCH_TEXTS.claim"), lang.base)
+    update_message_by_id(messages, 0x305C, lang.format_from_id("PATCH_TEXTS.claim"), lang)
 
     # Set Big Poe count to get reward from buyer
     poe_points = world.settings.big_poe_count * 100
@@ -1163,13 +1163,13 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     # 0x70F5 is done in build_misc_location_hints
     if world.settings.big_poe_count != 10:
         new_message = lang.format_from_id("PATCH_TEXTS.brought_poe",{"poe": poe_points})
-        update_message_by_id(messages, 0x70f7, new_message, lang.base)
+        update_message_by_id(messages, 0x70f7, new_message, lang)
         new_message = lang.format_from_id("PATCH_TEXTS.enough_poe",{"poe": poe_points})
-        update_message_by_id(messages, 0x70f8, new_message, lang.base)
+        update_message_by_id(messages, 0x70f8, new_message, lang)
 
     # Update Child Anju's dialogue
     new_message = lang.format_from_id("PATCH_TEXTS.child_anju",{"chicken":world.settings.chicken_count})
-    update_message_by_id(messages, 0x5036, new_message, lang.base)
+    update_message_by_id(messages, 0x5036, new_message, lang)
 
     # Update "Princess Ruto got the Spiritual Stone!" text before the midboss in Jabu
     location = world.bigocto_location()
@@ -1184,7 +1184,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         reward_text = get_hint(get_item_generic_name(location.item), lang, True).text
         reward_color = REWARD_COLORS.get(location.item.name, 'Blue')
         new_message = lang.format_from_id("PATCH_TEXTS.ruto_text",{"color":COLOR_MAP[reward_color][0 if lang.base == "en" else 1],"reward_text":reward_text})
-    update_message_by_id(messages, 0x4050, new_message, lang.base)
+    update_message_by_id(messages, 0x4050, new_message, lang)
 
     # Set Dungeon Reward Actor in Jabu Jabu to be accurate
     if location is not None and location.item is not None:  # TODO make actor invisible if no item?
@@ -1200,7 +1200,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         save_context.write_permanent_flag(Scenes.WINDMILL, FlagType.CLEAR, 0x3, 0x10) # Beat First Dampe Race (& Chest Spawned)
         rom.write_byte(rom.sym('CHAIN_HBA_REWARDS'), 1)
         # Update the first horseback archery text to make it clear both rewards are available from the start
-        update_message_by_id(messages, 0x6040, lang.format_from_id("PATCH_TEXTS.gallop"), lang.base)
+        update_message_by_id(messages, 0x6040, lang.format_from_id("PATCH_TEXTS.gallop"), lang)
 
     # Fix HBA to not wait for the fanfare to complete before transitioning to claim reward
     rom.write_byte(0xC1C00B, 0x2)
@@ -1376,9 +1376,9 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
 
     # add a cheaper bombchu pack to the bombchu shop
     # describe
-    update_message_by_id(messages, 0x80FE, lang.format_from_id("PATCH_TEXTS.bombchu_desc"), lang.base, 0x03)
+    update_message_by_id(messages, 0x80FE, lang.format_from_id("PATCH_TEXTS.bombchu_desc"), lang, 0x03)
     # purchase
-    update_message_by_id(messages, 0x80FF, lang.format_from_id("PATCH_TEXTS.bombchu_purc"), lang.base, 0x03)
+    update_message_by_id(messages, 0x80FF, lang.format_from_id("PATCH_TEXTS.bombchu_purc"), lang, 0x03)
     rbl_bombchu = shop_items[0x0018]
     rbl_bombchu.price = 60
     rbl_bombchu.pieces = 5
@@ -1390,12 +1390,12 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     shop_items[0x0015].price = 99
     shop_items[0x0019].price = 99
     shop_items[0x001C].price = 99
-    update_message_by_id(messages, shop_items[0x001C].description_message, lang.format_from_id("PATCH_TEXTS.bombchu_desc_10"), lang.base)
-    update_message_by_id(messages, shop_items[0x001C].purchase_message, lang.format_from_id("PATCH_TEXTS.bombchu_purc_10"), lang.base)
+    update_message_by_id(messages, shop_items[0x001C].description_message, lang.format_from_id("PATCH_TEXTS.bombchu_desc_10"), lang)
+    update_message_by_id(messages, shop_items[0x001C].purchase_message, lang.format_from_id("PATCH_TEXTS.bombchu_purc_10"), lang)
 
     # Fix blue potion shop text
-    update_message_by_id(messages, 0x80B5, lang.format_from_id("PATCH_TEXTS.blue_potion_desc"), lang.base, 0x03)
-    update_message_by_id(messages, 0x80BE, lang.format_from_id("PATCH_TEXTS.blue_potion_purc"), lang.base, 0x03)
+    update_message_by_id(messages, 0x80B5, lang.format_from_id("PATCH_TEXTS.blue_potion_desc"), lang, 0x03)
+    update_message_by_id(messages, 0x80BE, lang.format_from_id("PATCH_TEXTS.blue_potion_purc"), lang, 0x03)
     shop_items[0x000A].description_message = 0x80B5
     shop_items[0x000A].purchase_message = 0x80BE
 
@@ -1526,7 +1526,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     # Update scrub messages.
     shuffle_messages.scrubs_message_ids = []
     for text_id, message in scrub_message_dict.items():
-        update_message_by_id(messages, text_id, message, lang.base)
+        update_message_by_id(messages, text_id, message, lang)
         if world.settings.shuffle_scrubs == 'random':
             shuffle_messages.scrubs_message_ids.append(text_id)
 
@@ -1552,17 +1552,17 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         rom.write_byte(rom.sym('SHUFFLE_BEANS'), 0x01)
         # Update bean salesman messages to better fit the fact that he sells a randomized item
         if 'unique_merchants' not in world.settings.misc_hints:
-            update_message_by_id(messages, 0x405E, lang.format_from_id("PATCH_TEXTS.bean_mysterious"), lang.base)
+            update_message_by_id(messages, 0x405E, lang.format_from_id("PATCH_TEXTS.bean_mysterious"), lang)
         else:
             location = world.get_location("ZR Magic Bean Salesman")
             item_text = get_hint(get_item_generic_name(location.item), lang, True).text
             wrapped_item_text = line_wrap(item_text, lang.base, False, False, False)
             if wrapped_item_text != item_text:
-                update_message_by_id(messages, 0x405E, lang.format_from_id("PATCH_TEXTS.bean_wrapped",{"item":wrapped_item_text}),lang.base)
+                update_message_by_id(messages, 0x405E, lang.format_from_id("PATCH_TEXTS.bean_wrapped",{"item":wrapped_item_text}),lang)
             else:
-                update_message_by_id(messages, 0x405E, lang.format_from_id("PATCH_TEXTS.bean_item",{"item":item_text}),lang.base)
-        update_message_by_id(messages, 0x4069, lang.format_from_id("PATCH_TEXTS.bean_low"), lang.base)
-        update_message_by_id(messages, 0x406C, lang.format_from_id("PATCH_TEXTS.bean_enough"), lang.base)
+                update_message_by_id(messages, 0x405E, lang.format_from_id("PATCH_TEXTS.bean_item",{"item":item_text}),lang)
+        update_message_by_id(messages, 0x4069, lang.format_from_id("PATCH_TEXTS.bean_low"), lang)
+        update_message_by_id(messages, 0x406C, lang.format_from_id("PATCH_TEXTS.bean_enough"), lang)
         # Change first magic bean to cost 60 (is used as the price for the one time item when beans are shuffled)
         rom.write_byte(0xE209FD, 0x3C)
 
@@ -1570,46 +1570,46 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         rom.write_byte(rom.sym('SHUFFLE_CARPET_SALESMAN'), 0x01)
         # Update carpet salesman messages to better fit the fact that he sells a randomized item
         if 'unique_merchants' not in world.settings.misc_hints:
-            update_message_by_id(messages, 0x6077, lang.format_from_id("PATCH_TEXTS.carpet_mysterious"), lang.base)
+            update_message_by_id(messages, 0x6077, lang.format_from_id("PATCH_TEXTS.carpet_mysterious"), lang)
         else:
             location = world.get_location("Wasteland Bombchu Salesman")
             item_text = get_hint(get_item_generic_name(location.item), lang, True).text
             wrapped_item_text = line_wrap(item_text, lang.base, False, False, False)
             if wrapped_item_text != item_text:
-                update_message_by_id(messages, 0x6077, lang.format_from_id("PATCH_TEXTS.carpet_wrapped",{"item":wrapped_item_text}),lang.base)
+                update_message_by_id(messages, 0x6077, lang.format_from_id("PATCH_TEXTS.carpet_wrapped",{"item":wrapped_item_text}),lang)
             else:
-                update_message_by_id(messages, 0x6077, lang.format_from_id("PATCH_TEXTS.carpet_item",{"item":item_text}),lang.base)
-        update_message_by_id(messages, 0x6078, lang.format_from_id("PATCH_TEXTS.carpet_enough"), lang.base)
+                update_message_by_id(messages, 0x6077, lang.format_from_id("PATCH_TEXTS.carpet_item",{"item":item_text}),lang)
+        update_message_by_id(messages, 0x6078, lang.format_from_id("PATCH_TEXTS.carpet_enough"), lang)
 
         rom.write_byte(rom.sym('SHUFFLE_MEDIGORON'), 0x01)
         # Update medigoron messages to better fit the fact that he sells a randomized item
-        update_message_by_id(messages, 0x304C, lang.format_from_id("PATCH_TEXTS.medigoron_cool"), lang.base)
-        update_message_by_id(messages, 0x304D, lang.format_from_id("PATCH_TEXTS.medigoron_ask"), lang.base)
+        update_message_by_id(messages, 0x304C, lang.format_from_id("PATCH_TEXTS.medigoron_cool"), lang)
+        update_message_by_id(messages, 0x304D, lang.format_from_id("PATCH_TEXTS.medigoron_ask"), lang)
         if 'unique_merchants' not in world.settings.misc_hints:
-            update_message_by_id(messages, 0x304F, lang.format_from_id("PATCH_TEXTS.medigoron_mysterious"), lang.base)
+            update_message_by_id(messages, 0x304F, lang.format_from_id("PATCH_TEXTS.medigoron_mysterious"), lang)
         else:
             location = world.get_location("GC Medigoron")
             item_text = get_hint(get_item_generic_name(location.item), lang, True).text
             wrapped_item_text = line_wrap(item_text, lang.base, False, False, False)
             if wrapped_item_text != item_text:
-                update_message_by_id(messages, 0x304F, lang.format_from_id("PATCH_TEXTS.medigoron_wrapped",{"item":wrapped_item_text}),lang.base)
+                update_message_by_id(messages, 0x304F, lang.format_from_id("PATCH_TEXTS.medigoron_wrapped",{"item":wrapped_item_text}),lang)
             else:
-                update_message_by_id(messages, 0x304F, lang.format_from_id("PATCH_TEXTS.medigoron_item",{"item":item_text}),lang.base)
+                update_message_by_id(messages, 0x304F, lang.format_from_id("PATCH_TEXTS.medigoron_item",{"item":item_text}),lang)
 
         rom.write_byte(rom.sym('SHUFFLE_GRANNYS_POTION_SHOP'), 0x01)
         if 'unique_merchants' not in world.settings.misc_hints:
-            update_message_by_id(messages, 0x500C, lang.format_from_id("PATCH_TEXTS.granny_mysterious"), lang.base)
+            update_message_by_id(messages, 0x500C, lang.format_from_id("PATCH_TEXTS.granny_mysterious"), lang)
         else:
             location = world.get_location("Kak Granny Buy Blue Potion")
             item_text = get_hint(get_item_generic_name(location.item), lang, True).text
             wrapped_item_text = line_wrap(item_text, lang.base, False, False, False)
             if wrapped_item_text != item_text:
-                update_message_by_id(messages, 0x500C, lang.format_from_id("PATCH_TEXTS.granny_wrapped",{"item":wrapped_item_text}),lang.base)
+                update_message_by_id(messages, 0x500C, lang.format_from_id("PATCH_TEXTS.granny_wrapped",{"item":wrapped_item_text}),lang)
             else:
-                update_message_by_id(messages, 0x500C, lang.format_from_id("PATCH_TEXTS.granny_item",{"item":item_text}),lang.base)
+                update_message_by_id(messages, 0x500C, lang.format_from_id("PATCH_TEXTS.granny_item",{"item":item_text}),lang)
 
     new_message = lang.format_from_id("PATCH_TEXTS.play")
-    update_message_by_id(messages, 0x908B, new_message, lang.base, 0x00)
+    update_message_by_id(messages, 0x908B, new_message, lang, 0x00)
     if world.settings.shuffle_tcgkeys != 'vanilla':
         if world.settings.shuffle_tcgkeys == 'remove':
             rom.write_byte(rom.sym('SHUFFLE_CHEST_GAME'), 0x02)
@@ -1617,18 +1617,18 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             rom.write_byte(rom.sym('SHUFFLE_CHEST_GAME'), 0x01)
         # Update Chest Game Salesman to better fit the fact he sells a randomized item
         if 'unique_merchants' not in world.settings.misc_hints:
-            update_message_by_id(messages, 0x6D, lang.format_from_id("PATCH_TEXTS.salesman_mysterious"),lang.base)
+            update_message_by_id(messages, 0x6D, lang.format_from_id("PATCH_TEXTS.salesman_mysterious"),lang)
         else:
             location = world.get_location("Market Treasure Chest Game Salesman")
             item_text = get_hint(get_item_generic_name(location.item), lang, True).text
             wrapped_item_text = line_wrap(item_text, lang.base, False, False, False)
             if wrapped_item_text != item_text:
-                update_message_by_id(messages, 0x6D, lang.format_from_id("PATCH_TEXTS.salesman_wrapped",{"item":wrapped_item_text}),lang.base)
+                update_message_by_id(messages, 0x6D, lang.format_from_id("PATCH_TEXTS.salesman_wrapped",{"item":wrapped_item_text}),lang)
             else:
-                update_message_by_id(messages, 0x6D, lang.format_from_id("PATCH_TEXTS.salesman_item",{"item":item_text}),lang.base)
-        update_message_by_id(messages, 0x908B, lang.format_from_id("PATCH_TEXTS.salesman_ok"), lang.base, 0x00, allow_duplicates=True)
-        update_message_by_id(messages, 0x6E, lang.format_from_id("PATCH_TEXTS.salesman_limit"), lang.base)
-        update_message_by_id(messages, 0x704C, lang.format_from_id("PATCH_TEXTS.salesman_hope"), lang.base)
+                update_message_by_id(messages, 0x6D, lang.format_from_id("PATCH_TEXTS.salesman_item",{"item":item_text}),lang)
+        update_message_by_id(messages, 0x908B, lang.format_from_id("PATCH_TEXTS.salesman_ok"), lang, 0x00, allow_duplicates=True)
+        update_message_by_id(messages, 0x6E, lang.format_from_id("PATCH_TEXTS.salesman_limit"), lang)
+        update_message_by_id(messages, 0x704C, lang.format_from_id("PATCH_TEXTS.salesman_hope"), lang)
 
     if world.settings.tcg_requires_lens:
         rom.write_byte(rom.sym('TCG_REQUIRES_LENS'), 0x01)
@@ -1781,7 +1781,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
                     })
 
                 if world.settings.mq_dungeons_mode == 'random' or world.settings.mq_dungeons_count != 0 and world.settings.mq_dungeons_count != 12:
-                    update_message_by_id(messages, map_id, map_message, lang.base, allow_duplicates=True)
+                    update_message_by_id(messages, map_id, map_message, lang, allow_duplicates=True)
             else:
                 dungeon_name, compass_id, map_id, gender = lang.dungeon_list[dungeon.name]
                 if world.entrance_rando_reward_hints:
@@ -1817,7 +1817,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
                         }
                     )
                 if world.settings.shuffle_dungeon_rewards != 'dungeon':
-                    update_message_by_id(messages, compass_id, compass_message, lang.base, allow_duplicates=True)
+                    update_message_by_id(messages, compass_id, compass_message, lang, allow_duplicates=True)
                 if world.settings.mq_dungeons_mode == 'random' or world.settings.mq_dungeons_count != 0 and world.settings.mq_dungeons_count != 12:
                     map_message = lang.format_from_id(
                         "PATCH_TEXTS.map",
@@ -1826,7 +1826,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
                             "dungeon_state":lang.PATCH_TEXTS["masterful"] if world.dungeon_mq[dungeon.name] else lang.PATCH_TEXTS["ordinary"],
                             "gender":gender
                         })
-                    update_message_by_id(messages, map_id, map_message, lang.base, allow_duplicates=True)
+                    update_message_by_id(messages, map_id, map_message, lang, allow_duplicates=True)
 
     # Set hints on the altar inside ToT
     rom.write_int16(0xE2ADB2, 0x707A)
@@ -1853,7 +1853,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     tycoon_message = lang.PATCH_TEXTS["tycoon"]
     if world.settings.world_count > 1:
         tycoon_message = make_player_message(tycoon_message, lang)
-    update_message_by_id(messages, 0x00F8, tycoon_message, lang.base, 0x23)
+    update_message_by_id(messages, 0x00F8, tycoon_message, lang, 0x23)
 
     write_shop_items(rom, shop_item_file.start + 0x1DEC, shop_items)
 
@@ -1873,7 +1873,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             else:
                 chars_in_section += 1
                 text_codes.append(code)
-        update_message_by_id(messages, message_id, ''.join(code.get_string() for code in text_codes), lang.base)
+        update_message_by_id(messages, message_id, ''.join(code.get_string() for code in text_codes), lang)
 
     permutation = None
 
@@ -1897,7 +1897,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         bfa_message = lang.format_from_id("PATCH_TEXTS.blue_fire_arrow")
         if world.settings.world_count > 1:
             bfa_message = make_player_message(bfa_message, lang)
-        update_message_by_id(messages, 0x0071, bfa_message, lang.base, 0x23, allow_duplicates=True)
+        update_message_by_id(messages, 0x0071, bfa_message, lang, 0x23, allow_duplicates=True)
 
         with open(lang.data['blue_fire_arrow_item_name_eng.ia4' if lang.base=="en" else 'blue_fire_arrow_item_name_jap.ia4'], 'rb') as stream:
             bfa_name_bytes = stream.read()
@@ -2635,8 +2635,8 @@ def place_shop_items(rom: Rom, world: World, shop_items, messages, locations, in
                             "price": shop_item.price,
                         }
                     )
-            update_message_by_id(messages, shop_item.description_message, description_text, world.language.base, 0x03)
-            update_message_by_id(messages, shop_item.purchase_message, purchase_text, world.language.base, 0x03)
+            update_message_by_id(messages, shop_item.description_message, description_text, world.language, 0x03, force_left=True)
+            update_message_by_id(messages, shop_item.purchase_message, purchase_text, world.language, 0x03)
 
             place_shop_items.shop_id += 1
 
@@ -2667,14 +2667,18 @@ def configure_dungeon_info(rom: Rom, world: World) -> None:
         for reward in REWARD_COLORS:
             location = world.hinted_dungeon_reward_locations[reward]
             if location is None:
-                area = world.HintAreaLang.ROOT
+                area = HintAreaDefault.ROOT
             else:
-                area = world.HintAreaLang.at(location)
-            dungeon_reward_areas += area.short_name.encode('cp932').ljust(0x16) + b'\0'
+                if HintAreaDefault.at(location,get_name=True):
+                    area = HintAreaDefault[HintAreaDefault.at(location,get_name=True)]
+                else:
+                    area = HintAreaDefault[HintAreaDefault.at(location,get_name=True)]
+            dungeon_reward_areas += area.short_name.encode('ascii').ljust(0x16) + b'\0'
             dungeon_reward_worlds.append((world.id if location is None else location.world.id) + 1)
             if location is not None and location.world.id == world.id and area.is_dungeon:
                 dungeon_rewards[codes.index(area.dungeon_name)] = boss_reward_index(location.item)
-
+    with open("hh.txt", mode="a+") as f:
+        f.write(HintAreaDefault.ROOT.short_name)
     dungeon_is_mq = [int(world.dungeon_mq.get(c, False)) for c in codes]
     dungeon_precompleted = [int(world.precompleted_dungeons.get(c, False)) for c in codes]
 

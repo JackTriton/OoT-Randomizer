@@ -1,10 +1,10 @@
 import json
-from typing import Optional
 
 lang_property = {
     "base": "en",
     "display_name": "English",
-    "description": "Play with English language."
+    "description": "Play with English language.",
+    "align_text": "Left" # alignation of the texts [Left, Center, Right]
 }
 
 prefix = {
@@ -331,25 +331,33 @@ KEYSANITY_MESSAGES: list[tuple[int, str]] = [
     (0x908A, "\x08You found a \x05\x44Silver Rupee\x05\x40 for the\x01\x05\x42Forest Trial\x05\x40 in \x05\x41Ganon's Castle\x05\x40!\x09"),
 ]
 
-dungeon_names = [
-    None, # Unused Deku Tree
-    None, # Unused Dodongos Cavern
-    None, # Unused Jabu
-    "the \x05\x42Forest Temple\x05\x40",
-    "the \x05\x41Fire Temple\x05\x40",
-    "the \x05\x43Water Temple\x05\x40",
-    "the \x05\x46Spirit Temple\x05\x40",
-    "the \x05\x45Shadow Temple\x05\x40",
-    "the \x05\x45Bottom of the Well\x05\x40",
-    None, # Unused Ice Cavern
-    None, # Unused Ganons Castle Tower
-    "the \x05\x46Gerudo Training\x01Ground\x05\x40",
-    "the \x05\x46Thieves' Hideout\x05\x40",
-    "\x05\x41Ganon's Castle\x05\x40",
-    None, # Unused Tower Collapse
-    None, # Unused Castle Collapse
-    "the \x05\x44Treasure Box Shop\x05\x40",
-]
+color_white = "\x05\x40" if lang_property["base"] == "en" else "#00"
+
+dungeon_list = {
+    #                      dungeon name                      compass map gender
+    'Deku Tree':          ("the \x05\x42Deku Tree",          0x62, 0x88, "o"),
+    'Dodongos Cavern':    ("\x05\x41Dodongo\'s Cavern",      0x63, 0x89, "o"),
+    'Jabu Jabus Belly':   ("\x05\x43Jabu Jabu\'s Belly",     0x64, 0x8a, "o"),
+    'Forest Temple':      ("the \x05\x42Forest Temple",      0x65, 0x8b, "o"),
+    'Fire Temple':        ("the \x05\x41Fire Temple",        0x7c, 0x8c, "o"),
+    'Water Temple':       ("the \x05\x43Water Temple",       0x7d, 0x8e, "o"),
+    'Spirit Temple':      ("the \x05\x46Spirit Temple",      0x7e, 0x8f, "o"),
+    'Shadow Temple':      ("the \x05\x45Shadow Temple",      0x7f, 0xa3, "o"),
+    'Bottom of the Well': ("the \x05\x45Bottom of the Well", 0xa2, 0xa5, "o"),
+    'Ice Cavern':         ("the \x05\x44Ice Cavern",         0x87, 0x92, "o"),
+}
+
+additional_dungeon_list = {
+    'Ganons Castle Tower':  None,
+    'GTG':                  ("the \x05\x46Gerudo Training\x01Ground\x05\x40", "o"),
+    'Hideout':              ("the \x05\x46Thieves' Hideout\x05\x40", "o"),
+    'Ganons castle':        ("\x05\x41Ganon's Castle\x05\x40", "o"),
+    'Tower Collapse':       None,
+    'Castle Collapse':      None,
+    'Treasure Box Shop':    ("the \x05\x44Treasure Box Shop\x05\x40", "o")
+}
+
+dungeon_names = [(name + color_white, gender) if key not in ['Deku Tree', 'Dodongos Cavern', 'Jabu Jabus Belly', 'Ice Cavern'] else None for key, (name, _, _, gender) in dungeon_list.items()] + list(additional_dungeon_list.values())
 
 i = 0x9101
 # Add small key messages starting at 0x9101
@@ -360,35 +368,30 @@ i = 0x9101
 
 for dungeon_name in dungeon_names:
     if dungeon_name is not None:
-        KEYSANITY_MESSAGES.append((i, f"\x13\x77\x08You found a \x05\x41Small Key\x05\x40\x01for {dungeon_name}!\x01It's your \x05\x41first\x05\x40 one!\x09"))
+        KEYSANITY_MESSAGES.append((i, f"\x13\x77\x08You found a \x05\x41Small Key\x05\x40\x01for {dungeon_name[0]}!\x01It's your \x05\x41first\x05\x40 one!\x09"))
     i += 1
 c = 0
 for dungeon_name in dungeon_names:
     if dungeon_name is not None:
-        KEYSANITY_MESSAGES.append((i, f"\x13\x77\x08You found a \x05\x41Small Key\x05\x40\x01for {dungeon_name}!\x01You've collected \x05\x41" + "\xF1" + c.to_bytes(1, 'big').decode() + "\x05\x40 of them.\x09"))
+        KEYSANITY_MESSAGES.append((i, f"\x13\x77\x08You found a \x05\x41Small Key\x05\x40\x01for {dungeon_name[0]}!\x01You've collected \x05\x41" + "\xF1" + c.to_bytes(1, 'big').decode() + "\x05\x40 of them.\x09"))
     i += 1
     c += 1
 for dungeon_name in dungeon_names:
     if dungeon_name is not None:
-        KEYSANITY_MESSAGES.append((i, f"\x13\x77\x08You found a \x05\x41Small Key\x05\x40\x01for {dungeon_name}!\x01You already have enough keys.\x09"))
+        KEYSANITY_MESSAGES.append((i, f"\x13\x77\x08You found a \x05\x41Small Key\x05\x40\x01for {dungeon_name[0]}!\x01You already have enough keys.\x09"))
     i += 1
 
 # Add key ring messages starting at 0x9200
 i = 0x9200
 for dungeon_name in dungeon_names:
     if dungeon_name is not None:
-        KEYSANITY_MESSAGES.append((i, f"\x13\x77\x08You found a \x05\x41Small Key Ring\x05\x40\x01for {dungeon_name}!\x09"))
+        KEYSANITY_MESSAGES.append((i, f"\x13\x77\x08You found a \x05\x41Small Key Ring\x05\x40\x01for {dungeon_name[0]}!\x09"))
     i += 1
 
-key_rings_with_bk_dungeon_names = [
-    "the \x05\x42Forest Temple\x05\x40",
-    "the \x05\x41Fire Temple\x05\x40",
-    "the \x05\x43Water Temple\x05\x40",
-    "the \x05\x46Spirit Temple\x05\x40",
-    "the \x05\x45Shadow Temple\x05\x40"
-]
+key_rings_with_bk_dungeon_names = [(name + color_white, gender) for key, (name, _, _, gender) in dungeon_list.items() if key in ['Forest Temple','Fire Temple','Water Temple','Spirit Temple','Shadow Temple']]
+
 for dungeon_name in key_rings_with_bk_dungeon_names:
-    KEYSANITY_MESSAGES.append((i, f"\x13\x77\x08You found a \x05\x41Key Ring\x05\x40\x01for {dungeon_name}!\x09\x01It includes the \x05\x41Boss Key\x05\x40!"))
+    KEYSANITY_MESSAGES.append((i, f"\x13\x77\x08You found a \x05\x41Key Ring\x05\x40\x01for {dungeon_name[0]}!\x09\x01It includes the \x05\x41Boss Key\x05\x40!"))
     i += 1
     
 MISC_MESSAGES: list[tuple[int, tuple[str | bytearray, int]]] = [
@@ -518,20 +521,6 @@ SHOP_TEXTS = {
     "desc_multi": '\x08\x05\x41{base_name}  {price} Rupees\x01\x05\x42Player {player_id}\x05\x40\x01Special deal! ONE LEFT!\x09\x0A\x02',
     "desc": '\x08\x05\x41{base_name}  {price} Rupees\x01\x05\x40Special deal! ONE LEFT!\x01Get it while it lasts!\x09\x0A\x02',
     "purc": '\x08{base_name}  {price} Rupees\x09\x01\x01\x1B\x05\x42Buy\x01Don\'t buy\x05\x40\x02',
-}
-
-dungeon_list = {
-    #                      dungeon name                      compass map gender
-    'Deku Tree':          ("the \x05\x42Deku Tree",          0x62, 0x88, "o"),
-    'Dodongos Cavern':    ("\x05\x41Dodongo\'s Cavern",      0x63, 0x89, "o"),
-    'Jabu Jabus Belly':   ("\x05\x43Jabu Jabu\'s Belly",     0x64, 0x8a, "o"),
-    'Forest Temple':      ("the \x05\x42Forest Temple",      0x65, 0x8b, "o"),
-    'Fire Temple':        ("the \x05\x41Fire Temple",        0x7c, 0x8c, "o"),
-    'Water Temple':       ("the \x05\x43Water Temple",       0x7d, 0x8e, "o"),
-    'Spirit Temple':      ("the \x05\x46Spirit Temple",      0x7e, 0x8f, "o"),
-    'Ice Cavern':         ("the \x05\x44Ice Cavern",         0x87, 0x92, "o"),
-    'Bottom of the Well': ("the \x05\x45Bottom of the Well", 0xa2, 0xa5, "o"),
-    'Shadow Temple':      ("the \x05\x45Shadow Temple",      0x7f, 0xa3, "o"),
 }
 
 region_list = {
@@ -2072,7 +2061,6 @@ hint_text = {
     "ganon_grant_bk": "automatically granted once {item_req} {verb} retrieved",
     "ganon_base": "And the \x05\x41evil one\x05\x40's key will be {bk_location_string}"
 }
-
 
 trials = {
     'Spirit': "Spirit",

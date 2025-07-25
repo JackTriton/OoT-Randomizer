@@ -9,9 +9,11 @@ if TYPE_CHECKING:
 # Least common multiple of all possible character widths. A line wrap must occur when the combined widths of all of the
 # characters on a line reach this value.
 NORMAL_LINE_WIDTH: int = 1801800
+NORMAL_LINE_WIDTH_JP: int = 16*16
 
 # Attempting to display more lines in a single text box will cause additional lines to bleed past the bottom of the box.
 LINES_PER_BOX: int = 4
+LINES_PER_BOX_JP: int = 3
 
 # Attempting to display more characters in a single text box will cause buffer overflows. First, visual artifacts will
 # appear in lower areas of the text box. Eventually, the text box will become uncloseable.
@@ -31,10 +33,10 @@ hex_string_regex: re.Pattern = re.compile(r"\$\{((?:[0-9a-f][0-9a-f] ?)+)}", fla
 
 def line_wrap(text: str, lang: str, strip_existing_lines: bool = False, strip_existing_boxes: bool = False, replace_control_chars: bool = True, align: str = "Left"):
     # Replace stand-in characters with their actual control code.
-    line_box=LINES_PER_BOX
     lang = 1 if lang=="en" else 0
-    skip_align = [0x81BC, 0x81B8, 0x86C7, 0x819A]
-    if not lang: line_box=3
+    line_box = LINES_PER_BOX if lang else LINES_PER_BOX_JP
+    
+    skip_align = [0x81BC, 0x81B8, 0x819A]
     if replace_control_chars and lang:
         def replace_bytes(match: re.Match) -> str:
             return ''.join(chr(x) for x in bytes.fromhex(match[1]))
@@ -86,7 +88,7 @@ def line_wrap(text: str, lang: str, strip_existing_lines: bool = False, strip_ex
     # Split the boxes into lines and words.
     processed_boxes = []
     for box_codes in boxes:
-        line_width = NORMAL_LINE_WIDTH
+        line_width = NORMAL_LINE_WIDTH if lang else NORMAL_LINE_WIDTH_JP
         icon_code = None
         words = []
 
@@ -99,7 +101,7 @@ def line_wrap(text: str, lang: str, strip_existing_lines: bool = False, strip_ex
 
             # Check for an icon code and lower the width of this box if one is found.
             if text_code.code == [0x819A, 0x13][lang]:
-                line_width = 1441440 if lang else 1321320
+                line_width = 1441440 if lang else 16*14
                 icon_code = text_code
 
             if any([tc.code in skip_align for tc in box_codes[index:]]) and not any([tc.code == 0x81A5 for tc in box_codes[index:]]):
@@ -116,7 +118,7 @@ def line_wrap(text: str, lang: str, strip_existing_lines: bool = False, strip_ex
             if text_code.code in [[0x0A, 0x81A5, 0x8170],[0x01, 0x04, 0x20]][lang]:
                 if index > 1:
                     words.append(calculate_align(box_codes[:index-1],lang,line_width,align_box))
-                if lang and text_code.code in [0x01, 0x04]:
+                if text_code.code in [[0x0A, 0x81A5],[0x01, 0x04]][lang]:
                     # If we have run into a line or box break, add it as a "word" as well.
                     words.append([box_codes[index-1]])
                 box_codes = box_codes[index:]
@@ -161,13 +163,13 @@ def line_wrap(text: str, lang: str, strip_existing_lines: bool = False, strip_ex
     # Construct our final string.
     # This is a hideous level of list comprehension. Sorry.
     if lang: return '\x04'.join(['\x01'.join([' '.join([''.join([code.get_string() for code in word]) for word in line]) for line in box]) for box in processed_boxes])
-    else: return '^'.join(['&'.join(['　'.join([''.join([code.get_string() for code in word]) for word in line]) for line in box]) for box in processed_boxes])
+    else: return '^'.join(['&'.join([''.join([''.join([code.get_string() for code in word]) for word in line]) for line in box]) for box in processed_boxes]).replace("&&","&").replace("^^","^").replace("&^","^")
 
 
 def calculate_width(words: list[list[TextCode]], lang: str|int):
     words_width = 0
     lang= 1 if lang in ["en",1] else 0
-    CC=Messages.CONTROL_CODES if lang=="en" else Messages.CC_PARSE_JP
+    CC=Messages.CONTROL_CODES if lang else Messages.CC_PARSE_JP
     for word in words:
         index = 0
         while index < len(word):
@@ -176,12 +178,12 @@ def calculate_width(words: list[list[TextCode]], lang: str|int):
             if character.code in CC:
                 if character.code == [0x86C7,0x06][lang]:
                     words_width += character.data
-            words_width += get_character_width(chr(character.code) if lang=="en" else character.code, lang)
-    spaces_width = get_character_width(' ' if lang=="en" else '　', lang) * (len(words) - 1)
+            words_width += get_character_width(chr(character.code) if lang else character.code, lang)
+    spaces_width = get_character_width(' ', lang) * (len(words) - 1) if lang else 0
     return words_width + spaces_width
 
 
-def get_character_width(character: str, lang: str|int) -> int:
+def get_character_width(character: str|int, lang: str|int) -> int:
     if lang in ["en",1]:
         try:
             return character_table[character]
@@ -197,20 +199,26 @@ def get_character_width(character: str, lang: str|int) -> int:
     else:
         if character in Messages.CC_PARSE_JP:
             if character in control_code_width:
-                return 120120*len(control_code_width[character])
+                return 16*len(control_code_width[character])
             else:
                 return 0
         else:
             # A sane default with the most common character width
-            return 120120
+            if character in character_table:
+                return character_table[character]
+            return 16
 
 def calculate_align(words, lang: int, line_width:int, align:str="Left"):
-    if align=="Left" or lang:
+    if align=="Left":
         return words
+    word_codes = [w.code for w in words]
+    if [0x86C7,0x06][lang] in word_codes:
+        words.pop(word_codes.index([0x86C7,0x06][lang]))
     h=calculate_width([words],lang)
-    g=(line_width-h)//120120
+    g=line_width-h
     if g<=0: return words
-    asd=TextCode(0x86C7, g*8 if align=="Center" else g*16, 0)
+    if lang: g = g * 16 // 120120
+    asd=Messages.TextCode([0x86C7, 0x06][lang], int(g//2 if align=="Center" else g), lang)
     return [asd]+words
 
 control_code_width: dict[str|int, str] = {
@@ -245,7 +253,7 @@ control_code_width: dict[str|int, str] = {
 # at worst. This ensures that we will never bleed text out of the text box while line wrapping.
 # Larger numbers in the denominator mean more of that character fits on a line; conversely, larger values in this table
 # mean the character is wider and can't fit as many on one line.
-character_table: dict[str, int] = {
+character_table: dict[str|int, int] = {
     '\x0F': 655200,
     '\x16': 292215,
     '\x17': 292215,
@@ -330,6 +338,23 @@ character_table: dict[str, int] = {
     ')':  42900,  # LINE_WIDTH /  42
     '$':  51480,  # LINE_WIDTH /  35
     '\xF2': 655200,
+    0x8140: 6, # '　'
+    0x8141: 7, # '、'
+    0x8142: 7, # '。'
+    0x8144: 3, # '．'
+    0x8145: 7, # '・'
+    0x8148: 14,# '？'
+    0x8149: 14,# '！'
+    0x814F: 7, # '＾'
+    0x8167: 7, # '“'
+    0x8168: 7, # '”'
+    0x8169: 10, # '（'
+    0x816A: 5, # '）'
+    0x8175: 10, # '「'
+    0x8176: 5, # '」'
+    0x8194: 9, # '＃'
+    0x8196: 9, # '＊'
+    0x8250: 14,# '１'
 }
 
 trans_map = str.maketrans(
@@ -338,6 +363,7 @@ trans_map = str.maketrans(
 
 character_table_jp = {}
 for ch, ap in character_table.items():
+    if type(ch) != str: continue
     if len(ch) == 1 and not ch.isprintable():
         continue
     try:

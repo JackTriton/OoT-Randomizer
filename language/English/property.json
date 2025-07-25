@@ -9702,7 +9702,8 @@
     "lang_property": {
         "base": "en",
         "description": "Play with English language.",
-        "display_name": "English"
+        "display_name": "English",
+        "align_text": "Left"
     },
     "misc_dual_hint_table": {
         "skull_mask, mask_of_truth": {
