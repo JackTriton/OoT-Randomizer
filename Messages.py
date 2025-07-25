@@ -5,12 +5,13 @@ import random
 from collections.abc import Callable, Iterable
 from typing import TYPE_CHECKING, Optional, Any, Dict, Tuple, List
 from math import ceil
-from Language import Language
 import json
+import itertools
 
 from HintList import misc_item_hint_table, misc_location_hint_table
 from TextBox import line_wrap
 from Utils import find_last
+from Language import Language
 
 if TYPE_CHECKING:
     from Rom import Rom
@@ -586,9 +587,21 @@ class Message:
         box_breaks = [[0x81A5, 0x81A3], [0x04, 0x0C]][self.lang]
         slows_text = [[0x8189, 0x818A, 0x86C9], [0x08, 0x09, 0x14]][self.lang]
         slow_icons = [0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x04, 0x02]
+        
+        ignores = []
+        # ignore ending codes if it's going to be replaced
+        if replace_ending:
+            ignores += ending_codes
+        # ignore the "make unskippable flag"
+        if always_allow_skip:
+            ignores += [[0x8199], [0x1A]][self.lang]
+        # ignore anything that slows down text
+        if speed_up_text:
+            ignores += slows_text
 
         text_codes = []
-        instant_text_code = TextCode(0x08 if self.lang else 0x8189, 0, self.lang)
+        instant_text_code = TextCode([0x8189, 0x08][self.lang], 0, self.lang)
+        current_color = [0x0C00, 0x40][self.lang]
 
         # # speed the text
         if speed_up_text:
@@ -597,16 +610,12 @@ class Message:
         # write the message
         for i, code in enumerate(self.text_codes):
             # ignore the color change if the next code is color as well
-            if code.code == [0x0B, 0x05][self.lang] and self.text_codes[i+1].code == code.code:
-                pass
+            if code.code == [0x0B, 0x05][self.lang]:
+                if self.text_codes[i+1].code == code.code or all(tc.code == [0x8140, 0x20][self.lang] or tc.code in ignores for tc in itertools.takewhile(lambda tc: tc.code != code.code, self.text_codes[i+1:])) or current_color == code.data:
+                    continue
+                current_color = code.data
             # ignore ending codes if it's going to be replaced
-            elif replace_ending and code.code in ending_codes:
-                pass
-            # ignore the "make unskippable flag"
-            elif always_allow_skip and code.code == [0x8199, 0x1A][self.lang]:
-                pass
-            # ignore anything that slows down text
-            elif speed_up_text and code.code in slows_text:
+            if code.code in ignores:
                 pass
             elif speed_up_text and code.code in box_breaks:
                 # some special cases for text that needs to be on a timer
@@ -736,18 +745,18 @@ def update_message_by_index(messages: list[Message], index: int, text: bytearray
         opts = messages[index].opts
 
     if isinstance(text, bytearray):
-        messages[index] = Message.from_bytearray(text, lang, messages[index].id, opts)
+        messages[index] = Message.from_bytearray(text, lang.base, messages[index].id, opts)
     else:
-        messages[index] = Message.from_string(text, lang, messages[index].id, opts)
+        messages[index] = Message.from_string(text, lang.base, messages[index].id, opts)
     messages[index].index = index
 
 
 # wrapper for adding a string message to a list of messages
 def add_message(messages: list[Message], text: bytearray | str, lang: Language, id: int = 0, opts: int = 0x00) -> None:
     if isinstance(text, bytearray):
-        messages.append(Message.from_bytearray(text, lang, id, opts))
+        messages.append(Message.from_bytearray(text, lang.base, id, opts))
     else:
-        messages.append(Message.from_string(text, lang, id, opts))
+        messages.append(Message.from_string(text, lang.base, id, opts))
     messages[-1].index = len(messages) - 1
 
 
@@ -912,7 +921,7 @@ def update_item_messages(messages: list[Message], world: World) -> None:
     lang = world.language
     if lang.PLANE_TEXTS!=[]:
         for id, (text, opt) in lang.PLANE_TEXTS:
-            update_message_by_id(messages, id, text, lang, opt)
+            update_message_by_id(messages, id, text, lang, opt, force_left=True)
 
     new_item_messages = lang.ITEM_MESSAGES + lang.KEYSANITY_MESSAGES
     for id, text in new_item_messages:
