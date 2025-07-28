@@ -7,6 +7,9 @@ Create language file with below data structure
 
 For optional bin files, check out `data/bin_patch.json`.
 
+If you created the file, just drag and drop the file with the same structure as English / Japanese and place it here  
+The system will automatically recognize the language and implement it into the system
+
 ---
 ## makediff.py
 
