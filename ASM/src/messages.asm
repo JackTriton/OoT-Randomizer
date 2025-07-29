@@ -77,13 +77,14 @@ Message_Decode_Control_Code_Hook_JP:
     sw      a0, 0x10(sp)
     sw      a1, 0x14(sp)
     sw      a2, 0x18(sp)
+    sw      v0, 0x1C(sp)
     sw      a3, 0x20(sp)
 
     addiu   sp, sp, -0x20
     sw      s5, 0x10(sp)
     sw      s4, 0x14(sp)
 
-    lhu v0, 0xXXXX(sp)
+    lhu     v0, 0x1C(sp)
     or      a0, r0, v0
     addiu   a1, sp, 0x10
     addiu   a2, sp, 0x14
@@ -100,14 +101,14 @@ Message_Decode_Control_Code_Hook_JP:
     lw      a2, 0x18(sp)
     lw      a3, 0x20(sp)
 
-    beqz    v0, @no_match_jp
+    beqz    v0, @jp_natch
     lw      v0, 0x1C(sp)
 
     j       0x800DB4F0
     addiu   sp, sp, 0x60
 
-@no_match_jp
-    j       0x800DB32C
+@jp_natch:
+    j      0x800DB32C
     addiu   sp, sp, 0x60
 
 Message_Decode_Control_Code_Hook:
