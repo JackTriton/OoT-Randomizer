@@ -4,6 +4,8 @@
 #include "save.h"
 #include "dungeon_info.h"
 
+#define MSG_BUF_WIDE ((uint16_t*)font->msgBufWide)
+
 // no support for kana since they're not part of the message charset
 char FILENAME_ENCODING[256] = {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '?', '?', '?', '?', '?', '?',
@@ -24,6 +26,25 @@ char FILENAME_ENCODING[256] = {
     '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?',
 };
 
+uint16_t FILENAME_ENCODING_WIDE[256] = {
+    0x824F, 0x8250, 0x8251, 0x8252, 0x8253, 0x8254, 0x8255, 0x8256, 0x8257, 0x8258, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148,
+    0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148,
+    0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148,
+    0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148,
+    0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148,
+    0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148,
+    0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148,
+    0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148,
+    0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148,
+    0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148,
+    0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8260, 0x8261, 0x8262, 0x8263, 0x8264, 
+    0x8265, 0x8266, 0x8267, 0x8268, 0x8269, 0x826A, 0x826B, 0x826C, 0x826D, 0x826E, 0x826F, 0x8270, 0x8271, 0x8272, 0x8273, 0x8274, 
+    0x8275, 0x8276, 0x8277, 0x8278, 0x8279, 0x8281, 0x8282, 0x8283, 0x8284, 0x8285, 0x8286, 0x8287, 0x8288, 0x8289, 0x828A, 0x828B, 
+    0x828C, 0x828D, 0x828E, 0x828F, 0x8290, 0x8291, 0x8292, 0x8293, 0x8294, 0x8295, 0x8296, 0x8297, 0x8298, 0x8299, 0x829A, 0x8140, 
+    0x8148, 0x8148, 0x8149, 0x8146, 0x817C, 0x8169, 0x816A, 0x8148, 0x8148, 0x8143, 0x8144, 0x815E, 0x8148, 0x8148, 0x8148, 0x8148,
+    0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148, 0x8148,
+};
+
 extern uint8_t PLAYER_NAMES[256][8];
 extern uint8_t PLAYER_NAME_ID;
 
@@ -34,6 +55,20 @@ void Message_AddCharacter(MessageContext* msgCtx, void* pFont, uint32_t* pDecode
     msgCtx->msgBufDecoded[decodedBufPosVal++] = charToAdd; // Add the character to the output buffer, increment the output position
     if (charToAdd != ' ') { // Only load the character texture if it's not a space.
         Font_LoadChar(pFont, charToAdd - ' ', charTexIdx); // Load the character texture
+        charTexIdx += 0x80; // Increment the texture pointer
+    }
+
+    // Copy our locals back to their pointers
+    *pDecodedBufPos = decodedBufPosVal;
+    *pCharTexIdx = charTexIdx;
+}
+
+void Message_AddCharacterWide(MessageContext* msgCtx, Font* font, uint32_t* pDecodedBufPos, uint32_t* pCharTexIdx, uint16_t charToAdd) {
+    uint32_t decodedBufPosVal = *pDecodedBufPos;
+    uint32_t charTexIdx = *pCharTexIdx;
+    msgCtx->msgBufDecodedWide[decodedBufPosVal++] = charToAdd; // Add the character to the output buffer, increment the output position
+    if (charToAdd != 0x8140) { // Only load the character texture if it's not a space.
+        Font_LoadCharWide(font, charToAdd, charTexIdx); // Load the character texture
         charTexIdx += 0x80; // Increment the texture pointer
     }
 
@@ -64,30 +99,42 @@ void Message_AddIntegerWide(MessageContext* msgCtx, Font* font,
     uint32_t* pDecodedBufPos, uint32_t* pCharTexIdx,
     uint32_t numToAdd){
     uint8_t digits[10];
-    uint8_t n = 0;
+    uint8_t i = 0;
+    // Extract each digit. They are added, in reverse order, to digits[]
     do {
-        digits[n++] = numToAdd % 10;
-        numToAdd /= 10;
-    } while (numToAdd > 0);
-
-    uint32_t bufPos = *pDecodedBufPos;
-    uint32_t texIdx = *pCharTexIdx;
-
-    for (int i = n - 1; i >= 0; --i) {
-        uint16_t wideCode = (uint16_t)(digits[i] + MESSAGE_WIDE_CHAR_ZERO);
-        Font_LoadCharWide(font, wideCode, texIdx);
-        texIdx += FONT_CHAR_TEX_SIZE;
-        msgCtx->msgBufDecodedWide[bufPos++] = wideCode;
+        digits[i] = numToAdd % 10;
+        numToAdd = numToAdd / 10;
+        i++;
     }
+    // Loop through each digit in digits[] and add the character to the decoded buffer.
+    while (numToAdd > 0);
 
-    *pDecodedBufPos = bufPos;
-    *pCharTexIdx  = texIdx;
+    for (uint8_t c = i; c > 0; c--) {
+        Message_AddCharacterWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, MESSAGE_WIDE_CHAR_ZERO + digits[c - 1]);
+    }
 }
 
 // Helper function for adding simple strings to the decoded message buffer. Does not support additional control codes.
 void Message_AddString(MessageContext* msgCtx, void* pFont, uint32_t* pDecodedBufPos, uint32_t* pCharTexIdx, char* stringToAdd) {
     while (*stringToAdd != 0) {
         Message_AddCharacter(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, *stringToAdd);
+        stringToAdd++;
+    }
+}
+
+void Message_AddStringWide(MessageContext* msgCtx, Font* font, uint32_t* pDecodedBufPos, uint32_t* pCharTexIdx, char* stringToAdd) {
+    while (*stringToAdd != 0) {
+        uint16_t ch = 0x8140;
+        if (ch >= '0' && ch <= '9') {
+            ch = (uint16_t)((0x82 << 8) | (0x4F + (ch - '0')));
+        }
+        else if (ch >= 'A' && ch <= 'Z') {
+            ch = (uint16_t)((0x82 << 8) | (0x60 + (ch - 'A')));
+        }
+        else if (ch >= 'a' && ch <= 'z') {
+            ch = (uint16_t)((0x82 << 8) | (0x81 + (ch - 'a')));
+        }
+        Message_AddCharacterWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, ch);
         stringToAdd++;
     }
 }
@@ -101,6 +148,17 @@ void Message_AddFileName(MessageContext* msgCtx, void* pFont, uint32_t* pDecoded
     }
     for (int i = 0; i < end; i++) {
         Message_AddCharacter(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, FILENAME_ENCODING[filenameToAdd[i]]);
+    }
+}
+
+void Message_AddFileNameWide(MessageContext* msgCtx, Font* font, uint32_t* pDecodedBufPos, uint32_t* pCharTexIdx, uint8_t* filenameToAdd) {
+    int end = 8;
+    while (filenameToAdd[end - 1] == 0xDF) {
+        // trim trailing space
+        end--;
+    }
+    for (int i = 0; i < end; i++) {
+        Message_AddCharacterWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, FILENAME_ENCODING_WIDE[filenameToAdd[i]]);
     }
 }
 
@@ -148,43 +206,43 @@ bool Message_Decode_Additional_Control_Codes(uint8_t currChar, uint32_t* pDecode
                 case 0x000:
                 case 0x252: {
                     // Deku Tree
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[0].name_en);
+                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[0].en_name);
                     break;
                 }
                 case 0x004:
                 case 0x0C5: {
                     // DC
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[1].name_en);
+                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[1].en_name);
                     break;
                 }
                 case 0x028:
                 case 0x407: {
                     // Jabu
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[2].name_en);
+                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[2].en_name);
                     break;
                 }
                 case 0x169:
                 case 0x24E: {
                     // Forest Temple
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[3].name_en);
+                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[3].en_name);
                     break;
                 }
                 case 0x165:
                 case 0x175: {
                     // Fire Temple
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[4].name_en);
+                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[4].en_name);
                     break;
                 }
                 case 0x010:
                 case 0x423: {
                     // Water Temple
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[5].name_en);
+                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[5].en_name);
                     break;
                 }
                 case 0x037:
                 case 0x2B2: {
                     // Shadow Temple
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[6].name_en);
+                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[6].en_name);
                     break;
                 }
                 case 0x082:
@@ -192,22 +250,22 @@ bool Message_Decode_Additional_Control_Codes(uint8_t currChar, uint32_t* pDecode
                 case 0x3F0:
                 case 0x3F4: {
                     // Spirit Temple
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[7].name_en);
+                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[7].en_name);
                     break;
                 }
                 case 0x098: {
                     // BotW
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[8].name_en);
+                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[8].en_name);
                     break;
                 }
                 case 0x088: {
                     // Ice
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[9].name_en);
+                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[9].en_name);
                     break;
                 }
                 case 0x008: {
                     // GTG
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[11].name_en);
+                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[11].en_name);
                     break;
                 }
                 case 0x41B:
@@ -220,7 +278,7 @@ bool Message_Decode_Additional_Control_Codes(uint8_t currChar, uint32_t* pDecode
                 case 0x548:
                 case 0x54C: {
                     // Ganon
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[12].name_en);
+                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[12].en_name);
                     break;
                 }
                 default: {
@@ -240,37 +298,32 @@ bool Message_Decode_Additional_Control_Codes(uint8_t currChar, uint32_t* pDecode
 
 bool Message_Decode_Additional_Control_Codes_JP(uint16_t currCharWide, uint32_t* pDecodedBufPos, uint32_t* pCharTexIdx) {
     MessageContext* msgCtx = &(z64_game.msgContext);
-    Font* pFont = &(msgCtx->font); // Get a reference to the font.
-    char* msgRaw = (char*) &(pFont->msgBuf); // Get a reference to the start of the raw message. Index using msgCtx->msgBufPos.
+    Font* font = &(msgCtx->font);
 
     switch (currCharWide) {
         case 0x87F0: {
             // Silver rupee puzzle control code
             // Get the next character which tells us which puzzle it's for
-            uint8_t hi = msgRaw[++(msgCtx->msgBufPos)];
-            uint8_t lo = msgRaw[++(msgCtx->msgBufPos)];
-            uint16_t puzzle = (uint16_t)hi << 8 | lo;
+            uint8_t puzzle = MSG_BUF_WIDE[++(msgCtx->msgBufPos)] & 0xFF;
 
             uint8_t count = extended_savectx.silver_rupee_counts[puzzle];
-            Message_AddIntegerWide(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, count);
+            Message_AddIntegerWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, count);
             (*pDecodedBufPos)--;
             return true;
         }
         case 0x87F1: {
             // Small key count
             // Get the next character which tells us which dungeon it's for
-            uint8_t hi = msgRaw[++(msgCtx->msgBufPos)];
-            uint8_t lo = msgRaw[++(msgCtx->msgBufPos)];
-            uint16_t dungeon = (uint16_t)hi << 8 | lo;
+            uint8_t dungeon = MSG_BUF_WIDE[++(msgCtx->msgBufPos)] & 0xFF;
 
             uint8_t count = z64_file.scene_flags[dungeon].unk_00_ >> 0x10;
-            Message_AddIntegerWide(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, count);
+            Message_AddIntegerWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, count);
             (*pDecodedBufPos)--;
             return true;
         }
         case 0x87F2: {
             // Outgoing item filename
-            Message_AddFileName(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, PLAYER_NAMES[PLAYER_NAME_ID]);
+            Message_AddFileNameWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, PLAYER_NAMES[PLAYER_NAME_ID]);
             (*pDecodedBufPos)--;
             return true;
         }
@@ -280,43 +333,43 @@ bool Message_Decode_Additional_Control_Codes_JP(uint16_t currCharWide, uint32_t*
                 case 0x000:
                 case 0x252: {
                     // Deku Tree
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[0].name_jp);
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[0].en_name);
                     break;
                 }
                 case 0x004:
                 case 0x0C5: {
                     // DC
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[1].name_jp);
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[1].en_name);
                     break;
                 }
                 case 0x028:
                 case 0x407: {
                     // Jabu
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[2].name_jp);
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[2].en_name);
                     break;
                 }
                 case 0x169:
                 case 0x24E: {
                     // Forest Temple
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[3].name_jp);
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[3].en_name);
                     break;
                 }
                 case 0x165:
                 case 0x175: {
                     // Fire Temple
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[4].name_jp);
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[4].en_name);
                     break;
                 }
                 case 0x010:
                 case 0x423: {
                     // Water Temple
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[5].name_jp);
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[5].en_name);
                     break;
                 }
                 case 0x037:
                 case 0x2B2: {
                     // Shadow Temple
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[6].name_jp);
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[6].en_name);
                     break;
                 }
                 case 0x082:
@@ -324,22 +377,22 @@ bool Message_Decode_Additional_Control_Codes_JP(uint16_t currCharWide, uint32_t*
                 case 0x3F0:
                 case 0x3F4: {
                     // Spirit Temple
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[7].name_jp);
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[7].en_name);
                     break;
                 }
                 case 0x098: {
                     // BotW
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[8].name_jp);
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[8].en_name);
                     break;
                 }
                 case 0x088: {
                     // Ice
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[9].name_jp);
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[9].en_name);
                     break;
                 }
                 case 0x008: {
                     // GTG
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[11].name_jp);
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[11].en_name);
                     break;
                 }
                 case 0x41B:
@@ -352,12 +405,12 @@ bool Message_Decode_Additional_Control_Codes_JP(uint16_t currCharWide, uint32_t*
                 case 0x548:
                 case 0x54C: {
                     // Ganon
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, dungeons[12].name_jp);
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[12].en_name);
                     break;
                 }
                 default: {
                     // Vanilla text
-                    Message_AddString(msgCtx, pFont, pDecodedBufPos, pCharTexIdx, "ＷＡＲＰ");
+                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, "WARP");
                     break;
                 }
             }

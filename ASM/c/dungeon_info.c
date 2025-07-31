@@ -304,7 +304,7 @@ void draw_dungeon_info(z64_disp_buf_t* db) {
             int top = start_top + ((icon_size + padding) * i) + 1;
             if (empty) {
                 gDPSetPrimColor(db->p++, 0, 0, 0xFF, 0xFF, 0xFF, 0x7F);
-                uint16_t sizeRectangle = text_print_size(db, d->name, left, top, font_width, font_height) - left;
+                uint16_t sizeRectangle = text_print_size(db, d->en_name, left, top, font_width, font_height) - left;
                 gDPSetPrimColor(db->p++, 0, 0, 0xFF, 0xFF, 0xFF, 0xBF);
                 gDPSetCombineMode(db->p++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
                 gSPTextureRectangle(db->p++,
@@ -316,7 +316,7 @@ void draw_dungeon_info(z64_disp_buf_t* db) {
                 gDPSetCombineMode(db->p++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
             } else {
                 gDPSetPrimColor(db->p++, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
-                text_print_size(db, d->name, left, top, font_width, font_height);
+                text_print_size(db, d->en_name, left, top, font_width, font_height);
             }
         }
 
@@ -691,7 +691,7 @@ void draw_dungeon_info(z64_disp_buf_t* db) {
         for (int i = 0; i < rows; i++) {
             dungeon_entry_t* d = &(dungeons[d_right_dungeon_idx(i)]); // skip Deku/DC/Jabu/Ice dynamically
             int top = start_top + ((icon_size + padding) * i) + 1;
-            text_print(db, d->name, left, top);
+            text_print(db, d->en_name, left, top);
         }
 
         left += ((SHUFFLE_CHEST_GAME == 1 ? 11 : 8) * font_sprite.tile_w) + padding;
@@ -857,7 +857,7 @@ void draw_dungeon_info(z64_disp_buf_t* db) {
             int top = start_top + ((icon_size + padding) * i) + 1;
             if (empty) {
                 gDPSetPrimColor(db->p++, 0, 0, 0xFF, 0xFF, 0xFF, 0x7F);
-                uint16_t sizeRectangle = text_print(db, d->name, left, top) - left;
+                uint16_t sizeRectangle = text_print(db, d->en_name, left, top) - left;
                 gDPSetPrimColor(db->p++, 0, 0, 0xFF, 0xFF, 0xFF, 0xBF);
                 gDPSetCombineMode(db->p++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
                 gSPTextureRectangle(db->p++,
@@ -869,7 +869,7 @@ void draw_dungeon_info(z64_disp_buf_t* db) {
                 gDPSetCombineMode(db->p++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
             } else {
                 gDPSetPrimColor(db->p++, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
-                text_print(db, d->name, left, top);
+                text_print(db, d->en_name, left, top);
             }
         }
 
