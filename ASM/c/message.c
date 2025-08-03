@@ -4,7 +4,7 @@
 #include "save.h"
 #include "dungeon_info.h"
 
-#define MSG_BUF_WIDE ((uint16_t*)font->msgBufWide)
+#define MSG_BUF_WIDE (font->msgBufWide)
 
 // no support for kana since they're not part of the message charset
 char FILENAME_ENCODING[256] = {
@@ -124,18 +124,18 @@ void Message_AddString(MessageContext* msgCtx, void* pFont, uint32_t* pDecodedBu
 
 void Message_AddStringWide(MessageContext* msgCtx, Font* font, uint32_t* pDecodedBufPos, uint32_t* pCharTexIdx, char* stringToAdd) {
     while (*stringToAdd != 0) {
-        uint16_t ch = 0x8140;
-        if (ch >= '0' && ch <= '9') {
+        char     src = *stringToAdd++;
+        uint16_t ch  = 0x8140;
+        if (src >= '0' && src <= '9') {
             ch = (uint16_t)((0x82 << 8) | (0x4F + (ch - '0')));
         }
-        else if (ch >= 'A' && ch <= 'Z') {
+        else if (src >= 'A' && src <= 'Z') {
             ch = (uint16_t)((0x82 << 8) | (0x60 + (ch - 'A')));
         }
-        else if (ch >= 'a' && ch <= 'z') {
+        else if (src >= 'a' && src <= 'z') {
             ch = (uint16_t)((0x82 << 8) | (0x81 + (ch - 'a')));
         }
         Message_AddCharacterWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, ch);
-        stringToAdd++;
     }
 }
 
@@ -296,131 +296,83 @@ bool Message_Decode_Additional_Control_Codes(uint8_t currChar, uint32_t* pDecode
     }
 }
 
-bool Message_Decode_Additional_Control_Codes_JP(uint16_t currCharWide, uint32_t* pDecodedBufPos, uint32_t* pCharTexIdx) {
-    MessageContext* msgCtx = &(z64_game.msgContext);
-    Font* font = &(msgCtx->font);
+bool Message_Decode_Additional_Control_Codes_JP(
+    uint16_t      currCharWide,
+    int16_t*     pDecodedBufPos,
+    int32_t*     pCharTexIdx
+) {
+    MessageContext* msgCtx = &z64_game.msgContext;
+    Font*           font   = &msgCtx->font;
 
-    switch (currCharWide) {
-        case 0x87F0: {
-            // Silver rupee puzzle control code
-            // Get the next character which tells us which puzzle it's for
-            uint8_t puzzle = MSG_BUF_WIDE[++(msgCtx->msgBufPos)] & 0xFF;
+    if (currCharWide == 0x87F0) {
+        // Silver rupee puzzle control code
+        msgCtx->msgBufPos++;
+        uint8_t puzzle = MSG_BUF_WIDE[msgCtx->msgBufPos] & 0xFF;
+        uint8_t count  = extended_savectx.silver_rupee_counts[puzzle];
 
-            uint8_t count = extended_savectx.silver_rupee_counts[puzzle];
-            Message_AddIntegerWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, count);
-            (*pDecodedBufPos)--;
-            return true;
-        }
-        case 0x87F1: {
-            // Small key count
-            // Get the next character which tells us which dungeon it's for
-            uint8_t dungeon = MSG_BUF_WIDE[++(msgCtx->msgBufPos)] & 0xFF;
+        Message_AddIntegerWide(msgCtx, font, (uint32_t*)pDecodedBufPos, (uint32_t*)pCharTexIdx, count);
+        (*pDecodedBufPos)--;
+        return true;
 
-            uint8_t count = z64_file.scene_flags[dungeon].unk_00_ >> 0x10;
-            Message_AddIntegerWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, count);
-            (*pDecodedBufPos)--;
-            return true;
-        }
-        case 0x87F2: {
-            // Outgoing item filename
-            Message_AddFileNameWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, PLAYER_NAMES[PLAYER_NAME_ID]);
-            (*pDecodedBufPos)--;
-            return true;
-        }
-        case 0x87F3: {
-            // Farore's Wind destination
-            switch (z64_file.respawn[RESPAWN_MODE_TOP].entranceIndex) {
-                case 0x000:
-                case 0x252: {
-                    // Deku Tree
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[0].en_name);
-                    break;
-                }
-                case 0x004:
-                case 0x0C5: {
-                    // DC
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[1].en_name);
-                    break;
-                }
-                case 0x028:
-                case 0x407: {
-                    // Jabu
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[2].en_name);
-                    break;
-                }
-                case 0x169:
-                case 0x24E: {
-                    // Forest Temple
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[3].en_name);
-                    break;
-                }
-                case 0x165:
-                case 0x175: {
-                    // Fire Temple
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[4].en_name);
-                    break;
-                }
-                case 0x010:
-                case 0x423: {
-                    // Water Temple
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[5].en_name);
-                    break;
-                }
-                case 0x037:
-                case 0x2B2: {
-                    // Shadow Temple
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[6].en_name);
-                    break;
-                }
-                case 0x082:
-                case 0x2F5:
-                case 0x3F0:
-                case 0x3F4: {
-                    // Spirit Temple
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[7].en_name);
-                    break;
-                }
-                case 0x098: {
-                    // BotW
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[8].en_name);
-                    break;
-                }
-                case 0x088: {
-                    // Ice
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[9].en_name);
-                    break;
-                }
-                case 0x008: {
-                    // GTG
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[11].en_name);
-                    break;
-                }
-                case 0x41B:
-                case 0x467:
-                case 0x534:
-                case 0x538:
-                case 0x53C:
-                case 0x540:
-                case 0x544:
-                case 0x548:
-                case 0x54C: {
-                    // Ganon
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, dungeons[12].en_name);
-                    break;
-                }
-                default: {
-                    // Vanilla text
-                    Message_AddStringWide(msgCtx, font, pDecodedBufPos, pCharTexIdx, "WARP");
-                    break;
-                }
-            }
-            (*pDecodedBufPos)--;
-            return true;
-        }
-        default: {
-            return false;
-        }
+    } 
+
+    if (currCharWide == 0x87F1) {
+        // Small key count
+        msgCtx->msgBufPos++;
+        uint8_t dungeon = MSG_BUF_WIDE[msgCtx->msgBufPos] & 0xFF;
+        uint8_t count   = (z64_file.scene_flags[dungeon].unk_00_ >> 16) & 0xFF;
+
+        Message_AddIntegerWide(msgCtx, font, (uint32_t*)pDecodedBufPos, (uint32_t*)pCharTexIdx, count);
+        (*pDecodedBufPos)--;
+        return true;
+
     }
+    
+    if (currCharWide == 0x87F2) {
+        // Outgoing item filename
+        Message_AddFileNameWide(
+            msgCtx, font, (uint32_t*)pDecodedBufPos, (uint32_t*)pCharTexIdx,
+            PLAYER_NAMES[PLAYER_NAME_ID]
+        );
+        (*pDecodedBufPos)--;
+        return true;
+
+    } 
+    
+    if (currCharWide == 0x87F3) {
+        // Farore's Wind destination
+        uint16_t entrance = z64_file.respawn[RESPAWN_MODE_TOP].entranceIndex;
+        char* name;
+
+        if      (entrance ==   0x000 || entrance == 0x252) name = dungeons[0].en_name;
+        else if (entrance ==   0x004 || entrance == 0x0C5) name = dungeons[1].en_name;
+        else if (entrance ==   0x028 || entrance == 0x407) name = dungeons[2].en_name;
+        else if (entrance ==   0x169 || entrance == 0x24E) name = dungeons[3].en_name;
+        else if (entrance ==   0x165 || entrance == 0x175) name = dungeons[4].en_name;
+        else if (entrance ==   0x010 || entrance == 0x423) name = dungeons[5].en_name;
+        else if (entrance ==   0x037 || entrance == 0x2B2) name = dungeons[6].en_name;
+        else if (entrance ==   0x082 || entrance == 0x2F5 ||
+                 entrance ==   0x3F0 || entrance == 0x3F4) name = dungeons[7].en_name;
+        else if (entrance ==   0x098)                      name = dungeons[8].en_name;
+        else if (entrance ==   0x088)                      name = dungeons[9].en_name;
+        else if (entrance ==   0x008)                      name = dungeons[11].en_name;
+        else if ((entrance >= 0x41B && entrance <= 0x41B) ||
+                 (entrance ==   0x467) ||
+                 (entrance ==   0x534) ||
+                 (entrance ==   0x538) ||
+                 (entrance ==   0x53C) ||
+                 (entrance ==   0x540) ||
+                 (entrance ==   0x544) ||
+                 (entrance ==   0x548) ||
+                 (entrance ==   0x54C)            )    name = dungeons[12].en_name;
+        else                                               name = "WARP";
+
+        Message_AddStringWide(msgCtx, font, (uint32_t*)pDecodedBufPos, (uint32_t*)pCharTexIdx, name);
+        (*pDecodedBufPos)--;
+        return true;
+    }
+
+    return false;
 }
 
 uint8_t shooting_gallery_show_message = 0;

@@ -50,6 +50,17 @@ def data_path(path: str = '') -> str:
 
     return os.path.join(data_path.cached_path, path)
 
+def lang_path(path: str = '') -> str:
+    if not hasattr(lang_path, "cached_path"):
+        lang_path.cached_path = None
+
+    if lang_path.cached_path is not None:
+        return os.path.join(lang_path.cached_path, path)
+    
+    lang_path.cached_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "language")
+
+    return os.path.join(lang_path.cached_path, path)
+
 
 def default_output_path(path: str) -> str:
     if path == '':

@@ -63,17 +63,18 @@ load_correct_message_segment:
 
 Message_Decode_Control_Code_Hook_JP:
     ;— replaced newline handling —
-    addiu   $at, r0, 0x000A
-    bne     v0, $at, @not_newline_jp
-    lh      t7, 0x008C($sp)
+    addiu   at, r0, 0x000A
+    bne     v0, at, @not_newline_jp
+    lh      t7, 0x008C(sp)
     addiu   t8, t7, 0x0001
+    sh      t8, 0x008C(sp)
     j       0x800DB4F0    ; return to JP decode loop on newline
-    sh      t8, 0x008C($sp)
+    nop
 
 ;— New JP Control Codes go here —
 
 @not_newline_jp:
-    addiu   sp, sp, -0x60
+    addiu   sp, sp, -0x50
     sw      a0, 0x10(sp)
     sw      a1, 0x14(sp)
     sw      a2, 0x18(sp)
@@ -84,13 +85,11 @@ Message_Decode_Control_Code_Hook_JP:
     sw      s5, 0x10(sp)
     sw      s4, 0x14(sp)
 
-    lhu     v0, 0x1C(sp)
     or      a0, r0, v0
     addiu   a1, sp, 0x10
     addiu   a2, sp, 0x14
 
     jal     Message_Decode_Additional_Control_Codes_JP
-    nop
 
     lw      s5, 0x10(sp)
     lw      s4, 0x14(sp)
@@ -101,15 +100,14 @@ Message_Decode_Control_Code_Hook_JP:
     lw      a2, 0x18(sp)
     lw      a3, 0x20(sp)
 
-    beqz    v0, @jp_natch
+    beqz    v0, @jp_no_match
     lw      v0, 0x1C(sp)
-
     j       0x800DB4F0
-    addiu   sp, sp, 0x60
+    addiu   sp, sp, 0x50
 
-@jp_natch:
-    j      0x800DB32C
-    addiu   sp, sp, 0x60
+@jp_no_match:
+    j       0x800DB32C
+    addiu   sp, sp, 0x50
 
 Message_Decode_Control_Code_Hook:
 ; Replaced code
