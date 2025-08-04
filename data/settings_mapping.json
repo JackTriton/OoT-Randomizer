@@ -122,12 +122,21 @@
       "sections": [
         {
           "name": "main_section",
-          "text": "",
-          "col_span": 4,
+          "text": "Logic",
+          "col_span": 2,
           "row_span": [2,2,2],
           "settings": [
             "randomize_settings",
             "logic_rules"
+          ]
+        },
+        {
+          "name": "language_section",
+          "text": "Language",
+          "col_span": 2,
+          "row_span": [2,2,2],
+          "settings": [
+            "language_selection"
           ]
         },
         {
