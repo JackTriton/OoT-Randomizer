@@ -3,17 +3,16 @@ from collections.abc import Iterator
 from typing import TYPE_CHECKING, Optional, Any
 
 if TYPE_CHECKING:
-    from Hints import HintArea
     from Item import Item
     from Region import Region
     from World import World
 
 
 class Dungeon:
-    def __init__(self, world: World, name: str, hint: HintArea, regions: Optional[list[Region]] = None) -> None:
+    def __init__(self, world: World, name: str, hint: str, regions: Optional[list[Region]] = None) -> None:
         self.world: World = world
         self.name: str = name
-        self.hint: HintArea = hint
+        self.hint: str = hint
         self.regions: list[Region] = regions if regions is not None else []
         self.boss_key: list[Item] = []
         self.small_keys: list[Item] = []

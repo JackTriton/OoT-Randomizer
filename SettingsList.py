@@ -3,6 +3,7 @@ import difflib
 import json
 from collections.abc import Iterable
 from typing import TYPE_CHECKING, Optional, Any
+import os
 
 import Colors
 from Hints import hint_dist_list, hint_dist_tips, gossipLocations
@@ -16,7 +17,7 @@ from SettingTypes import SettingInfo, SettingInfoStr, SettingInfoList, SettingIn
     SearchBox
 import Sounds
 import StartingItems
-from Utils import data_path
+from Utils import data_path, lang_path
 
 if TYPE_CHECKING:
     from Entrance import Entrance
@@ -33,6 +34,14 @@ settings_versioning = [
         new_name       = '',
     ),
 ]
+
+def get_language() -> dict[str, str]:
+    return {
+        lang: lang.capitalize()
+        for lang in os.listdir(lang_path())
+        if os.path.isdir(os.path.join(lang_path(), lang))
+        and os.path.isfile(os.path.join(lang_path(), lang, 'property.json'))
+    }
 
 class SettingInfos:
     # Internal & Non-GUI Settings
@@ -65,6 +74,16 @@ class SettingInfos:
         gui_params = {
             'function':      "openPythonDir",
         },
+    )
+    
+    language_selection = Combobox(
+        gui_text       = 'Language Selection',
+        default        = 'japanese',
+        choices        = get_language(),
+        gui_tooltip    = '''\
+            Language sets the one that you use on the game itself
+            Some languages requires using NTSC rom instead
+        '''
     )
 
     tricks_list_msg = Textbox(
