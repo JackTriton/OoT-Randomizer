@@ -26,6 +26,7 @@ from SettingsList import logic_tricks, advanced_logic_tricks
 from Spoiler import Spoiler
 from Rom import Rom
 from Audiobank import *
+from Language import Language
 
 test_dir = os.path.join(os.path.dirname(__file__), 'tests')
 output_dir = os.path.join(test_dir, 'Output')
@@ -60,6 +61,7 @@ ludicrous_set = set(ludicrous_items_base) | set(ludicrous_items_extended) | ludi
 def make_settings_for_test(settings_dict: dict[str, Any], seed: Optional[str] = None, outfilename: str = '', strict: bool = True) -> Settings:
     # Some consistent settings for testability
     settings_dict.update({
+        'language_selection': 'English',
         'create_patch_file': False,
         'create_compressed_rom': False,
         'create_wad_file': False,
@@ -642,10 +644,10 @@ class TestHints(unittest.TestCase):
         _, spoiler = generate_with_plandomizer(filename, live_copy=True)
         world = spoiler.worlds[0]
         location = spoiler.worlds[0].misc_hint_item_locations["ganondorf"]
-        area = HintAreaDefault.at(location, use_alt_hint=True).text(world.settings.clearer_hints, world=None if not location.world or location.world.id == world.id else location.world.id + 1)
+        area = HintAreaDefault.at(location, use_alt_hint=True).text(world.language, world.settings.clearer_hints, world=None if not location.world or location.world.id == world.id else location.world.id + 1)
         self.assertEqual(area, "#Ganondorf's Chamber#")
         # Build a test message with the same ID as the ganondorf hint (0x70CC)
-        messages = [Message("Test", 0, 0x70CC, 0, 0, 0)]
+        messages = [Message("Test", 0, 0x70CC, 0, 0, 0, "en")]
         build_misc_item_hints(spoiler.worlds[0], messages, allow_duplicates=True)
         for message in messages:
             if message.id == 0x70CC: # Ganondorf hint message
@@ -934,7 +936,7 @@ class TestTextShuffle(unittest.TestCase):
         if not os.path.isfile('./ZOOTDEC.z64'):
             self.skipTest("Base ROM file not available.")
         rom = Rom("./ZOOTDEC.z64")
-        messages = read_messages(rom)
+        messages = read_messages(rom, Language("English"))
         shuffle_messages(messages)
         shuffle_messages(messages, False)
 

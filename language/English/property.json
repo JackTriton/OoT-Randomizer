@@ -2,48 +2,39 @@
     "BOSS_GOAL_TABLE": {
         "Barinade": [
             "path to the #Tentacle#",
-            "path to #Barinade#",
-            "Blue"
+            "path to #Barinade#"
         ],
         "Bongo Bongo": [
             "path to the #Hands#",
-            "path to #Bongo Bongo#",
-            "Pink"
+            "path to #Bongo Bongo#"
         ],
         "King Dodongo": [
             "path to the #Dinosaur#",
-            "path to #King Dodongo#",
-            "Red"
+            "path to #King Dodongo#"
         ],
         "Morpha": [
             "path to the #Amoeba#",
-            "path to #Morpha#",
-            "Blue"
+            "path to #Morpha#"
         ],
         "Phantom Ganon": [
             "path to the #Puppet#",
-            "path to #Phantom Ganon#",
-            "Green"
+            "path to #Phantom Ganon#"
         ],
         "Queen Gohma": [
             "path to the #Spider#",
-            "path to #Queen Gohma#",
-            "Green"
+            "path to #Queen Gohma#"
         ],
         "ToT Reward from Rauru": [
             "path of #time#",
-            "path of #time#",
-            "Light Blue"
+            "path of #time#"
         ],
         "Twinrova": [
             "path to the #Witches#",
-            "path to #Twinrova#",
-            "Yellow"
+            "path to #Twinrova#"
         ],
         "Volvagia": [
             "path to the #Dragon#",
-            "path to #Volvagia#",
-            "Red"
+            "path to #Volvagia#"
         ]
     },
     "ITEM_MESSAGES": [
@@ -1652,12 +1643,12 @@
         "bean_mysterious": "\u001aChomp chomp chomp...\u0001We have... \u0005Aa mysterious item\u0005@! \u0001Do you want it...huh? Huh?\u0004\u0005A\b60 Rupees\u0005@ and it's yours!\u0001Keyahahah!\u0001\u001b\u0005BYes\u0001No\u0005@\u0002",
         "bean_wrapped": "\u001aChomp chomp chomp...We have...\u0001\u0005A{item}\u0005@!\u0004\u0005A\b60 Rupees\u0005@ and it's yours!\u0001Keyahahah!\u0001\u001b\u0005BYes\u0001No\u0005@\u0002",
         "blue_fire_arrow": "\b\u0013\fYou got the \u0005CBlue Fire Arrow\u0005@!\u0001This is a cool arrow you can\u0001use on red ice.",
-        "blue_potion_desc": "\b\u0005CBlue Potion 100 Rupees\u0001\u0005@If you drink this, you will\u0001recover your life energy and magic.\t\n",
-        "blue_potion_purc": "\bBlue Potion 100 Rupees\u0001\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@",
-        "bombchu_desc": "\b\u0005ABombchu   (5 pieces)   60 Rupees\u0001\u0005@This looks like a toy mouse, but\u0001it's actually a self-propelled time\u0001bomb!\t\n",
-        "bombchu_desc_10": "\b\u0005ABombchu  (10 pieces)  99 Rupees\u0001\u0005@This looks like a toy mouse, but\u0001it's actually a self-propelled time\u0001bomb!\t\n",
-        "bombchu_purc": "\bBombchu    5 Pieces    60 Rupees\u0001\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@\t",
-        "bombchu_purc_10": "\bBombchu  10 pieces   99 Rupees\t\u0001\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@",
+        "blue_potion_description": "\b\u0005CBlue Potion 100 Rupees\u0001\u0005@If you drink this, you will\u0001recover your life energy and magic.\t\n",
+        "blue_potion_purchase": "\bBlue Potion 100 Rupees\u0001\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@",
+        "bombchu_description": "\b\u0005ABombchu   (5 pieces)   60 Rupees\u0001\u0005@This looks like a toy mouse, but\u0001it's actually a self-propelled time\u0001bomb!\t\n",
+        "bombchu_description_10": "\b\u0005ABombchu  (10 pieces)  99 Rupees\u0001\u0005@This looks like a toy mouse, but\u0001it's actually a self-propelled time\u0001bomb!\t\n",
+        "bombchu_purchase": "\bBombchu    5 Pieces    60 Rupees\u0001\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@\t",
+        "bombchu_purchase_10": "\bBombchu  10 pieces   99 Rupees\t\u0001\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@",
         "brought_poe": "\u001aOh, you brought a Poe today!\u0004\u001aHmmmm!\u0004\u001aVery interesting!\u0001This is a \u0005ABig Poe\u0005@!\u0004\u001aI'll buy it for \u0005A50 Rupees\u0005@.\u0004On top of that, I'll put \u0005A100\u0001points \u0005@on your card.\u0004\u001aIf you earn \u0005A{poe} points\u0005@, you'll\u0001be a happy man! Heh heh.",
         "carpet_enough": "Thank you very much!\u0004The mark that will lead you to\u0001the Spirit Temple is the \u0005Aflag on\u0001the left \u0005@outside the shop.\u0001Be seeing you!\u0002",
         "carpet_item": "\u0006AWell Come!\u0004I am selling stuff, strange and \u0001rare, from all over the world to \u0001everybody. Today's special is...\u0001\u0005A{item}\u0005@! \u0001\u0004How about \u0005A200 Rupees\u0005@?\u0001\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@\u0002",
@@ -1757,11 +1748,11 @@
             "rape",
             "shit"
         ],
-        "desc": "\b\u0005A{base_name}  {price} Rupees\u0001\u0005@Special deal! ONE LEFT!\u0001Get it while it lasts!\t\n\u0002",
-        "desc_multi": "\b\u0005A{base_name}  {price} Rupees\u0001\u0005BPlayer {player_id}\u0005@\u0001Special deal! ONE LEFT!\t\n\u0002",
-        "dungeon_desc": "\b\u0005A{base_name}  {price} Rupees\u0001({extra_name})\u0001\u0005@Special deal! ONE LEFT!\u0001Get it while it lasts!\t\n\u0002",
-        "dungeon_desc_multi": "\b\u0005A{base_name}  {price} Rupees\u0001({extra_name})\u0001\u0005BPlayer {player_id}\u0005@\u0001Special deal! ONE LEFT!\t\n\u0002",
-        "dungeon_extra": {
+        "description": "\b\u0005A{base_name}  {price} Rupees\u0001\u0005@Special deal! ONE LEFT!\u0001Get it while it lasts!\t\n\u0002",
+        "description_multiplay": "\b\u0005A{base_name}  {price} Rupees\u0001\u0005BPlayer {player_id}\u0005@\u0001Special deal! ONE LEFT!\t\n\u0002",
+        "dungeon-item_description": "\b\u0005A{base_name}  {price} Rupees\u0001({extra_name})\u0001\u0005@Special deal! ONE LEFT!\u0001Get it while it lasts!\t\n\u0002",
+        "dungeon-item_description_multiplay": "\b\u0005A{base_name}  {price} Rupees\u0001({extra_name})\u0001\u0005BPlayer {player_id}\u0005@\u0001Special deal! ONE LEFT!\t\n\u0002",
+        "dungeon-item_extra": {
             "Dodongos Cavern": "Dodongo's Cavern",
             "Dodongos Cavern Staircase": "Dodongo's Cavern Staircase",
             "Ganons Castle": "Ganon's Castle",
@@ -1774,69 +1765,49 @@
             "Jabu Jabus Belly": "Jabu Jabu's Belly",
             "Thieves Hideout": "Thieves' Hideout"
         },
-        "dungeon_purc": "\b{base_name}  {price} Rupees\t\u0001({extra_name})\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@\u0002",
-        "purc": "\b{base_name}  {price} Rupees\t\u0001\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@\u0002"
+        "dungeon-item_purchase": "\b{base_name}  {price} Rupees\t\u0001({extra_name})\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@\u0002",
+        "purchase": "\b{base_name}  {price} Rupees\t\u0001\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@\u0002"
     },
     "dungeon_list": {
         "Bottom of the Well": [
             "the \u0005EBottom of the Well",
-            162,
-            165,
-            "o"
+            "no_gender"
         ],
         "Deku Tree": [
             "the \u0005BDeku Tree",
-            98,
-            136,
-            "o"
+            "no_gender"
         ],
         "Dodongos Cavern": [
             "\u0005ADodongo's Cavern",
-            99,
-            137,
-            "o"
+            "no_gender"
         ],
         "Fire Temple": [
             "the \u0005AFire Temple",
-            124,
-            140,
-            "o"
+            "no_gender"
         ],
         "Forest Temple": [
             "the \u0005BForest Temple",
-            101,
-            139,
-            "o"
+            "no_gender"
         ],
         "Ice Cavern": [
             "the \u0005DIce Cavern",
-            135,
-            146,
-            "o"
+            "no_gender"
         ],
         "Jabu Jabus Belly": [
             "\u0005CJabu Jabu's Belly",
-            100,
-            138,
-            "o"
+            "no_gender"
         ],
         "Shadow Temple": [
             "the \u0005EShadow Temple",
-            127,
-            163,
-            "o"
+            "no_gender"
         ],
         "Spirit Temple": [
             "the \u0005FSpirit Temple",
-            126,
-            143,
-            "o"
+            "no_gender"
         ],
         "Water Temple": [
             "the \u0005CWater Temple",
-            125,
-            142,
-            "o"
+            "no_gender"
         ]
     },
     "hintPrefixes": [
@@ -2995,7 +2966,7 @@
                 "some sharp shafts"
             ],
             "Arrows (10 pieces)",
-            "o"
+            "no_gender"
         ],
         "Arrows (30)": [
             [
@@ -3003,7 +2974,7 @@
                 "plenty of sharp shafts"
             ],
             "Arrows (30 pieces)",
-            "o"
+            "no_gender"
         ],
         "Arrows (5)": [
             [
@@ -3011,7 +2982,7 @@
                 "a few sharp shafts"
             ],
             "Arrows (5 pieces)",
-            "o"
+            "no_gender"
         ],
         "Barinade": [
             "the #Bio-Electric Anemone# holds",
@@ -3021,7 +2992,7 @@
         "Barinade Boss Room": [
             "the #Bio-Electric Anemone#",
             "#Barinade#",
-            "o"
+            "no_gender"
         ],
         "Barinade Rewards": [
             "the #Bio-Electric Anemone# holds...^",
@@ -3034,7 +3005,7 @@
                 "a colossal cleaver"
             ],
             "the Biggoron Sword",
-            "o"
+            "no_gender"
         ],
         "Blue Fire Arrows": [
             [
@@ -3043,7 +3014,7 @@
                 "an iceberg destroyer"
             ],
             "the Blue Fire Arrows",
-            "o"
+            "no_gender"
         ],
         "Bolero of Fire": [
             [
@@ -3052,7 +3023,7 @@
                 "a volcanic verse"
             ],
             "the Bolero of Fire",
-            "o"
+            "no_gender"
         ],
         "Bomb Bag": [
             [
@@ -3060,7 +3031,7 @@
                 "a blast bag"
             ],
             "a Bomb Bag",
-            "o"
+            "no_gender"
         ],
         "Bombchus": [
             [
@@ -3070,7 +3041,7 @@
                 "trail blazers"
             ],
             "Bombchus",
-            "o"
+            "no_gender"
         ],
         "Bombchus (10)": [
             [
@@ -3080,7 +3051,7 @@
                 "some trail blazers"
             ],
             "Bombchus (10 pieces)",
-            "o"
+            "no_gender"
         ],
         "Bombchus (20)": [
             [
@@ -3090,7 +3061,7 @@
                 "plenty of trail blazers"
             ],
             "Bombchus (20 pieces)",
-            "o"
+            "no_gender"
         ],
         "Bombchus (5)": [
             [
@@ -3100,7 +3071,7 @@
                 "a few trail blazers"
             ],
             "Bombchus (5 pieces)",
-            "o"
+            "no_gender"
         ],
         "Bombs (10)": [
             [
@@ -3108,7 +3079,7 @@
                 "some blast balls"
             ],
             "Bombs (10 pieces)",
-            "o"
+            "no_gender"
         ],
         "Bombs (20)": [
             [
@@ -3116,7 +3087,7 @@
                 "plenty of blast balls"
             ],
             "Bombs (20 pieces)",
-            "o"
+            "no_gender"
         ],
         "Bombs (5)": [
             [
@@ -3124,7 +3095,7 @@
                 "a few blast balls"
             ],
             "Bombs (5 pieces)",
-            "o"
+            "no_gender"
         ],
         "Bongo Bongo": [
             "the #Phantom Shadow Beast# holds",
@@ -3134,7 +3105,7 @@
         "Bongo Bongo Boss Room": [
             "the #Phantom Shadow Beast#",
             "#Bongo Bongo#",
-            "o"
+            "no_gender"
         ],
         "Bongo Bongo Rewards": [
             "the #Phantom Shadow Beast# holds...^",
@@ -3147,7 +3118,7 @@
                 "a stun stick"
             ],
             "the Boomerang",
-            "o"
+            "no_gender"
         ],
         "Boss Key (Fire Temple)": [
             [
@@ -3155,7 +3126,7 @@
                 "a master pass for a high mountain"
             ],
             "the Fire Temple Boss Key",
-            "o"
+            "no_gender"
         ],
         "Boss Key (Forest Temple)": [
             [
@@ -3163,7 +3134,7 @@
                 "a master pass for a deep forest"
             ],
             "the Forest Temple Boss Key",
-            "o"
+            "no_gender"
         ],
         "Boss Key (Ganons Castle)": [
             [
@@ -3171,7 +3142,7 @@
                 "a floating dungeon's master pass"
             ],
             "Ganon's Castle Boss Key",
-            "o"
+            "no_gender"
         ],
         "Boss Key (Shadow Temple)": [
             [
@@ -3179,7 +3150,7 @@
                 "a master pass for the house of the dead"
             ],
             "the Shadow Temple Boss Key",
-            "o"
+            "no_gender"
         ],
         "Boss Key (Spirit Temple)": [
             [
@@ -3187,7 +3158,7 @@
                 "a master pass for a goddess of the sand"
             ],
             "the Spirit Temple Boss Key",
-            "o"
+            "no_gender"
         ],
         "Boss Key (Water Temple)": [
             [
@@ -3195,7 +3166,7 @@
                 "a master pass for under a vast lake"
             ],
             "the Water Temple Boss Key",
-            "o"
+            "no_gender"
         ],
         "BossKey": [
             [
@@ -3203,7 +3174,7 @@
                 "a dungeon's master pass"
             ],
             "a Boss Key",
-            "o"
+            "no_gender"
         ],
         "Bottle": [
             [
@@ -3212,7 +3183,7 @@
                 "encased air"
             ],
             "a Bottle",
-            "o"
+            "no_gender"
         ],
         "Bottle with Big Poe": [
             [
@@ -3220,7 +3191,7 @@
                 "a sidequest spirit"
             ],
             "a Big Poe Bottle",
-            "o"
+            "no_gender"
         ],
         "Bottle with Blue Fire": [
             [
@@ -3228,7 +3199,7 @@
                 "an icemelt jar"
             ],
             "a Blue Fire Bottle",
-            "o"
+            "no_gender"
         ],
         "Bottle with Blue Potion": [
             [
@@ -3236,7 +3207,7 @@
                 "a blue liquid"
             ],
             "a Blue Potion Bottle",
-            "o"
+            "no_gender"
         ],
         "Bottle with Bugs": [
             [
@@ -3244,7 +3215,7 @@
                 "Skulltula finders"
             ],
             "a Bug Bottle",
-            "o"
+            "no_gender"
         ],
         "Bottle with Fairy": [
             [
@@ -3252,7 +3223,7 @@
                 "an extra life"
             ],
             "a Fairy Bottle",
-            "o"
+            "no_gender"
         ],
         "Bottle with Fish": [
             [
@@ -3260,7 +3231,7 @@
                 "a deity's snack"
             ],
             "a Fish Bottle",
-            "o"
+            "no_gender"
         ],
         "Bottle with Green Potion": [
             [
@@ -3268,7 +3239,7 @@
                 "a green liquid"
             ],
             "a Green Potion Bottle",
-            "o"
+            "no_gender"
         ],
         "Bottle with Milk": [
             [
@@ -3277,7 +3248,7 @@
                 "a baby's breakfast"
             ],
             "a Milk Bottle",
-            "o"
+            "no_gender"
         ],
         "Bottle with Poe": [
             [
@@ -3285,7 +3256,7 @@
                 "a face in the jar"
             ],
             "a Poe Bottle",
-            "o"
+            "no_gender"
         ],
         "Bottle with Red Potion": [
             [
@@ -3293,7 +3264,7 @@
                 "a red liquid"
             ],
             "a Red Potion Bottle",
-            "o"
+            "no_gender"
         ],
         "Bottom of the Well": [
             "a shadow's prison",
@@ -3457,28 +3428,28 @@
                 "a danger dart launcher"
             ],
             "a Bow",
-            "o"
+            "no_gender"
         ],
         "Broken Sword": [
             [
                 "a shattered slicer"
             ],
             "the Broken Sword",
-            "o"
+            "no_gender"
         ],
         "Bunny Hood": [
             [
                 "the fast façade"
             ],
             "the Bunny Hood",
-            "o"
+            "no_gender"
         ],
         "Buy Magic Bean": [
             [
                 "a wizardly legume"
             ],
             "a Magic Bean",
-            "o"
+            "no_gender"
         ],
         "Castle Fairy Checks": [
             "Great Fairies outside #Hyrule and Ganon's castles# reward...^",
@@ -3490,21 +3461,26 @@
                 "a chicken dilemma"
             ],
             "the Chicken",
-            "o"
+            "no_gender"
+        ],
+        "Child Altar Text End": [
+            "\u0013\u0007Ye who may become a Hero...&Stand with the Ocarina and&play the Song of Time.",
+            null,
+            null
         ],
         "Claim Check": [
             [
                 "a three day wait"
             ],
             "the Claim Check",
-            "o"
+            "no_gender"
         ],
         "Cojiro": [
             [
                 "a cerulean capon"
             ],
             "Cojiro",
-            "o"
+            "no_gender"
         ],
         "Colossus Deku Scrub Grotto Front": [
             "a #scrub underground duo# sells",
@@ -3539,7 +3515,7 @@
         "Colossus Great Fairy Fountain": [
             "a #Great Fairy Fountain#",
             null,
-            "o"
+            "no_gender"
         ],
         "Colossus Great Fairy Reward": [
             "the #fairy of love# holds",
@@ -3549,7 +3525,7 @@
         "Colossus Grotto": [
             "2 Deku Scrubs",
             null,
-            "o"
+            "no_gender"
         ],
         "Colossus Nighttime GS": [
             "#at the Desert Colossus#, skulltulas at night hold...^",
@@ -3562,7 +3538,7 @@
                 "a magnetic needle"
             ],
             "a Compass",
-            "o"
+            "no_gender"
         ],
         "Compass (Bottom of the Well)": [
             [
@@ -3570,7 +3546,7 @@
                 "a magnetic needle for a shadow's prison"
             ],
             "a Bottom of the Well Compass",
-            "o"
+            "no_gender"
         ],
         "Compass (Deku Tree)": [
             [
@@ -3578,7 +3554,7 @@
                 "a magnetic needle for an ancient tree"
             ],
             "a Deku Tree Compass",
-            "o"
+            "no_gender"
         ],
         "Compass (Dodongos Cavern)": [
             [
@@ -3586,7 +3562,7 @@
                 "a magnetic needle for an immense cavern"
             ],
             "a Dodongo's Cavern Compass",
-            "o"
+            "no_gender"
         ],
         "Compass (Fire Temple)": [
             [
@@ -3594,7 +3570,7 @@
                 "a magnetic needle for a high mountain"
             ],
             "a Fire Temple Compass",
-            "o"
+            "no_gender"
         ],
         "Compass (Forest Temple)": [
             [
@@ -3602,7 +3578,7 @@
                 "a magnetic needle for a deep forest"
             ],
             "a Forest Temple Compass",
-            "o"
+            "no_gender"
         ],
         "Compass (Ice Cavern)": [
             [
@@ -3610,7 +3586,7 @@
                 "a magnetic needle for a frozen maze"
             ],
             "an Ice Cavern Compass",
-            "o"
+            "no_gender"
         ],
         "Compass (Jabu Jabus Belly)": [
             [
@@ -3618,7 +3594,7 @@
                 "a magnetic needle for the belly of a deity"
             ],
             "a Jabu Jabu's Belly Compass",
-            "o"
+            "no_gender"
         ],
         "Compass (Shadow Temple)": [
             [
@@ -3626,7 +3602,7 @@
                 "a magnetic needle for the house of the dead"
             ],
             "a Shadow Temple Compass",
-            "o"
+            "no_gender"
         ],
         "Compass (Spirit Temple)": [
             [
@@ -3634,7 +3610,7 @@
                 "a magnetic needle for a goddess of the sand"
             ],
             "a Spirit Temple Compass",
-            "o"
+            "no_gender"
         ],
         "Compass (Water Temple)": [
             [
@@ -3642,7 +3618,7 @@
                 "a magnetic needle for a vast lake"
             ],
             "a Water Temple Compass",
-            "o"
+            "no_gender"
         ],
         "DMC Child Upper Checks": [
             "in the #crater, a spider in a crate and a single scrub# guard...^",
@@ -3682,7 +3658,7 @@
         "DMC Great Fairy Fountain": [
             "a #Great Fairy Fountain#",
             null,
-            "o"
+            "no_gender"
         ],
         "DMC Great Fairy Reward": [
             "a #magical fairy# gifts",
@@ -3692,12 +3668,12 @@
         "DMC Hammer Grotto": [
             "3 Deku Scrubs",
             null,
-            "o"
+            "no_gender"
         ],
         "DMC Upper Grotto": [
             "a #generic grotto#",
             null,
-            "o"
+            "no_gender"
         ],
         "DMC Upper Grotto Chest": [
             "a #hole in a volcano# holds",
@@ -3727,7 +3703,7 @@
         "DMT Cow Grotto": [
             "a solitary #Cow#",
             null,
-            "o"
+            "no_gender"
         ],
         "DMT Cow Grotto Cow": [
             "a #cow in a luxurious hole# offers",
@@ -3762,7 +3738,7 @@
         "DMT Great Fairy Fountain": [
             "a #Great Fairy Fountain#",
             null,
-            "o"
+            "no_gender"
         ],
         "DMT Great Fairy Reward": [
             "a #magical fairy# gifts",
@@ -3772,7 +3748,7 @@
         "DMT Storms Grotto": [
             "a #generic grotto#",
             null,
-            "o"
+            "no_gender"
         ],
         "DMT Storms Grotto Chest": [
             "#hole flooded with rain on a mountain# holds",
@@ -3785,7 +3761,7 @@
                 "flashbang storage"
             ],
             "Deku Nut Capacity",
-            "o"
+            "no_gender"
         ],
         "Deku Nuts (10)": [
             [
@@ -3794,7 +3770,7 @@
                 "plenty of scrub spit"
             ],
             "Deku Nuts (10 pieces)",
-            "o"
+            "no_gender"
         ],
         "Deku Nuts (5)": [
             [
@@ -3803,7 +3779,7 @@
                 "some scrub spit"
             ],
             "Deku Nuts (5 pieces)",
-            "o"
+            "no_gender"
         ],
         "Deku Seeds (30)": [
             [
@@ -3811,7 +3787,7 @@
                 "lots-o-seeds"
             ],
             "Deku Seeds (30 pieces)",
-            "o"
+            "no_gender"
         ],
         "Deku Shield": [
             [
@@ -3819,12 +3795,12 @@
                 "a burnable barrier"
             ],
             "a Deku Shield",
-            "o"
+            "no_gender"
         ],
         "Deku Stick (1)": [
             "a breakable branch",
             "a Deku Stick",
-            "o"
+            "no_gender"
         ],
         "Deku Stick Capacity": [
             [
@@ -3832,12 +3808,12 @@
                 "more flammable twigs"
             ],
             "Deku Stick Capacity",
-            "o"
+            "no_gender"
         ],
         "Deku Theater": [
             "the #Lost Woods Stage#",
             null,
-            "o"
+            "no_gender"
         ],
         "Deku Theater Mask of Truth": [
             "showing a #truthful eye to the crowd# rewards",
@@ -3996,7 +3972,7 @@
                 "a red ball"
             ],
             "Din's Fire",
-            "o"
+            "no_gender"
         ],
         "Dodongos Cavern": [
             "an immense cavern",
@@ -4175,7 +4151,7 @@
                 "strengthened love"
             ],
             "Double Defense",
-            "o"
+            "no_gender"
         ],
         "Epona": [
             [
@@ -4183,7 +4159,7 @@
                 "a four legged friend"
             ],
             "Epona",
-            "o"
+            "no_gender"
         ],
         "Eponas Song": [
             [
@@ -4192,21 +4168,21 @@
                 "a ranch song"
             ],
             "Epona's Song",
-            "o"
+            "no_gender"
         ],
         "Eyeball Frog": [
             [
                 "a perceiving polliwog"
             ],
             "the Eyeball Frog",
-            "o"
+            "no_gender"
         ],
         "Eyedrops": [
             [
                 "a vision vial"
             ],
             "the Eyedrops",
-            "o"
+            "no_gender"
         ],
         "Fairy Drop": [
             [
@@ -4214,7 +4190,7 @@
                 "Navi's cousin"
             ],
             "a Stray Fairy",
-            "o"
+            "no_gender"
         ],
         "Farores Wind": [
             [
@@ -4224,7 +4200,7 @@
                 "a green gust"
             ],
             "Farore's Wind",
-            "o"
+            "no_gender"
         ],
         "Fire Arrows": [
             [
@@ -4233,7 +4209,7 @@
                 "a magma missile"
             ],
             "the Fire Arrows",
-            "o"
+            "no_gender"
         ],
         "Fire Medallion": [
             [
@@ -4242,7 +4218,7 @@
                 "a red disc"
             ],
             "the Fire Medallion",
-            "o"
+            "no_gender"
         ],
         "Fire Temple": [
             "a high mountain",
@@ -4451,7 +4427,7 @@
                 "a green disc"
             ],
             "the Forest Medallion",
-            "o"
+            "no_gender"
         ],
         "Forest Temple": [
             "a deep forest",
@@ -4671,7 +4647,7 @@
         "GC Grotto": [
             "3 Deku Scrubs",
             null,
-            "o"
+            "no_gender"
         ],
         "GC Grotto Platform -> GC Grotto": [
             "a #pool of lava# in Goron City blocks the way to",
@@ -4716,7 +4692,7 @@
         "GC Shop": [
             "the #Goron Shop#",
             null,
-            "o"
+            "no_gender"
         ],
         "GC Shop Item 1": [
             "a #Goron shopkeeper# sells",
@@ -4796,12 +4772,12 @@
         "GF Storms Grotto": [
             "a small #Fairy Fountain#",
             null,
-            "o"
+            "no_gender"
         ],
         "GV Carpenter Tent": [
             "the #Carpenters' tent#",
             null,
-            "o"
+            "no_gender"
         ],
         "GV Chest": [
             "in #Gerudo Valley# the hammer unlocks",
@@ -4866,7 +4842,7 @@
         "GV Octorok Grotto": [
             "an #Octorok# guarding a rich pool",
             null,
-            "o"
+            "no_gender"
         ],
         "GV Pieces of Heart Ledges": [
             "within the #valley#, the crate and waterfall conceal...^",
@@ -4876,7 +4852,7 @@
         "GV Storms Grotto": [
             "2 Deku Scrubs",
             null,
-            "o"
+            "no_gender"
         ],
         "GV Waterfall Freestanding PoH": [
             "behind a #desert waterfall# is",
@@ -4889,7 +4865,7 @@
                 "a dungeon's master pass"
             ],
             "a Boss Key",
-            "o"
+            "no_gender"
         ],
         "Ganons Castle": [
             "a conquered citadel",
@@ -5094,7 +5070,7 @@
         "Ganons Castle Tower": [
             "#Ganon's Tower#",
             null,
-            "o"
+            "no_gender"
         ],
         "Ganons Castle Water Trial Left Chest": [
             "the #test of the seas# holds",
@@ -5121,7 +5097,7 @@
                 "the feminine façade"
             ],
             "the Gerudo Mask",
-            "o"
+            "no_gender"
         ],
         "Gerudo Membership Card": [
             [
@@ -5129,7 +5105,7 @@
                 "a desert tribe's pass"
             ],
             "the Gerudo Card",
-            "o"
+            "no_gender"
         ],
         "Gerudo Training Ground": [
             "the test of thieves",
@@ -5343,7 +5319,7 @@
                 "a breakable cleaver"
             ],
             "the Giant's Knife",
-            "o"
+            "no_gender"
         ],
         "Gold Skulltula Token": [
             [
@@ -5353,14 +5329,14 @@
                 "one percent of a curse"
             ],
             "a Gold Skulltula Token",
-            "o"
+            "no_gender"
         ],
         "Goron Mask": [
             [
                 "the fraternal façade"
             ],
             "the Goron Mask",
-            "o"
+            "no_gender"
         ],
         "Goron Ruby": [
             [
@@ -5368,7 +5344,7 @@
                 "the Spiritual Stone of Fire"
             ],
             "the Goron Ruby",
-            "o"
+            "no_gender"
         ],
         "Goron Tunic": [
             [
@@ -5377,7 +5353,7 @@
                 "cooking clothes"
             ],
             "a Goron Tunic",
-            "o"
+            "no_gender"
         ],
         "Graveyard Dampe Gravedigging Tour": [
             "a #gravekeeper digs up#",
@@ -5402,12 +5378,12 @@
         "Graveyard Dampes Grave": [
             "Dampé's Grave",
             null,
-            "o"
+            "no_gender"
         ],
         "Graveyard Dampes House": [
             "Dampé's Hut",
             null,
-            "o"
+            "no_gender"
         ],
         "Graveyard Freestanding PoH": [
             "a #crate in a graveyard# hides",
@@ -5427,7 +5403,7 @@
         "Graveyard Heart Piece Grave": [
             "a chest spawned by #Sun's Song#",
             null,
-            "o"
+            "no_gender"
         ],
         "Graveyard Heart Piece Grave Chest": [
             "playing #Sun's Song# in a grave spawns",
@@ -5442,7 +5418,7 @@
         "Graveyard Royal Familys Tomb": [
             "the #Royal Family's Tomb#",
             null,
-            "o"
+            "no_gender"
         ],
         "Graveyard Royal Familys Tomb Chest": [
             [
@@ -5455,7 +5431,7 @@
         "Graveyard Shield Grave": [
             "a #grave with a free chest#",
             null,
-            "o"
+            "no_gender"
         ],
         "Graveyard Shield Grave Chest": [
             "the #treasure of a fallen soldier# is",
@@ -5480,7 +5456,7 @@
         "HC Great Fairy Fountain": [
             "a #Great Fairy Fountain#",
             null,
-            "o"
+            "no_gender"
         ],
         "HC Great Fairy Reward": [
             "the #fairy of fire# holds",
@@ -5495,7 +5471,7 @@
         "HC Storms Grotto": [
             "a sandy grotto with #fragile walls#",
             null,
-            "o"
+            "no_gender"
         ],
         "HC Zeldas Letter": [
             "a #princess in a castle# gifts",
@@ -5505,7 +5481,7 @@
         "HF Cow Grotto": [
             "a grotto full of #spider webs#",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Cow Grotto Cow": [
             "the #cobwebbed cow# gifts",
@@ -5520,7 +5496,7 @@
         "HF Fairy Grotto": [
             "a small #Fairy Fountain#",
             null,
-            "o"
+            "no_gender"
         ],
         "HF GS Cow Grotto": [
             "a #spider behind webs# in a grotto holds",
@@ -5535,17 +5511,17 @@
         "HF Inside Fence Grotto": [
             "a #lonely Deku Scrub#",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Near Kak Grotto": [
             "a #Big Skulltula# guarding a Gold one",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Near Market Grotto": [
             "a #generic grotto#",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Near Market Grotto Chest": [
             "a #hole in a field near a drawbridge# holds",
@@ -5565,7 +5541,7 @@
         "HF Open Grotto": [
             "a #generic grotto#",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Open Grotto Chest": [
             "an #open hole in a field# holds",
@@ -5575,7 +5551,7 @@
         "HF Southeast Grotto": [
             "a #generic grotto#",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Southeast Grotto Chest": [
             "a #hole amongst trees in a field# holds",
@@ -5585,7 +5561,7 @@
         "HF Tektite Grotto": [
             "a pool guarded by a #Tektite#",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Tektite Grotto Freestanding PoH": [
             "#deep underwater in a hole# is",
@@ -5609,7 +5585,7 @@
                 "a boss's organ"
             ],
             "a Heart Container",
-            "o"
+            "no_gender"
         ],
         "Hideout 1 Torch Jail Gerudo Key": [
             "#defeating Gerudo guards# reveals",
@@ -5641,14 +5617,14 @@
                 "a get out of jail free card"
             ],
             "a Jail Key",
-            "o"
+            "no_gender"
         ],
         "HideoutSmallKeyRing": [
             [
                 "a deck of get out of jail free cards"
             ],
             "a Jail Key Ring",
-            "o"
+            "no_gender"
         ],
         "Hover Boots": [
             [
@@ -5657,7 +5633,7 @@
                 "spacewalkers"
             ],
             "the Hover Boots",
-            "o"
+            "no_gender"
         ],
         "Hylian Shield": [
             [
@@ -5665,7 +5641,7 @@
                 "Like Like's metal meal"
             ],
             "a Hylian Shield",
-            "o"
+            "no_gender"
         ],
         "Hyrule Castle Grounds -> HC Storms Grotto": [
             "a #storm near the castle# reveals",
@@ -5679,7 +5655,7 @@
                 "an iceberg maker"
             ],
             "the Ice Arrows",
-            "o"
+            "no_gender"
         ],
         "Ice Cavern": [
             "a frozen maze",
@@ -5773,7 +5749,7 @@
                 "frosty fun"
             ],
             "an Ice Trap",
-            "o"
+            "no_gender"
         ],
         "Iron Boots": [
             [
@@ -5781,7 +5757,7 @@
                 "clank cleats"
             ],
             "the Iron Boots",
-            "o"
+            "no_gender"
         ],
         "Jabu Jabus Belly": [
             "the belly of a deity",
@@ -5934,17 +5910,17 @@
         "KF House of Twins": [
             "the #House of Twins#",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Know It All House": [
             "Know-It-All Brothers' House",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Kokiri Shop": [
             "the #Kokiri Shop#",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Kokiri Sword Chest": [
             "the #hidden treasure of the Kokiri# is",
@@ -5954,7 +5930,7 @@
         "KF Links House": [
             "Link's House",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Links House Cow": [
             "the #bovine bounty of a horseback hustle# gifts",
@@ -5974,7 +5950,7 @@
         "KF Midos House": [
             "Mido's house",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Midos Top Left Chest": [
             "the #leader of the Kokiri# hides",
@@ -5989,7 +5965,7 @@
         "KF Sarias House": [
             "Saria's House",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Shop Item 1": [
             "a #child shopkeeper# sells",
@@ -6034,7 +6010,7 @@
         "KF Storms Grotto": [
             "a #generic grotto#",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Storms Grotto Chest": [
             "a #hole in a forest village# holds",
@@ -6111,7 +6087,7 @@
         "Kak Bazaar": [
             "the #Kakariko Bazaar#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Bazaar Item 1": [
             "the #Kakariko Bazaar# offers",
@@ -6156,7 +6132,7 @@
         "Kak Carpenter Boss House": [
             "the #Carpenters' Boss House#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak GS Above Impas House": [
             "night in the future reveals a #spider in a town# holding",
@@ -6191,17 +6167,17 @@
         "Kak House of Skulltula": [
             "the #House of Skulltula#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Impas House": [
             "Impa's House",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Impas House Back": [
             "Impa's cow cage",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Impas House Cow": [
             "a #cow imprisoned in a house# protects",
@@ -6221,12 +6197,12 @@
         "Kak Odd Medicine Building": [
             "Granny's Potion Shop",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Open Grotto": [
             "a #generic grotto#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Open Grotto Chest": [
             "an #open hole in a town# holds",
@@ -6236,12 +6212,12 @@
         "Kak Potion Shop Back": [
             "the #Kakariko Potion Shop#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Potion Shop Front": [
             "the #Kakariko Potion Shop#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Potion Shop Item 1": [
             "a #potion seller# offers",
@@ -6286,7 +6262,7 @@
         "Kak Redead Grotto": [
             "#ReDeads# guarding a chest",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Redead Grotto Chest": [
             "#zombies beneath the earth# guard",
@@ -6296,7 +6272,7 @@
         "Kak Shooting Gallery": [
             "a #Bow Shooting Gallery#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Shooting Gallery Reward": [
             "#shooting in maturity# grants",
@@ -6306,7 +6282,7 @@
         "Kak Windmill": [
             "the #Windmill#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Windmill Freestanding PoH": [
             "on a #windmill ledge# lies",
@@ -6323,7 +6299,7 @@
                 "the famous façade"
             ],
             "the Keaton Mask",
-            "o"
+            "no_gender"
         ],
         "KeyError": [
             [
@@ -6331,7 +6307,7 @@
                 "an unknown treasure"
             ],
             "An Error (Please Report This)",
-            "o"
+            "no_gender"
         ],
         "King Dodongo": [
             "the #Infernal Dinosaur# holds",
@@ -6341,7 +6317,7 @@
         "King Dodongo Boss Room": [
             "the #Infernal Dinosaur#",
             "#King Dodongo#",
-            "o"
+            "no_gender"
         ],
         "King Dodongo Rewards": [
             "the #Infernal Dinosaur# holds...^",
@@ -6359,7 +6335,7 @@
                 "the Spiritual Stone of the Forest"
             ],
             "the Kokiri Emerald",
-            "o"
+            "no_gender"
         ],
         "Kokiri Sword": [
             [
@@ -6368,7 +6344,7 @@
                 "a switchblade"
             ],
             "the Kokiri Sword",
-            "o"
+            "no_gender"
         ],
         "LH Adult Bean Destination Checks": [
             "#riding the bean in Lake Hylia# leads to...^",
@@ -6403,7 +6379,7 @@
         "LH Fishing Hole": [
             "the #Fishing Pond#",
             null,
-            "o"
+            "no_gender"
         ],
         "LH Freestanding PoH": [
             "high on a #lab rooftop# one can find",
@@ -6438,12 +6414,12 @@
         "LH Grotto": [
             "3 Deku Scrubs",
             null,
-            "o"
+            "no_gender"
         ],
         "LH Lab": [
             "the #Lakeside Laboratory#",
             null,
-            "o"
+            "no_gender"
         ],
         "LH Lab Dive": [
             "a #diving experiment# is rewarded with",
@@ -6513,12 +6489,12 @@
         "LLR Grotto": [
             "3 Deku Scrubs",
             null,
-            "o"
+            "no_gender"
         ],
         "LLR Stables": [
             "a #stable#",
             null,
-            "o"
+            "no_gender"
         ],
         "LLR Stables Left Cow": [
             "a #cow in a stable# gifts",
@@ -6538,12 +6514,12 @@
         "LLR Talons House": [
             "Talon's House",
             null,
-            "o"
+            "no_gender"
         ],
         "LLR Tower": [
             "the #Lon Lon Tower#",
             null,
-            "o"
+            "no_gender"
         ],
         "LLR Tower Left Cow": [
             "a #cow in a ranch silo# gifts",
@@ -6606,7 +6582,7 @@
         "LW Near Shortcuts Grotto": [
             "a #generic grotto#",
             null,
-            "o"
+            "no_gender"
         ],
         "LW Near Shortcuts Grotto Chest": [
             "a #hole in a wooded maze# holds",
@@ -6624,7 +6600,7 @@
         "LW Scrubs Grotto": [
             "#2 Deku Scrubs# including an Upgrade one",
             null,
-            "o"
+            "no_gender"
         ],
         "LW Skull Kid": [
             "the #Skull Kid# grants",
@@ -6649,7 +6625,7 @@
                 "a detective's tool"
             ],
             "the Lens of Truth",
-            "o"
+            "no_gender"
         ],
         "Light Arrows": [
             [
@@ -6659,7 +6635,7 @@
                 "the lighting bolts"
             ],
             "the Light Arrows",
-            "o"
+            "no_gender"
         ],
         "Light Medallion": [
             [
@@ -6668,21 +6644,21 @@
                 "a yellow disc"
             ],
             "the Light Medallion",
-            "o"
+            "no_gender"
         ],
         "Magic Bean": [
             [
                 "a wizardly legume"
             ],
             "a Magic Bean",
-            "o"
+            "no_gender"
         ],
         "Magic Bean Pack": [
             [
                 "wizardly legumes"
             ],
             "Magic Beans",
-            "o"
+            "no_gender"
         ],
         "Magic Meter": [
             [
@@ -6691,7 +6667,7 @@
                 "a green rectangle"
             ],
             "a Magic Meter",
-            "o"
+            "no_gender"
         ],
         "Map": [
             [
@@ -6699,7 +6675,7 @@
                 "blueprints"
             ],
             "a Map",
-            "o"
+            "no_gender"
         ],
         "Map (Bottom of the Well)": [
             [
@@ -6707,7 +6683,7 @@
                 "blueprints of a shadow's prison"
             ],
             "a Map of the Bottom of the Well",
-            "o"
+            "no_gender"
         ],
         "Map (Deku Tree)": [
             [
@@ -6715,7 +6691,7 @@
                 "blueprints of an ancient tree"
             ],
             "a Map of the Deku Tree",
-            "o"
+            "no_gender"
         ],
         "Map (Dodongos Cavern)": [
             [
@@ -6723,7 +6699,7 @@
                 "blueprints of an immense cavern"
             ],
             "a Map of Dodongo's Cavern",
-            "o"
+            "no_gender"
         ],
         "Map (Fire Temple)": [
             [
@@ -6731,7 +6707,7 @@
                 "blueprints of a high mountain"
             ],
             "a Map of the Fire Temple",
-            "o"
+            "no_gender"
         ],
         "Map (Forest Temple)": [
             [
@@ -6739,7 +6715,7 @@
                 "blueprints of a deep forest"
             ],
             "a Map of the Forest Temple",
-            "o"
+            "no_gender"
         ],
         "Map (Ice Cavern)": [
             [
@@ -6747,7 +6723,7 @@
                 "blueprints of a frozen maze"
             ],
             "a Map of the Ice Cavern",
-            "o"
+            "no_gender"
         ],
         "Map (Jabu Jabus Belly)": [
             [
@@ -6755,7 +6731,7 @@
                 "blueprints of the belly of a deity"
             ],
             "a Map of Jabu Jabu's Belly",
-            "o"
+            "no_gender"
         ],
         "Map (Shadow Temple)": [
             [
@@ -6763,7 +6739,7 @@
                 "blueprints of the house of the dead"
             ],
             "a Map of the Shadow Temple",
-            "o"
+            "no_gender"
         ],
         "Map (Spirit Temple)": [
             [
@@ -6771,7 +6747,7 @@
                 "blueprints of the goddess of the sand"
             ],
             "a Map of the Spirit Temple",
-            "o"
+            "no_gender"
         ],
         "Map (Water Temple)": [
             [
@@ -6779,7 +6755,7 @@
                 "blueprints of a vast lake"
             ],
             "a Map of the Water Temple",
-            "o"
+            "no_gender"
         ],
         "Market 10 Big Poes": [
             "#ghost hunters# will be rewarded with",
@@ -6789,7 +6765,7 @@
         "Market Bazaar": [
             "the #Market Bazaar#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Bazaar Item 1": [
             "the #Market Bazaar# offers",
@@ -6834,7 +6810,7 @@
         "Market Bombchu Bowling": [
             "the #Bombchu Bowling Alley#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Bombchu Bowling First Prize": [
             "the #first explosive prize# is",
@@ -6854,7 +6830,7 @@
         "Market Bombchu Shop": [
             "the #Bombchu Shop#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Bombchu Shop Item 1": [
             "a #Bombchu merchant# sells",
@@ -6904,7 +6880,7 @@
         "Market Guard House": [
             "the #Guard House#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Lost Dog": [
             "#puppy lovers# will find",
@@ -6914,17 +6890,17 @@
         "Market Man in Green House": [
             "Man in Green's House",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Mask Shop": [
             "the #Happy Mask Shop#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Potion Shop": [
             "the #Market Potion Shop#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Potion Shop Item 1": [
             "a #potion seller# offers",
@@ -6969,7 +6945,7 @@
         "Market Shooting Gallery": [
             "a #Slingshot Shooting Gallery#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Shooting Gallery Reward": [
             "#shooting in youth# grants",
@@ -6979,7 +6955,7 @@
         "Market Treasure Chest Game": [
             "the #Treasure Box Shop#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Treasure Chest Game Reward": [
             [
@@ -6994,14 +6970,14 @@
                 "the factual façade"
             ],
             "the Mask of Truth",
-            "o"
+            "no_gender"
         ],
         "Master Sword": [
             [
                 "evil's bane"
             ],
             "the Master Sword",
-            "o"
+            "no_gender"
         ],
         "Megaton Hammer": [
             [
@@ -7010,7 +6986,7 @@
                 "the heavy hitter"
             ],
             "the Megaton Hammer",
-            "o"
+            "no_gender"
         ],
         "Minuet of Forest": [
             [
@@ -7019,7 +6995,7 @@
                 "a green spark trail"
             ],
             "the Minuet of Forest",
-            "o"
+            "no_gender"
         ],
         "Mirror Shield": [
             [
@@ -7028,7 +7004,7 @@
                 "a silvered surface"
             ],
             "the Mirror Shield",
-            "o"
+            "no_gender"
         ],
         "Morpha": [
             "the #Giant Aquatic Amoeba# holds",
@@ -7038,7 +7014,7 @@
         "Morpha Boss Room": [
             "the #Giant Aquatic Amoeba#",
             "#Morpha#",
-            "o"
+            "no_gender"
         ],
         "Morpha Rewards": [
             "the #Giant Aquatic Amoeba# holds...^",
@@ -7053,7 +7029,7 @@
                 "a blue crystal"
             ],
             "Nayru's Love",
-            "o"
+            "no_gender"
         ],
         "Nocturne of Shadow": [
             [
@@ -7063,7 +7039,7 @@
                 "a purple spark trail"
             ],
             "the Nocturne of Shadow",
-            "o"
+            "no_gender"
         ],
         "Nothing": [
             [
@@ -7071,7 +7047,7 @@
                 "loneliness"
             ],
             "Nothing",
-            "o"
+            "no_gender"
         ],
         "OGC GS": [
             "a #spider outside a tyrant's tower# holds",
@@ -7081,7 +7057,7 @@
         "OGC Great Fairy Fountain": [
             "a #Great Fairy Fountain#",
             null,
-            "o"
+            "no_gender"
         ],
         "OGC Great Fairy Reward": [
             "the #fairy of strength# holds",
@@ -7094,56 +7070,56 @@
                 "a music maker"
             ],
             "an Ocarina",
-            "o"
+            "no_gender"
         ],
         "Ocarina A Button": [
             [
                 "a blue note"
             ],
             "the Ocarina A Button",
-            "o"
+            "no_gender"
         ],
         "Ocarina C down Button": [
             [
                 "a low note"
             ],
             "the Ocarina C down Button",
-            "o"
+            "no_gender"
         ],
         "Ocarina C left Button": [
             [
                 "a somewhat high note"
             ],
             "the Ocarina C left Button",
-            "o"
+            "no_gender"
         ],
         "Ocarina C right Button": [
             [
                 "a middle note"
             ],
             "the Ocarina C right Button",
-            "o"
+            "no_gender"
         ],
         "Ocarina C up Button": [
             [
                 "a high note"
             ],
             "the Ocarina C up Button",
-            "o"
+            "no_gender"
         ],
         "Odd Mushroom": [
             [
                 "a powder ingredient"
             ],
             "an Odd Mushroom",
-            "o"
+            "no_gender"
         ],
         "Odd Potion": [
             [
                 "Granny's goodies"
             ],
             "an Odd Potion",
-            "o"
+            "no_gender"
         ],
         "Phantom Ganon": [
             "the #Evil Spirit from Beyond# holds",
@@ -7153,7 +7129,7 @@
         "Phantom Ganon Boss Room": [
             "the #Evil Spirit from Beyond#",
             "#Phantom Ganon#",
-            "o"
+            "no_gender"
         ],
         "Phantom Ganon Rewards": [
             "the #Evil Spirit from Beyond# holds...^",
@@ -7166,26 +7142,26 @@
                 "a broken heart"
             ],
             "a Piece of Heart",
-            "o"
+            "no_gender"
         ],
         "Piece of Heart (Treasure Chest Game)": [
             "a victory valentine",
             "a Piece of Heart",
-            "o"
+            "no_gender"
         ],
         "Poachers Saw": [
             [
                 "a tree killer"
             ],
             "the Poacher's Saw",
-            "o"
+            "no_gender"
         ],
         "Pocket Cucco": [
             [
                 "a little clucker"
             ],
             "the Pocket Cucco",
-            "o"
+            "no_gender"
         ],
         "Pocket Egg": [
             [
@@ -7194,7 +7170,7 @@
                 "a fowl youth"
             ],
             "the Pocket Egg",
-            "o"
+            "no_gender"
         ],
         "Prelude of Light": [
             [
@@ -7203,7 +7179,7 @@
                 "the temple traveler"
             ],
             "the Prelude of Light",
-            "o"
+            "no_gender"
         ],
         "Prescription": [
             [
@@ -7211,7 +7187,7 @@
                 "a doctor's note"
             ],
             "the Prescription",
-            "o"
+            "no_gender"
         ],
         "Progressive Hookshot": [
             [
@@ -7220,7 +7196,7 @@
                 "the BOING! chain"
             ],
             "a Hookshot",
-            "o"
+            "no_gender"
         ],
         "Progressive Scale": [
             [
@@ -7228,7 +7204,7 @@
                 "a piece of Zora"
             ],
             "a Zora Scale",
-            "o"
+            "no_gender"
         ],
         "Progressive Strength Upgrade": [
             [
@@ -7237,7 +7213,7 @@
                 "the heavy lifty"
             ],
             "a Strength Upgrade",
-            "o"
+            "no_gender"
         ],
         "Progressive Wallet": [
             [
@@ -7246,7 +7222,7 @@
                 "a portable bank"
             ],
             "a Wallet",
-            "o"
+            "no_gender"
         ],
         "Queen Gohma": [
             "the #Parasitic Armored Arachnid# holds",
@@ -7256,7 +7232,7 @@
         "Queen Gohma Boss Room": [
             "the #Parasitic Armored Arachnid#",
             "#Queen Gohma#",
-            "o"
+            "no_gender"
         ],
         "Queen Gohma Rewards": [
             "the #Parasitic Armored Arachnid# holds...^",
@@ -7270,7 +7246,7 @@
                 "a Band-Aid"
             ],
             "a Recovery Heart",
-            "o"
+            "no_gender"
         ],
         "Requiem of Spirit": [
             [
@@ -7279,7 +7255,7 @@
                 "the desert ditty"
             ],
             "the Requiem of Spirit",
-            "o"
+            "no_gender"
         ],
         "Rupee (1)": [
             [
@@ -7288,12 +7264,12 @@
                 "a green gem"
             ],
             "a Green Rupee",
-            "o"
+            "no_gender"
         ],
         "Rupee (Treasure Chest Game) (1)": [
             "the green gem of grief",
             "a Green Rupee",
-            "o"
+            "no_gender"
         ],
         "Rupees (20)": [
             [
@@ -7301,7 +7277,7 @@
                 "a red gem"
             ],
             "a Red Rupee",
-            "o"
+            "no_gender"
         ],
         "Rupees (200)": [
             [
@@ -7311,7 +7287,7 @@
                 "great wealth"
             ],
             "a Huge Rupee",
-            "o"
+            "no_gender"
         ],
         "Rupees (5)": [
             [
@@ -7319,7 +7295,7 @@
                 "a blue gem"
             ],
             "a Blue Rupee",
-            "o"
+            "no_gender"
         ],
         "Rupees (50)": [
             [
@@ -7328,22 +7304,22 @@
                 "wealth"
             ],
             "a Purple Rupee",
-            "o"
+            "no_gender"
         ],
         "Rupees (Treasure Chest Game) (20)": [
             "the red gem of regret",
             "a Red Rupee",
-            "o"
+            "no_gender"
         ],
         "Rupees (Treasure Chest Game) (5)": [
             "the blue gem of blunder",
             "a Blue Rupee",
-            "o"
+            "no_gender"
         ],
         "Rupees (Treasure Chest Game) (50)": [
             "the purple gem of punishment",
             "a Purple Rupee",
-            "o"
+            "no_gender"
         ],
         "Rutos Letter": [
             [
@@ -7353,7 +7329,7 @@
                 "a fishy stationery"
             ],
             "Ruto's Letter",
-            "o"
+            "no_gender"
         ],
         "SFM Deku Scrub Grotto Front": [
             "a #scrub underground duo# sells",
@@ -7368,7 +7344,7 @@
         "SFM Fairy Grotto": [
             "a small #Fairy Fountain#",
             null,
-            "o"
+            "no_gender"
         ],
         "SFM GS": [
             "night reveals a #spider in a forest meadow# holding",
@@ -7378,12 +7354,12 @@
         "SFM Storms Grotto": [
             "2 Deku Scrubs",
             null,
-            "o"
+            "no_gender"
         ],
         "SFM Wolfos Grotto": [
             "#Wolfos# guarding a chest",
             null,
-            "o"
+            "no_gender"
         ],
         "SFM Wolfos Grotto Chest": [
             "#wolves beneath the earth# guard",
@@ -7396,7 +7372,7 @@
                 "Saria's phone number"
             ],
             "Saria's Song",
-            "o"
+            "no_gender"
         ],
         "Serenade of Water": [
             [
@@ -7405,7 +7381,7 @@
                 "the lake's lyric"
             ],
             "the Serenade of Water",
-            "o"
+            "no_gender"
         ],
         "Shadow Medallion": [
             [
@@ -7414,7 +7390,7 @@
                 "a purple disc"
             ],
             "the Shadow Medallion",
-            "o"
+            "no_gender"
         ],
         "Shadow Temple": [
             "the house of the dead",
@@ -7727,7 +7703,7 @@
                 "a priced artifact from a shadow's prison"
             ],
             "a Silver Rupee for the Bottom of the Well",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Dodongos Cavern Staircase)": [
             [
@@ -7735,7 +7711,7 @@
                 "a priced artifact from an immense cavern"
             ],
             "a Silver Rupee for Dodongo's Cavern",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ganons Castle Fire Trial)": [
             [
@@ -7743,7 +7719,7 @@
                 "a priced artifact from a conquered citadel"
             ],
             "a Silver Rupee for Ganon's Castle",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ganons Castle Forest Trial)": [
             [
@@ -7751,7 +7727,7 @@
                 "a priced artifact from a conquered citadel"
             ],
             "a Silver Rupee for Ganon's Castle",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ganons Castle Light Trial)": [
             [
@@ -7759,7 +7735,7 @@
                 "a priced artifact from a conquered citadel"
             ],
             "a Silver Rupee for Ganon's Castle",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ganons Castle Shadow Trial)": [
             [
@@ -7767,7 +7743,7 @@
                 "a priced artifact from a conquered citadel"
             ],
             "a Silver Rupee for Ganon's Castle",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ganons Castle Spirit Trial)": [
             [
@@ -7775,7 +7751,7 @@
                 "a priced artifact from a conquered citadel"
             ],
             "a Silver Rupee for Ganon's Castle",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ganons Castle Water Trial)": [
             [
@@ -7783,7 +7759,7 @@
                 "a priced artifact from a conquered citadel"
             ],
             "a Silver Rupee for Ganon's Castle",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Gerudo Training Ground Lava)": [
             [
@@ -7791,7 +7767,7 @@
                 "a priced artifact from the test of thieves"
             ],
             "a Silver Rupee for the Gerudo Training Ground",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Gerudo Training Ground Slopes)": [
             [
@@ -7799,7 +7775,7 @@
                 "a priced artifact from the test of thieves"
             ],
             "a Silver Rupee for the Gerudo Training Ground",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Gerudo Training Ground Water)": [
             [
@@ -7807,7 +7783,7 @@
                 "a priced artifact from the test of thieves"
             ],
             "a Silver Rupee for the Gerudo Training Ground",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ice Cavern Push Block)": [
             [
@@ -7815,7 +7791,7 @@
                 "a priced artifact from a frozen maze"
             ],
             "a Silver Rupee for the Ice Cavern",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ice Cavern Spinning Scythe)": [
             [
@@ -7823,7 +7799,7 @@
                 "a priced artifact from a frozen maze"
             ],
             "a Silver Rupee for the Ice Cavern",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Shadow Temple Huge Pit)": [
             [
@@ -7831,7 +7807,7 @@
                 "a priced artifact from the house of the dead"
             ],
             "a Silver Rupee for the Shadow Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Shadow Temple Invisible Blades)": [
             [
@@ -7839,7 +7815,7 @@
                 "a priced artifact from the house of the dead"
             ],
             "a Silver Rupee for the Shadow Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Shadow Temple Invisible Spikes)": [
             [
@@ -7847,7 +7823,7 @@
                 "a priced artifact from the house of the dead"
             ],
             "a Silver Rupee for the Shadow Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Shadow Temple Scythe Shortcut)": [
             [
@@ -7855,7 +7831,7 @@
                 "a priced artifact from the house of the dead"
             ],
             "a Silver Rupee for the Shadow Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Spirit Temple Adult Boulders)": [
             [
@@ -7863,7 +7839,7 @@
                 "a priced artifact from a goddess of the sand"
             ],
             "a Silver Rupee for the Spirit Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Spirit Temple Adult Climb)": [
             [
@@ -7871,7 +7847,7 @@
                 "a priced artifact from a goddess of the sand"
             ],
             "a Silver Rupee for the Spirit Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Spirit Temple Child Early Torches)": [
             [
@@ -7879,7 +7855,7 @@
                 "a priced artifact from a goddess of the sand"
             ],
             "a Silver Rupee for the Spirit Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Spirit Temple Lobby and Lower Adult)": [
             [
@@ -7887,7 +7863,7 @@
                 "a priced artifact from a goddess of the sand"
             ],
             "a Silver Rupee for the Spirit Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Spirit Temple Sun Block)": [
             [
@@ -7895,7 +7871,7 @@
                 "a priced artifact from a goddess of the sand"
             ],
             "a Silver Rupee for the Spirit Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Bottom of the Well Basement)": [
             [
@@ -7903,7 +7879,7 @@
                 "a stash of silver shekels for a shadow's prison"
             ],
             "a Pouch of Silver Rupees for the Bottom of the Well",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Dodongos Cavern Staircase)": [
             [
@@ -7911,7 +7887,7 @@
                 "a stash of silver shekels for an immense cavern"
             ],
             "a Pouch of Silver Rupees for Dodongo's Cavern",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ganons Castle Fire Trial)": [
             [
@@ -7919,7 +7895,7 @@
                 "a stash of silver shekels for a conquered citadel"
             ],
             "a Pouch of Silver Rupees for Ganon's Castle",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ganons Castle Forest Trial)": [
             [
@@ -7927,7 +7903,7 @@
                 "a stash of silver shekels for a conquered citadel"
             ],
             "a Pouch of Silver Rupees for Ganon's Castle",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ganons Castle Light Trial)": [
             [
@@ -7935,7 +7911,7 @@
                 "a stash of silver shekels for a conquered citadel"
             ],
             "a Pouch of Silver Rupees for Ganon's Castle",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ganons Castle Shadow Trial)": [
             [
@@ -7943,7 +7919,7 @@
                 "a stash of silver shekels for a conquered citadel"
             ],
             "a Pouch of Silver Rupees for Ganon's Castle",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ganons Castle Spirit Trial)": [
             [
@@ -7951,7 +7927,7 @@
                 "a stash of silver shekels for a conquered citadel"
             ],
             "a Pouch of Silver Rupees for Ganon's Castle",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ganons Castle Water Trial)": [
             [
@@ -7959,7 +7935,7 @@
                 "a stash of silver shekels for a conquered citadel"
             ],
             "a Pouch of Silver Rupees for Ganon's Castle",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Gerudo Training Ground Lava)": [
             [
@@ -7967,7 +7943,7 @@
                 "a stash of silver shekels for the test of thieves"
             ],
             "a Pouch of Silver Rupees for the Gerudo Training Ground",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Gerudo Training Ground Slopes)": [
             [
@@ -7975,7 +7951,7 @@
                 "a stash of silver shekels for the test of thieves"
             ],
             "a Pouch of Silver Rupees for the Gerudo Training Ground",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Gerudo Training Ground Water)": [
             [
@@ -7983,7 +7959,7 @@
                 "a stash of silver shekels for the test of thieves"
             ],
             "a Pouch of Silver Rupees for the Gerudo Training Ground",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ice Cavern Push Block)": [
             [
@@ -7991,7 +7967,7 @@
                 "a stash of silver shekels for a frozen maze"
             ],
             "a Pouch of Silver Rupees for the Ice Cavern",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ice Cavern Spinning Scythe)": [
             [
@@ -7999,7 +7975,7 @@
                 "a stash of silver shekels for a frozen maze"
             ],
             "a Pouch of Silver Rupees for the Ice Cavern",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Shadow Temple Huge Pit)": [
             [
@@ -8007,7 +7983,7 @@
                 "a stash of silver shekels for the house of the dead"
             ],
             "a Pouch of Silver Rupees for the Shadow Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Shadow Temple Invisible Blades)": [
             [
@@ -8015,7 +7991,7 @@
                 "a stash of silver shekels for the house of the dead"
             ],
             "a Pouch of Silver Rupees for the Shadow Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Shadow Temple Invisible Spikes)": [
             [
@@ -8023,7 +7999,7 @@
                 "a stash of silver shekels for the house of the dead"
             ],
             "a Pouch of Silver Rupees for the Shadow Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Shadow Temple Scythe Shortcut)": [
             [
@@ -8031,7 +8007,7 @@
                 "a stash of silver shekels for the house of the dead"
             ],
             "a Pouch of Silver Rupees for the Shadow Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Spirit Temple Adult Boulders)": [
             [
@@ -8039,7 +8015,7 @@
                 "a stash of silver shekels for a goddess of the sand"
             ],
             "a Pouch of Silver Rupees for the Spirit Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Spirit Temple Adult Climb)": [
             [
@@ -8047,7 +8023,7 @@
                 "a stash of silver shekels for a goddess of the sand"
             ],
             "a Pouch of Silver Rupees for the Spirit Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Spirit Temple Child Early Torches)": [
             [
@@ -8055,7 +8031,7 @@
                 "a stash of silver shekels for a goddess of the sand"
             ],
             "a Pouch of Silver Rupees for the Spirit Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Spirit Temple Lobby and Lower Adult)": [
             [
@@ -8063,7 +8039,7 @@
                 "a stash of silver shekels for a goddess of the sand"
             ],
             "a Pouch of Silver Rupees for the Spirit Temple",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Spirit Temple Sun Block)": [
             [
@@ -8071,7 +8047,7 @@
                 "a stash of silver shekels for a goddess of the sand"
             ],
             "a Pouch of Silver Rupees for the Spirit Temple",
-            "o"
+            "no_gender"
         ],
         "SilverRupee": [
             [
@@ -8079,14 +8055,14 @@
                 "a priced artifact"
             ],
             "a Silver Rupee",
-            "o"
+            "no_gender"
         ],
         "Skull Mask": [
             [
                 "the fleshless façade"
             ],
             "the Skull Mask",
-            "o"
+            "no_gender"
         ],
         "Slingshot": [
             [
@@ -8095,7 +8071,7 @@
                 "a child's catapult"
             ],
             "a Slingshot",
-            "o"
+            "no_gender"
         ],
         "Small Key (Bottom of the Well)": [
             [
@@ -8105,7 +8081,7 @@
                 "a lockpick for a shadow's prison"
             ],
             "a Bottom of the Well Small Key",
-            "o"
+            "no_gender"
         ],
         "Small Key (Fire Temple)": [
             [
@@ -8115,7 +8091,7 @@
                 "a lockpick for a high mountain"
             ],
             "a Fire Temple Small Key",
-            "o"
+            "no_gender"
         ],
         "Small Key (Forest Temple)": [
             [
@@ -8125,7 +8101,7 @@
                 "a lockpick for a deep forest"
             ],
             "a Forest Temple Small Key",
-            "o"
+            "no_gender"
         ],
         "Small Key (Ganons Castle)": [
             [
@@ -8135,7 +8111,7 @@
                 "a lockpick for a conquered citadel"
             ],
             "a Ganon's Castle Small Key",
-            "o"
+            "no_gender"
         ],
         "Small Key (Gerudo Training Ground)": [
             [
@@ -8145,7 +8121,7 @@
                 "a lockpick for the test of thieves"
             ],
             "a Gerudo Training Ground Small Key",
-            "o"
+            "no_gender"
         ],
         "Small Key (Shadow Temple)": [
             [
@@ -8155,7 +8131,7 @@
                 "a lockpick for the house of the dead"
             ],
             "a Shadow Temple Small Key",
-            "o"
+            "no_gender"
         ],
         "Small Key (Spirit Temple)": [
             [
@@ -8165,21 +8141,21 @@
                 "a lockpick for a goddess of the sand"
             ],
             "a Spirit Temple Small Key",
-            "o"
+            "no_gender"
         ],
         "Small Key (Thieves Hideout)": [
             [
                 "a get out of jail free card"
             ],
             "a Jail Key",
-            "o"
+            "no_gender"
         ],
         "Small Key (Treasure Chest Game)": [
             [
                 "a key to becoming a winner"
             ],
             "a Game Key",
-            "o"
+            "no_gender"
         ],
         "Small Key (Water Temple)": [
             [
@@ -8189,7 +8165,7 @@
                 "a lockpick for under a vast lake"
             ],
             "a Water Temple Small Key",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Bottom of the Well)": [
             [
@@ -8199,7 +8175,7 @@
                 "a skeleton key for a shadow's prison"
             ],
             "a Bottom of the Well Small Key Ring",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Fire Temple)": [
             [
@@ -8209,7 +8185,7 @@
                 "a skeleton key for a high mountain"
             ],
             "a Fire Temple Small Key Ring",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Forest Temple)": [
             [
@@ -8219,7 +8195,7 @@
                 "a skeleton key for a deep forest"
             ],
             "a Forest Temple Small Key Ring",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Ganons Castle)": [
             [
@@ -8229,7 +8205,7 @@
                 "a skeleton key for a conquered citadel"
             ],
             "a Ganon's Castle Small Key Ring",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Gerudo Training Ground)": [
             [
@@ -8239,7 +8215,7 @@
                 "a skeleton key for the test of thieves"
             ],
             "a Gerudo Training Ground Small Key Ring",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Shadow Temple)": [
             [
@@ -8249,7 +8225,7 @@
                 "a skeleton key for the house of the dead"
             ],
             "a Shadow Temple Small Key Ring",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Spirit Temple)": [
             [
@@ -8259,21 +8235,21 @@
                 "a skeleton key for a goddess of the sand"
             ],
             "a Spirit Temple Small Key Ring",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Thieves Hideout)": [
             [
                 "a deck of get out of jail free cards"
             ],
             "a Jail Key Ring",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Treasure Chest Game)": [
             [
                 "the keys to becoming a winner"
             ],
             "a Game Key Ring",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Water Temple)": [
             [
@@ -8283,7 +8259,7 @@
                 "a skeleton key for under a vast lake"
             ],
             "a Water Temple Small Key Ring",
-            "o"
+            "no_gender"
         ],
         "SmallKey": [
             [
@@ -8293,7 +8269,7 @@
                 "a lockpick"
             ],
             "a Small Key",
-            "o"
+            "no_gender"
         ],
         "SmallKeyRing": [
             [
@@ -8303,7 +8279,7 @@
                 "a skeleton key"
             ],
             "a Small Key Ring",
-            "o"
+            "no_gender"
         ],
         "Song from Impa": [
             "#deep in a castle#, Impa teaches",
@@ -8345,7 +8321,7 @@
                 "windmill acceleration"
             ],
             "the Song of Storms",
-            "o"
+            "no_gender"
         ],
         "Song of Time": [
             [
@@ -8353,7 +8329,7 @@
                 "the tune of ages"
             ],
             "the Song of Time",
-            "o"
+            "no_gender"
         ],
         "Spirit Medallion": [
             [
@@ -8362,7 +8338,7 @@
                 "an orange disc"
             ],
             "the Spirit Medallion",
-            "o"
+            "no_gender"
         ],
         "Spirit Temple": [
             "the goddess of the sand",
@@ -8664,7 +8640,7 @@
                 "the frightening façade"
             ],
             "the Spooky Mask",
-            "o"
+            "no_gender"
         ],
         "Stone of Agony": [
             [
@@ -8672,7 +8648,7 @@
                 "the Rumble Pak (TM)"
             ],
             "the Stone of Agony",
-            "o"
+            "no_gender"
         ],
         "Suns Song": [
             [
@@ -8681,26 +8657,26 @@
                 "the Gibdo's bane"
             ],
             "the Sun's Song",
-            "o"
+            "no_gender"
         ],
         "TCGSmallKey": [
             [
                 "a key to becoming a winner"
             ],
             "a Game Key",
-            "o"
+            "no_gender"
         ],
         "TCGSmallKeyRing": [
             [
                 "the keys to becoming a winner"
             ],
             "a Game Key Ring",
-            "o"
+            "no_gender"
         ],
         "Temple of Time": [
             "the #Temple of Time#",
             null,
-            "o"
+            "no_gender"
         ],
         "ToT Light Arrows Cutscene": [
             "the #final gift of a princess# is",
@@ -8719,7 +8695,7 @@
                 "a gold fragment"
             ],
             "a Piece of the Triforce",
-            "o"
+            "no_gender"
         ],
         "Twinrova": [
             "the #Sorceress Sisters# hold",
@@ -8729,7 +8705,7 @@
         "Twinrova Boss Room": [
             "the #Sorceress Sisters#",
             "#Twinrova#",
-            "o"
+            "no_gender"
         ],
         "Twinrova Rewards": [
             "the #Sorceress Sisters# hold...^",
@@ -8749,7 +8725,7 @@
         "Volvagia Boss Room": [
             "the #Subterranean Lava Dragon#",
             "#Volvagia#",
-            "o"
+            "no_gender"
         ],
         "Volvagia Rewards": [
             "the #Subterranean Lava Dragon# holds...^",
@@ -8781,7 +8757,7 @@
                 "a blue disc"
             ],
             "the Water Medallion",
-            "o"
+            "no_gender"
         ],
         "Water Temple": [
             "a vast lake",
@@ -8956,7 +8932,7 @@
                 "a chicken dilemma"
             ],
             "the Weird Egg",
-            "o"
+            "no_gender"
         ],
         "ZD Chest": [
             "fire #beyond a waterfall# reveals",
@@ -8986,7 +8962,7 @@
         "ZD Shop": [
             "the #Zora Shop#",
             null,
-            "o"
+            "no_gender"
         ],
         "ZD Shop Item 1": [
             "a #Zora shopkeeper# sells",
@@ -9031,7 +9007,7 @@
         "ZD Storms Grotto": [
             "a small #Fairy Fountain#",
             null,
-            "o"
+            "no_gender"
         ],
         "ZF Bottom Freestanding PoH": [
             "#under the icy waters# lies",
@@ -9056,7 +9032,7 @@
         "ZF Great Fairy Fountain": [
             "a #Great Fairy Fountain#",
             null,
-            "o"
+            "no_gender"
         ],
         "ZF Great Fairy Reward": [
             "the #fairy of winds# holds",
@@ -9081,7 +9057,7 @@
         "ZR Fairy Grotto": [
             "a small #Fairy Fountain#",
             null,
-            "o"
+            "no_gender"
         ],
         "ZR Frogs Eponas Song": [
             "after hearing #Epona's Song, frogs gift#",
@@ -9165,7 +9141,7 @@
         "ZR Open Grotto": [
             "a #generic grotto#",
             null,
-            "o"
+            "no_gender"
         ],
         "ZR Open Grotto Chest": [
             "a #hole along a river# holds",
@@ -9175,7 +9151,7 @@
         "ZR Storms Grotto": [
             "2 Deku Scrubs",
             null,
-            "o"
+            "no_gender"
         ],
         "Zeldas Letter": [
             [
@@ -9184,7 +9160,7 @@
                 "royal snail mail"
             ],
             "Zelda's Letter",
-            "o"
+            "no_gender"
         ],
         "Zeldas Lullaby": [
             [
@@ -9192,14 +9168,14 @@
                 "a triforce tune"
             ],
             "Zelda's Lullaby",
-            "o"
+            "no_gender"
         ],
         "Zora Mask": [
             [
                 "the fishy façade"
             ],
             "the Zora Mask",
-            "o"
+            "no_gender"
         ],
         "Zora Sapphire": [
             [
@@ -9207,7 +9183,7 @@
                 "the Spiritual Stone of Water"
             ],
             "the Zora Sapphire",
-            "o"
+            "no_gender"
         ],
         "Zora Tunic": [
             [
@@ -9216,7 +9192,7 @@
                 "a swimsuit"
             ],
             "a Zora Tunic",
-            "o"
+            "no_gender"
         ],
         "Zoras Domain -> ZD Storms Grotto": [
             "a #storm within Zora's Domain# reveals",
@@ -9270,352 +9246,275 @@
         ]
     },
     "hint_area_enum": {
-        "BOTTOM_OF_THE_WELL": [
-            "within",
-            "at",
-            "the Bottom of the Well",
-            "Bottom of the Well",
-            "Pink",
-            "Bottom of the Well",
-            "o"
-        ],
-        "CASTLE_GROUNDS": [
-            "on",
-            "on",
-            "the Castle Grounds",
-            null,
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "DEATH_MOUNTAIN_CRATER": [
-            "in",
-            "in",
-            "the Death Mountain Crater",
-            "Death Mountain Crater",
-            "Red",
-            null,
-            "o"
-        ],
-        "DEATH_MOUNTAIN_TRAIL": [
-            "on",
-            "on",
-            "the Death Mountain Trail",
-            "Death Mountain Trail",
-            "Red",
-            null,
-            "o"
-        ],
-        "DEKU_TREE": [
-            "inside",
-            "inside",
-            "the Deku Tree",
-            "Deku Tree",
-            "Green",
-            "Deku Tree",
-            "o"
-        ],
-        "DESERT_COLOSSUS": [
-            "at",
-            "at",
-            "the Desert Colossus",
-            "Desert Colossus",
-            "Yellow",
-            null,
-            "o"
-        ],
-        "DODONGOS_CAVERN": [
-            "within",
-            "in",
-            "Dodongo's Cavern",
-            "Dodongo's Cavern",
-            "Red",
-            "Dodongos Cavern",
-            "o"
-        ],
-        "FIRE_TEMPLE": [
-            "on",
-            "in",
-            "the Fire Temple",
-            "Fire Temple",
-            "Red",
-            "Fire Temple",
-            "o"
-        ],
-        "FOREST_TEMPLE": [
-            "in",
-            "in",
-            "the Forest Temple",
-            "Forest Temple",
-            "Green",
-            "Forest Temple",
-            "o"
-        ],
-        "GANONDORFS_CHAMBER": [
-            "in",
-            "in",
-            "Ganondorf's Chamber",
-            "Ganondorf's Chamber",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "GERUDO_FORTRESS": [
-            "at",
-            "at",
-            "Gerudo's Fortress",
-            "Gerudo's Fortress",
-            "Yellow",
-            null,
-            "o"
-        ],
-        "GERUDO_TRAINING_GROUND": [
-            "within",
-            "on",
-            "the Gerudo Training Ground",
-            "Gerudo Training Ground",
-            "Yellow",
-            "Gerudo Training Ground",
-            "o"
-        ],
-        "GERUDO_VALLEY": [
-            "at",
-            "at",
-            "Gerudo Valley",
-            "Gerudo Valley",
-            "Yellow",
-            null,
-            "o"
-        ],
-        "GORON_CITY": [
-            "in",
-            "in",
-            "Goron City",
-            "Goron City",
-            "Red",
-            null,
-            "o"
-        ],
-        "GRAVEYARD": [
-            "in",
-            "in",
-            "the Graveyard",
-            "Graveyard",
-            "Pink",
-            null,
-            "o"
-        ],
-        "HAUNTED_WASTELAND": [
-            "in",
-            "in",
-            "the Haunted Wasteland",
-            "Haunted Wasteland",
-            "Yellow",
-            null,
-            "o"
-        ],
-        "HYRULE_CASTLE": [
-            "at",
-            "at",
-            "Hyrule Castle",
-            "Hyrule Castle",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "HYRULE_FIELD": [
-            "in",
-            "in",
-            "Hyrule Field",
-            "Hyrule Field",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "ICE_CAVERN": [
-            "inside",
-            "in",
-            "the Ice Cavern",
-            "Ice Cavern",
-            "Blue",
-            "Ice Cavern",
-            "o"
-        ],
-        "INSIDE_GANONS_CASTLE": [
-            "inside",
-            null,
-            "inside Ganon's Castle",
-            "Inside Ganon's Castle",
-            "Light Blue",
-            "Ganons Castle",
-            "o"
-        ],
-        "JABU_JABUS_BELLY": [
-            "in",
-            "inside",
-            "Jabu Jabu's Belly",
-            "Jabu Jabu's Belly",
-            "Blue",
-            "Jabu Jabus Belly",
-            "o"
-        ],
-        "KAKARIKO_VILLAGE": [
-            "in",
-            "in",
-            "Kakariko Village",
-            "Kakariko Village",
-            "Pink",
-            null,
-            "o"
-        ],
-        "KOKIRI_FOREST": [
-            "in",
-            "in",
-            "Kokiri Forest",
-            "Kokiri Forest",
-            "Green",
-            null,
-            "o"
-        ],
-        "LAKE_HYLIA": [
-            "at",
-            "at",
-            "Lake Hylia",
-            "Lake Hylia",
-            "Blue",
-            null,
-            "o"
-        ],
-        "LON_LON_RANCH": [
-            "at",
-            "at",
-            "Lon Lon Ranch",
-            "Lon Lon Ranch",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "LOST_WOODS": [
-            "in",
-            "in",
-            "the Lost Woods",
-            "Lost Woods",
-            "Green",
-            null,
-            "o"
-        ],
-        "MARKET": [
-            "in",
-            "in",
-            "the Market",
-            "Market",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "OUTSIDE_GANONS_CASTLE": [
-            null,
-            null,
-            "outside Ganon's Castle",
-            "Outside Ganon's Castle",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "ROOT": [
-            "in",
-            "in",
-            "Link's pocket",
-            "Free",
-            "White",
-            null,
-            "o"
-        ],
-        "SACRED_FOREST_MEADOW": [
-            "at",
-            "at",
-            "the Sacred Forest Meadow",
-            "Sacred Forest Meadow",
-            "Green",
-            null,
-            "o"
-        ],
-        "SHADOW_TEMPLE": [
-            "within",
-            "in",
-            "the Shadow Temple",
-            "Shadow Temple",
-            "Pink",
-            "Shadow Temple",
-            "o"
-        ],
-        "SPIRIT_TEMPLE": [
-            "inside",
-            "in",
-            "the Spirit Temple",
-            "Spirit Temple",
-            "Yellow",
-            "Spirit Temple",
-            "o"
-        ],
-        "TEMPLE_OF_TIME": [
-            "inside",
-            "inside",
-            "the Temple of Time",
-            "Temple of Time",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "THIEVES_HIDEOUT": [
-            "in",
-            "in",
-            "the Thieves' Hideout",
-            "Thieves' Hideout",
-            "Yellow",
-            null,
-            "o"
-        ],
-        "WATER_TEMPLE": [
-            "under",
-            "in",
-            "the Water Temple",
-            "Water Temple",
-            "Blue",
-            "Water Temple",
-            "o"
-        ],
-        "ZORAS_DOMAIN": [
-            "at",
-            "at",
-            "Zora's Domain",
-            "Zora's Domain",
-            "Blue",
-            null,
-            "o"
-        ],
-        "ZORAS_FOUNTAIN": [
-            "at",
-            "at",
-            "Zora's Fountain",
-            "Zora's Fountain",
-            "Blue",
-            null,
-            "o"
-        ],
-        "ZORA_RIVER": [
-            "at",
-            "at",
-            "Zora's River",
-            "Zora's River",
-            "Blue",
-            null,
-            "o"
-        ]
+        "BOTTOM_OF_THE_WELL": {
+            "clear_prep": "at",
+            "display_name": "the Bottom of the Well",
+            "gender": "no_gender",
+            "short_name": "Bottom of the Well",
+            "vague_prep": "within"
+        },
+        "CASTLE_GROUNDS": {
+            "clear_prep": "on",
+            "display_name": "the Castle Grounds",
+            "gender": "no_gender",
+            "short_name": null,
+            "vague_prep": "on"
+        },
+        "DEATH_MOUNTAIN_CRATER": {
+            "clear_prep": "in",
+            "display_name": "the Death Mountain Crater",
+            "gender": "no_gender",
+            "short_name": "Death Mountain Crater",
+            "vague_prep": "in"
+        },
+        "DEATH_MOUNTAIN_TRAIL": {
+            "clear_prep": "on",
+            "display_name": "the Death Mountain Trail",
+            "gender": "no_gender",
+            "short_name": "Death Mountain Trail",
+            "vague_prep": "on"
+        },
+        "DEKU_TREE": {
+            "clear_prep": "inside",
+            "display_name": "the Deku Tree",
+            "gender": "no_gender",
+            "short_name": "Deku Tree",
+            "vague_prep": "inside"
+        },
+        "DESERT_COLOSSUS": {
+            "clear_prep": "at",
+            "display_name": "the Desert Colossus",
+            "gender": "no_gender",
+            "short_name": "Desert Colossus",
+            "vague_prep": "at"
+        },
+        "DODONGOS_CAVERN": {
+            "clear_prep": "in",
+            "display_name": "Dodongo's Cavern",
+            "gender": "no_gender",
+            "short_name": "Dodongo's Cavern",
+            "vague_prep": "within"
+        },
+        "FIRE_TEMPLE": {
+            "clear_prep": "in",
+            "display_name": "the Fire Temple",
+            "gender": "no_gender",
+            "short_name": "Fire Temple",
+            "vague_prep": "on"
+        },
+        "FOREST_TEMPLE": {
+            "clear_prep": "in",
+            "display_name": "the Forest Temple",
+            "gender": "no_gender",
+            "short_name": "Forest Temple",
+            "vague_prep": "in"
+        },
+        "GANONDORFS_CHAMBER": {
+            "clear_prep": "in",
+            "display_name": "Ganondorf's Chamber",
+            "gender": "no_gender",
+            "short_name": "Ganondorf's Chamber",
+            "vague_prep": "in"
+        },
+        "GERUDO_FORTRESS": {
+            "clear_prep": "at",
+            "display_name": "Gerudo's Fortress",
+            "gender": "no_gender",
+            "short_name": "Gerudo's Fortress",
+            "vague_prep": "at"
+        },
+        "GERUDO_TRAINING_GROUND": {
+            "clear_prep": "on",
+            "display_name": "the Gerudo Training Ground",
+            "gender": "no_gender",
+            "short_name": "Gerudo Training Ground",
+            "vague_prep": "within"
+        },
+        "GERUDO_VALLEY": {
+            "clear_prep": "at",
+            "display_name": "Gerudo Valley",
+            "gender": "no_gender",
+            "short_name": "Gerudo Valley",
+            "vague_prep": "at"
+        },
+        "GORON_CITY": {
+            "clear_prep": "in",
+            "display_name": "Goron City",
+            "gender": "no_gender",
+            "short_name": "Goron City",
+            "vague_prep": "in"
+        },
+        "GRAVEYARD": {
+            "clear_prep": "in",
+            "display_name": "the Graveyard",
+            "gender": "no_gender",
+            "short_name": "Graveyard",
+            "vague_prep": "in"
+        },
+        "HAUNTED_WASTELAND": {
+            "clear_prep": "in",
+            "display_name": "the Haunted Wasteland",
+            "gender": "no_gender",
+            "short_name": "Haunted Wasteland",
+            "vague_prep": "in"
+        },
+        "HYRULE_CASTLE": {
+            "clear_prep": "at",
+            "display_name": "Hyrule Castle",
+            "gender": "no_gender",
+            "short_name": "Hyrule Castle",
+            "vague_prep": "at"
+        },
+        "HYRULE_FIELD": {
+            "clear_prep": "in",
+            "display_name": "Hyrule Field",
+            "gender": "no_gender",
+            "short_name": "Hyrule Field",
+            "vague_prep": "in"
+        },
+        "ICE_CAVERN": {
+            "clear_prep": "in",
+            "display_name": "the Ice Cavern",
+            "gender": "no_gender",
+            "short_name": "Ice Cavern",
+            "vague_prep": "inside"
+        },
+        "INSIDE_GANONS_CASTLE": {
+            "clear_prep": null,
+            "display_name": "inside Ganon's Castle",
+            "gender": "no_gender",
+            "short_name": "Inside Ganon's Castle",
+            "vague_prep": "inside"
+        },
+        "JABU_JABUS_BELLY": {
+            "clear_prep": "inside",
+            "display_name": "Jabu Jabu's Belly",
+            "gender": "no_gender",
+            "short_name": "Jabu Jabu's Belly",
+            "vague_prep": "in"
+        },
+        "KAKARIKO_VILLAGE": {
+            "clear_prep": "in",
+            "display_name": "Kakariko Village",
+            "gender": "no_gender",
+            "short_name": "Kakariko Village",
+            "vague_prep": "in"
+        },
+        "KOKIRI_FOREST": {
+            "clear_prep": "in",
+            "display_name": "Kokiri Forest",
+            "gender": "no_gender",
+            "short_name": "Kokiri Forest",
+            "vague_prep": "in"
+        },
+        "LAKE_HYLIA": {
+            "clear_prep": "at",
+            "display_name": "Lake Hylia",
+            "gender": "no_gender",
+            "short_name": "Lake Hylia",
+            "vague_prep": "at"
+        },
+        "LON_LON_RANCH": {
+            "clear_prep": "at",
+            "display_name": "Lon Lon Ranch",
+            "gender": "no_gender",
+            "short_name": "Lon Lon Ranch",
+            "vague_prep": "at"
+        },
+        "LOST_WOODS": {
+            "clear_prep": "in",
+            "display_name": "the Lost Woods",
+            "gender": "no_gender",
+            "short_name": "Lost Woods",
+            "vague_prep": "in"
+        },
+        "MARKET": {
+            "clear_prep": "in",
+            "display_name": "the Market",
+            "gender": "no_gender",
+            "short_name": "Market",
+            "vague_prep": "in"
+        },
+        "OUTSIDE_GANONS_CASTLE": {
+            "clear_prep": null,
+            "display_name": "outside Ganon's Castle",
+            "gender": "no_gender",
+            "short_name": "Outside Ganon's Castle",
+            "vague_prep": null
+        },
+        "ROOT": {
+            "clear_prep": "in",
+            "display_name": "Link's pocket",
+            "gender": "no_gender",
+            "short_name": "Free",
+            "vague_prep": "in"
+        },
+        "SACRED_FOREST_MEADOW": {
+            "clear_prep": "at",
+            "display_name": "the Sacred Forest Meadow",
+            "gender": "no_gender",
+            "short_name": "Sacred Forest Meadow",
+            "vague_prep": "at"
+        },
+        "SHADOW_TEMPLE": {
+            "clear_prep": "in",
+            "display_name": "the Shadow Temple",
+            "gender": "no_gender",
+            "short_name": "Shadow Temple",
+            "vague_prep": "within"
+        },
+        "SPIRIT_TEMPLE": {
+            "clear_prep": "in",
+            "display_name": "the Spirit Temple",
+            "gender": "no_gender",
+            "short_name": "Spirit Temple",
+            "vague_prep": "inside"
+        },
+        "TEMPLE_OF_TIME": {
+            "clear_prep": "inside",
+            "display_name": "the Temple of Time",
+            "gender": "no_gender",
+            "short_name": "Temple of Time",
+            "vague_prep": "inside"
+        },
+        "THIEVES_HIDEOUT": {
+            "clear_prep": "in",
+            "display_name": "the Thieves' Hideout",
+            "gender": "no_gender",
+            "short_name": "Thieves' Hideout",
+            "vague_prep": "in"
+        },
+        "WATER_TEMPLE": {
+            "clear_prep": "in",
+            "display_name": "the Water Temple",
+            "gender": "no_gender",
+            "short_name": "Water Temple",
+            "vague_prep": "under"
+        },
+        "ZORAS_DOMAIN": {
+            "clear_prep": "at",
+            "display_name": "Zora's Domain",
+            "gender": "no_gender",
+            "short_name": "Zora's Domain",
+            "vague_prep": "at"
+        },
+        "ZORAS_FOUNTAIN": {
+            "clear_prep": "at",
+            "display_name": "Zora's Fountain",
+            "gender": "no_gender",
+            "short_name": "Zora's Fountain",
+            "vague_prep": "at"
+        },
+        "ZORA_RIVER": {
+            "clear_prep": "at",
+            "display_name": "Zora's River",
+            "gender": "no_gender",
+            "short_name": "Zora's River",
+            "vague_prep": "at"
+        }
     },
     "hint_text": {
         "always": "{location} #{item}#",
-        "at_own": "@'s {suffix}",
         "boss_pocket_clear": "\b\u0013{item_icon}One #@ already has#...",
         "boss_pocket_vague": "\b\u0013{item_icon}One in #@'s pocket#...",
         "boss_string": "\b\u0013{item_icon}One {location_text}...",
@@ -9623,7 +9522,7 @@
         "bridge_open": "The awakened ones will have #already created a bridge# to the castle where the evil dwells.",
         "bridge_vague": "The awakened ones will await for the Hero to collect {item_req}.",
         "bridge_vanilla": "the #Shadow and Spirit Medallions# as well as the #Light Arrows#",
-        "cbf": "#{item_text}# can be found {location_text}.",
+        "can_be_found": "#{item_text}# can be found {location_text}.",
         "conjunction": " and ",
         "conjunction_more": ", ",
         "dot_oot_sot": "\u0013\bYe who may become a Hero... Stand with the Ocarina of Time and play the Song of Time.",
@@ -9672,7 +9571,7 @@
         ],
         "goal_format": "{location_text} is on {player_text} {goal_text}.",
         "gossip_prefix": "They say that ",
-        "hero": "{location_text} may be on the hero's path.",
+        "hero_path": "{location_text} may be on the hero's path.",
         "hoards": "{location_text} hoards #{item_text}#.",
         "important": " Important Check",
         "major_item": "#{hint_loc}# has #{item_count}# major item.",
@@ -9684,9 +9583,10 @@
         "move_world": "{prefix} world {world}'s {suffix}",
         "own_prefix": "Link's",
         "player's": "player {world}'s {suffix}",
+        "player_own": "@'s {suffix}",
         "player_text": "Player {world}'s",
         "pocket": "#your pocket#",
-        "prep_pos": "first",
+        "prep_position": "first",
         "req_custom": "{count} {item}",
         "second_own": "your {suffix}",
         "separator": " ",
@@ -9696,9 +9596,9 @@
         "trial_ganon": "#the #{trial} Trials# protects Ganon's Tower.",
         "trial_none": "Sheik dispelled the barrier around #Ganon's Tower#.",
         "trial_sheik": "the #{trial} Trial# was dispelled by Sheik.",
-        "wiw": "the",
-        "woh": "{location_text} is on the way of the hero.",
-        "world's": "world {world}'s {suffix}"
+        "way_of_hero": "{location_text} is on the way of the hero.",
+        "world's": "world {world}'s {suffix}",
+        "world_is_world_player": "the"
     },
     "lang_property": {
         "align_text": "Left",
@@ -9789,11 +9689,11 @@
     },
     "prefix": {
         "gender": [
-            "o"
+            "no_gender"
         ],
         "prefix": {
             "definite": {
-                "o": "the"
+                "no_gender": "the"
             },
             "indefinite": {
                 "next_first": [
@@ -9803,7 +9703,7 @@
                     "o",
                     "u"
                 ],
-                "o": [
+                "no_gender": [
                     "a",
                     "an"
                 ]

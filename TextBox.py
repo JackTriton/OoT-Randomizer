@@ -36,7 +36,7 @@ def line_wrap(text: str, lang: str, strip_existing_lines: bool = False, strip_ex
     # Replace stand-in characters with their actual control code.
     lang = 1 if lang=="en" else 0
     line_box = LINES_PER_BOX if lang else LINES_PER_BOX_JP
-    
+
     skip_align = [0x81BC, 0x81B8, 0x819A]
     if replace_control_chars and lang:
         def replace_bytes(match: re.Match) -> str:
@@ -114,7 +114,7 @@ def line_wrap(text: str, lang: str, strip_existing_lines: bool = False, strip_ex
                 if text_code.code == 0x81A5:
                     align_box=align
                 index = 0
-                
+
             # Find us a whole word.
             if text_code.code in [[0x0A, 0x81A5, 0x8170],[0x01, 0x04, 0x20]][lang]:
                 if index > 1:

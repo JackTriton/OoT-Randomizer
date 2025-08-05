@@ -54,7 +54,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             address, value = [int(x, 16) for x in line.split(',')]
             rom.write_int32(address, value)
     rom.scan_dmadata_update()
-    
+
     lang = world.language
 
     # Binary patches of certain assets.
@@ -1395,9 +1395,9 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
 
     # add a cheaper bombchu pack to the bombchu shop
     # describe
-    update_message_by_id(messages, 0x80FE, lang.format_from_id("PATCH_TEXTS.bombchu_desc"), lang, 0x03)
+    update_message_by_id(messages, 0x80FE, lang.format_from_id("PATCH_TEXTS.bombchu_description"), lang, 0x03)
     # purchase
-    update_message_by_id(messages, 0x80FF, lang.format_from_id("PATCH_TEXTS.bombchu_purc"), lang, 0x03)
+    update_message_by_id(messages, 0x80FF, lang.format_from_id("PATCH_TEXTS.bombchu_purchase"), lang, 0x03)
     rbl_bombchu = shop_items[0x0018]
     rbl_bombchu.price = 60
     rbl_bombchu.pieces = 5
@@ -1409,12 +1409,12 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     shop_items[0x0015].price = 99
     shop_items[0x0019].price = 99
     shop_items[0x001C].price = 99
-    update_message_by_id(messages, shop_items[0x001C].description_message, lang.format_from_id("PATCH_TEXTS.bombchu_desc_10"), lang)
-    update_message_by_id(messages, shop_items[0x001C].purchase_message, lang.format_from_id("PATCH_TEXTS.bombchu_purc_10"), lang)
+    update_message_by_id(messages, shop_items[0x001C].description_message, lang.format_from_id("PATCH_TEXTS.bombchu_description_10"), lang)
+    update_message_by_id(messages, shop_items[0x001C].purchase_message, lang.format_from_id("PATCH_TEXTS.bombchu_purchase_10"), lang)
 
     # Fix blue potion shop text
-    update_message_by_id(messages, 0x80B5, lang.format_from_id("PATCH_TEXTS.blue_potion_desc"), lang, 0x03)
-    update_message_by_id(messages, 0x80BE, lang.format_from_id("PATCH_TEXTS.blue_potion_purc"), lang, 0x03)
+    update_message_by_id(messages, 0x80B5, lang.format_from_id("PATCH_TEXTS.blue_potion_description"), lang, 0x03)
+    update_message_by_id(messages, 0x80BE, lang.format_from_id("PATCH_TEXTS.blue_potion_purchase"), lang, 0x03)
     shop_items[0x000A].description_message = 0x80B5
     shop_items[0x000A].purchase_message = 0x80BE
 
@@ -1496,7 +1496,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     def update_scrub_text(message: bytearray, text_replacement: list[str], default_price: int, price: int,
                           item_name: Optional[str] = None) -> str:
         message = lang.format_from_text(
-            random.choice(lang.PATCH_TEXTS["scrub_texts"]), 
+            random.choice(lang.PATCH_TEXTS["scrub_texts"]),
             {
                 "item": lang.PATCH_TEXTS["mysterious"] if item_name is None else lang.hintTable[item_name][1],
                 "price": price
@@ -1786,11 +1786,25 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     # give dungeon items the correct messages
     add_item_messages(messages, shop_items, world)
     if world.settings.enhance_map_compass and world.settings.shuffle_mapcompass != 'remove' and world.settings.world_count == 1:
+        dungeon_id_list = {
+                #                      compass map
+                'Deku Tree':          (0x62,   0x88),
+                'Dodongos Cavern':    (0x63,   0x89),
+                'Jabu Jabus Belly':   (0x64,   0x8a),
+                'Forest Temple':      (0x65,   0x8b),
+                'Fire Temple':        (0x7c,   0x8c),
+                'Water Temple':       (0x7d,   0x8e),
+                'Spirit Temple':      (0x7e,   0x8f),
+                'Shadow Temple':      (0x7f,   0xa3),
+                'Bottom of the Well': (0xa2,   0xa5),
+                'Ice Cavern':         (0x87,   0x92),
+            }
         for dungeon in world.dungeons:
             if dungeon.name in ('Gerudo Training Ground', 'Ganons Castle'):
                 pass
             elif dungeon.name in ('Bottom of the Well', 'Ice Cavern'):
-                dungeon_name, compass_id, map_id, gender = lang.dungeon_list[dungeon.name]
+                dungeon_name, gender = lang.dungeon_list[dungeon.name]
+                compass_id, map_id = dungeon_id_list[dungeon.name]
                 map_message = lang.format_from_id(
                     "PATCH_TEXTS.map",
                     {
@@ -1802,7 +1816,8 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
                 if world.settings.mq_dungeons_mode == 'random' or world.settings.mq_dungeons_count != 0 and world.settings.mq_dungeons_count != 12:
                     update_message_by_id(messages, map_id, map_message, lang, allow_duplicates=True)
             else:
-                dungeon_name, compass_id, map_id, gender = lang.dungeon_list[dungeon.name]
+                dungeon_name, gender = lang.dungeon_list[dungeon.name]
+                compass_id, map_id = dungeon_id_list[dungeon.name]
                 if world.entrance_rando_reward_hints:
                     vanilla_reward = world.get_location(dungeon.vanilla_boss_name).vanilla_item
                     vanilla_reward_location = world.hinted_dungeon_reward_locations[vanilla_reward]
@@ -2494,7 +2509,7 @@ def create_fake_name(name: str, censor: list[str]) -> str:
     for i in random.sample(vowel_indexes, min(2, len(vowel_indexes))):
         c = list_name[i]
         list_name[i] = random.choice([v for v in vowels if v != c])
-    
+
     idx = [i for i,ch in enumerate(name) if PAT.match(ch) and ch in M]
     if idx:
         i = random.choice(idx)
@@ -2592,15 +2607,15 @@ def place_shop_items(rom: Rom, world: World, shop_items, messages, locations, in
                 base_name = world.language.hintTable.get(base_name,["",base_name])[1]
                 base_name = world.language.hintTable.get(base_name.replace(" ",""),["",base_name])[1]
                 extra_name = world.language.region_list.get(extra_name,extra_name)
-                
-                extra_name = world.language.SHOP_TEXTS["dungeon_extra"].get(extra_name, extra_name)
+
+                extra_name = world.language.SHOP_TEXTS["dungeon-item_extra"].get(extra_name, extra_name)
 
                 if location.item.name == 'Ice Trap':
                     base_name = create_fake_name(base_name, world.language.SHOP_TEXTS["censor"])
 
                 if world.settings.world_count > 1:
                     description_text = world.language.format_from_id(
-                        "SHOP_TEXTS.dungeon_desc_multi",
+                        "SHOP_TEXTS.dungeon-item_description_multiplay",
                         {
                             "base_name": base_name,
                             "price": shop_item.price,
@@ -2610,7 +2625,7 @@ def place_shop_items(rom: Rom, world: World, shop_items, messages, locations, in
                     )
                 else:
                     description_text = world.language.format_from_id(
-                        "SHOP_TEXTS.dungeon_desc",
+                        "SHOP_TEXTS.dungeon-item_description",
                         {
                             "base_name": base_name,
                             "price": shop_item.price,
@@ -2618,7 +2633,7 @@ def place_shop_items(rom: Rom, world: World, shop_items, messages, locations, in
                         }
                     )
                 purchase_text = world.language.format_from_id(
-                        "SHOP_TEXTS.dungeon_purc",
+                        "SHOP_TEXTS.dungeon-item_purchase",
                         {
                             "base_name": base_name,
                             "price": shop_item.price,
@@ -2632,7 +2647,7 @@ def place_shop_items(rom: Rom, world: World, shop_items, messages, locations, in
 
                 if world.settings.world_count > 1:
                     description_text = world.language.format_from_id(
-                        "SHOP_TEXTS.desc_multi",
+                        "SHOP_TEXTS.description_multiplay",
                         {
                             "base_name": shop_item_name,
                             "price": shop_item.price,
@@ -2641,14 +2656,14 @@ def place_shop_items(rom: Rom, world: World, shop_items, messages, locations, in
                     )
                 else:
                     description_text = world.language.format_from_id(
-                        "SHOP_TEXTS.desc",
+                        "SHOP_TEXTS.description",
                         {
                             "base_name": shop_item_name,
                             "price": shop_item.price,
                         }
                     )
                 purchase_text = world.language.format_from_id(
-                        "SHOP_TEXTS.purc",
+                        "SHOP_TEXTS.purchase",
                         {
                             "base_name": shop_item_name,
                             "price": shop_item.price,

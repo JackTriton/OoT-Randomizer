@@ -75,7 +75,7 @@ class SettingInfos:
             'function':      "openPythonDir",
         },
     )
-    
+
     language_selection = Combobox(
         gui_text       = 'Language Selection',
         default        = 'japanese',

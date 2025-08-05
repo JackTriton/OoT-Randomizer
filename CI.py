@@ -15,7 +15,7 @@ from Main import resolve_settings
 from Patches import get_override_table, get_override_table_bytes
 from Rom import Rom
 import Unittest as Tests
-from Messages import ITEM_MESSAGES, KEYSANITY_MESSAGES, MISC_MESSAGES
+from language.property_build import ITEM_MESSAGES, KEYSANITY_MESSAGES, MISC_MESSAGES
 from SettingsList import SettingInfos, logic_tricks, validate_settings
 import Unittest as Tests
 from Utils import data_path

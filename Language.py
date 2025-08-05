@@ -37,7 +37,7 @@ class Language:
             for fname in os.listdir(lang_path(lang))
             if fname.lower().endswith(extensions)
         }
-        
+
     def _dict_get(self, obj: dict, key):
         if isinstance(obj, (list, tuple)):
             return obj[int(key, 0)]
@@ -67,7 +67,7 @@ class Language:
                     if type(val) is int:
                         s = htz(s)
             return s
-        
+
         out = text
         while True:
             nxt = pattern.sub(repl, out)
@@ -75,7 +75,7 @@ class Language:
                 break
             out = nxt
         return re.sub(r'\\([\[\]\{\}])', r'\1', out)
-    
+
     def format_from_id(self, id: str, external: dict = None):
         keys = id.split('.')
         if len(keys)>1:

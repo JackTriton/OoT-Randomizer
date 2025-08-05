@@ -12,7 +12,7 @@ from Dungeon import Dungeon
 from Entrance import Entrance
 from Goals import Goal, GoalCategory
 from HintList import get_required_hints, misc_item_hint_table, misc_location_hint_table, misc_dual_hint_table
-from Hints import HintArea, hint_dist_keys, hint_dist_files, HintAreaDefault
+from Hints import HintArea, hint_dist_keys, hint_dist_files, hint_area_enum, area_flat
 from Item import Item, ItemFactory, ItemInfo, make_event_item
 from ItemList import REWARD_COLORS
 from ItemPool import reward_list
@@ -66,8 +66,17 @@ class World:
 
         # language property...
         self.language: Language = Language(settings.language_selection)
-        self.HintAreaLang = HintArea("HintAreaLang", self.language.hint_area_enum)
-        
+        def update_dict(A: dict, B: dict) -> dict:
+            C = {}
+            for key, subdict in A.items():
+                merged = subdict.copy()
+                if key in B:
+                    merged.update(B[key])
+                C[key] = merged
+            return C
+        lang_hint_area_enum = update_dict(hint_area_enum, self.language.hint_area_enum)
+        self.HintAreaLang = HintArea("HintAreaLang", area_flat(lang_hint_area_enum))
+
         # rename a few attributes...
         self.keysanity: bool = settings.shuffle_smallkeys in ('keysanity', 'remove', 'any_dungeon', 'overworld', 'regional')
         self.shuffle_silver_rupees = settings.shuffle_silver_rupees != 'vanilla'

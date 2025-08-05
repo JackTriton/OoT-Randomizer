@@ -1643,12 +1643,12 @@
         "bean_mysterious": "☆ポリ…ポリ…ポリ…&#01秘密のもの#00は要らんかね。&あんまり売れ行き良くないな…^♂#01６０ルピー#00でどう？&⊂#02かう&やめとく#00｝",
         "bean_wrapped": "☆ポリ…ポリ…ポリ…&#01{item}#00は要らんかね。^♂#01６０ルピー#00でどう？&⊂#02かう&やめとく#00｝",
         "blue_fire_arrow": "★0C#03青炎の矢#00を手に入れた！&赤い氷を溶かせる&冷たい炎の矢だ。",
-        "blue_potion_desc": "♂#03青いクスリ　１００ルピー&#00体力、魔力も全復活！♀☜",
-        "blue_potion_purc": "♂青いクスリ　１００ルピー&⊂#02かう&やめとく#00",
-        "bombchu_desc": "♂#01ボムチュウ（５コ）　６０ルピー&#00見た目は　ネズミのお人形。&自分で走る　新型バクダン。♀☜",
-        "bombchu_desc_10": "♂#01ボムチュウ（１０コ）　９９ルピー&#00見た目は　ネズミのお人形。&自分で走る　新型バクダン。♀☜",
-        "bombchu_purc": "♂ボムチュウ（５コ）　６０ルピー&⊂#02かう&やめとく#00♀",
-        "bombchu_purc_10": "♂ボムチュウ（１０コ）　９９ルピー&⊂#02かう&やめとく#00",
+        "blue_potion_description": "♂#03青いクスリ　１００ルピー&#00体力、魔力も全復活！♀☜",
+        "blue_potion_purchase": "♂青いクスリ　１００ルピー&⊂#02かう&やめとく#00",
+        "bombchu_description": "♂#01ボムチュウ（５コ）　６０ルピー&#00見た目は　ネズミのお人形。&自分で走る　新型バクダン。♀☜",
+        "bombchu_description_10": "♂#01ボムチュウ（１０コ）　９９ルピー&#00見た目は　ネズミのお人形。&自分で走る　新型バクダン。♀☜",
+        "bombchu_purchase": "♂ボムチュウ（５コ）　６０ルピー&⊂#02かう&やめとく#00♀",
+        "bombchu_purchase_10": "♂ボムチュウ（１０コ）　９９ルピー&⊂#02かう&やめとく#00",
         "brought_poe": "☆おおっ？　ニイさん　今日は　ポウを&つかまえてきたんだね？^☆オオ～ッ！^☆ちょっと　目が　さめたぞ。&こいつは　#01ビッグポウ#00じゃないか！^☆#01５０ルピー#00で　買い取ろう。^☆オマケに　お店のクーポン&#01１００ポイント#00も　つけとくよ。^☆#01{poe}ポイント#00たまると&しあわせに　なれる　クーポンだ！&ヒッヒッヒ！",
         "carpet_enough": "☞40マイドアリ～！！^☞38魂の神殿ヘノ目印ハ&☞28店ヲ出テ#01左ノ旗#00デ～ス。&☞10気ガ変ワッタラマタ来テネ～。｝",
         "carpet_item": "☞20オ～　イ～ラッシャ～イ！！^☞18ワタシ　世界中ノ珍品・奇品ヲ&☞18皆様ニオ売リシテイマ～ス。&☞48今回ノ商品ハ…^#01{item}#00！&オ金モラウマデ　答エハヒミツ！^#01２００るぴぃ#00デ～ス。　買ウ？⊂#02かう&やめとく#00｝",
@@ -1733,74 +1733,54 @@
     },
     "SHOP_TEXTS": {
         "censor": [],
-        "desc": "♂#01{base_name}　{price}ルピー&#00特別セール！　一度きり！♀☜",
-        "desc_multi": "♂#01{base_name}　{price}ルピー&#02プレイヤー{player_id}#00　一度きり！♀☜",
-        "dungeon_desc": "♂#01{base_name}　{price}ルピー&（{extra_name}）&#00特別セール！　一度きり！♀☜",
-        "dungeon_desc_multi": "♂#01{base_name}　{price}ルピー&（{extra_name}）&#02プレイヤー{player_id}#00　一度きり！♀☜",
-        "dungeon_extra": {},
-        "dungeon_purc": "♂{base_name}　{price}ルピー♀&⊂#02かう&やめとく#00｝",
-        "purc": "♂{base_name}　{price}ルピー♀&⊂#02かう&やめとく#00｝"
+        "description": "♂#01{base_name}　{price}ルピー&#00特別セール！　一度きり！♀☜",
+        "description_multiplay": "♂#01{base_name}　{price}ルピー&#02プレイヤー{player_id}#00　一度きり！♀☜",
+        "dungeon_description": "♂#01{base_name}　{price}ルピー&（{extra_name}）&#00特別セール！　一度きり！♀☜",
+        "dungeon-item_description_multiplay": "♂#01{base_name}　{price}ルピー&（{extra_name}）&#02プレイヤー{player_id}#00　一度きり！♀☜",
+        "dungeon-item_extra": {},
+        "dungeon-item_purchace": "♂{base_name}　{price}ルピー♀&⊂#02かう&やめとく#00｝",
+        "purchase": "♂{base_name}　{price}ルピー♀&⊂#02かう&やめとく#00｝"
     },
     "dungeon_list": {
         "Bottom of the Well": [
             "#05井戸の底",
-            162,
-            165,
-            "o"
+            "no_gender"
         ],
         "Deku Tree": [
             "#02デクの樹サマの中",
-            98,
-            136,
-            "o"
+            "no_gender"
         ],
         "Dodongos Cavern": [
             "#01ドドンゴの洞窟",
-            99,
-            137,
-            "o"
+            "no_gender"
         ],
         "Fire Temple": [
             "#01炎の神殿",
-            124,
-            140,
-            "o"
+            "no_gender"
         ],
         "Forest Temple": [
             "#02森の神殿",
-            101,
-            139,
-            "o"
+            "no_gender"
         ],
         "Ice Cavern": [
             "#04氷の洞窟",
-            135,
-            146,
-            "o"
+            "no_gender"
         ],
         "Jabu Jabus Belly": [
             "#03ジャブジャブ様のお腹",
-            100,
-            138,
-            "o"
+            "no_gender"
         ],
         "Shadow Temple": [
             "#05闇の神殿",
-            127,
-            163,
-            "o"
+            "no_gender"
         ],
         "Spirit Temple": [
             "#06魂の神殿",
-            126,
-            143,
-            "o"
+            "no_gender"
         ],
         "Water Temple": [
             "#03水の神殿",
-            125,
-            142,
-            "o"
+            "no_gender"
         ]
     },
     "hintPrefixes": [
@@ -2954,21 +2934,21 @@
                 "いくつかの矢"
             ],
             "矢（１０本）",
-            "o"
+            "no_gender"
         ],
         "Arrows (30)": [
             [
                 "多くの矢"
             ],
             "矢（３０本）",
-            "o"
+            "no_gender"
         ],
         "Arrows (5)": [
             [
                 "少しの矢"
             ],
             "矢（５本）",
-            "o"
+            "no_gender"
         ],
         "Barinade": [
             "一つは　#神の腹の中#　に…",
@@ -2978,7 +2958,7 @@
         "Barinade Boss Room": [
             "#電撃旋回虫#",
             "#バリネード#",
-            "o"
+            "no_gender"
         ],
         "Barinade Rewards": [
             "#電撃旋回虫#が報いる…^",
@@ -2991,7 +2971,7 @@
                 "壊れない包丁"
             ],
             "ダイゴロン刀",
-            "o"
+            "no_gender"
         ],
         "Blue Fire Arrows": [
             [
@@ -3000,7 +2980,7 @@
                 "氷山溶かし"
             ],
             "青炎の矢",
-            "o"
+            "no_gender"
         ],
         "Bolero of Fire": [
             [
@@ -3009,7 +2989,7 @@
                 "火山の歌"
             ],
             "炎のボレロ",
-            "o"
+            "no_gender"
         ],
         "Bomb Bag": [
             [
@@ -3017,7 +2997,7 @@
                 "体飛ばし"
             ],
             "ボム袋",
-            "o"
+            "no_gender"
         ],
         "Bombchus": [
             [
@@ -3026,7 +3006,7 @@
                 "走るバクダン"
             ],
             "ボムチュウ",
-            "o"
+            "no_gender"
         ],
         "Bombchus (10)": [
             [
@@ -3035,7 +3015,7 @@
                 "いくつかの走バクダン"
             ],
             "ボムチュウ（１０コ）",
-            "o"
+            "no_gender"
         ],
         "Bombchus (20)": [
             [
@@ -3044,7 +3024,7 @@
                 "多くの走バクダン"
             ],
             "ボムチュウ（２０コ）",
-            "o"
+            "no_gender"
         ],
         "Bombchus (5)": [
             [
@@ -3053,28 +3033,28 @@
                 "少しの走バクダン"
             ],
             "ボムチュウ（５コ）",
-            "o"
+            "no_gender"
         ],
         "Bombs (10)": [
             [
                 "いくつかのバクダン"
             ],
             "バクダン（１０コ）",
-            "o"
+            "no_gender"
         ],
         "Bombs (20)": [
             [
                 "多くのバクダン"
             ],
             "バクダン（２０コ）",
-            "o"
+            "no_gender"
         ],
         "Bombs (5)": [
             [
                 "少しのバクダン"
             ],
             "バクダン（５コ）",
-            "o"
+            "no_gender"
         ],
         "Bongo Bongo": [
             "一つは　#屍の館#　に…",
@@ -3084,7 +3064,7 @@
         "Bongo Bongo Boss Room": [
             "#暗黒幻影獣#",
             "#ボンゴボンゴ#",
-            "o"
+            "no_gender"
         ],
         "Bongo Bongo Rewards": [
             "#暗黒幻影獣#が報いる…^",
@@ -3097,7 +3077,7 @@
                 "スタン棒"
             ],
             "ブーメラン",
-            "o"
+            "no_gender"
         ],
         "Boss Key (Fire Temple)": [
             [
@@ -3105,7 +3085,7 @@
                 "赤の大きなカギ"
             ],
             "炎のボスキー",
-            "o"
+            "no_gender"
         ],
         "Boss Key (Forest Temple)": [
             [
@@ -3113,7 +3093,7 @@
                 "緑の大きなカギ"
             ],
             "森のボスキー",
-            "o"
+            "no_gender"
         ],
         "Boss Key (Ganons Castle)": [
             [
@@ -3121,7 +3101,7 @@
                 "最後の大きなカギ"
             ],
             "ガノンボスキー",
-            "o"
+            "no_gender"
         ],
         "Boss Key (Shadow Temple)": [
             [
@@ -3129,7 +3109,7 @@
                 "ピンクの大きなカギ"
             ],
             "闇のボスキー",
-            "o"
+            "no_gender"
         ],
         "Boss Key (Spirit Temple)": [
             [
@@ -3137,7 +3117,7 @@
                 "黄色の大きなカギ"
             ],
             "魂のボスキー",
-            "o"
+            "no_gender"
         ],
         "Boss Key (Water Temple)": [
             [
@@ -3145,7 +3125,7 @@
                 "青の大きなカギ"
             ],
             "水のボスキー",
-            "o"
+            "no_gender"
         ],
         "BossKey": [
             [
@@ -3153,7 +3133,7 @@
                 "大きなカギ"
             ],
             "ボスキー",
-            "o"
+            "no_gender"
         ],
         "Bottle": [
             [
@@ -3162,7 +3142,7 @@
                 "空気瓶"
             ],
             "空き瓶",
-            "o"
+            "no_gender"
         ],
         "Bottle with Big Poe": [
             [
@@ -3170,7 +3150,7 @@
                 "大きな幽霊"
             ],
             "ビッグポウ",
-            "o"
+            "no_gender"
         ],
         "Bottle with Blue Fire": [
             [
@@ -3178,7 +3158,7 @@
                 "解氷瓶"
             ],
             "青い炎",
-            "o"
+            "no_gender"
         ],
         "Bottle with Blue Potion": [
             [
@@ -3186,7 +3166,7 @@
                 "青い瓶"
             ],
             "青いクスリ",
-            "o"
+            "no_gender"
         ],
         "Bottle with Bugs": [
             [
@@ -3194,7 +3174,7 @@
                 "トークン探知機"
             ],
             "虫かご",
-            "o"
+            "no_gender"
         ],
         "Bottle with Fairy": [
             [
@@ -3203,7 +3183,7 @@
                 "ナビィの親戚"
             ],
             "妖精",
-            "o"
+            "no_gender"
         ],
         "Bottle with Fish": [
             [
@@ -3211,7 +3191,7 @@
                 "ジャブジャブの餌"
             ],
             "サカナ",
-            "o"
+            "no_gender"
         ],
         "Bottle with Green Potion": [
             [
@@ -3219,7 +3199,7 @@
                 "緑の瓶"
             ],
             "緑のクスリ",
-            "o"
+            "no_gender"
         ],
         "Bottle with Milk": [
             [
@@ -3228,7 +3208,7 @@
                 "赤子の食べ物"
             ],
             "牛乳",
-            "o"
+            "no_gender"
         ],
         "Bottle with Poe": [
             [
@@ -3236,7 +3216,7 @@
                 "顔入り瓶"
             ],
             "ポウ",
-            "o"
+            "no_gender"
         ],
         "Bottle with Red Potion": [
             [
@@ -3244,7 +3224,7 @@
                 "赤い瓶"
             ],
             "赤いクスリ",
-            "o"
+            "no_gender"
         ],
         "Bottom of the Well": [
             "#三拍子の井戸#",
@@ -3408,28 +3388,28 @@
                 "ダーツ飛ばし"
             ],
             "弓本体",
-            "o"
+            "no_gender"
         ],
         "Broken Sword": [
             [
                 "壊れた刃"
             ],
             "折れた刀",
-            "o"
+            "no_gender"
         ],
         "Bunny Hood": [
             [
                 "速い帽子"
             ],
             "ウサギずきん",
-            "o"
+            "no_gender"
         ],
         "Buy Magic Bean": [
             [
                 "不思議なマメ"
             ],
             "魔法のマメ",
-            "o"
+            "no_gender"
         ],
         "Castle Fairy Checks": [
             "ハイラル城とガノン城外の大妖精が報いる…^",
@@ -3441,21 +3421,21 @@
                 "鶏か卵か"
             ],
             "ニワトリ",
-            "o"
+            "no_gender"
         ],
         "Claim Check": [
             [
                 "３日待ち"
             ],
             "ひきかえ券",
-            "o"
+            "no_gender"
         ],
         "Cojiro": [
             [
                 "青いコッコ"
             ],
             "コジロー",
-            "o"
+            "no_gender"
         ],
         "Colossus Deku Scrub Grotto Front": [
             "#穴下の商人#は",
@@ -3490,7 +3470,7 @@
         "Colossus Great Fairy Fountain": [
             "#大妖精の泉#",
             null,
-            "o"
+            "no_gender"
         ],
         "Colossus Great Fairy Reward": [
             "#愛の大妖精#は",
@@ -3500,7 +3480,7 @@
         "Colossus Grotto": [
             "#２体のアキンド穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "Colossus Nighttime GS": [
             "砂漠の#コロッサス#で夜のクモが持つ…^",
@@ -3513,7 +3493,7 @@
                 "羅針盤"
             ],
             "コンパス",
-            "o"
+            "no_gender"
         ],
         "Compass (Bottom of the Well)": [
             [
@@ -3521,7 +3501,7 @@
                 "井戸の羅針盤"
             ],
             "井戸の底のコンパス",
-            "o"
+            "no_gender"
         ],
         "Compass (Deku Tree)": [
             [
@@ -3529,7 +3509,7 @@
                 "木の羅針盤"
             ],
             "デクの樹のコンパス",
-            "o"
+            "no_gender"
         ],
         "Compass (Dodongos Cavern)": [
             [
@@ -3537,7 +3517,7 @@
                 "洞窟の羅針盤"
             ],
             "ドドンゴのコンパス",
-            "o"
+            "no_gender"
         ],
         "Compass (Fire Temple)": [
             [
@@ -3545,7 +3525,7 @@
                 "高き山の羅針盤"
             ],
             "炎の神殿のコンパス",
-            "o"
+            "no_gender"
         ],
         "Compass (Forest Temple)": [
             [
@@ -3553,7 +3533,7 @@
                 "深き森の羅針盤"
             ],
             "森の神殿のコンパス",
-            "o"
+            "no_gender"
         ],
         "Compass (Ice Cavern)": [
             [
@@ -3561,7 +3541,7 @@
                 "凍る羅針盤"
             ],
             "氷の洞窟のコンパス",
-            "o"
+            "no_gender"
         ],
         "Compass (Jabu Jabus Belly)": [
             [
@@ -3569,7 +3549,7 @@
                 "水神の羅針盤"
             ],
             "ジャブジャブのコンパス",
-            "o"
+            "no_gender"
         ],
         "Compass (Shadow Temple)": [
             [
@@ -3577,7 +3557,7 @@
                 "屍の館の羅針盤"
             ],
             "闇の神殿のコンパス",
-            "o"
+            "no_gender"
         ],
         "Compass (Spirit Temple)": [
             [
@@ -3585,7 +3565,7 @@
                 "女神の羅針盤"
             ],
             "魂の神殿のコンパス",
-            "o"
+            "no_gender"
         ],
         "Compass (Water Temple)": [
             [
@@ -3593,7 +3573,7 @@
                 "広き湖の羅針盤"
             ],
             "水の神殿のコンパス",
-            "o"
+            "no_gender"
         ],
         "DMC Child Upper Checks": [
             "#火口のクレーター内#でクモとスクラブが守る…^",
@@ -3633,7 +3613,7 @@
         "DMC Great Fairy Fountain": [
             "#大妖精の泉#",
             null,
-            "o"
+            "no_gender"
         ],
         "DMC Great Fairy Reward": [
             "#魔法の大妖精#は",
@@ -3643,12 +3623,12 @@
         "DMC Hammer Grotto": [
             "#３体のアキンド穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "DMC Upper Grotto": [
             "#穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "DMC Upper Grotto Chest": [
             "#火口の穴#には",
@@ -3678,7 +3658,7 @@
         "DMT Cow Grotto": [
             "孤独な#牛#",
             null,
-            "o"
+            "no_gender"
         ],
         "DMT Cow Grotto Cow": [
             "#豪華な穴の牛#は",
@@ -3713,7 +3693,7 @@
         "DMT Great Fairy Fountain": [
             "#大妖精の泉#",
             null,
-            "o"
+            "no_gender"
         ],
         "DMT Great Fairy Reward": [
             "#魔法の大妖精#は",
@@ -3723,7 +3703,7 @@
         "DMT Storms Grotto": [
             "#穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "DMT Storms Grotto Chest": [
             "#登山道の嵐穴#には",
@@ -3735,7 +3715,7 @@
                 "目晦まし増加"
             ],
             "種増加",
-            "o"
+            "no_gender"
         ],
         "Deku Nuts (10)": [
             [
@@ -3743,7 +3723,7 @@
                 "多くの目くらまし"
             ],
             "デクの実（１０コ）",
-            "o"
+            "no_gender"
         ],
         "Deku Nuts (5)": [
             [
@@ -3751,7 +3731,7 @@
                 "いくつかの目くらまし"
             ],
             "デクの実（５コ）",
-            "o"
+            "no_gender"
         ],
         "Deku Seeds (30)": [
             [
@@ -3759,7 +3739,7 @@
                 "多くの種"
             ],
             "デクの種（３０コ）",
-            "o"
+            "no_gender"
         ],
         "Deku Shield": [
             [
@@ -3767,12 +3747,12 @@
                 "燃える盾"
             ],
             "デクの盾",
-            "o"
+            "no_gender"
         ],
         "Deku Stick (1)": [
             "壊れる枝",
             "デクの棒",
-            "o"
+            "no_gender"
         ],
         "Deku Stick Capacity": [
             [
@@ -3780,12 +3760,12 @@
                 "可燃ストック"
             ],
             "棒増加",
-            "o"
+            "no_gender"
         ],
         "Deku Theater": [
             "#仮面博覧会#",
             null,
-            "o"
+            "no_gender"
         ],
         "Deku Theater Mask of Truth": [
             "#ウソ無きお面の世論#は",
@@ -3944,7 +3924,7 @@
                 "赤い玉"
             ],
             "ディンの炎",
-            "o"
+            "no_gender"
         ],
         "Dodongos Cavern": [
             "#巨大な洞窟#",
@@ -4122,7 +4102,7 @@
                 "ダメージ減少"
             ],
             "防御二倍",
-            "o"
+            "no_gender"
         ],
         "Epona": [
             [
@@ -4130,7 +4110,7 @@
                 "四足の友達"
             ],
             "エポナ",
-            "o"
+            "no_gender"
         ],
         "Eponas Song": [
             [
@@ -4139,21 +4119,21 @@
                 "牧場の歌"
             ],
             "エポナの歌",
-            "o"
+            "no_gender"
         ],
         "Eyeball Frog": [
             [
                 "大人のオタマジャクシ"
             ],
             "カエル",
-            "o"
+            "no_gender"
         ],
         "Eyedrops": [
             [
                 "視力回復"
             ],
             "目薬",
-            "o"
+            "no_gender"
         ],
         "Fairy Drop": [
             [
@@ -4161,7 +4141,7 @@
                 "ナビィのいとこ"
             ],
             "妖精",
-            "o"
+            "no_gender"
         ],
         "Farores Wind": [
             [
@@ -4171,7 +4151,7 @@
                 "緑の風"
             ],
             "フロルの風",
-            "o"
+            "no_gender"
         ],
         "Fire Arrows": [
             [
@@ -4179,7 +4159,7 @@
                 "マグマミサイル"
             ],
             "炎の矢",
-            "o"
+            "no_gender"
         ],
         "Fire Medallion": [
             [
@@ -4188,7 +4168,7 @@
                 "赤い円盤"
             ],
             "炎のメダル",
-            "o"
+            "no_gender"
         ],
         "Fire Temple": [
             "#高き山#",
@@ -4397,7 +4377,7 @@
                 "緑の円盤"
             ],
             "森のメダル",
-            "o"
+            "no_gender"
         ],
         "Forest Temple": [
             "#深き森#",
@@ -4617,7 +4597,7 @@
         "GC Grotto": [
             "#３体のアキンド穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "GC Grotto Platform -> GC Grotto": [
             "ゴロンシティの#溶岩#は",
@@ -4662,7 +4642,7 @@
         "GC Shop": [
             "#ゴロンの店#",
             null,
-            "o"
+            "no_gender"
         ],
         "GC Shop Item 1": [
             "#ゴロン#が売るのは",
@@ -4742,12 +4722,12 @@
         "GF Storms Grotto": [
             "#妖精の泉#",
             null,
-            "o"
+            "no_gender"
         ],
         "GV Carpenter Tent": [
             "#大工のテント#",
             null,
-            "o"
+            "no_gender"
         ],
         "GV Chest": [
             "#ゲルドの谷#の錆びたスイッチは",
@@ -4812,7 +4792,7 @@
         "GV Octorok Grotto": [
             "#オクタン#のいる穴",
             null,
-            "o"
+            "no_gender"
         ],
         "GV Pieces of Heart Ledges": [
             "#谷間#のクレートと滝が隠す…^",
@@ -4822,7 +4802,7 @@
         "GV Storms Grotto": [
             "#２体のアキンド穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "GV Waterfall Freestanding PoH": [
             "#ゲルドの滝の奥#には",
@@ -4835,7 +4815,7 @@
                 "大きなカギ"
             ],
             "ボスキー",
-            "o"
+            "no_gender"
         ],
         "Ganons Castle": [
             "#乗っ取られた城#",
@@ -5040,7 +5020,7 @@
         "Ganons Castle Tower": [
             "#ガノン城#",
             null,
-            "o"
+            "no_gender"
         ],
         "Ganons Castle Water Trial Left Chest": [
             "#水の試練#では",
@@ -5067,7 +5047,7 @@
                 "おとめのマスク"
             ],
             "ゲルドのお面",
-            "o"
+            "no_gender"
         ],
         "Gerudo Membership Card": [
             [
@@ -5075,7 +5055,7 @@
                 "部族証"
             ],
             "ゲルド会員証",
-            "o"
+            "no_gender"
         ],
         "Gerudo Training Ground": [
             "#盗人のテスト#",
@@ -5289,7 +5269,7 @@
                 "壊れる包丁"
             ],
             "巨人のナイフ",
-            "o"
+            "no_gender"
         ],
         "Gold Skulltula Token": [
             [
@@ -5299,14 +5279,14 @@
                 "呪いの欠片"
             ],
             "トークン",
-            "o"
+            "no_gender"
         ],
         "Goron Mask": [
             [
                 "友愛のマスク"
             ],
             "ゴロンのお面",
-            "o"
+            "no_gender"
         ],
         "Goron Ruby": [
             [
@@ -5314,7 +5294,7 @@
                 "炎の精霊石"
             ],
             "ゴロンのルビー",
-            "o"
+            "no_gender"
         ],
         "Goron Tunic": [
             [
@@ -5322,7 +5302,7 @@
                 "耐火服"
             ],
             "ゴロンの服",
-            "o"
+            "no_gender"
         ],
         "Graveyard Dampe Gravedigging Tour": [
             "#墓守が掘る#のは",
@@ -5347,12 +5327,12 @@
         "Graveyard Dampes Grave": [
             "#ダンペイの墓#",
             null,
-            "o"
+            "no_gender"
         ],
         "Graveyard Dampes House": [
             "#ダンペイの小屋#",
             null,
-            "o"
+            "no_gender"
         ],
         "Graveyard Freestanding PoH": [
             "#墓場の箱#には",
@@ -5372,7 +5352,7 @@
         "Graveyard Heart Piece Grave": [
             "#太陽の歌#で現れるチェスト",
             null,
-            "o"
+            "no_gender"
         ],
         "Graveyard Heart Piece Grave Chest": [
             "#太陽の歌#を穴で奏でると",
@@ -5387,7 +5367,7 @@
         "Graveyard Royal Familys Tomb": [
             "#作曲家の墓#",
             null,
-            "o"
+            "no_gender"
         ],
         "Graveyard Royal Familys Tomb Chest": [
             [
@@ -5400,7 +5380,7 @@
         "Graveyard Shield Grave": [
             "#大妖精の泉#",
             null,
-            "o"
+            "no_gender"
         ],
         "Graveyard Shield Grave Chest": [
             "#兵士の墓に眠る宝#は",
@@ -5425,7 +5405,7 @@
         "HC Great Fairy Fountain": [
             "#大妖精の泉#",
             null,
-            "o"
+            "no_gender"
         ],
         "HC Great Fairy Reward": [
             "#炎の大妖精#は",
@@ -5440,7 +5420,7 @@
         "HC Storms Grotto": [
             "砂っぽい#脆壁の穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "HC Zeldas Letter": [
             "#城にいる姫#は",
@@ -5450,7 +5430,7 @@
         "HF Cow Grotto": [
             "#クモの巣#だらけの穴",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Cow Grotto Cow": [
             "#クモにまみれた牛#は",
@@ -5465,7 +5445,7 @@
         "HF Fairy Grotto": [
             "#妖精の泉#",
             null,
-            "o"
+            "no_gender"
         ],
         "HF GS Cow Grotto": [
             "#穴中の巣に隠れたクモ#は",
@@ -5480,17 +5460,17 @@
         "HF Inside Fence Grotto": [
             "#アキンド穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Near Kak Grotto": [
             "#２色のクモ#のいる穴",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Near Market Grotto": [
             "#穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Near Market Grotto Chest": [
             "#平原の橋近くの穴#には",
@@ -5510,7 +5490,7 @@
         "HF Open Grotto": [
             "#穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Open Grotto Chest": [
             "#平原の穴#には",
@@ -5520,7 +5500,7 @@
         "HF Southeast Grotto": [
             "#穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Southeast Grotto Chest": [
             "#平原の木の間の穴#には",
@@ -5530,7 +5510,7 @@
         "HF Tektite Grotto": [
             "#テクタイト#のいる穴",
             null,
-            "o"
+            "no_gender"
         ],
         "HF Tektite Grotto Freestanding PoH": [
             "#穴の水の底#には",
@@ -5554,7 +5534,7 @@
                 "ボスの心"
             ],
             "ハートの器",
-            "o"
+            "no_gender"
         ],
         "Hideout 1 Torch Jail Gerudo Key": [
             "#ゲルドの監守を倒す#と",
@@ -5586,14 +5566,14 @@
                 "釈放カード"
             ],
             "牢屋のカギ",
-            "o"
+            "no_gender"
         ],
         "HideoutSmallKeyRing": [
             [
                 "釈放カードの束"
             ],
             "牢屋のカギ束",
-            "o"
+            "no_gender"
         ],
         "Hover Boots": [
             [
@@ -5602,7 +5582,7 @@
                 "滑り歩き"
             ],
             "ホバーブーツ",
-            "o"
+            "no_gender"
         ],
         "Hylian Shield": [
             [
@@ -5610,7 +5590,7 @@
                 "ライクライクの鉄分"
             ],
             "ハイリアの盾",
-            "o"
+            "no_gender"
         ],
         "Hyrule Castle Grounds -> HC Storms Grotto": [
             "#城の近くの嵐穴#は",
@@ -5624,7 +5604,7 @@
                 "使えない矢"
             ],
             "氷の矢",
-            "o"
+            "no_gender"
         ],
         "Ice Cavern": [
             "#凍った迷路#",
@@ -5717,7 +5697,7 @@
                 "ＦＯＯＬ"
             ],
             "アイストラップ",
-            "o"
+            "no_gender"
         ],
         "Iron Boots": [
             [
@@ -5725,7 +5705,7 @@
                 "耐風クツ"
             ],
             "ヘビーブーツ",
-            "o"
+            "no_gender"
         ],
         "Jabu Jabus Belly": [
             "#神の腹の中#",
@@ -5878,17 +5858,17 @@
         "KF House of Twins": [
             "#双子の家#",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Know It All House": [
             "#物知り兄弟の家#",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Kokiri Shop": [
             "#コキリの店#",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Kokiri Sword Chest": [
             "#コキリの隠した宝#は",
@@ -5898,7 +5878,7 @@
         "KF Links House": [
             "#リンクの家#",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Links House Cow": [
             "#乗馬の恵み#は",
@@ -5918,7 +5898,7 @@
         "KF Midos House": [
             "#ミドの家#",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Midos Top Left Chest": [
             "#コキリのリーダーが#隠したのは",
@@ -5933,7 +5913,7 @@
         "KF Sarias House": [
             "#サリアの家#",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Shop Item 1": [
             "#子供の商人#が売るのは",
@@ -5978,7 +5958,7 @@
         "KF Storms Grotto": [
             "#穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "KF Storms Grotto Chest": [
             "#森村の嵐穴#には",
@@ -6054,7 +6034,7 @@
         "Kak Bazaar": [
             "#なンでも屋#",
             "#村のなンでも屋#",
-            "o"
+            "no_gender"
         ],
         "Kak Bazaar Item 1": [
             "#村#で売るのは",
@@ -6099,7 +6079,7 @@
         "Kak Carpenter Boss House": [
             "#大工の家#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak GS Above Impas House": [
             "大人の夜に出る#村のクモ#は",
@@ -6134,17 +6114,17 @@
         "Kak House of Skulltula": [
             "#スタルチュラハウス#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Impas House": [
             "#インパの家#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Impas House Back": [
             "#インパの牛小屋#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Impas House Cow": [
             "#家の中の牛#は",
@@ -6164,12 +6144,12 @@
         "Kak Odd Medicine Building": [
             "#オババのクスリ屋#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Open Grotto": [
             "#穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Open Grotto Chest": [
             "#街の穴#には",
@@ -6179,12 +6159,12 @@
         "Kak Potion Shop Back": [
             "#クスリ屋#",
             "#村のクスリ屋#",
-            "o"
+            "no_gender"
         ],
         "Kak Potion Shop Front": [
             "#クスリ屋#",
             "#村のクスリ屋#",
-            "o"
+            "no_gender"
         ],
         "Kak Potion Shop Item 1": [
             "#薬売り#が売るのは",
@@ -6229,7 +6209,7 @@
         "Kak Redead Grotto": [
             "#リーデッド#のいる穴",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Redead Grotto Chest": [
             "#穴中のゾンビ#が守るのは",
@@ -6239,7 +6219,7 @@
         "Kak Shooting Gallery": [
             "#的当屋#",
             "#村の的当屋#",
-            "o"
+            "no_gender"
         ],
         "Kak Shooting Gallery Reward": [
             "#青年の的当て#は",
@@ -6249,7 +6229,7 @@
         "Kak Windmill": [
             "#風車#",
             null,
-            "o"
+            "no_gender"
         ],
         "Kak Windmill Freestanding PoH": [
             "#風車#には",
@@ -6266,7 +6246,7 @@
                 "人気者のマスク"
             ],
             "キータンのお面",
-            "o"
+            "no_gender"
         ],
         "KeyError": [
             [
@@ -6274,7 +6254,7 @@
                 "なぞのもの"
             ],
             "エラー（レポートして）",
-            "o"
+            "no_gender"
         ],
         "King Dodongo": [
             "一つは　#巨大な洞窟#　に…",
@@ -6284,7 +6264,7 @@
         "King Dodongo Boss Room": [
             "#猛炎古代竜#",
             "#キングドドンゴ#",
-            "o"
+            "no_gender"
         ],
         "King Dodongo Rewards": [
             "#猛炎古代竜#が報いる…^",
@@ -6302,7 +6282,7 @@
                 "森の精霊石"
             ],
             "コキリのヒスイ",
-            "o"
+            "no_gender"
         ],
         "Kokiri Sword": [
             [
@@ -6311,7 +6291,7 @@
                 "飛び出しナイフ"
             ],
             "コキリの剣",
-            "o"
+            "no_gender"
         ],
         "LH Adult Bean Destination Checks": [
             "湖上の#バネ豆ライド#が導く…^",
@@ -6346,7 +6326,7 @@
         "LH Fishing Hole": [
             "#つりぼり#",
             null,
-            "o"
+            "no_gender"
         ],
         "LH Freestanding PoH": [
             "#研究所の屋根#には",
@@ -6381,12 +6361,12 @@
         "LH Grotto": [
             "#３体のアキンド穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "LH Lab": [
             "#みずうみ研究所#",
             null,
-            "o"
+            "no_gender"
         ],
         "LH Lab Dive": [
             "#潜水実験#での報酬は",
@@ -6456,12 +6436,12 @@
         "LLR Grotto": [
             "#３体のアキンド穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "LLR Stables": [
             "#馬小屋#",
             null,
-            "o"
+            "no_gender"
         ],
         "LLR Stables Left Cow": [
             "#馬小屋の牛#は",
@@ -6481,12 +6461,12 @@
         "LLR Talons House": [
             "#タロンの家#",
             null,
-            "o"
+            "no_gender"
         ],
         "LLR Tower": [
             "#納屋#",
             null,
-            "o"
+            "no_gender"
         ],
         "LLR Tower Left Cow": [
             "#サイロの牛#は",
@@ -6546,7 +6526,7 @@
         "LW Near Shortcuts Grotto": [
             "#穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "LW Near Shortcuts Grotto Chest": [
             "#迷路の穴#には",
@@ -6564,7 +6544,7 @@
         "LW Scrubs Grotto": [
             "#アキンド穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "LW Skull Kid": [
             "#スタルキッド#の持つものは",
@@ -6589,7 +6569,7 @@
                 "探偵のツール"
             ],
             "まことのメガネ",
-            "o"
+            "no_gender"
         ],
         "Light Arrows": [
             [
@@ -6598,7 +6578,7 @@
                 "聖なる矢"
             ],
             "光の矢",
-            "o"
+            "no_gender"
         ],
         "Light Medallion": [
             [
@@ -6607,21 +6587,21 @@
                 "黄色い円盤"
             ],
             "光のメダル",
-            "o"
+            "no_gender"
         ],
         "Magic Bean": [
             [
                 "不思議なマメ"
             ],
             "魔法のマメ",
-            "o"
+            "no_gender"
         ],
         "Magic Bean Pack": [
             [
                 "不思議なマメ袋"
             ],
             "マメ袋",
-            "o"
+            "no_gender"
         ],
         "Magic Meter": [
             [
@@ -6629,7 +6609,7 @@
                 "緑の線"
             ],
             "魔力増加",
-            "o"
+            "no_gender"
         ],
         "Map": [
             [
@@ -6637,7 +6617,7 @@
                 "見取り図"
             ],
             "地図",
-            "o"
+            "no_gender"
         ],
         "Map (Bottom of the Well)": [
             [
@@ -6645,7 +6625,7 @@
                 "井戸の見取り図"
             ],
             "井戸の底の地図",
-            "o"
+            "no_gender"
         ],
         "Map (Deku Tree)": [
             [
@@ -6653,7 +6633,7 @@
                 "木の見取り図"
             ],
             "デクの樹の地図",
-            "o"
+            "no_gender"
         ],
         "Map (Dodongos Cavern)": [
             [
@@ -6661,7 +6641,7 @@
                 "洞窟の案内図"
             ],
             "ドドンゴの地図",
-            "o"
+            "no_gender"
         ],
         "Map (Fire Temple)": [
             [
@@ -6669,7 +6649,7 @@
                 "高き山の案内図"
             ],
             "炎の神殿の地図",
-            "o"
+            "no_gender"
         ],
         "Map (Forest Temple)": [
             [
@@ -6677,7 +6657,7 @@
                 "深き森の案内図"
             ],
             "森の神殿の地図",
-            "o"
+            "no_gender"
         ],
         "Map (Ice Cavern)": [
             [
@@ -6685,7 +6665,7 @@
                 "凍る案内図"
             ],
             "氷の洞窟の地図",
-            "o"
+            "no_gender"
         ],
         "Map (Jabu Jabus Belly)": [
             [
@@ -6693,7 +6673,7 @@
                 "水神の見取り図"
             ],
             "ジャブジャブの地図",
-            "o"
+            "no_gender"
         ],
         "Map (Shadow Temple)": [
             [
@@ -6701,7 +6681,7 @@
                 "館の見取り図"
             ],
             "闇の神殿の地図",
-            "o"
+            "no_gender"
         ],
         "Map (Spirit Temple)": [
             [
@@ -6709,7 +6689,7 @@
                 "女神の見取り図"
             ],
             "魂の神殿の地図",
-            "o"
+            "no_gender"
         ],
         "Map (Water Temple)": [
             [
@@ -6717,7 +6697,7 @@
                 "広き湖の見取り図"
             ],
             "水の神殿の地図",
-            "o"
+            "no_gender"
         ],
         "Market 10 Big Poes": [
             "#ゴーストハンター#は",
@@ -6727,7 +6707,7 @@
         "Market Bazaar": [
             "#なンでも屋#",
             "#町のなンでも屋#",
-            "o"
+            "no_gender"
         ],
         "Market Bazaar Item 1": [
             "#街#で売るのは",
@@ -6772,7 +6752,7 @@
         "Market Bombchu Bowling": [
             "#ボウリング#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Bombchu Bowling First Prize": [
             "#ボウリングの景品#は",
@@ -6792,7 +6772,7 @@
         "Market Bombchu Shop": [
             "#ボムチュウ屋#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Bombchu Shop Item 1": [
             "#ボムチュウ屋#が売るのは",
@@ -6842,7 +6822,7 @@
         "Market Guard House": [
             "#兵士詰所#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Lost Dog": [
             "#犬好き#には",
@@ -6852,17 +6832,17 @@
         "Market Man in Green House": [
             "#民家#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Mask Shop": [
             "#お面屋#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Potion Shop": [
             "#クスリ屋#",
             "#町のクスリ屋#",
-            "o"
+            "no_gender"
         ],
         "Market Potion Shop Item 1": [
             "#薬売り#が売るのは",
@@ -6907,7 +6887,7 @@
         "Market Shooting Gallery": [
             "#的当屋#",
             "#町の的当屋#",
-            "o"
+            "no_gender"
         ],
         "Market Shooting Gallery Reward": [
             "#少年の的当て#は",
@@ -6917,7 +6897,7 @@
         "Market Treasure Chest Game": [
             "#クジ屋#",
             null,
-            "o"
+            "no_gender"
         ],
         "Market Treasure Chest Game Reward": [
             [
@@ -6932,14 +6912,14 @@
                 "正直なマスク"
             ],
             "まことのお面",
-            "o"
+            "no_gender"
         ],
         "Master Sword": [
             [
                 "聖なる包丁"
             ],
             "マスターソード",
-            "o"
+            "no_gender"
         ],
         "Megaton Hammer": [
             [
@@ -6947,7 +6927,7 @@
                 "鉄のマレット"
             ],
             "メガトンハンマー",
-            "o"
+            "no_gender"
         ],
         "Minuet of Forest": [
             [
@@ -6956,7 +6936,7 @@
                 "緑に輝く歌"
             ],
             "森のメヌエット",
-            "o"
+            "no_gender"
         ],
         "Mirror Shield": [
             [
@@ -6965,7 +6945,7 @@
                 "顔の映る表面"
             ],
             "ミラーシールド",
-            "o"
+            "no_gender"
         ],
         "Morpha": [
             "一つは　#広き湖#　に…",
@@ -6975,7 +6955,7 @@
         "Morpha Boss Room": [
             "#水棲核細胞#",
             "#モーファ#",
-            "o"
+            "no_gender"
         ],
         "Morpha Rewards": [
             "#水棲核細胞#が報いる…^",
@@ -6989,7 +6969,7 @@
                 "青い玉"
             ],
             "ネールの愛",
-            "o"
+            "no_gender"
         ],
         "Nocturne of Shadow": [
             [
@@ -6999,7 +6979,7 @@
                 "紫に輝く歌"
             ],
             "闇のノクターン",
-            "o"
+            "no_gender"
         ],
         "Nothing": [
             [
@@ -7007,7 +6987,7 @@
                 "空虚"
             ],
             "何もない",
-            "o"
+            "no_gender"
         ],
         "OGC GS": [
             "#暴君の塔外にいるクモ#は",
@@ -7017,7 +6997,7 @@
         "OGC Great Fairy Fountain": [
             "#大妖精の泉#",
             null,
-            "o"
+            "no_gender"
         ],
         "OGC Great Fairy Reward": [
             "#力の大妖精#は",
@@ -7030,56 +7010,56 @@
                 "曲鳴らし"
             ],
             "オカリナ",
-            "o"
+            "no_gender"
         ],
         "Ocarina A Button": [
             [
                 "青の音"
             ],
             "低いレの音",
-            "o"
+            "no_gender"
         ],
         "Ocarina C down Button": [
             [
                 "低い音"
             ],
             "ファの音",
-            "o"
+            "no_gender"
         ],
         "Ocarina C left Button": [
             [
                 "高めの音"
             ],
             "シの音",
-            "o"
+            "no_gender"
         ],
         "Ocarina C right Button": [
             [
                 "真ん中の音"
             ],
             "ラの音",
-            "o"
+            "no_gender"
         ],
         "Ocarina C up Button": [
             [
                 "高い音"
             ],
             "高いレの音",
-            "o"
+            "no_gender"
         ],
         "Odd Mushroom": [
             [
                 "粉の素材"
             ],
             "あやしいキノコ",
-            "o"
+            "no_gender"
         ],
         "Odd Potion": [
             [
                 "おばばのクスリ"
             ],
             "あやしいクスリ",
-            "o"
+            "no_gender"
         ],
         "Phantom Ganon": [
             "一つは　#深き森#　に…",
@@ -7089,7 +7069,7 @@
         "Phantom Ganon Boss Room": [
             "#異次元悪霊#",
             "#ファントムガノン#",
-            "o"
+            "no_gender"
         ],
         "Phantom Ganon Rewards": [
             "#異次元悪霊#が報いる…^",
@@ -7102,26 +7082,26 @@
                 "壊れた心"
             ],
             "ハートの欠片",
-            "o"
+            "no_gender"
         ],
         "Piece of Heart (Treasure Chest Game)": [
             "義理チョコ",
             "ハートの欠片",
-            "o"
+            "no_gender"
         ],
         "Poachers Saw": [
             [
                 "木殺し"
             ],
             "ノコギリ",
-            "o"
+            "no_gender"
         ],
         "Pocket Cucco": [
             [
                 "目覚まし時計"
             ],
             "てのりコッコ",
-            "o"
+            "no_gender"
         ],
         "Pocket Egg": [
             [
@@ -7130,7 +7110,7 @@
                 "若いコッコ"
             ],
             "ポケットタマゴ",
-            "o"
+            "no_gender"
         ],
         "Prelude of Light": [
             [
@@ -7139,7 +7119,7 @@
                 "神殿の歌"
             ],
             "光のプレリュード",
-            "o"
+            "no_gender"
         ],
         "Prescription": [
             [
@@ -7147,7 +7127,7 @@
                 "医者の書留"
             ],
             "処方せん",
-            "o"
+            "no_gender"
         ],
         "Progressive Hookshot": [
             [
@@ -7155,7 +7135,7 @@
                 "取り付く線"
             ],
             "フックショット",
-            "o"
+            "no_gender"
         ],
         "Progressive Scale": [
             [
@@ -7163,7 +7143,7 @@
                 "ゾーラの欠片"
             ],
             "ウロコ",
-            "o"
+            "no_gender"
         ],
         "Progressive Strength Upgrade": [
             [
@@ -7171,7 +7151,7 @@
                 "力持ち"
             ],
             "腕輪",
-            "o"
+            "no_gender"
         ],
         "Progressive Wallet": [
             [
@@ -7180,7 +7160,7 @@
                 "小さな銀行"
             ],
             "サイフ",
-            "o"
+            "no_gender"
         ],
         "Queen Gohma": [
             "一つは　#古代の樹#　に…",
@@ -7190,7 +7170,7 @@
         "Queen Gohma Boss Room": [
             "#甲殻寄生獣#",
             "#ゴーマ#",
-            "o"
+            "no_gender"
         ],
         "Queen Gohma Rewards": [
             "#甲殻寄生獣#が報いる…^",
@@ -7204,7 +7184,7 @@
                 "絆創膏"
             ],
             "回復のハート",
-            "o"
+            "no_gender"
         ],
         "Requiem of Spirit": [
             [
@@ -7213,7 +7193,7 @@
                 "砂漠の歌"
             ],
             "魂のレクイエム",
-            "o"
+            "no_gender"
         ],
         "Rupee (1)": [
             [
@@ -7221,12 +7201,12 @@
                 "緑の宝石"
             ],
             "緑ルピー",
-            "o"
+            "no_gender"
         ],
         "Rupee (Treasure Chest Game) (1)": [
             "悲しみの緑石",
             "緑ルピー",
-            "o"
+            "no_gender"
         ],
         "Rupees (20)": [
             [
@@ -7234,7 +7214,7 @@
                 "赤い宝石"
             ],
             "赤ルピー",
-            "o"
+            "no_gender"
         ],
         "Rupees (200)": [
             [
@@ -7244,7 +7224,7 @@
                 "富豪"
             ],
             "金ルピー",
-            "o"
+            "no_gender"
         ],
         "Rupees (5)": [
             [
@@ -7252,7 +7232,7 @@
                 "青いゴミ"
             ],
             "青ルピー",
-            "o"
+            "no_gender"
         ],
         "Rupees (50)": [
             [
@@ -7260,22 +7240,22 @@
                 "財貨"
             ],
             "紫ルピー",
-            "o"
+            "no_gender"
         ],
         "Rupees (Treasure Chest Game) (20)": [
             "後悔の赤石",
             "赤ルピー",
-            "o"
+            "no_gender"
         ],
         "Rupees (Treasure Chest Game) (5)": [
             "手違いの青石",
             "青ルピー",
-            "o"
+            "no_gender"
         ],
         "Rupees (Treasure Chest Game) (50)": [
             "償いの紫石",
             "紫ルピー",
-            "o"
+            "no_gender"
         ],
         "Rutos Letter": [
             [
@@ -7285,7 +7265,7 @@
                 "サカナの手紙"
             ],
             "ルトの手紙",
-            "o"
+            "no_gender"
         ],
         "SFM Deku Scrub Grotto Front": [
             "#穴下の商人#は",
@@ -7300,7 +7280,7 @@
         "SFM Fairy Grotto": [
             "#妖精の泉#",
             null,
-            "o"
+            "no_gender"
         ],
         "SFM GS": [
             "#森の聖域の夜クモ#は",
@@ -7310,12 +7290,12 @@
         "SFM Storms Grotto": [
             "#２体のアキンド穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "SFM Wolfos Grotto": [
             "#ウルフォス#のいる穴",
             null,
-            "o"
+            "no_gender"
         ],
         "SFM Wolfos Grotto Chest": [
             "#穴中の狼#が守るのは",
@@ -7328,7 +7308,7 @@
                 "サリアの電話番号"
             ],
             "サリアの歌",
-            "o"
+            "no_gender"
         ],
         "Serenade of Water": [
             [
@@ -7337,7 +7317,7 @@
                 "川の歌"
             ],
             "水のセレナーデ",
-            "o"
+            "no_gender"
         ],
         "Shadow Medallion": [
             [
@@ -7346,7 +7326,7 @@
                 "紫の円盤"
             ],
             "闇のメダル",
-            "o"
+            "no_gender"
         ],
         "Shadow Temple": [
             "#屍の館#",
@@ -7662,7 +7642,7 @@
                 "地下の牢獄の価値ある秘宝"
             ],
             "井戸の下の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Dodongos Cavern Staircase)": [
             [
@@ -7670,7 +7650,7 @@
                 "アツい洞窟の価値ある秘宝"
             ],
             "ドドンゴの洞窟の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ganons Castle Fire Trial)": [
             [
@@ -7678,7 +7658,7 @@
                 "征服された砦の秘宝"
             ],
             "ガノン城の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ganons Castle Forest Trial)": [
             [
@@ -7686,7 +7666,7 @@
                 "征服された砦の秘宝"
             ],
             "ガノン城の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ganons Castle Light Trial)": [
             [
@@ -7694,7 +7674,7 @@
                 "征服された砦の秘宝"
             ],
             "ガノン城の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ganons Castle Shadow Trial)": [
             [
@@ -7702,7 +7682,7 @@
                 "征服された砦の秘宝"
             ],
             "ガノン城の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ganons Castle Spirit Trial)": [
             [
@@ -7710,7 +7690,7 @@
                 "征服された砦の秘宝"
             ],
             "ガノン城の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ganons Castle Water Trial)": [
             [
@@ -7718,7 +7698,7 @@
                 "征服された砦の秘宝"
             ],
             "ガノン城の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Gerudo Training Ground Lava)": [
             [
@@ -7726,7 +7706,7 @@
                 "盗賊修練場の秘宝"
             ],
             "ゲルド修練場の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Gerudo Training Ground Slopes)": [
             [
@@ -7734,7 +7714,7 @@
                 "盗賊修練場の秘宝"
             ],
             "ゲルド修練場の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Gerudo Training Ground Water)": [
             [
@@ -7742,7 +7722,7 @@
                 "盗賊修練場の秘宝"
             ],
             "ゲルド修練場の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ice Cavern Push Block)": [
             [
@@ -7750,7 +7730,7 @@
                 "サムい迷路の価値ある秘宝"
             ],
             "氷の洞窟の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Ice Cavern Spinning Scythe)": [
             [
@@ -7758,7 +7738,7 @@
                 "サムい迷路の価値ある秘宝"
             ],
             "氷の洞窟の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Shadow Temple Huge Pit)": [
             [
@@ -7766,7 +7746,7 @@
                 "死者の館の秘宝"
             ],
             "闇の神殿の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Shadow Temple Invisible Blades)": [
             [
@@ -7774,7 +7754,7 @@
                 "死者の館の秘宝"
             ],
             "闇の神殿の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Shadow Temple Invisible Spikes)": [
             [
@@ -7782,7 +7762,7 @@
                 "死者の館の秘宝"
             ],
             "闇の神殿の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Shadow Temple Scythe Shortcut)": [
             [
@@ -7790,7 +7770,7 @@
                 "死者の館の秘宝"
             ],
             "闇の神殿の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Spirit Temple Adult Boulders)": [
             [
@@ -7798,7 +7778,7 @@
                 "砂の女神の秘宝"
             ],
             "魂の神殿の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Spirit Temple Adult Climb)": [
             [
@@ -7806,7 +7786,7 @@
                 "砂の女神の秘宝"
             ],
             "魂の神殿の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Spirit Temple Child Early Torches)": [
             [
@@ -7814,7 +7794,7 @@
                 "砂の女神の秘宝"
             ],
             "魂の神殿の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Spirit Temple Lobby and Lower Adult)": [
             [
@@ -7822,7 +7802,7 @@
                 "砂の女神の秘宝"
             ],
             "魂の神殿の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee (Spirit Temple Sun Block)": [
             [
@@ -7830,7 +7810,7 @@
                 "砂の女神の秘宝"
             ],
             "魂の神殿の銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Bottom of the Well Basement)": [
             [
@@ -7838,7 +7818,7 @@
                 "闇の牢獄の銀貨の備え"
             ],
             "井戸の底の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Dodongos Cavern Staircase)": [
             [
@@ -7846,7 +7826,7 @@
                 "アツい洞窟の銀貨の備え"
             ],
             "ドドンゴの洞窟の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ganons Castle Fire Trial)": [
             [
@@ -7854,7 +7834,7 @@
                 "征服された砦の銀貨の備え"
             ],
             "ガノン城の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ganons Castle Forest Trial)": [
             [
@@ -7862,7 +7842,7 @@
                 "征服された砦の銀貨の備え"
             ],
             "ガノン城の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ganons Castle Light Trial)": [
             [
@@ -7870,7 +7850,7 @@
                 "征服された砦の銀貨の備え"
             ],
             "ガノン城の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ganons Castle Shadow Trial)": [
             [
@@ -7878,7 +7858,7 @@
                 "征服された砦の銀貨の備え"
             ],
             "ガノン城の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ganons Castle Spirit Trial)": [
             [
@@ -7886,7 +7866,7 @@
                 "征服された砦の銀貨の備え"
             ],
             "ガノン城の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ganons Castle Water Trial)": [
             [
@@ -7894,7 +7874,7 @@
                 "征服された砦の銀貨の備え"
             ],
             "ガノン城の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Gerudo Training Ground Lava)": [
             [
@@ -7902,7 +7882,7 @@
                 "盗賊試練場の銀貨の備え"
             ],
             "ゲルド修練場の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Gerudo Training Ground Slopes)": [
             [
@@ -7910,7 +7890,7 @@
                 "盗賊試練場の銀貨の備え"
             ],
             "ゲルド修練場の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Gerudo Training Ground Water)": [
             [
@@ -7918,7 +7898,7 @@
                 "盗賊試練場の銀貨の備え"
             ],
             "ゲルド修練場の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ice Cavern Push Block)": [
             [
@@ -7926,7 +7906,7 @@
                 "サムい迷路の銀貨の備え"
             ],
             "氷の洞窟の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Ice Cavern Spinning Scythe)": [
             [
@@ -7934,7 +7914,7 @@
                 "サムい迷路の銀貨の備え"
             ],
             "氷の洞窟の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Shadow Temple Huge Pit)": [
             [
@@ -7942,7 +7922,7 @@
                 "死者の館の銀貨の備え"
             ],
             "闇の神殿の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Shadow Temple Invisible Blades)": [
             [
@@ -7950,7 +7930,7 @@
                 "死者の館の銀貨の備え"
             ],
             "闇の神殿の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Shadow Temple Invisible Spikes)": [
             [
@@ -7958,7 +7938,7 @@
                 "死者の館の銀貨の備え"
             ],
             "闇の神殿の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Shadow Temple Scythe Shortcut)": [
             [
@@ -7966,7 +7946,7 @@
                 "死者の館の銀貨の備え"
             ],
             "闇の神殿の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Spirit Temple Adult Boulders)": [
             [
@@ -7974,7 +7954,7 @@
                 "砂の女神の銀貨の備え"
             ],
             "魂の神殿の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Spirit Temple Adult Climb)": [
             [
@@ -7982,7 +7962,7 @@
                 "砂の女神の銀貨の備え"
             ],
             "魂の神殿の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Spirit Temple Child Early Torches)": [
             [
@@ -7990,7 +7970,7 @@
                 "砂の女神の銀貨の備え"
             ],
             "魂の神殿の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Spirit Temple Lobby and Lower Adult)": [
             [
@@ -7998,7 +7978,7 @@
                 "砂の女神の銀貨の備え"
             ],
             "魂の神殿の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "Silver Rupee Pouch (Spirit Temple Sun Block)": [
             [
@@ -8006,7 +7986,7 @@
                 "砂の女神の銀貨の備え"
             ],
             "魂の神殿の銀ルピー袋",
-            "o"
+            "no_gender"
         ],
         "SilverRupee": [
             [
@@ -8014,14 +7994,14 @@
                 "価値ある秘宝"
             ],
             "銀ルピー",
-            "o"
+            "no_gender"
         ],
         "Skull Mask": [
             [
                 "肉なしマスク"
             ],
             "ドクロのお面",
-            "o"
+            "no_gender"
         ],
         "Slingshot": [
             [
@@ -8030,7 +8010,7 @@
                 "カタパルト"
             ],
             "パチンコ",
-            "o"
+            "no_gender"
         ],
         "Small Key (Bottom of the Well)": [
             [
@@ -8039,7 +8019,7 @@
                 "井戸のロックピック"
             ],
             "井戸下のカギ",
-            "o"
+            "no_gender"
         ],
         "Small Key (Fire Temple)": [
             [
@@ -8048,7 +8028,7 @@
                 "赤のロックピック"
             ],
             "炎のカギ",
-            "o"
+            "no_gender"
         ],
         "Small Key (Forest Temple)": [
             [
@@ -8057,7 +8037,7 @@
                 "緑のロックピック"
             ],
             "森のカギ",
-            "o"
+            "no_gender"
         ],
         "Small Key (Ganons Castle)": [
             [
@@ -8066,7 +8046,7 @@
                 "最後のロックピック"
             ],
             "ガノンのカギ",
-            "o"
+            "no_gender"
         ],
         "Small Key (Gerudo Training Ground)": [
             [
@@ -8075,7 +8055,7 @@
                 "ゲルドのロックピック"
             ],
             "修練場のカギ",
-            "o"
+            "no_gender"
         ],
         "Small Key (Shadow Temple)": [
             [
@@ -8084,7 +8064,7 @@
                 "ピンクのロックピック"
             ],
             "闇のカギ",
-            "o"
+            "no_gender"
         ],
         "Small Key (Spirit Temple)": [
             [
@@ -8093,21 +8073,21 @@
                 "黄色いロックピック"
             ],
             "魂のカギ",
-            "o"
+            "no_gender"
         ],
         "Small Key (Thieves Hideout)": [
             [
                 "釈放カード"
             ],
             "牢屋のカギ",
-            "o"
+            "no_gender"
         ],
         "Small Key (Treasure Chest Game)": [
             [
                 "勝者のカギ"
             ],
             "ゲームのカギ",
-            "o"
+            "no_gender"
         ],
         "Small Key (Water Temple)": [
             [
@@ -8116,7 +8096,7 @@
                 "青のロックピック"
             ],
             "水のカギ",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Bottom of the Well)": [
             [
@@ -8125,7 +8105,7 @@
                 "井戸の合カギ"
             ],
             "井戸下のカギ束",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Fire Temple)": [
             [
@@ -8134,7 +8114,7 @@
                 "赤の合カギ"
             ],
             "炎のカギ束",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Forest Temple)": [
             [
@@ -8143,7 +8123,7 @@
                 "緑の合カギ"
             ],
             "森のカギ束",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Ganons Castle)": [
             [
@@ -8152,7 +8132,7 @@
                 "最後の合カギ"
             ],
             "ガノンのカギ束",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Gerudo Training Ground)": [
             [
@@ -8161,7 +8141,7 @@
                 "ゲルドの合カギ"
             ],
             "修練場のカギ束",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Shadow Temple)": [
             [
@@ -8170,7 +8150,7 @@
                 "ピンクの合カギ"
             ],
             "闇のカギ束",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Spirit Temple)": [
             [
@@ -8179,21 +8159,21 @@
                 "黄色い合カギ"
             ],
             "魂のカギ束",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Thieves Hideout)": [
             [
                 "釈放カードの束"
             ],
             "牢屋のカギ束",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Treasure Chest Game)": [
             [
                 "勝者のカギ束"
             ],
             "ゲームのカギ束",
-            "o"
+            "no_gender"
         ],
         "Small Key Ring (Water Temple)": [
             [
@@ -8202,7 +8182,7 @@
                 "青の合カギ"
             ],
             "水のカギ束",
-            "o"
+            "no_gender"
         ],
         "SmallKey": [
             [
@@ -8211,7 +8191,7 @@
                 "ロックピック"
             ],
             "小さなカギ",
-            "o"
+            "no_gender"
         ],
         "SmallKeyRing": [
             [
@@ -8220,7 +8200,7 @@
                 "合カギ"
             ],
             "カギの束",
-            "o"
+            "no_gender"
         ],
         "Song from Impa": [
             "#城奥で#インパは",
@@ -8262,7 +8242,7 @@
                 "風車を加速する歌"
             ],
             "嵐の歌",
-            "o"
+            "no_gender"
         ],
         "Song of Time": [
             [
@@ -8270,7 +8250,7 @@
                 "時をかける歌"
             ],
             "時の歌",
-            "o"
+            "no_gender"
         ],
         "Spirit Medallion": [
             [
@@ -8279,7 +8259,7 @@
                 "オレンジの円盤"
             ],
             "魂のメダル",
-            "o"
+            "no_gender"
         ],
         "Spirit Temple": [
             "#砂の女神#",
@@ -8581,7 +8561,7 @@
                 "怖いマスク"
             ],
             "こわそなお面",
-            "o"
+            "no_gender"
         ],
         "Stone of Agony": [
             [
@@ -8589,7 +8569,7 @@
                 "振動パック（Ｒ）"
             ],
             "もだえ石",
-            "o"
+            "no_gender"
         ],
         "Suns Song": [
             [
@@ -8598,26 +8578,26 @@
                 "ギブドの天敵"
             ],
             "太陽の歌",
-            "o"
+            "no_gender"
         ],
         "TCGSmallKey": [
             [
                 "勝者のカギ"
             ],
             "ゲームのカギ",
-            "o"
+            "no_gender"
         ],
         "TCGSmallKeyRing": [
             [
                 "勝者の束"
             ],
             "ゲームのカギ束",
-            "o"
+            "no_gender"
         ],
         "Temple of Time": [
             "#時の神殿#",
             null,
-            "o"
+            "no_gender"
         ],
         "ToT Light Arrows Cutscene": [
             "#姫の最後のプレゼント#は",
@@ -8636,7 +8616,7 @@
                 "金の欠片"
             ],
             "トライフォース",
-            "o"
+            "no_gender"
         ],
         "Twinrova": [
             "一つは　#砂の女神#　に…",
@@ -8646,7 +8626,7 @@
         "Twinrova Boss Room": [
             "#双生魔導士#",
             "#ツインローバ#",
-            "o"
+            "no_gender"
         ],
         "Twinrova Rewards": [
             "#双生魔導士#が報いる…^",
@@ -8666,7 +8646,7 @@
         "Volvagia Boss Room": [
             "#灼熱穴居竜#",
             "#ヴァルバジア#",
-            "o"
+            "no_gender"
         ],
         "Volvagia Rewards": [
             "#灼熱穴居竜#が報いる…^",
@@ -8698,7 +8678,7 @@
                 "青い円盤"
             ],
             "水のメダル",
-            "o"
+            "no_gender"
         ],
         "Water Temple": [
             "#広き湖#",
@@ -8873,7 +8853,7 @@
                 "コッコのジレンマ"
             ],
             "不思議なタマゴ",
-            "o"
+            "no_gender"
         ],
         "ZD Chest": [
             "#滝先の炎#は",
@@ -8903,7 +8883,7 @@
         "ZD Shop": [
             "#ゾーラの店#",
             null,
-            "o"
+            "no_gender"
         ],
         "ZD Shop Item 1": [
             "#ゾーラ#が売るのは",
@@ -8948,7 +8928,7 @@
         "ZD Storms Grotto": [
             "#妖精の泉#",
             null,
-            "o"
+            "no_gender"
         ],
         "ZF Bottom Freestanding PoH": [
             "#氷の下#には",
@@ -8973,7 +8953,7 @@
         "ZF Great Fairy Fountain": [
             "#大妖精の泉#",
             null,
-            "o"
+            "no_gender"
         ],
         "ZF Great Fairy Reward": [
             "#風の大妖精#は",
@@ -8998,7 +8978,7 @@
         "ZR Fairy Grotto": [
             "#妖精の泉#",
             null,
-            "o"
+            "no_gender"
         ],
         "ZR Frogs Eponas Song": [
             "#エポナの歌#を聞かせたカエルは",
@@ -9082,7 +9062,7 @@
         "ZR Open Grotto": [
             "#穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "ZR Open Grotto Chest": [
             "#ゾーラ川の穴#には",
@@ -9092,7 +9072,7 @@
         "ZR Storms Grotto": [
             "#２体のアキンド穴#",
             null,
-            "o"
+            "no_gender"
         ],
         "Zeldas Letter": [
             [
@@ -9101,7 +9081,7 @@
                 "姫の手紙"
             ],
             "ゼルダの手紙",
-            "o"
+            "no_gender"
         ],
         "Zeldas Lullaby": [
             [
@@ -9109,14 +9089,14 @@
                 "フォースの歌"
             ],
             "ゼルダの子守歌",
-            "o"
+            "no_gender"
         ],
         "Zora Mask": [
             [
                 "魚のマスク"
             ],
             "ゾーラのお面",
-            "o"
+            "no_gender"
         ],
         "Zora Sapphire": [
             [
@@ -9124,7 +9104,7 @@
                 "水の精霊石"
             ],
             "ゾーラのサファイア",
-            "o"
+            "no_gender"
         ],
         "Zora Tunic": [
             [
@@ -9133,7 +9113,7 @@
                 "水着"
             ],
             "ゾーラの服",
-            "o"
+            "no_gender"
         ],
         "Zoras Domain -> ZD Storms Grotto": [
             "#ゾーラの里の嵐穴#は",
@@ -9187,352 +9167,276 @@
         ]
     },
     "hint_area_enum": {
-        "BOTTOM_OF_THE_WELL": [
-            "の中に",
-            "に",
-            "井戸の底",
-            "井戸",
-            "Pink",
-            "Bottom of the Well",
-            "o"
-        ],
-        "CASTLE_GROUNDS": [
-            "の上に",
-            "の上に",
-            "ハイラル城中庭",
-            null,
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "DEATH_MOUNTAIN_CRATER": [
-            "に",
-            "の中に",
-            "デスマウンテン火口",
-            "火口",
-            "Red",
-            null,
-            "o"
-        ],
-        "DEATH_MOUNTAIN_TRAIL": [
-            "の上に",
-            "の上に",
-            "デスマウンテン登山道",
-            "登山道",
-            "Red",
-            null,
-            "o"
-        ],
-        "DEKU_TREE": [
-            "の中に",
-            "の中に",
-            "デクの樹",
-            "デクの樹",
-            "Green",
-            "Deku Tree",
-            "o"
-        ],
-        "DESERT_COLOSSUS": [
-            "に",
-            "に",
-            "砂漠の巨像",
-            "砂漠の巨像",
-            "Yellow",
-            null,
-            "o"
-        ],
-        "DODONGOS_CAVERN": [
-            "の中に",
-            "の中に",
-            "ドドンゴの洞窟",
-            "ドドンゴ",
-            "Red",
-            "Dodongos Cavern",
-            "o"
-        ],
-        "FIRE_TEMPLE": [
-            "の上に",
-            "の中に",
-            "炎の神殿",
-            "神殿",
-            "Red",
-            "Fire Temple",
-            "o"
-        ],
-        "FOREST_TEMPLE": [
-            "に",
-            "の中に",
-            "森の神殿",
-            "森の神殿",
-            "Green",
-            "Forest Temple",
-            "o"
-        ],
-        "GANONDORFS_CHAMBER": [
-            "に",
-            "の中に",
-            "ガノンドロフの間",
-            "ガノンの間",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "GERUDO_FORTRESS": [
-            "に",
-            "に",
-            "ゲルドの砦",
-            "ゲルドの砦",
-            "Yellow",
-            null,
-            "o"
-        ],
-        "GERUDO_TRAINING_GROUND": [
-            "の中に",
-            "の上に",
-            "ゲルドの修練場",
-            "修練場",
-            "Yellow",
-            "Gerudo Training Ground",
-            "o"
-        ],
-        "GERUDO_VALLEY": [
-            "に",
-            "に",
-            "ゲルドの谷",
-            "ゲルドの谷",
-            "Yellow",
-            null,
-            "o"
-        ],
-        "GORON_CITY": [
-            "に",
-            "の中に",
-            "ゴロンシティ",
-            "ゴロンシティ",
-            "Red",
-            null,
-            "o"
-        ],
-        "GRAVEYARD": [
-            "に",
-            "の中に",
-            "墓地",
-            "墓地",
-            "Pink",
-            null,
-            "o"
-        ],
-        "HAUNTED_WASTELAND": [
-            "に",
-            "の中に",
-            "呪われた荒野",
-            "荒野",
-            "Yellow",
-            null,
-            "o"
-        ],
-        "HYRULE_CASTLE": [
-            "に",
-            "に",
-            "ハイラル城",
-            "ハイラル城",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "HYRULE_FIELD": [
-            "に",
-            "の中に",
-            "ハイラル平原",
-            "平原",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "ICE_CAVERN": [
-            "の中に",
-            "に",
-            "氷の洞窟",
-            "氷の洞窟",
-            "Blue",
-            "Ice Cavern",
-            "o"
-        ],
-        "INSIDE_GANONS_CASTLE": [
-            "の中に",
-            null,
-            "ガノン城の中",
-            "ガノン城内",
-            "Light Blue",
-            "Ganons Castle",
-            "o"
-        ],
-        "JABU_JABUS_BELLY": [
-            "に",
-            "の中に",
-            "ジャブジャブさまのお腹",
-            "ジャブジャブ",
-            "Blue",
-            "Jabu Jabus Belly",
-            "o"
-        ],
-        "KAKARIKO_VILLAGE": [
-            "に",
-            "の中に",
-            "カカリコ村",
-            "カカリコ村",
-            "Pink",
-            null,
-            "o"
-        ],
-        "KOKIRI_FOREST": [
-            "に",
-            "の中に",
-            "コキリの森",
-            "コキリの森",
-            "Green",
-            null,
-            "o"
-        ],
-        "LAKE_HYLIA": [
-            "に",
-            "に",
-            "ハイリア湖畔",
-            "湖畔",
-            "Blue",
-            null,
-            "o"
-        ],
-        "LON_LON_RANCH": [
-            "に",
-            "に",
-            "ロンロン牧場",
-            "牧場",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "LOST_WOODS": [
-            "に",
-            "の中に",
-            "迷いの森",
-            "迷いの森",
-            "Green",
-            null,
-            "o"
-        ],
-        "MARKET": [
-            "に",
-            "の中に",
-            "城下町",
-            "城下町",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "OUTSIDE_GANONS_CASTLE": [
-            null,
-            null,
-            "ガノン城の外",
-            "ガノン城外",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "ROOT": [
-            "に",
-            "の中に",
-            "リンクのポケット",
-            "ポケット",
-            "White",
-            null,
-            "o"
-        ],
-        "SACRED_FOREST_MEADOW": [
-            "に",
-            "に",
-            "森の聖域",
-            "森の聖域",
-            "Green",
-            null,
-            "o"
-        ],
-        "SHADOW_TEMPLE": [
-            "の中に",
-            "の中に",
-            "闇の神殿",
-            "闇の神殿",
-            "Pink",
-            "Shadow Temple",
-            "o"
-        ],
-        "SPIRIT_TEMPLE": [
-            "の中に",
-            "の中に",
-            "魂の神殿",
-            "魂の神殿",
-            "Yellow",
-            "Spirit Temple",
-            "o"
-        ],
-        "TEMPLE_OF_TIME": [
-            "の中に",
-            "の中に",
-            "時の神殿",
-            "時の神殿",
-            "Light Blue",
-            null,
-            "o"
-        ],
-        "THIEVES_HIDEOUT": [
-            "に",
-            "の中に",
-            "盗賊の隠れ家",
-            "盗賊の隠れ家",
-            "Yellow",
-            null,
-            "o"
-        ],
-        "WATER_TEMPLE": [
-            "の下に",
-            "の中に",
-            "水の神殿",
-            "水の神殿",
-            "Blue",
-            "Water Temple",
-            "o"
-        ],
-        "ZORAS_DOMAIN": [
-            "に",
-            "に",
-            "ゾーラの里",
-            "ゾーラの里",
-            "Blue",
-            null,
-            "o"
-        ],
-        "ZORAS_FOUNTAIN": [
-            "に",
-            "に",
-            "ゾーラの泉",
-            "ゾーラの泉",
-            "Blue",
-            null,
-            "o"
-        ],
-        "ZORA_RIVER": [
-            "に",
-            "に",
-            "ゾーラ川",
-            "ゾーラ川",
-            "Blue",
-            null,
-            "o"
-        ]
+        "BOTTOM_OF_THE_WELL": {
+            "vague_prep": "の中に",
+            "clear_prep": "に",
+            "display_name": "井戸の底",
+            "short_name": "井戸",
+            "gender": "no_gender"
+        },
+        "CASTLE_GROUNDS": {
+            "vague_prep": "の上に",
+            "clear_prep": "の上に",
+            "display_name": "ハイラル城中庭",
+            "short_name": null,
+            "gender": "no_gender"
+        },
+        "DEATH_MOUNTAIN_CRATER": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "デスマウンテン火口",
+            "short_name": "火口",
+            "gender": "no_gender"
+        },
+        "DEATH_MOUNTAIN_TRAIL": {
+            "vague_prep": "の上に",
+            "clear_prep": "の上に",
+            "display_name": "デスマウンテン登山道",
+            "short_name": "登山道",
+            "gender": "no_gender"
+        },
+        "DEKU_TREE": {
+            "vague_prep": "の中に",
+            "clear_prep": "の中に",
+            "display_name": "デクの樹",
+            "short_name": "デクの樹",
+            "gender": "no_gender"
+        },
+        "DESERT_COLOSSUS": {
+            "vague_prep": "に",
+            "clear_prep": "に",
+            "display_name": "砂漠の巨像",
+            "short_name": "砂漠の巨像",
+            "gender": "no_gender"
+        },
+        "DODONGOS_CAVERN": {
+            "vague_prep": "の中に",
+            "clear_prep": "の中に",
+            "display_name": "ドドンゴの洞窟",
+            "short_name": "ドドンゴ",
+            "gender": "no_gender"
+        },
+        "FIRE_TEMPLE": {
+            "vague_prep": "の上に",
+            "clear_prep": "の中に",
+            "display_name": "炎の神殿",
+            "short_name": "神殿",
+            "gender": "no_gender"
+        },
+        "FOREST_TEMPLE": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "森の神殿",
+            "short_name": "森の神殿",
+            "gender": "no_gender"
+        },
+        "GANONDORFS_CHAMBER": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "ガノンドロフの間",
+            "short_name": "ガノンの間",
+            "gender": "no_gender"
+        },
+        "GERUDO_FORTRESS": {
+            "vague_prep": "に",
+            "clear_prep": "に",
+            "display_name": "ゲルドの砦",
+            "short_name": "ゲルドの砦",
+            "gender": "no_gender"
+        },
+        "GERUDO_TRAINING_GROUND": {
+            "vague_prep": "の中に",
+            "clear_prep": "の上に",
+            "display_name": "ゲルドの修練場",
+            "short_name": "修練場",
+            "gender": "no_gender"
+        },
+        "GERUDO_VALLEY": {
+            "vague_prep": "に",
+            "clear_prep": "に",
+            "display_name": "ゲルドの谷",
+            "short_name": "ゲルドの谷",
+            "gender": "no_gender"
+        },
+        "GORON_CITY": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "ゴロンシティ",
+            "short_name": "ゴロンシティ",
+            "gender": "no_gender"
+        },
+        "GRAVEYARD": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "墓地",
+            "short_name": "墓地",
+            "gender": "no_gender"
+        },
+        "HAUNTED_WASTELAND": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "呪われた荒野",
+            "short_name": "荒野",
+            "gender": "no_gender"
+        },
+        "HYRULE_CASTLE": {
+            "vague_prep": "に",
+            "clear_prep": "に",
+            "display_name": "ハイラル城",
+            "short_name": "ハイラル城",
+            "gender": "no_gender"
+        },
+        "HYRULE_FIELD": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "ハイラル平原",
+            "short_name": "平原",
+            "gender": "no_gender"
+        },
+        "ICE_CAVERN": {
+            "vague_prep": "の中に",
+            "clear_prep": "に",
+            "display_name": "氷の洞窟",
+            "short_name": "氷の洞窟",
+            "gender": "no_gender"
+        },
+        "INSIDE_GANONS_CASTLE": {
+            "vague_prep": "の中に",
+            "clear_prep": null,
+            "display_name": "ガノン城の中",
+            "short_name": "ガノン城内",
+            "gender": "no_gender"
+        },
+        "JABU_JABUS_BELLY": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "ジャブジャブさまのお腹",
+            "short_name": "ジャブジャブ",
+            "gender": "no_gender"
+        },
+        "KAKARIKO_VILLAGE": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "カカリコ村",
+            "short_name": "カカリコ村",
+            "gender": "no_gender"
+        },
+        "KOKIRI_FOREST": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "コキリの森",
+            "short_name": "コキリの森",
+            "gender": "no_gender"
+        },
+        "LAKE_HYLIA": {
+            "vague_prep": "に",
+            "clear_prep": "に",
+            "display_name": "ハイリア湖畔",
+            "short_name": "湖畔",
+            "gender": "no_gender"
+        },
+        "LON_LON_RANCH": {
+            "vague_prep": "に",
+            "clear_prep": "に",
+            "display_name": "ロンロン牧場",
+            "short_name": "牧場",
+            "gender": "no_gender"
+        },
+        "LOST_WOODS": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "迷いの森",
+            "short_name": "迷いの森",
+            "gender": "no_gender"
+        },
+        "MARKET": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "城下町",
+            "short_name": "城下町",
+            "gender": "no_gender"
+        },
+        "OUTSIDE_GANONS_CASTLE": {
+            "vague_prep": null,
+            "clear_prep": null,
+            "display_name": "ガノン城の外",
+            "short_name": "ガノン城外",
+            "gender": "no_gender"
+        },
+        "ROOT": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "リンクのポケット",
+            "short_name": "ポケット",
+            "gender": "no_gender"
+        },
+        "SACRED_FOREST_MEADOW": {
+            "vague_prep": "に",
+            "clear_prep": "に",
+            "display_name": "森の聖域",
+            "short_name": "森の聖域",
+            "gender": "no_gender"
+        },
+        "SHADOW_TEMPLE": {
+            "vague_prep": "の中に",
+            "clear_prep": "の中に",
+            "display_name": "闇の神殿",
+            "short_name": "闇の神殿",
+            "gender": "no_gender"
+        },
+        "SPIRIT_TEMPLE": {
+            "vague_prep": "の中に",
+            "clear_prep": "の中に",
+            "display_name": "魂の神殿",
+            "short_name": "魂の神殿",
+            "gender": "no_gender"
+        },
+        "TEMPLE_OF_TIME": {
+            "vague_prep": "の中に",
+            "clear_prep": "の中に",
+            "display_name": "時の神殿",
+            "short_name": "時の神殿",
+            "gender": "no_gender"
+        },
+        "THIEVES_HIDEOUT": {
+            "vague_prep": "に",
+            "clear_prep": "の中に",
+            "display_name": "盗賊の隠れ家",
+            "short_name": "盗賊の隠れ家",
+            "gender": "no_gender"
+        },
+        "WATER_TEMPLE": {
+            "vague_prep": "の下に",
+            "clear_prep": "の中に",
+            "display_name": "水の神殿",
+            "short_name": "水の神殿",
+            "gender": "no_gender"
+        },
+        "ZORAS_DOMAIN": {
+            "vague_prep": "に",
+            "clear_prep": "に",
+            "display_name": "ゾーラの里",
+            "short_name": "ゾーラの里",
+            "gender": "no_gender"
+        },
+        "ZORAS_FOUNTAIN": {
+            "vague_prep": "に",
+            "clear_prep": "に",
+            "display_name": "ゾーラの泉",
+            "short_name": "ゾーラの泉",
+            "gender": "no_gender"
+        },
+        "ZORA_RIVER": {
+            "vague_prep": "に",
+            "clear_prep": "に",
+            "display_name": "ゾーラ川",
+            "short_name": "ゾーラ川",
+            "gender": "no_gender"
+        }
     },
     "hint_text": {
         "always": "{location}　#{item}#",
-        "at_own": "@の{suffix}",
+        "player_own": "@の{suffix}",
         "boss_pocket_clear": "♂★{item_icon}一つは　#@の手#　に…",
         "boss_pocket_vague": "♂★{item_icon}一つは　#@のポケット#　に…",
         "boss_string": "♂★{item_icon}一つは　{location_text}　に…",
@@ -9540,7 +9444,7 @@
         "bridge_open": "目覚めし者により　悪しき者への橋は　#すでにかけられている#",
         "bridge_vague": "勇者が{item_req}集める時を　目覚めし者は待つ",
         "bridge_vanilla": "#闇と魂のメダル#　そして#光の矢#",
-        "cbf": "#{item_text}#は{location_text}ある",
+        "can_be_found": "#{item_text}#は{location_text}ある",
         "conjunction": "そして",
         "conjunction_more": "、",
         "dot_oot_sot": "★08勇者なるもの&時のオカリナをもち&時の歌を　奏でよ",
@@ -9589,7 +9493,7 @@
         ],
         "goal_format": "{player_text}{goal_text}{location_text}",
         "gossip_prefix": "",
-        "hero": "{location_text}は勇者の道にある",
+        "hero_path": "{location_text}は勇者の道にある",
         "hoards": "{location_text}#{item_text}#を隠す",
         "important": "重要",
         "major_item": "#{hint_loc}#は#{item_count}個#重要なものがある",
@@ -9600,7 +9504,7 @@
         "player's": "プレイヤー{world}の{suffix}",
         "player_text": "プレイヤー{world}の",
         "pocket": "#手持ち#",
-        "prep_pos": "last",
+        "prep_position": "last",
         "req_custom": "{count}つの{item}",
         "second_own": "あなたの{suffix}",
         "separator": "の",
@@ -9610,8 +9514,8 @@
         "trial_ganon": "#{trial}の試練#により　ガノンの塔は守られている",
         "trial_none": "#ガノンの塔#の結界は　シークによって破られた",
         "trial_sheik": "#{trial}の試練#は　シークによって破られた",
-        "wiw": "",
-        "woh": "{location_text}は勇者の道",
+        "world_is_world_player": "",
+        "way_of_hero": "{location_text}は勇者の道",
         "world's": "{world}の{suffix}"
     },
     "lang_property": {
@@ -9688,14 +9592,14 @@
     },
     "prefix": {
         "gender": [
-            "o"
+            "no_gender"
         ],
         "prefix": {
             "definite": {
-                "o": ""
+                "no_gender": ""
             },
             "indefinite": {
-                "o": ""
+                "no_gender": ""
             }
         }
     },

@@ -1967,29 +1967,16 @@ misc_dual_hint_table: dict[str, dict[str, Any]] = {
 # Separate table for goal names to avoid duplicates in the hint table.
 # Link's Pocket will always be an empty goal, but it's included here to
 # prevent key errors during the dungeon reward lookup.
-BOSS_GOAL_TABLE: dict[str, tuple[str, str, str]] = {
-    'Queen Gohma':                                              ("path to the #Spider#", "path to #Queen Gohma#", "Green"),
-    'King Dodongo':                                             ("path to the #Dinosaur#", "path to #King Dodongo#", "Red"),
-    'Barinade':                                                 ("path to the #Tentacle#", "path to #Barinade#", "Blue"),
-    'Phantom Ganon':                                            ("path to the #Puppet#", "path to #Phantom Ganon#", "Green"),
-    'Volvagia':                                                 ("path to the #Dragon#", "path to #Volvagia#", "Red"),
-    'Morpha':                                                   ("path to the #Amoeba#", "path to #Morpha#", "Blue"),
-    'Bongo Bongo':                                              ("path to the #Hands#", "path to #Bongo Bongo#", "Pink"),
-    'Twinrova':                                                 ("path to the #Witches#", "path to #Twinrova#", "Yellow"),
-    'ToT Reward from Rauru':                                    ("path of #time#", "path of #time#", "Light Blue"),
-}
-
-# If dungeon rewards are shuffled, we don't use boss names for their goals.
-REWARD_GOAL_TABLE: dict[str, tuple[str, str]] = {
-    'Kokiri Emerald':                                           ("path to a #tree's farewell#", "path to the #Kokiri Emerald#"),
-    'Goron Ruby':                                               ("path to the #Gorons' hidden treasure#", "path to the #Goron Ruby#"),
-    'Zora Sapphire':                                            ("path to an #engagement ring#", "path to the #Zora Sapphire#"),
-    'Light Medallion':                                          ("path to #an old man's sagely power#", "path to the #Light Medallion#"),
-    'Forest Medallion':                                         ("path to #a Kokiri's sagely power#", "path to the #Forest Medallion#"),
-    'Fire Medallion':                                           ("path to #a Goron's sagely power#", "path to the #Fire Medallion#"),
-    'Water Medallion':                                          ("path to #a Zora's sagely power#", "path to the #Water Medallion#"),
-    'Shadow Medallion':                                         ("path to #a Sheikah's sagely power#", "path to the #Shadow Medallion#"),
-    'Spirit Medallion':                                         ("path to #a Gerudo's sagely power#", "path to the #Spirit Medallion#"),
+BOSS_GOAL_COLOR: dict[str, str] = {
+    'Queen Gohma':                                              "Green",
+    'King Dodongo':                                             "Red",
+    'Barinade':                                                 "Blue",
+    'Phantom Ganon':                                            "Green",
+    'Volvagia':                                                 "Red",
+    'Morpha':                                                   "Blue",
+    'Bongo Bongo':                                              "Pink",
+    'Twinrova':                                                 "Yellow",
+    'ToT Reward from Rauru':                                    "Light Blue",
 }
 
 

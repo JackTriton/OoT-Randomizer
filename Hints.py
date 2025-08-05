@@ -374,7 +374,7 @@ def color_text(gossip_text: GossipText, lang: Language) -> str:
                 split_text[1] = COLOR_MAP[color][1] + split_text[1]
                 split_text[2] = "00" + split_text[2]
             split_text[1] = "#" + split_text[1] + "#"
-            index += len(split_text[0]) + len(split_text[1]) 
+            index += len(split_text[0]) + len(split_text[1])
             text = "".join(split_text)
     return text
 
@@ -484,7 +484,7 @@ class HintArea(Enum):
     # Dungeons are hinted differently depending on the clearer_hints setting.
     def text(self, lang: Language, clearer_hints: bool, preposition: bool = False, use_2nd_person: bool = False, world: Optional[int] = None) -> str:
         flatten = lambda d: sum((flatten(v) if isinstance(v, dict) else [v] for v in d.values()), [])
-        prep_pos = lang.hint_text["prep_pos"]
+        prep_pos = lang.hint_text["prep_position"]
         if self.is_dungeon and self.dungeon_name:
             text = get_hint(self.dungeon_name, lang, clearer_hints).text
         else:
@@ -495,7 +495,7 @@ class HintArea(Enum):
                 if use_2nd_person:
                     text = lang.format_from_id("hint_text.second_own",{"suffix":pre_suf[1]})
                 else:
-                    text = lang.format_from_id("hint_text.at_own",{"suffix":pre_suf[1]})
+                    text = lang.format_from_id("hint_text.player_own",{"suffix":pre_suf[1]})
         else:
             replace_prefixes = flatten(lang.prefix["prefix"])
             move_prefixes = lang.hint_text["move_prefixes"]
@@ -511,54 +511,373 @@ class HintArea(Enum):
             text = f'#{text}#'
         if preposition and self.preposition(clearer_hints) is not None:
             if prep_pos == "first":
-                text = f'{self.preposition(clearer_hints)}{' ' if lang.base=="en" else '　'}{text}'
+                text = f"{self.preposition(clearer_hints)}{' ' if lang.base=="en" else '　'}{text}"
             elif prep_pos == "last":
-                text = f'{text}{' ' if lang.base=="en" else '　'}{self.preposition(clearer_hints)}'
+                text = f"{text}{' ' if lang.base=="en" else '　'}{self.preposition(clearer_hints)}"
         return text
 
 
-hint_area_enum: dict[str:tuple(str,str,str,str,str,Optional[str],str)] = {
-    "ROOT": ('in', 'in', "Link's pocket", 'Free', 'White', None, "o"),
-    "HYRULE_FIELD": ('in', 'in', 'Hyrule Field', 'Hyrule Field', 'Light Blue', None, "o"),
-    "LON_LON_RANCH": ('at', 'at', 'Lon Lon Ranch', 'Lon Lon Ranch', 'Light Blue', None, "o"),
-    "MARKET": ('in', 'in', 'the Market', 'Market', 'Light Blue', None, "o"),
-    "TEMPLE_OF_TIME": ('inside', 'inside', 'the Temple of Time', 'Temple of Time', 'Light Blue', None, "o"),
-    "CASTLE_GROUNDS": ('on', 'on', 'the Castle Grounds', None, 'Light Blue', None, "o"),
-    "HYRULE_CASTLE": ('at', 'at', 'Hyrule Castle', 'Hyrule Castle', 'Light Blue', None, "o"),
-    "OUTSIDE_GANONS_CASTLE": (None, None, "outside Ganon's Castle", "Outside Ganon's Castle", 'Light Blue', None, "o"),
-    "INSIDE_GANONS_CASTLE": ('inside', None, "inside Ganon's Castle", "Inside Ganon's Castle", 'Light Blue', 'Ganons Castle', "o"),
-    "GANONDORFS_CHAMBER": ('in', 'in', "Ganondorf's Chamber", "Ganondorf's Chamber", 'Light Blue', None, "o"),
-    "KOKIRI_FOREST": ('in', 'in', 'Kokiri Forest', "Kokiri Forest", 'Green', None, "o"),
-    "DEKU_TREE": ('inside', 'inside', 'the Deku Tree', "Deku Tree", 'Green', 'Deku Tree', "o"),
-    "LOST_WOODS": ('in', 'in', 'the Lost Woods', "Lost Woods", 'Green', None, "o"),
-    "SACRED_FOREST_MEADOW": ('at', 'at', 'the Sacred Forest Meadow', "Sacred Forest Meadow", 'Green', None, "o"),
-    "FOREST_TEMPLE": ('in', 'in', 'the Forest Temple', "Forest Temple", 'Green', 'Forest Temple', "o"),
-    "DEATH_MOUNTAIN_TRAIL": ('on', 'on', 'the Death Mountain Trail', "Death Mountain Trail", 'Red', None, "o"),
-    "DODONGOS_CAVERN": ('within', 'in', "Dodongo's Cavern", "Dodongo's Cavern", 'Red', 'Dodongos Cavern', "o"),
-    "GORON_CITY": ('in', 'in', 'Goron City', "Goron City", 'Red', None, "o"),
-    "DEATH_MOUNTAIN_CRATER": ('in', 'in', 'the Death Mountain Crater', "Death Mountain Crater", 'Red', None, "o"),
-    "FIRE_TEMPLE": ('on', 'in', 'the Fire Temple', "Fire Temple", 'Red', 'Fire Temple', "o"),
-    "ZORA_RIVER": ('at', 'at', "Zora's River", "Zora's River", 'Blue', None, "o"),
-    "ZORAS_DOMAIN": ('at', 'at', "Zora's Domain", "Zora's Domain", 'Blue', None, "o"),
-    "ZORAS_FOUNTAIN": ('at', 'at', "Zora's Fountain", "Zora's Fountain", 'Blue', None, "o"),
-    "JABU_JABUS_BELLY": ('in', 'inside', "Jabu Jabu's Belly", "Jabu Jabu's Belly", 'Blue', 'Jabu Jabus Belly', "o"),
-    "ICE_CAVERN": ('inside', 'in'    , 'the Ice Cavern', "Ice Cavern", 'Blue', 'Ice Cavern', "o"),
-    "LAKE_HYLIA": ('at', 'at', 'Lake Hylia', "Lake Hylia", 'Blue', None, "o"),
-    "WATER_TEMPLE": ('under', 'in', 'the Water Temple', "Water Temple", 'Blue', 'Water Temple', "o"),
-    "KAKARIKO_VILLAGE": ('in', 'in', 'Kakariko Village', "Kakariko Village", 'Pink', None, "o"),
-    "BOTTOM_OF_THE_WELL": ('within', 'at', 'the Bottom of the Well', "Bottom of the Well", 'Pink', 'Bottom of the Well', "o"),
-    "GRAVEYARD": ('in', 'in', 'the Graveyard', "Graveyard", 'Pink', None, "o"),
-    "SHADOW_TEMPLE": ('within', 'in', 'the Shadow Temple', "Shadow Temple", 'Pink', 'Shadow Temple', "o"),
-    "GERUDO_VALLEY": ('at', 'at', 'Gerudo Valley', "Gerudo Valley", 'Yellow', None, "o"),
-    "GERUDO_FORTRESS": ('at', 'at', "Gerudo's Fortress", "Gerudo's Fortress", 'Yellow', None, "o"),
-    "THIEVES_HIDEOUT": ('in', 'in', "the Thieves' Hideout", "Thieves' Hideout", 'Yellow', None, "o"),
-    "GERUDO_TRAINING_GROUND": ('within', 'on', 'the Gerudo Training Ground', "Gerudo Training Ground", 'Yellow', 'Gerudo Training Ground', "o"),
-    "HAUNTED_WASTELAND": ('in', 'in', 'the Haunted Wasteland', "Haunted Wasteland", 'Yellow', None, "o"),
-    "DESERT_COLOSSUS": ('at', 'at', 'the Desert Colossus', "Desert Colossus", 'Yellow', None, "o"),
-    "SPIRIT_TEMPLE": ('inside', 'in', 'the Spirit Temple', "Spirit Temple", 'Yellow', 'Spirit Temple', "o")
+hint_area_enum = {
+    "ROOT": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": "Link's pocket",
+        "short_name": 'Free',
+        "color": 'White',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "HYRULE_FIELD": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": 'Hyrule Field',
+        "short_name": 'Hyrule Field',
+        "color": 'Light Blue',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "LON_LON_RANCH": {
+        "vague_prep": 'at',
+        "clear_prep": 'at',
+        "display_name": 'Lon Lon Ranch',
+        "short_name": 'Lon Lon Ranch',
+        "color": 'Light Blue',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "MARKET": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": 'the Market',
+        "short_name": 'Market',
+        "color": 'Light Blue',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "TEMPLE_OF_TIME": {
+        "vague_prep": 'inside',
+        "clear_prep": 'inside',
+        "display_name": 'the Temple of Time',
+        "short_name": 'Temple of Time',
+        "color": 'Light Blue',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "CASTLE_GROUNDS": {
+        "vague_prep": 'on',
+        "clear_prep": 'on',
+        "display_name": 'the Castle Grounds',
+        "short_name": None,
+        "color": 'Light Blue',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "HYRULE_CASTLE": {
+        "vague_prep": 'at',
+        "clear_prep": 'at',
+        "display_name": 'Hyrule Castle',
+        "short_name": 'Hyrule Castle',
+        "color": 'Light Blue',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "OUTSIDE_GANONS_CASTLE": {
+        "vague_prep": None,
+        "clear_prep": None,
+        "display_name": "outside Ganon's Castle",
+        "short_name": "Outside Ganon's Castle",
+        "color": 'Light Blue',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "INSIDE_GANONS_CASTLE": {
+        "vague_prep": 'inside',
+        "clear_prep": None,
+        "display_name": "inside Ganon's Castle",
+        "short_name": "Inside Ganon's Castle",
+        "color": 'Light Blue',
+        "dungeon_name": 'Ganons Castle',
+        "gender": "o",
+    },
+    "GANONDORFS_CHAMBER": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": "Ganondorf's Chamber",
+        "short_name": "Ganondorf's Chamber",
+        "color": 'Light Blue',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "KOKIRI_FOREST": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": 'Kokiri Forest',
+        "short_name": "Kokiri Forest",
+        "color": 'Green',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "DEKU_TREE": {
+        "vague_prep": 'inside',
+        "clear_prep": 'inside',
+        "display_name": 'the Deku Tree',
+        "short_name": "Deku Tree",
+        "color": 'Green',
+        "dungeon_name": 'Deku Tree',
+        "gender": "o",
+    },
+    "LOST_WOODS": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": 'the Lost Woods',
+        "short_name": "Lost Woods",
+        "color": 'Green',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "SACRED_FOREST_MEADOW": {
+        "vague_prep": 'at',
+        "clear_prep": 'at',
+        "display_name": 'the Sacred Forest Meadow',
+        "short_name": "Sacred Forest Meadow",
+        "color": 'Green',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "FOREST_TEMPLE": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": 'the Forest Temple',
+        "short_name": "Forest Temple",
+        "color": 'Green',
+        "dungeon_name": 'Forest Temple',
+        "gender": "o",
+    },
+    "DEATH_MOUNTAIN_TRAIL": {
+        "vague_prep": 'on',
+        "clear_prep": 'on',
+        "display_name": 'the Death Mountain Trail',
+        "short_name": "Death Mountain Trail",
+        "color": 'Red',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "DODONGOS_CAVERN": {
+        "vague_prep": 'within',
+        "clear_prep": 'in',
+        "display_name": "Dodongo's Cavern",
+        "short_name": "Dodongo's Cavern",
+        "color": 'Red',
+        "dungeon_name": 'Dodongos Cavern',
+        "gender": "o",
+    },
+    "GORON_CITY": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": 'Goron City',
+        "short_name": "Goron City",
+        "color": 'Red',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "DEATH_MOUNTAIN_CRATER": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": 'the Death Mountain Crater',
+        "short_name": "Death Mountain Crater",
+        "color": 'Red',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "FIRE_TEMPLE": {
+        "vague_prep": 'on',
+        "clear_prep": 'in',
+        "display_name": 'the Fire Temple',
+        "short_name": "Fire Temple",
+        "color": 'Red',
+        "dungeon_name": 'Fire Temple',
+        "gender": "o",
+    },
+    "ZORA_RIVER": {
+        "vague_prep": 'at',
+        "clear_prep": 'at',
+        "display_name": "Zora's River",
+        "short_name": "Zora's River",
+        "color": 'Blue',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "ZORAS_DOMAIN": {
+        "vague_prep": 'at',
+        "clear_prep": 'at',
+        "display_name": "Zora's Domain",
+        "short_name": "Zora's Domain",
+        "color": 'Blue',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "ZORAS_FOUNTAIN": {
+        "vague_prep": 'at',
+        "clear_prep": 'at',
+        "display_name": "Zora's Fountain",
+        "short_name": "Zora's Fountain",
+        "color": 'Blue',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "JABU_JABUS_BELLY": {
+        "vague_prep": 'in',
+        "clear_prep": 'inside',
+        "display_name": "Jabu Jabu's Belly",
+        "short_name": "Jabu Jabu's Belly",
+        "color": 'Blue',
+        "dungeon_name": 'Jabu Jabus Belly',
+        "gender": "o",
+    },
+    "ICE_CAVERN": {
+        "vague_prep": 'inside',
+        "clear_prep": 'in'    ,
+        "display_name": 'the Ice Cavern',
+        "short_name": "Ice Cavern",
+        "color": 'Blue',
+        "dungeon_name": 'Ice Cavern',
+        "gender": "o",
+    },
+    "LAKE_HYLIA": {
+        "vague_prep": 'at',
+        "clear_prep": 'at',
+        "display_name": 'Lake Hylia',
+        "short_name": "Lake Hylia",
+        "color": 'Blue',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "WATER_TEMPLE": {
+        "vague_prep": 'under',
+        "clear_prep": 'in',
+        "display_name": 'the Water Temple',
+        "short_name": "Water Temple",
+        "color": 'Blue',
+        "dungeon_name": 'Water Temple',
+        "gender": "o",
+    },
+    "KAKARIKO_VILLAGE": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": 'Kakariko Village',
+        "short_name": "Kakariko Village",
+        "color": 'Pink',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "BOTTOM_OF_THE_WELL": {
+        "vague_prep": 'within',
+        "clear_prep": 'at',
+        "display_name": 'the Bottom of the Well',
+        "short_name": "Bottom of the Well",
+        "color": 'Pink',
+        "dungeon_name": 'Bottom of the Well',
+        "gender": "o",
+    },
+    "GRAVEYARD": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": 'the Graveyard',
+        "short_name": "Graveyard",
+        "color": 'Pink',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "SHADOW_TEMPLE": {
+        "vague_prep": 'within',
+        "clear_prep": 'in',
+        "display_name": 'the Shadow Temple',
+        "short_name": "Shadow Temple",
+        "color": 'Pink',
+        "dungeon_name": 'Shadow Temple',
+        "gender": "o",
+    },
+    "GERUDO_VALLEY": {
+        "vague_prep": 'at',
+        "clear_prep": 'at',
+        "display_name": 'Gerudo Valley',
+        "short_name": "Gerudo Valley",
+        "color": 'Yellow',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "GERUDO_FORTRESS": {
+        "vague_prep": 'at',
+        "clear_prep": 'at',
+        "display_name": "Gerudo's Fortress",
+        "short_name": "Gerudo's Fortress",
+        "color": 'Yellow',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "THIEVES_HIDEOUT": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": "the Thieves' Hideout",
+        "short_name": "Thieves' Hideout",
+        "color": 'Yellow',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "GERUDO_TRAINING_GROUND": {
+        "vague_prep": 'within',
+        "clear_prep": 'on',
+        "display_name": 'the Gerudo Training Ground',
+        "short_name": "Gerudo Training Ground",
+        "color": 'Yellow',
+        "dungeon_name": 'Gerudo Training Ground',
+        "gender": "o",
+    },
+    "HAUNTED_WASTELAND": {
+        "vague_prep": 'in',
+        "clear_prep": 'in',
+        "display_name": 'the Haunted Wasteland',
+        "short_name": "Haunted Wasteland",
+        "color": 'Yellow',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "DESERT_COLOSSUS": {
+        "vague_prep": 'at',
+        "clear_prep": 'at',
+        "display_name": 'the Desert Colossus',
+        "short_name": "Desert Colossus",
+        "color": 'Yellow',
+        "dungeon_name": None,
+        "gender": "o",
+    },
+    "SPIRIT_TEMPLE": {
+        "vague_prep": 'inside',
+        "clear_prep": 'in',
+        "display_name": 'the Spirit Temple',
+        "short_name": "Spirit Temple",
+        "color": 'Yellow',
+        "dungeon_name": 'Spirit Temple',
+        "gender": "o",
+    }
 }
 
-HintAreaDefault = HintArea("HintAreaDefault", hint_area_enum)
+def area_flat(hint_area_enum):
+    fields = [
+        "vague_prep",
+        "clear_prep",
+        "display_name",
+        "short_name",
+        "color",
+        "dungeon_name",
+        "gender",
+    ]
+    res_enum = {}
+    for key, info in hint_area_enum.items():
+        res_enum[key] = tuple(info[field] for field in fields)
+    return res_enum
+
+HintAreaDefault = HintArea("HintAreaDefault", area_flat(hint_area_enum))
 
 
 def get_woth_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintReturn:
@@ -586,12 +905,12 @@ def get_woth_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintRetu
 
     return GossipText(
         lang.format_from_id(
-            "hint_text.woh",
+            "hint_text.way_of_hero",
             {
                 "location_text":location_text
                 }
-            ), 
-        lang, ['Light Blue'], [location.name], 
+            ),
+        lang, ['Light Blue'], [location.name],
         [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
 
 
@@ -723,11 +1042,11 @@ def get_goal_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintRetu
     # Goal weight to zero mitigates double hinting this goal
     # Once all goals in a category are 0, selection is true random
     goal.weight = 0
-    
-    
+
+
     location_text = world.HintAreaLang.at(location).text(world.language, world.settings.clearer_hints)
     if world_id == world.id:
-        player_text = lang.hint_text["wiw"]
+        player_text = lang.hint_text["world_is_world_player"]
         goal_text = goal.hint_text
     else:
         player_text = lang.format_from_id(
@@ -754,7 +1073,7 @@ def get_barren_hint(spoiler: Spoiler, world: World, checked: set[str], all_check
 
     checked_areas = get_checked_areas(world, checked)
     lang = world.language
-    
+
     areas = list(filter(lambda area:
         area not in checked_areas
         and str(area) not in world.hint_type_overrides['barren']
@@ -812,7 +1131,7 @@ def get_barren_hint(spoiler: Spoiler, world: World, checked: set[str], all_check
             "hint_text.foolish",
             {
                 "area": area.text(world.language, world.settings.clearer_hints)
-            }), 
+            }),
         lang, ['Pink'],prefix=lang.hint_text["gossip_prefix"]), None
 
 
@@ -849,7 +1168,7 @@ def get_good_item_hint(spoiler: Spoiler, world: World, checked: set[str]) -> Hin
     checked.add(location.name)
 
     item_text = get_hint(get_item_generic_name(location.item), lang, world.settings.clearer_hints).text
-    
+
     hint_area = world.HintAreaLang.at(location)
     if hint_area.is_dungeon:
         location_text = hint_area.text(lang, world.settings.clearer_hints)
@@ -859,17 +1178,17 @@ def get_good_item_hint(spoiler: Spoiler, world: World, checked: set[str]) -> Hin
                 {
                     "location_text":location_text,
                     "item_text":item_text
-                }), 
+                }),
             lang, ['Red', 'Green'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
     else:
         location_text = hint_area.text(lang, world.settings.clearer_hints, preposition=True)
         return GossipText(
             lang.format_from_id(
-                "hint_text.cbf",
+                "hint_text.can_be_found",
                 {
                     "location_text":location_text,
                     "item_text":item_text
-                }),  
+                }),
             lang, ['Green', 'Red'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
 
 
@@ -917,11 +1236,11 @@ def get_specific_item_hint(spoiler: Spoiler, world: World, checked: set[str]) ->
         location = random.choice(locations)
         checked.add(location.name)
         item_text = get_hint(get_item_generic_name(location.item), lang, world.settings.clearer_hints).text
-        
+
         hint_area = world.HintAreaLang.at(location)
         if world.hint_dist_user.get('vague_named_items', False):
             location_text = hint_area.text(lang, world.settings.clearer_hints)
-            return GossipText(lang.format_from_id("hint_text.hero",{"location_text":location_text}), lang, ['Green'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+            return GossipText(lang.format_from_id("hint_text.hero_path",{"location_text":location_text}), lang, ['Green'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
         elif hint_area.is_dungeon:
             location_text = hint_area.text(lang, world.settings.clearer_hints)
             return GossipText(
@@ -935,7 +1254,7 @@ def get_specific_item_hint(spoiler: Spoiler, world: World, checked: set[str]) ->
             location_text = hint_area.text(lang, world.settings.clearer_hints, preposition=True)
             return GossipText(
                 lang.format_from_id(
-                "hint_text.cbf",
+                "hint_text.can_be_found",
                     {
                         "location_text":location_text,
                         "item_text":item_text
@@ -1010,11 +1329,11 @@ def get_specific_item_hint(spoiler: Spoiler, world: World, checked: set[str]) ->
         location = random.choice(locations)
         checked.add(location.name)
         item_text = get_hint(get_item_generic_name(location.item), lang, world.settings.clearer_hints).text
-        
+
         hint_area = world.HintAreaLang.at(location)
         if world.hint_dist_user.get('vague_named_items', False):
             location_text = hint_area.text(lang, world.settings.clearer_hints, world=location.world.id + 1)
-            return GossipText(lang.format_from_id("hint_text.hero",{"location_text":location_text}), lang, ['Green'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+            return GossipText(lang.format_from_id("hint_text.hero_path",{"location_text":location_text}), lang, ['Green'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
         elif hint_area.is_dungeon:
             location_text = hint_area.text(lang, world.settings.clearer_hints, world=location.world.id + 1)
             return GossipText(
@@ -1028,7 +1347,7 @@ def get_specific_item_hint(spoiler: Spoiler, world: World, checked: set[str]) ->
             location_text = hint_area.text(lang, world.settings.clearer_hints, preposition=True, world=location.world.id + 1)
             return GossipText(
                 lang.format_from_id(
-                    "hint_text.cbf",
+                    "hint_text.can_be_found",
                     {
                         "location_text":location_text,
                         "item_text":item_text
@@ -1047,13 +1366,13 @@ def get_random_location_hint(spoiler: Spoiler, world: World, checked: set[str]) 
         world.get_filled_locations()))
     if not locations:
         return None
-    
+
     lang = world.language
 
     location = random.choice(locations)
     checked.add(location.name)
     item_text = get_hint(get_item_generic_name(location.item), lang, world.settings.clearer_hints).text
-    
+
     hint_area = world.HintAreaLang.at(location)
     if hint_area.is_dungeon:
         location_text = hint_area.text(lang, world.settings.clearer_hints)
@@ -1067,7 +1386,7 @@ def get_random_location_hint(spoiler: Spoiler, world: World, checked: set[str]) 
         location_text = hint_area.text(lang, world.settings.clearer_hints, preposition=True)
         return GossipText(
             lang.format_from_id(
-                        "hint_text.cbf",
+                        "hint_text.can_be_found",
                         {
                             "location_text":location_text,
                             "item_text":item_text
@@ -1151,7 +1470,7 @@ def get_random_multi_hint(spoiler: Spoiler, world: World, checked: set[str], hin
     hint = random.choice(multi_hints)
 
     if world.hint_dist_user['upgrade_hints'] in ['on', 'limited']:
-        multi = get_multi(hint.name, world.language)
+        multi = get_multi(hint.name)
 
         upgrade_list = get_upgrade_hint_list(world, multi.locations)
         upgrade_list = list(filter(
@@ -1171,7 +1490,7 @@ def get_random_multi_hint(spoiler: Spoiler, world: World, checked: set[str], hin
 
 
 def get_specific_multi_hint(spoiler: Spoiler, world: World, checked: set[str], hint: Hint) -> HintReturn:
-    multi = get_multi(hint.name, world.language)
+    multi = get_multi(hint.name)
     locations = [world.get_location(location) for location in multi.locations]
 
     for location in locations:
@@ -1187,7 +1506,7 @@ def get_specific_multi_hint(spoiler: Spoiler, world: World, checked: set[str], h
     location_count = len(locations)
     colors = ['Red'] + ['Green']*location_count
     items = [location.item for location in locations]
-    gossip_string = natjoin([multi_text] + [get_hint(get_item_generic_name(item), world.language, world.settings.clearer_hints).text for item in items],conjuction=world.language.hint_text["conjuction"],conjunction_more=world.language.hint_text["conjuction_more"])
+    gossip_string = natjoin([multi_text] + [get_hint(get_item_generic_name(item), world.language, world.settings.clearer_hints).text for item in items],conjunction=world.language.hint_text["conjunction"],conjunction_more=world.language.hint_text["conjunction_more"])
     return GossipText(gossip_string, world.language, colors, [location.name for location in locations], [item.name for item in items],prefix=world.language.hint_text["gossip_prefix"]), locations
 
 
@@ -1255,7 +1574,7 @@ def get_important_check_hint(spoiler: Spoiler, world: World, checked: set[str]) 
     top_level_locations = []
     lang = world.language
     imp = lang.hint_text["important"]
-    
+
     for location in world.get_filled_locations():
         if (world.HintAreaLang.at(location).text(world.language, world.settings.clearer_hints) not in top_level_locations
                 and (world.HintAreaLang.at(location).text(world.language, world.settings.clearer_hints) + imp) not in checked
@@ -1264,7 +1583,7 @@ def get_important_check_hint(spoiler: Spoiler, world: World, checked: set[str]) 
     hint_loc = random.choice(top_level_locations)
     item_count = 0
     for location in world.get_filled_locations():
-        region = world.HintAreaLang.at(location).text(world.settings.clearer_hints)
+        region = world.HintAreaLang.at(location).text(world.language, world.settings.clearer_hints)
         if region == hint_loc:
             if (location.item.majoritem
                 # exclude locked items
@@ -1305,7 +1624,7 @@ def get_important_check_hint(spoiler: Spoiler, world: World, checked: set[str]) 
             {
                 "hint_loc":hint_loc,
                 "item_count":item_count
-             }), 
+             }),
         lang, ['Green', numcolor],prefix=lang.hint_text["gossip_prefix"]), None
 
 
@@ -1602,9 +1921,9 @@ def build_world_gossip_hints(spoiler: Spoiler, world: World, checked_locations: 
             first_item_text = get_hint(get_item_generic_name(first_location.item), world.language, world.settings.clearer_hints).text
             second_item_text = get_hint(get_item_generic_name(second_location.item), world.language, world.settings.clearer_hints).text
             add_hint(
-                spoiler, 
-                world, 
-                stone_groups, 
+                spoiler,
+                world,
+                stone_groups,
                 GossipText(
                     world.language.format_from_id(
                         "hint_text.dual_always",
@@ -1613,14 +1932,14 @@ def build_world_gossip_hints(spoiler: Spoiler, world: World, checked_locations: 
                             "first_item": first_item_text,
                             "second_item": second_item_text
                         }
-                    ), 
+                    ),
                     world.language,
-                    ['Red', 'Green', 'Green'], 
-                    [first_location.name, second_location.name], 
+                    ['Red', 'Green', 'Green'],
+                    [first_location.name, second_location.name],
                     [first_location.item.name, second_location.item.name],
                     prefix=world.language.hint_text["gossip_prefix"]
-                ), 
-                hint_dist['dual_always'][1], [first_location, second_location], 
+                ),
+                hint_dist['dual_always'][1], [first_location, second_location],
                 force_reachable=True, hint_type='dual_always')
             logging.getLogger('').debug('Placed dual_always hint for %s.', hint.name)
 
@@ -1644,9 +1963,9 @@ def build_world_gossip_hints(spoiler: Spoiler, world: World, checked_locations: 
                 location_text = '#%s#' % location_text
             item_text = get_hint(get_item_generic_name(location.item), world.language, world.settings.clearer_hints).text
             add_hint(
-                spoiler, 
-                world, 
-                stone_groups, 
+                spoiler,
+                world,
+                stone_groups,
                 GossipText(
                     world.language.format_from_id(
                         "hint_text.always",
@@ -1654,14 +1973,14 @@ def build_world_gossip_hints(spoiler: Spoiler, world: World, checked_locations: 
                             "location": location_text,
                             "item": item_text
                         }
-                    ), 
+                    ),
                     world.language,
-                    ['Red', 'Green'], 
-                    [location.name], 
+                    ['Red', 'Green'],
+                    [location.name],
                     [location.item.name],
                     prefix=world.language.hint_text["gossip_prefix"]
-                ), 
-                hint_dist['always'][1], [location], 
+                ),
+                hint_dist['always'][1], [location],
                 force_reachable=True, hint_type='always')
             logging.getLogger('').debug('Placed always hint for %s.', location.name)
 
@@ -1687,9 +2006,9 @@ def build_world_gossip_hints(spoiler: Spoiler, world: World, checked_locations: 
                     region_text = '#%s#' % region_text
 
                 add_hint(
-                    spoiler, 
-                    world, 
-                    stone_groups, 
+                    spoiler,
+                    world,
+                    stone_groups,
                     GossipText(
                         world.language.format_from_id(
                             "hint_text.entrance",
@@ -1698,12 +2017,12 @@ def build_world_gossip_hints(spoiler: Spoiler, world: World, checked_locations: 
                                 "region": region_text
                             }
                         ),
-                        world.language, 
+                        world.language,
                         ['Green', 'Light Blue'],
                         prefix=world.language.hint_text["gossip_prefix"]
-                    ), 
-                    hint_dist['entrance_always'][1], 
-                    None, force_reachable=True, 
+                    ),
+                    hint_dist['entrance_always'][1],
+                    None, force_reachable=True,
                     hint_type='entrance_always')
 
     # Add trial hints, only if hint copies > 0
@@ -1714,35 +2033,35 @@ def build_world_gossip_hints(spoiler: Spoiler, world: World, checked_locations: 
             add_hint(spoiler, world, stone_groups, GossipText(world.language.format_from_id("hint_text.trial_none"), world.language, ['Yellow'],prefix=world.language.hint_text["gossip_prefix"]), hint_dist['trial'][1], force_reachable=True, hint_type='trial')
         elif 3 < world.settings.trials < 6:
             if world.hint_dist_user['combine_trial_hints'] and world.settings.trials < 5:
-                add_hint(spoiler, world, stone_groups, 
+                add_hint(spoiler, world, stone_groups,
                          GossipText(
-                             world.language.format_from_id("hint_text.trial_combine_sheik", {"trials": natjoin((world.language.trials[trial] for trial, skipped in world.skipped_trials.items() if skipped), world.language.hint_text["conjunction"], world.language.hint_text["conjunction_more"])}), 
-                             world.language, 
-                             ['Yellow'],prefix=world.language.hint_text["gossip_prefix"]), 
+                             world.language.format_from_id("hint_text.trial_combine_sheik", {"trials": natjoin((world.language.trials[trial] for trial, skipped in world.skipped_trials.items() if skipped), world.language.hint_text["conjunction"], world.language.hint_text["conjunction_more"])}),
+                             world.language,
+                             ['Yellow'],prefix=world.language.hint_text["gossip_prefix"]),
                          hint_dist['trial'][1], force_reachable=True, hint_type='trial')
             else:
                 for trial, skipped in world.skipped_trials.items():
                     if skipped:
-                        add_hint(spoiler, world, stone_groups, 
+                        add_hint(spoiler, world, stone_groups,
                                  GossipText(world.language.format_from_id("hint_text.trial_sheik", {"trial": world.language.trials[trial]}),
-                                            world.language, 
-                                            ['Yellow'],prefix=world.language.hint_text["gossip_prefix"]), 
+                                            world.language,
+                                            ['Yellow'],prefix=world.language.hint_text["gossip_prefix"]),
                                  hint_dist['trial'][1], force_reachable=True, hint_type='trial')
         elif 0 < world.settings.trials <= 3:
             if world.hint_dist_user['combine_trial_hints'] and world.settings.trials > 1:
-                add_hint(spoiler, world, stone_groups, 
+                add_hint(spoiler, world, stone_groups,
                          GossipText(
                              world.language.format_from_id("hint_text.trial_combine_ganon", {"trials": natjoin((world.language.trials[trial] for trial, skipped in world.skipped_trials.items() if skipped), world.language.hint_text["conjunction"], world.language.hint_text["conjunction_more"])}),
-                             world.language,  
-                             ['Pink'],prefix=world.language.hint_text["gossip_prefix"]), 
+                             world.language,
+                             ['Pink'],prefix=world.language.hint_text["gossip_prefix"]),
                          hint_dist['trial'][1], force_reachable=True, hint_type='trial')
             else:
                 for trial, skipped in world.skipped_trials.items():
                     if not skipped:
-                        add_hint(spoiler, world, stone_groups, 
+                        add_hint(spoiler, world, stone_groups,
                                  GossipText(world.language.format_from_id("hint_text.trial_ganon", {"trial": world.language.trials[trial]}),
-                                            world.language, 
-                                            ['Pink'],prefix=world.language.hint_text["gossip_prefix"]), 
+                                            world.language,
+                                            ['Pink'],prefix=world.language.hint_text["gossip_prefix"]),
                                  hint_dist['trial'][1], force_reachable=True, hint_type='trial')
 
     # Add user-specified hinted item locations if using a built-in hint distribution
@@ -1856,7 +2175,7 @@ def build_altar_hints(world: World, messages: list[Message], include_rewards: bo
             'Goron Ruby',
             'Zora Sapphire',
         )]
-        child_text += get_hint('Spiritual Stone Text Start', world.language, world.settings.clearer_hints).text 
+        child_text += get_hint('Spiritual Stone Text Start', world.language, world.settings.clearer_hints).text
         child_text += '\x04' if world.language.base=="en" else "^"
         for (reward, color) in boss_rewards_spiritual_stones:
             child_text += build_boss_string(reward, color, world)
@@ -1898,9 +2217,9 @@ def build_boss_string(reward: str, color: str, world: World) -> str:
                     "hint_text.boss_pocket_clear",
                     {
                         "item_icon": chr(item_icon) if world.language.base=="en" else format(item_icon, '02x')
-                    }), 
-                world.language, 
-                [color], 
+                    }),
+                world.language,
+                [color],
                 prefix='')
         else:
             text = GossipText(
@@ -1908,9 +2227,9 @@ def build_boss_string(reward: str, color: str, world: World) -> str:
                     "hint_text.boss_pocket_vague",
                     {
                         "item_icon": chr(item_icon) if world.language.base=="en" else format(item_icon, '02x')
-                    }), 
-                world.language, 
-                [color], 
+                    }),
+                world.language,
+                [color],
                 prefix='')
     else:
         location = world.hinted_dungeon_reward_locations[reward]
@@ -1925,11 +2244,11 @@ def build_boss_string(reward: str, color: str, world: World) -> str:
                 {
                     "item_icon": chr(item_icon) if world.language.base=="en" else format(item_icon, '02x'),
                     "location_text": location_text
-                }), 
-            world.language, 
-            [color], 
+                }),
+            world.language,
+            [color],
             prefix='')
-    end = + '\x04' if world.language.base == "en" else "^"
+    end = '\x04' if world.language.base == "en" else "^"
     return str(text) + end
 
 
@@ -2012,7 +2331,7 @@ def build_ganon_boss_key_string(world: World) -> str:
             bk_location_string = world.language.format_from_id(
                 "hint_text.ganon_lacs_bk",
                 {
-                    "item_req":item_req_string, 
+                    "item_req":item_req_string,
                     "verb":verb_singular if count == 1 else verb_plural
                     })
         elif world.settings.shuffle_ganon_bosskey in ('stones', 'medallions', 'dungeons', 'tokens', 'hearts'):
@@ -2026,13 +2345,13 @@ def build_ganon_boss_key_string(world: World) -> str:
             item_req_string = world.language.format_from_id(
                 "hint_text.req_custom",
                 {
-                    "count": count, 
+                    "count": count,
                     "item": singular if count == 1 else plural
                     })
             bk_location_string = world.language.format_from_id(
                 "hint_text.ganon_grant_bk",
                 {
-                    "item_req":item_req_string, 
+                    "item_req":item_req_string,
                     "verb":verb_singular if count == 1 else verb_plural
                     })
         else:
@@ -2077,7 +2396,7 @@ def build_misc_item_hints(world: World, messages: list[Message], allow_duplicate
                     text = world.language.format_from_text(
                         d['custom_item_text'],
                         {
-                            "area":area, 
+                            "area":area,
                             "item":get_hint(get_item_generic_name(location.item), world.language, world.settings.clearer_hints).text,
                         }
                     )
