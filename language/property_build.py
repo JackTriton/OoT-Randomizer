@@ -2126,7 +2126,7 @@ hintPrefixes: list[str] = [
     '',
 ]
 
-# Hint area texts, DON'T change the ones with 'None'
+# Hint area texts
 hint_area_enum = {
     "ROOT": {
         "vague_prep": 'in',
