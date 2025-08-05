@@ -81,6 +81,7 @@ def load_settings(settings_file: dict[str, Any] | str, seed: Optional[str] = Non
             raise RuntimeError("Running test with in memory file but did not supply a filename for output file.")
         j = settings_file
         j.update({
+            'language_selection': 'English',
             'enable_distribution_file': True,
             'distribution_file': os.path.join(test_dir, 'plando', filename + '.json')
         })
@@ -113,6 +114,7 @@ def generate_with_plandomizer(filename: str, live_copy: bool = False, max_attemp
         settings = load_settings(distribution_file['settings'], seed='TESTTESTTEST', filename=filename)
     except KeyError:  # No settings dict in distribution file, create minimal consistent configuration
         settings = Settings({
+            'language_selection': 'English',
             'enable_distribution_file': True,
             'distribution_file': os.path.join(test_dir, 'plando', filename + '.json'),
             'create_patch_file': False,
@@ -216,6 +218,7 @@ class TestPlandomizer(unittest.TestCase):
         for logic_rules_setting in logic_rules_settings:
             with self.subTest(f"Logic Rules: {logic_rules_setting}"):
                 settings = Settings({
+                    'language_selection': 'English',
                     'enable_distribution_file': True,
                     'distribution_file': os.path.join(test_dir, 'plando', filename + '.json'),
                     'patch_without_output': True,
@@ -902,6 +905,7 @@ class TestValidSpoilers(unittest.TestCase):
     def test_fuzzer(self):
         random.seed()
         fuzz_settings = [Settings({
+            'language_selection': 'English',
             'randomize_settings': True,
             'create_patch_file': False,
             'create_compressed_rom': False,

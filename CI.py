@@ -15,7 +15,7 @@ from Main import resolve_settings
 from Patches import get_override_table, get_override_table_bytes
 from Rom import Rom
 import Unittest as Tests
-from language.property_build import ITEM_MESSAGES, KEYSANITY_MESSAGES, MISC_MESSAGES
+from Language import Language
 from SettingsList import SettingInfos, logic_tricks, validate_settings
 import Unittest as Tests
 from Utils import data_path
@@ -142,8 +142,8 @@ def check_message_duplicates() -> None:
                     message_id2, message2 = new_item_messages[j]
                     if message_id1 == message_id2:
                         error(f'Duplicate MessageID found: {hex(message_id1)}, {message1}, {message2}', False)
-
-    messages = ITEM_MESSAGES + KEYSANITY_MESSAGES + MISC_MESSAGES
+    lang = Language("English")
+    messages = lang.ITEM_MESSAGES + lang.KEYSANITY_MESSAGES + lang.MISC_MESSAGES
     check_for_duplicates(messages)
 
 

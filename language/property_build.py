@@ -9,7 +9,7 @@ lang_property = {
 }
 
 # DON'T CHANGE THESE VV
-color_white = "\x05\x40" if lang_property["base"] == "en" else "#00"
+color_white = "#00" if lang_property["base"] == "jp" else "\x05\x40" 
 # DON'T CHANGE THESE ^^
 
 # Prefix property for the language

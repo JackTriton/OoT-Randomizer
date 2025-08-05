@@ -111,7 +111,7 @@ CONTROL_CHARS_JP: dict[str, tuple[str, str|int, int, int]] = {
 CC_PARSE_JP: Dict[int, Tuple[str, int, Callable[[Any], str]]] = {}
 
 for _k, (name_jp, byte, ext_len_jp, code) in CONTROL_CHARS_JP.items():
-    byte_key = byte if isinstance(byte, int) else int.from_bytes(byte.encode("cp932"))
+    byte_key = byte if isinstance(byte, int) else int.from_bytes(byte.encode("cp932"), 'big')
     try:
         print_fmt = CONTROL_CODES[code][2]
     except KeyError:
@@ -218,25 +218,25 @@ TEMPLE_HINTS_MESSAGES: list[int] = [0x7057, 0x707A]  # dungeon reward hints from
 GS_TOKEN_MESSAGES: list[int] = [0x00B4, 0x00B5]  # Get Gold Skulltula Token messages
 ERROR_MESSAGE: int = 0x0001
 KEYSANITY_IDS = [
-    6, 28, 29, 30, 42, 97, 98, 99, 100, 101, 
-    124, 125, 126, 127, 135, 136, 137, 138, 
-    139, 140, 142, 143, 146, 147, 148, 149, 
-    155, 159, 160, 161, 162, 163, 165, 166, 
-    169, 243, 36891, 36892, 36893, 36894, 
-    36895, 36896, 36897, 36898, 36899, 36900, 
-    36901, 36902, 36903, 36904, 36905, 36906, 
-    36907, 36908, 36909, 36910, 36911, 36912, 
-    36913, 36914, 36915, 36916, 36917, 36918, 
-    36919, 36920, 36921, 36922, 36923, 36924, 
-    36925, 36926, 36927, 36928, 36929, 36930, 
-    36931, 36932, 36933, 36934, 36937, 36941, 
-    36942, 36943, 36944, 36945, 36946, 36947, 
-    36950, 36952, 36955, 36956, 36957, 36960, 
-    36961, 36962, 36963, 36965, 36966, 36967, 
-    36968, 36969, 36970, 36971, 36973, 36975, 
-    36976, 36977, 36980, 36981, 36982, 36983, 
-    36984, 36985, 36986, 36987, 36988, 36989, 
-    36990, 36991, 36992, 36993, 36994, 36995, 
+    6, 28, 29, 30, 42, 97, 98, 99, 100, 101,
+    124, 125, 126, 127, 135, 136, 137, 138,
+    139, 140, 142, 143, 146, 147, 148, 149,
+    155, 159, 160, 161, 162, 163, 165, 166,
+    169, 243, 36891, 36892, 36893, 36894,
+    36895, 36896, 36897, 36898, 36899, 36900,
+    36901, 36902, 36903, 36904, 36905, 36906,
+    36907, 36908, 36909, 36910, 36911, 36912,
+    36913, 36914, 36915, 36916, 36917, 36918,
+    36919, 36920, 36921, 36922, 36923, 36924,
+    36925, 36926, 36927, 36928, 36929, 36930,
+    36931, 36932, 36933, 36934, 36937, 36941,
+    36942, 36943, 36944, 36945, 36946, 36947,
+    36950, 36952, 36955, 36956, 36957, 36960,
+    36961, 36962, 36963, 36965, 36966, 36967,
+    36968, 36969, 36970, 36971, 36973, 36975,
+    36976, 36977, 36980, 36981, 36982, 36983,
+    36984, 36985, 36986, 36987, 36988, 36989,
+    36990, 36991, 36992, 36993, 36994, 36995,
     36996, 36997, 36998, 36999, 37000, 37001, 37002
     ]
 
@@ -286,7 +286,7 @@ def encode_text_string_jp(text: str) -> list[int]:
             continue
         if ch in CONTROL_CHARS_JP.keys():
             _,h,q,_ = CONTROL_CHARS_JP[ch]
-            if q % 2 == 1: 
+            if q % 2 == 1:
                 c += "0C" if ch == "#" else "00"
             q *= 2
             if type(h) == int:
@@ -298,7 +298,7 @@ def encode_text_string_jp(text: str) -> list[int]:
         if mapped:
             result.append(mapped)
             continue
-        else: 
+        else:
             result.append(int.from_bytes(ch.encode("cp932")))
     return result
 
@@ -324,18 +324,18 @@ def encode_text_string(text: str) -> list[int]:
 
 def bytearray_to_list(text: bytearray, lang: int):
     l = list(text)
-    if lang: 
+    if lang:
         return l
-    else: 
+    else:
         return [hi * 0x100 + lo for hi, lo in zip(l[::2], l[1::2])]
 
 def form_list(text: list[int], lang: int):
     if lang: return text
-    else: 
-        if all([t<256*256 for t in text]): 
+    else:
+        if all([t<256*256 for t in text]):
             return text
         return [hi * 0x100 + lo for hi, lo in zip(text[::2], text[1::2])]
-    
+
 def parse_control_codes(text: list[int] | bytearray | str, lang: int) -> list[TextCode]:
     if isinstance(text, list):
         text_bytes = form_list(text, lang)
@@ -377,7 +377,7 @@ def parse_control_codes(text: list[int] | bytearray | str, lang: int) -> list[Te
 class TextCode:
     def __init__(self, code: int, data: int, lang: str|int) -> None:
         self.code: int = code
-        self.lang: int = 1 if lang in ["en", 1] else 0
+        self.lang: int = 0 if lang in ["jp", 0] else 1
         self.get_control_codes()
         if code in self.CC:
             self.type = self.CC[code][0]
@@ -438,7 +438,7 @@ class TextCode:
                 return ret
             else:
                 name, ext_len, _, literal=self.CC[self.code]
-                if name == "color": 
+                if name == "color":
                     subdata -= 0x0C00
                 width = ext_len * 2
                 return literal+f"{subdata:0{width}X}" if ext_len!=0 else literal
@@ -475,7 +475,7 @@ class TextCode:
 # holds a single message, and all its data
 class Message:
     def __init__(self, raw_text: list[int] | bytearray | str, index: int, id: int, opts: int, offset: int, length: int, lang: str) -> None:
-        self.lang: int = 1 if lang == "en" else 0
+        self.lang: int = 0 if lang == "jp" else 1
         if isinstance(raw_text, str):
             raw_text = encode_text_string(raw_text) if self.lang else encode_text_string_jp(raw_text)
         elif not isinstance(raw_text, bytearray):
@@ -521,7 +521,7 @@ class Message:
         for code in self.text_codes:
             ret = ret + code.get_python_string()
         return ret
-    
+
     def get_string(self) -> str:
         ret = ''
         for code in self.text_codes:
@@ -601,7 +601,7 @@ class Message:
         box_breaks = [[0x81A5, 0x81A3], [0x04, 0x0C]][self.lang]
         slows_text = [[0x8189, 0x818A, 0x86C9], [0x08, 0x09, 0x14]][self.lang]
         slow_icons = [0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x04, 0x02]
-        
+
         ignores = []
         # ignore ending codes if it's going to be replaced
         if replace_ending:
@@ -673,10 +673,10 @@ class Message:
         # write it back
         entry_offset = EXTENDED_TABLE_START + 8 * index
         rom.write_bytes(entry_offset, entry)
-        
+
         for code in self.text_codes:
             offset = code.write(rom, text_start, offset)
-            
+
         while offset % 4 > 0:
             offset = TextCode(0x00, 0, self.lang).write(rom, text_start, offset) # pad to 4 byte align
 
@@ -709,8 +709,8 @@ class Message:
     @classmethod
     def from_string(cls, text: str, lang: str, id: int = 0, opts: int = 0x00) -> Message:
         bytes = text
-        if not text.endswith(f"{'\x02' if lang=="en" else '｝'}"):
-            bytes += f"{'\x02' if lang=="en" else '｝'}"
+        if not text.endswith('｝' if lang == 'jp' else '\x02'):
+            bytes += '｝' if lang == 'jp' else '\x02'
         length = len(bytes) + 1
         if lang != "en":
             length *= 2
@@ -718,7 +718,7 @@ class Message:
 
     @classmethod
     def from_bytearray(cls, text: bytearray, lang: str, id: int = 0, opts: int = 0x00) -> Message:
-        lang_int = 1 if lang == "en" else 0
+        lang_int = 0 if lang == "jp" else 1
         bytes = bytearray_to_list(text,lang_int)
         if bytes[-1] != [0x8170,0x02][lang_int]:
             bytes += [0x8170,0x02][lang_int]
@@ -742,11 +742,11 @@ def update_message_by_id(messages: list[Message], id: int, text: bytearray | str
     new_messages.append(id)
     # get the message index
     index = next( (m.index for m in messages if m.id == id), -1)
-    
+
     # align the text when the proposed align text by the language isn't "Left"
     if lang.lang_property["align_text"] != "Left" and not force_left:
         text = line_wrap(text, lang.base, align=lang.lang_property["align_text"])
-    
+
     # update if it was found
     if index >= 0:
         update_message_by_index(messages, index, text, lang, opts)
@@ -920,7 +920,7 @@ def make_player_message(text: str, lang: Language) -> str:
     new_text = text
     # Replace the first instance of a 'You' with the player name
     if lang.search is not None:
-        if lang.base=="en":
+        if lang.base != "jp":
             lower_text = text.lower()
             you_index = lower_text.find(lang.search)
         if you_index != -1:
@@ -966,7 +966,7 @@ def add_item_messages(messages: list[Message], shop_items: Iterable[ShopItem], w
 
 # reads each of the game's messages into a list of Message objects
 def read_messages(rom: Rom, lang: Language) -> list[Message]:
-    table_offset = ENG_TABLE_START if lang.base=="en" else JPN_TABLE_START
+    table_offset = JPN_TABLE_START if lang.base == "jp" else ENG_TABLE_START
     index = 0
     messages = []
     while True:
@@ -979,8 +979,8 @@ def read_messages(rom: Rom, lang: Language) -> list[Message]:
         if id == 0xFFFF:
             break # this marks the end of the table
         if lang.base == "jp" and id == 0xFFFC: break
-        
-        messages.append(Message.from_rom(rom, index, eng=lang.base=="en"))
+
+        messages.append(Message.from_rom(rom, index, eng = lang.base != "jp"))
 
         index += 1
         table_offset += 8
@@ -1166,7 +1166,7 @@ def shuffle_messages(messages: list[Message], except_hints: bool = True) -> list
 # Update warp song text boxes for ER
 def update_warp_song_text(messages: list[Message], world: World) -> None:
     lang = world.language
-    lang_num = 0 if lang.base == "en" else 1
+    lang_num = 1 if lang.base == "jp" else 0
     msg_list = {
         0x088D: 'Minuet of Forest Warp -> Sacred Forest Meadow',
         0x088E: 'Bolero of Fire Warp -> DMC Central Local',

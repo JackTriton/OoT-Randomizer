@@ -298,7 +298,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     rom.write_int32s(0x14B9F20, [0x00000000, 0x00000000, 0x00000000, 0x00000000])  # Boss Key (Gem)
 
     # Force language to be specific language base
-    rom.write_byte(0x3E, 0x45 if lang.base == "en" else 0x4A)
+    rom.write_byte(0x3E, 0x4A if lang.base == "jp" else 0x45)
     rom.force_patch.append(0x3E)
 
     # Increase the instance size of Bombchus prevent the heap from becoming corrupt when
@@ -1202,7 +1202,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         jabu_item = location.item
         reward_text = get_hint(get_item_generic_name(location.item), lang, True).text
         reward_color = REWARD_COLORS.get(location.item.name, 'Blue')
-        new_message = lang.format_from_id("PATCH_TEXTS.ruto_text",{"color":COLOR_MAP[reward_color][0 if lang.base == "en" else 1],"reward_text":reward_text})
+        new_message = lang.format_from_id("PATCH_TEXTS.ruto_text",{"color":COLOR_MAP[reward_color][1 if lang.base == "jp" else 0],"reward_text":reward_text})
     update_message_by_id(messages, 0x4050, new_message, lang)
 
     # Set Dungeon Reward Actor in Jabu Jabu to be accurate
@@ -1845,7 +1845,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
                         "PATCH_TEXTS.compass",
                         {
                             "dungeon_name": dungeon_name,
-                            "color": COLOR_MAP[REWARD_COLORS[dungeon_reward]][0 if lang.base == "en" else 1],
+                            "color": COLOR_MAP[REWARD_COLORS[dungeon_reward]][1 if lang.base == "jp" else 0],
                             "dungeon_reward": world.language.hintTable[dungeon][1],
                             "gender": gender
                         }
@@ -1893,7 +1893,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
 
     # set end credits text to automatically fade without player input,
     # with timing depending on the number of lines in the text box
-    lang_num = 0 if lang.base == "en" else 1
+    lang_num = 1 if lang.base == "jp" else 0
     for message_id in (0x706F, 0x7091, 0x7092, 0x7093, 0x7094, 0x7095):
         text_codes = []
         chars_in_section = 1
@@ -1933,9 +1933,9 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             bfa_message = make_player_message(bfa_message, lang)
         update_message_by_id(messages, 0x0071, bfa_message, lang, 0x23, allow_duplicates=True)
 
-        with open(lang.data['blue_fire_arrow_item_name_eng.ia4' if lang.base=="en" else 'blue_fire_arrow_item_name_jap.ia4'], 'rb') as stream:
+        with open(lang.data['blue_fire_arrow_item_name_jap.ia4' if lang.base == "jp" else 'blue_fire_arrow_item_name_eng.ia4'], 'rb') as stream:
             bfa_name_bytes = stream.read()
-            rom.write_bytes(0x8a1c00 if lang.base=="en" else 0x883000, bfa_name_bytes)
+            rom.write_bytes(0x883000 if lang.base == "jp" else 0x8A1C00, bfa_name_bytes)
 
     repack_messages(rom, messages, lang.base, permutation)
 

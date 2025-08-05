@@ -34,7 +34,7 @@ hex_string_regex: re.Pattern = re.compile(r"\$\{((?:[0-9a-f][0-9a-f] ?)+)}", fla
 
 def line_wrap(text: str, lang: str, strip_existing_lines: bool = False, strip_existing_boxes: bool = False, replace_control_chars: bool = True, align: str = "Left"):
     # Replace stand-in characters with their actual control code.
-    lang = 1 if lang=="en" else 0
+    lang = 0 if lang == "jp" else 1
     line_box = LINES_PER_BOX if lang else LINES_PER_BOX_JP
 
     skip_align = [0x81BC, 0x81B8, 0x819A]
@@ -390,12 +390,12 @@ def line_wrap_tests(lang) -> None:
 
 
 def test_wrap_simple_line(lang) -> None:
-    if lang == "en":
+    if lang == "jp":
+        words = 'あいうえおかきくけこさしすせそたちつてと'
+        expected = 'あいうえおかきくけこさしすせそた&ちつてと'
+    else:
         words = 'Hello World! Hello World! Hello World!'
         expected = 'Hello World! Hello World! Hello\x01World!'
-    else:
-        words = '★04あいうえおかきくけこさしすせそたちつてと'
-        expected = '★04あいうえおかきくけこさし&すせそたちつてと'
     result = line_wrap(words,lang)
 
     if result != expected:
@@ -405,8 +405,12 @@ def test_wrap_simple_line(lang) -> None:
 
 
 def test_honor_forced_line_wraps(lang) -> None:
-    words = 'Hello World! Hello World!&Hello World! Hello World! Hello World!'
-    expected = 'Hello World! Hello World!\x01Hello World! Hello World! Hello\x01World!'
+    if lang == "jp":
+        words = 'あいう&えおかきくけこさしすせそたちつてとなにぬねの'
+        expected = 'あいう&えおかきくけこさしすせそたちつて&と'
+    else:
+        words = 'Hello World! Hello World!&Hello World! Hello World! Hello World!'
+        expected = 'Hello World! Hello World!\x01Hello World! Hello World! Hello\x01World!'
     result = line_wrap(words, lang)
 
     if result != expected:
@@ -416,8 +420,12 @@ def test_honor_forced_line_wraps(lang) -> None:
 
 
 def test_honor_box_breaks(lang) -> None:
-    words = 'Hello World! Hello World!^Hello World! Hello World! Hello World!'
-    expected = 'Hello World! Hello World!\x04Hello World! Hello World! Hello\x01World!'
+    if lang == "jp":
+        words = 'あいう^えおかきくけこさしすせそたちつてとなにぬねの'
+        expected = 'あいう^えおかきくけこさしすせそたちつて&と'
+    else:
+        words = 'Hello World! Hello World!^Hello World! Hello World! Hello World!'
+        expected = 'Hello World! Hello World!\x04Hello World! Hello World! Hello\x01World!'
     result = line_wrap(words, lang)
 
     if result != expected:
@@ -427,8 +435,12 @@ def test_honor_box_breaks(lang) -> None:
 
 
 def test_honor_control_characters(lang) -> None:
-    words = 'Hello World! #Hello# World! Hello World!'
-    expected = 'Hello World! \x05\x00Hello\x05\x00 World! Hello\x01World!'
+    if lang == "jp":
+        words = 'あいうえお#01かきくけこ#00さしすせそたちつてと'
+        expected = 'あいうえお#01かきくけこ#00さしすせそた&ちつてと'
+    else:
+        words = 'Hello World! #Hello# World! Hello World!'
+        expected = 'Hello World! \x05\x00Hello\x05\x00 World! Hello\x01World!'
     result = line_wrap(words, lang)
 
     if result != expected:
@@ -438,8 +450,12 @@ def test_honor_control_characters(lang) -> None:
 
 
 def test_honor_player_name(lang) -> None:
-    words = 'Hello @! Hello World! Hello World!'
-    expected = 'Hello \x0F! Hello World!\x01Hello World!'
+    if lang == "jp":
+        words = 'あいうえお@さしすせそたちつてと'
+        expected = 'あいうえお@さしすせそた&ちつてと'
+    else:
+        words = 'Hello @! Hello World! Hello World!'
+        expected = 'Hello \x0F! Hello World!\x01Hello World!'
     result = line_wrap(words, lang)
 
     if result != expected:
@@ -449,8 +465,12 @@ def test_honor_player_name(lang) -> None:
 
 
 def test_maintain_multiple_forced_breaks(lang) -> None:
-    words = 'Hello World!&&&Hello World!'
-    expected = 'Hello World!\x01\x01\x01Hello World!'
+    if lang == "jp":
+        words = 'あいうえお&&&かきくけこさしすせそたちつてと'
+        expected = 'あいうえお&&^かきくけこさしすせそたちつてと'
+    else:
+        words = 'Hello World!&&&Hello World!'
+        expected = 'Hello World!\x01\x01\x01Hello World!'
     result = line_wrap(words, lang)
 
     if result != expected:
@@ -460,8 +480,12 @@ def test_maintain_multiple_forced_breaks(lang) -> None:
 
 
 def test_trim_whitespace(lang) -> None:
-    words = 'Hello World! & Hello World!'
-    expected = 'Hello World!\x01Hello World!'
+    if lang == "jp":
+        words = 'あいうえおかきく　けこさしすせそたちつてと'
+        expected = 'あいうえおかきく　けこさしすせそ&たちつてと'
+    else:
+        words = 'Hello World! & Hello World!'
+        expected = 'Hello World!\x01Hello World!'
     result = line_wrap(words, lang)
 
     if result != expected:
@@ -471,8 +495,12 @@ def test_trim_whitespace(lang) -> None:
 
 
 def test_support_long_words(lang) -> None:
-    words = 'Hello World! WWWWWWWWWWWWWWWWWWWW Hello World!'
-    expected = 'Hello World!\x01WWWWWWWWWWWWWWWWWWWW\x01Hello World!'
+    if lang == "jp":
+        words = 'あいうえおかきくけこさしすせそたちつてと'
+        expected = 'あいうえおかきくけこさしすせそた&ちつてと'
+    else:
+        words = 'Hello World! WWWWWWWWWWWWWWWWWWWW Hello World!'
+        expected = 'Hello World!\x01WWWWWWWWWWWWWWWWWWWW\x01Hello World!'
     result = line_wrap(words, lang)
 
     if result != expected:

@@ -101,9 +101,9 @@ class GossipText:
         return {'text': self.text, 'colors': self.colors, 'hinted_locations': self.hinted_locations, 'hinted_items': self.hinted_items}
 
     def __str__(self) -> str:
-        if self.lang.base == "en":
-            return get_raw_text(line_wrap(color_text(self, self.lang), self.lang.base), self.lang.base)
-        return get_raw_text(color_text(self, self.lang), self.lang.base)
+        if self.lang.base == "jp":
+            return get_raw_text(color_text(self, self.lang), self.lang.base)
+        return get_raw_text(line_wrap(color_text(self, self.lang), self.lang.base), self.lang.base)
 
 
 #   Abbreviations
@@ -348,21 +348,7 @@ def color_text(gossip_text: GossipText, lang: Language) -> str:
     text = gossip_text.text
     colors = list(gossip_text.colors) if gossip_text.colors is not None else []
     color = 'White'
-    if lang.base=="en":
-        while '#' in text:
-            split_text = text.split('#', 2)
-            if len(colors) > 0:
-                color = colors.pop(0)
-
-            for prefix in lang.hintPrefixes:
-                if split_text[1].startswith(prefix):
-                    split_text[0] += split_text[1][:len(prefix)]
-                    split_text[1] = split_text[1][len(prefix):]
-                    break
-
-            split_text[1] = '\x05' + COLOR_MAP[color][0] + split_text[1] + '\x05\x40'
-            text = ''.join(split_text)
-    else:
+    if lang.base=="jp":
         index = 0
         while "#" in text[index:]:
             pre_text = text[:index]
@@ -376,6 +362,20 @@ def color_text(gossip_text: GossipText, lang: Language) -> str:
             split_text[1] = "#" + split_text[1] + "#"
             index += len(split_text[0]) + len(split_text[1])
             text = "".join(split_text)
+    else:
+        while '#' in text:
+            split_text = text.split('#', 2)
+            if len(colors) > 0:
+                color = colors.pop(0)
+
+            for prefix in lang.hintPrefixes:
+                if split_text[1].startswith(prefix):
+                    split_text[0] += split_text[1][:len(prefix)]
+                    split_text[1] = split_text[1][len(prefix):]
+                    break
+
+            split_text[1] = '\x05' + COLOR_MAP[color][0] + split_text[1] + '\x05\x40'
+            text = ''.join(split_text)
     return text
 
 
@@ -511,9 +511,9 @@ class HintArea(Enum):
             text = f'#{text}#'
         if preposition and self.preposition(clearer_hints) is not None:
             if prep_pos == "first":
-                text = f"{self.preposition(clearer_hints)}{' ' if lang.base=="en" else '　'}{text}"
+                text = f"{self.preposition(clearer_hints)}{' ' if lang.base=='en' else '　'}{text}"
             elif prep_pos == "last":
-                text = f"{text}{' ' if lang.base=="en" else '　'}{self.preposition(clearer_hints)}"
+                text = f"{text}{' ' if lang.base=='en' else '　'}{self.preposition(clearer_hints)}"
         return text
 
 
@@ -2168,7 +2168,7 @@ def build_world_gossip_hints(spoiler: Spoiler, world: World, checked_locations: 
 # builds text that is displayed at the temple of time altar for child and adult, rewards pulled based off of item in a fixed order.
 def build_altar_hints(world: World, messages: list[Message], include_rewards: bool = True, include_wincons: bool = True) -> None:
     # text that appears at altar as a child.
-    child_text = '\x08' if world.language.base == "en" else "♂"
+    child_text = '♂' if world.language.base == "jp" else "\x08"
     if include_rewards:
         boss_rewards_spiritual_stones = [(reward, REWARD_COLORS[reward]) for reward in (
             'Kokiri Emerald',
@@ -2176,15 +2176,15 @@ def build_altar_hints(world: World, messages: list[Message], include_rewards: bo
             'Zora Sapphire',
         )]
         child_text += get_hint('Spiritual Stone Text Start', world.language, world.settings.clearer_hints).text
-        child_text += '\x04' if world.language.base=="en" else "^"
+        child_text += '^' if world.language.base == "jp" else "\x04"
         for (reward, color) in boss_rewards_spiritual_stones:
             child_text += build_boss_string(reward, color, world)
     child_text += build_dot_reqs_string(world)
-    child_text += '\x0B' if world.language.base=="en" else "◆"
+    child_text += '◆' if world.language.base == "jp" else "\x0B"
     update_message_by_id(messages, 0x707A, get_raw_text(child_text, world.language.base), world.language, 0x20)
 
     # text that appears at altar as an adult.
-    adult_text = '\x08' if world.language.base == "en" else "♂"
+    adult_text = '♂' if world.language.base == "jp" else "\x08"
     adult_text += get_hint('Adult Altar Text Start', world.language, world.settings.clearer_hints).text + '\x04'
     if include_rewards:
         boss_rewards_medallions = [(reward, REWARD_COLORS[reward]) for reward in (
@@ -2199,11 +2199,11 @@ def build_altar_hints(world: World, messages: list[Message], include_rewards: bo
             adult_text += build_boss_string(reward, color, world)
     if include_wincons:
         adult_text += build_bridge_reqs_string(world)
-        adult_text += '\x04' if world.language.base=="en" else "^"
+        adult_text += '^' if world.language.base=="jp" else "\x04"
         adult_text += build_ganon_boss_key_string(world)
     else:
         adult_text += get_hint('Adult Altar Text End', world.language, world.settings.clearer_hints).text
-    adult_text += '\x0B' if world.language.base=="en" else "◆"
+    adult_text += '◆' if world.language.base == "jp" else "\x0B"
     update_message_by_id(messages, 0x7057, get_raw_text(adult_text, world.language.base), world.language, 0x20)
 
 
@@ -2216,7 +2216,7 @@ def build_boss_string(reward: str, color: str, world: World) -> str:
                 world.language.format_from_id(
                     "hint_text.boss_pocket_clear",
                     {
-                        "item_icon": chr(item_icon) if world.language.base=="en" else format(item_icon, '02x')
+                        "item_icon": format(item_icon, '02x') if world.language.base=="jp" else chr(item_icon)
                     }),
                 world.language,
                 [color],
@@ -2226,7 +2226,7 @@ def build_boss_string(reward: str, color: str, world: World) -> str:
                 world.language.format_from_id(
                     "hint_text.boss_pocket_vague",
                     {
-                        "item_icon": chr(item_icon) if world.language.base=="en" else format(item_icon, '02x')
+                        "item_icon": format(item_icon, '02x') if world.language.base=="jp" else chr(item_icon)
                     }),
                 world.language,
                 [color],
@@ -2242,13 +2242,13 @@ def build_boss_string(reward: str, color: str, world: World) -> str:
             world.language.format_from_id(
                 "hint_text.boss_string",
                 {
-                    "item_icon": chr(item_icon) if world.language.base=="en" else format(item_icon, '02x'),
+                    "item_icon": format(item_icon, '02x') if world.language.base == "jp" else chr(item_icon),
                     "location_text": location_text
                 }),
             world.language,
             [color],
             prefix='')
-    end = '\x04' if world.language.base == "en" else "^"
+    end = "^" if world.language.base == "jp" else '\x04'
     return str(text) + end
 
 
@@ -2306,7 +2306,7 @@ def build_bridge_reqs_string(world: World) -> str:
 
 
 def build_ganon_boss_key_string(world: World) -> str:
-    string = "\x13\x74" if world.language.base == "en" else "★74" # Boss Key Icon
+    string = "★74" if world.language.base == "jp" else "\x13\x74" # Boss Key Icon
     if world.settings.shuffle_ganon_bosskey == 'remove':
         string += world.language.format_from_id("hint_text.ganon_remove")
     else:
@@ -2365,7 +2365,7 @@ def build_ganon_boss_key_string(world: World) -> str:
 # fun new lines for Ganon during the final battle
 def build_ganon_text(world: World, messages: list[Message]) -> None:
     # empty now unused messages to make space for ganon lines
-    empty_word = ' ' if world.language.base == "en" else "　"
+    empty_word = "　" if world.language.base == "jp" else ' '
     update_message_by_id(messages, 0x70C8, empty_word, world.language, force_left=True)
     update_message_by_id(messages, 0x70C9, empty_word, world.language, force_left=True)
     update_message_by_id(messages, 0x70CA, empty_word, world.language, force_left=True)
@@ -2489,7 +2489,7 @@ def build_misc_dual_hints(world: World, messages: list[Message]) -> None:
 
 def get_raw_text(string: str, lang: str) -> str:
     text = ''
-    if lang=="en":
+    if lang != "jp":
         for char in string:
             if char == '^':
                 text += '\x04' # box break
