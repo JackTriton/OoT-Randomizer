@@ -27,7 +27,7 @@ def htz(s: str) -> str:
 
 class Language:
     def __init__(self, lang: str):
-        message=json.load(open(os.path.join(lang_path(lang),"property.json"),mode="r+"))
+        message=json.load(open(os.path.join(lang_path(lang), "property.json"), mode="r+", encoding="utf-8"))
         self.__dict__.update(message)
         self.base=self.lang_property["base"]
         extensions = (".bin", ".ia4", ".zobj")
