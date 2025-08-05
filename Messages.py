@@ -629,6 +629,10 @@ class Message:
                     continue
                 current_color = code.data
             # ignore ending codes if it's going to be replaced
+            if speed_up_text and code.code == 0x81CB and not self.lang:
+                text_codes.append(TextCode([0x818A,0x09][self.lang], 0, self.lang))
+                text_codes.append(code)
+                continue
             if code.code in ignores:
                 pass
             elif speed_up_text and code.code in box_breaks:
@@ -673,9 +677,8 @@ class Message:
         for code in self.text_codes:
             offset = code.write(rom, text_start, offset)
             
-        if self.lang:
-            while offset % 4 > 0:
-                offset = TextCode(0x00, 0, 1).write(rom, text_start, offset) # pad to 4 byte align
+        while offset % 4 > 0:
+            offset = TextCode(0x00, 0, self.lang).write(rom, text_start, offset) # pad to 4 byte align
 
         return offset
 
@@ -705,14 +708,24 @@ class Message:
 
     @classmethod
     def from_string(cls, text: str, lang: str, id: int = 0, opts: int = 0x00) -> Message:
-        bytes = text + f"{'\x02' if lang=="en" else '｝'}"
-        return cls(bytes, 0, id, opts, 0, len(bytes) + 1, lang)
+        bytes = text
+        if not text.endswith(f"{'\x02' if lang=="en" else '｝'}"):
+            bytes += f"{'\x02' if lang=="en" else '｝'}"
+        length = len(bytes) + 1
+        if lang != "en":
+            length *= 2
+        return cls(bytes, 0, id, opts, 0, length, lang)
 
     @classmethod
     def from_bytearray(cls, text: bytearray, lang: str, id: int = 0, opts: int = 0x00) -> Message:
         lang_int = 1 if lang == "en" else 0
-        bytes = bytearray_to_list(text,lang_int)+[0x8170,0x02][lang_int]
-        return cls(bytes, 0, id, opts, 0, len(bytes) + 1, lang)
+        bytes = bytearray_to_list(text,lang_int)
+        if bytes[-1] != [0x8170,0x02][lang_int]:
+            bytes += [0x8170,0x02][lang_int]
+        length = len(bytes) + 1
+        if lang != "en":
+            length *= 2
+        return cls(bytes, 0, id, opts, 0, length, lang)
 
     __str__ = __repr__ = display
 
@@ -1031,7 +1044,7 @@ def repack_messages(rom: Rom, messages: list[Message], lang: str, permutation: O
 
         # check if there is space to write the message
         message_size = new_message.size()
-        if message_size + offset > JPN_TEXT_SIZE_LIMIT and text_start == JPN_TEXT_START and lang == "en":
+        if message_size + offset > JPN_TEXT_SIZE_LIMIT and text_start == JPN_TEXT_START:
             # Add a dummy entry to the table for the last entry in the
             # JP file. This is used by the game to calculate message
             # length. Since the next entry in the English table has an
@@ -1051,7 +1064,7 @@ def repack_messages(rom: Rom, messages: list[Message], lang: str, permutation: O
 
         # Special handling for text ID 0xFFFC, which has hard-coded offsets to
         # the JP file in function Font_LoadOrderedFont in z_kanfont.c
-        if new_message.id == 0xFFFC and text_bank == 0x08:
+        if new_message.id == 0xFFFC:
             # hard-coded offset including segment
             rom.write_int16(0xAD1CE2, (text_bank << 8) + ((offset & 0xFFFF0000) >> 16) + (1 if offset & 0xFFFF > 0x8000 else 0))
             rom.write_int16(0xAD1CE6, offset & 0XFFFF)
@@ -1084,7 +1097,6 @@ def repack_messages(rom: Rom, messages: list[Message], lang: str, permutation: O
     if 8 * (table_index + 1) > EXTENDED_TABLE_SIZE:
         raise(TypeError("Message ID table is too large: 0x" + "{:x}".format(8 * (table_index + 1)) + " written / 0x" + "{:x}".format(EXTENDED_TABLE_SIZE) + " allowed."))
     rom.write_bytes(entry_offset, [0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
-
 
 # shuffles the messages in the game, making sure to keep various message types in their own group
 def shuffle_messages(messages: list[Message], except_hints: bool = True) -> list[int]:

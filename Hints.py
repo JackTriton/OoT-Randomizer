@@ -101,7 +101,9 @@ class GossipText:
         return {'text': self.text, 'colors': self.colors, 'hinted_locations': self.hinted_locations, 'hinted_items': self.hinted_items}
 
     def __str__(self) -> str:
-        return get_raw_text(line_wrap(color_text(self, self.lang), self.lang.base), self.lang.base)
+        if self.lang.base == "en":
+            return get_raw_text(line_wrap(color_text(self, self.lang), self.lang.base), self.lang.base)
+        return get_raw_text(color_text(self, self.lang), self.lang.base)
 
 
 #   Abbreviations
