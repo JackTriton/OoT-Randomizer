@@ -1735,10 +1735,10 @@
         "censor": [],
         "description": "♂#01{base_name}　{price}ルピー&#00特別セール！　一度きり！♀☜",
         "description_multiplay": "♂#01{base_name}　{price}ルピー&#02プレイヤー{player_id}#00　一度きり！♀☜",
-        "dungeon_description": "♂#01{base_name}　{price}ルピー&（{extra_name}）&#00特別セール！　一度きり！♀☜",
+        "dungeon-item_description": "♂#01{base_name}　{price}ルピー&（{extra_name}）&#00特別セール！　一度きり！♀☜",
         "dungeon-item_description_multiplay": "♂#01{base_name}　{price}ルピー&（{extra_name}）&#02プレイヤー{player_id}#00　一度きり！♀☜",
         "dungeon-item_extra": {},
-        "dungeon-item_purchace": "♂{base_name}　{price}ルピー♀&⊂#02かう&やめとく#00｝",
+        "dungeon-item_purchase": "♂{base_name}　{price}ルピー♀&⊂#02かう&やめとく#00｝",
         "purchase": "♂{base_name}　{price}ルピー♀&⊂#02かう&やめとく#00｝"
     },
     "dungeon_list": {
