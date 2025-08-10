@@ -292,14 +292,14 @@ def encode_text_string_jp(text: str) -> list[int]:
             if type(h) == int:
                 result.append(h)
             else:
-                result.append(int.from_bytes(h.encode("cp932")))
+                result.append(int.from_bytes(h.encode("cp932"), "big"))
             continue
         mapped = CHARACTER_MAP_JP.get(ch)
         if mapped:
             result.append(mapped)
             continue
         else:
-            result.append(int.from_bytes(ch.encode("cp932")))
+            result.append(int.from_bytes(ch.encode("cp932"), "big"))
     return result
 
 def encode_text_string(text: str) -> list[int]:

@@ -1846,7 +1846,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
                         {
                             "dungeon_name": dungeon_name,
                             "color": COLOR_MAP[REWARD_COLORS[dungeon_reward]][1 if lang.base == "jp" else 0],
-                            "dungeon_reward": world.language.hintTable[dungeon][1],
+                            "dungeon_reward": world.language.hintTable[dungeon_reward][1],
                             "gender": gender
                         }
                     )

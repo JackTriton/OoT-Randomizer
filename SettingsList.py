@@ -76,16 +76,6 @@ class SettingInfos:
         },
     )
 
-    language_selection = Combobox(
-        gui_text       = 'Language Selection',
-        default        = 'japanese',
-        choices        = get_language(),
-        gui_tooltip    = '''\
-            Language sets the one that you use on the game itself
-            Some languages requires using NTSC rom instead
-        '''
-    )
-
     tricks_list_msg = Textbox(
         gui_text   = "Your current logic setting does not support the enabling of tricks.",
         gui_params = {
@@ -681,6 +671,15 @@ class SettingInfos:
             'none':       {'settings': ['allowed_tricks', 'advanced_allowed_tricks', 'logic_no_night_tokens_without_suns_song', 'reachable_locations']},
         },
         shared         = True,
+    )
+
+    language_selection = Combobox(
+        gui_text       = 'Language Selection',
+        default        = 'English',
+        choices        = get_language(),
+        gui_tooltip    = '''\
+            Sets the language used within the game.
+        '''
     )
 
     reachable_locations = Combobox(
