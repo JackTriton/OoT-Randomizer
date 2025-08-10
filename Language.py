@@ -27,13 +27,13 @@ def htz(s: str) -> str:
 
 class Language:
     def __init__(self, lang: str):
-        message=json.load(open(os.path.join(lang_path(lang), "property.json"), mode="r+", encoding="utf-8"))
+        message = json.load(open(os.path.join(lang_path(lang), "property.json"), mode="r+", encoding="utf-8"))
         self.__dict__.update(message)
-        self.base=self.lang_property["base"]
+        self.base = self.lang_property["base"]
         extensions = (".bin", ".ia4", ".zobj")
         self.path = lang_path(lang)
         self.data = {
-            fname: os.path.join(lang_path(lang),fname)
+            fname: os.path.join(lang_path(lang), fname)
             for fname in os.listdir(lang_path(lang))
             if fname.lower().endswith(extensions)
         }
@@ -79,13 +79,14 @@ class Language:
     def format_from_id(self, id: str, external: dict = None):
         keys = id.split('.')
         if len(keys)>1:
-            key=keys.pop(0)
-        else: key=keys
-        base = getattr(self,key)
-        i=0
-        while i<len(keys):
+            key = keys.pop(0)
+        else:
+            key = keys
+        base = getattr(self, key)
+        i = 0
+        while i < len(keys):
             if keys[i].isdigit():
-                keys[i]=int(keys[i])
-            i+=1
-        txt = reduce(self._dict_get,keys,base)
+                keys[i] = int(keys[i])
+            i += 1
+        txt = reduce(self._dict_get, keys, base)
         return self.format_from_text(str(txt), external)

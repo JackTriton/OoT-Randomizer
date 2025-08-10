@@ -51,7 +51,7 @@ class Multi:
 
 def get_hint(name: str, lang: Language, clearer_hint: bool = False) -> Hint:
     text_options, clear_text, _ = lang.hintTable[name]
-    _, _, hint_type = hintTable[name]
+    hint_type = hintTable[name][2]
     if clearer_hint:
         if clear_text is None:
             return Hint(name, text_options, hint_type, 0)

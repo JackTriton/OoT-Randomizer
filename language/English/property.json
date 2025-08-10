@@ -1658,7 +1658,7 @@
         "claim": "Brrrring me the Claim Check...\u0001to rrreceive anotherrrrrr item...",
         "compass": "\u0013u\bYou found the \u0005ACompass\u0005@\u0001for {dungeon_name}\u0005@!\u0001It holds the \u0005{color}{dungeon_reward}\u0005@!\t",
         "compass_area": "\u0013u\bYou found the \u0005ACompass\u0005@\u0001for {dungeon_name}\u0005@!\u0001The {vanilla_reward} can be found\u0001{area}!\t",
-        "enough_poe": "\u001aWait a minute! WOW!\u0004\u001aYou have earned \u0005A{poe} points\u0005@!\u0004\u001aYoung man, you are a genuine\u0001\u0005AGhost Hunter\u0005@!\u0004\u001aIs that what you expected me to\u0001say? Heh heh heh!\u0004\u001aBecause of you, I have extra\u0001inventory of \u0005ABig Poes\u0005@, so this will\u0001be the last time I can buy a \u0001ghost.\u0004\u001aYou're thinking about what I \u0001promised would happen when you\u0001earned {poe} points. Heh heh.\u0004\u001aDon't worry, I didn't forget.\u0001Just take this.",
+        "enough_poes": "\u001aWait a minute! WOW!\u0004\u001aYou have earned \u0005A{poe} points\u0005@!\u0004\u001aYoung man, you are a genuine\u0001\u0005AGhost Hunter\u0005@!\u0004\u001aIs that what you expected me to\u0001say? Heh heh heh!\u0004\u001aBecause of you, I have extra\u0001inventory of \u0005ABig Poes\u0005@, so this will\u0001be the last time I can buy a \u0001ghost.\u0004\u001aYou're thinking about what I \u0001promised would happen when you\u0001earned {poe} points. Heh heh.\u0004\u001aDon't worry, I didn't forget.\u0001Just take this.",
         "gallop": "Hey newcomer, you have a fine \u0001horse!\u0004I don't know where you stole \u0001it from, but...\u0004OK, how about challenging this \u0001\u0005Ahorseback archery\u0005@?\u0004Once the horse starts galloping,\u0001shoot the targets with your\u0001arrows. \u0004Let's see how many points you \u0001can score. You get 20 arrows.\u0004If you can score \u0005A1,000 points\u0005@, I will \u0001give you something good! And even \u0001more if you score \u0005A1,500 points\u0005@!\u000b\u0002",
         "granny_item": "How about \u0005A100 Rupees\u0005@ for\u0001\u0005A{item}\u0005@?\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@\u0002",
         "granny_mysterious": "Mysterious item! How about\u0001\u0005A100 Rupees\u0005@?\u0001\u001b\u0005BBuy\u0001Don't buy\u0005@\u0002",
@@ -1699,7 +1699,7 @@
         "warp_owl": "Hold on to my talons! I'll fly you\u0001\b\u0005{color}{destination_name}\u0005 \t!",
         "warp_to": "to {destination_name}"
     },
-    "PLANE_TEXTS": [],
+    "PLAIN_TEXTS": [],
     "REWARD_GOAL_TABLE": {
         "Fire Medallion": [
             "path to #a Goron's sagely power#",

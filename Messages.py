@@ -73,39 +73,39 @@ CONTROL_CODES: dict[int, tuple[str, int, Callable[[Any], str]]] = {
 }
 
 CONTROL_CHARS_JP: dict[str, tuple[str, str|int, int, int]] = {
-    '　':('pad', '　', 0,0x00),
-    '&':('line-break', 0x0A, 0,0x01),
-    '｝':('end', '｝', 0,0x02),
-    '^':('box-break', '▼', 0,0x04),
-    '#':('color', 0x0B, 1,0x05),
-    '☞':('gap', 0x86C7, 1, 0x06),
-    '⇒':('goto', '⇒', 2,0x07),
-    '♂':('instant', '♂', 0,0x08),
-    '♀':('un-instant', '♀', 0,0x09),
-    '☜':('keep-open', 0x86C8,0,0x0A),
-    '◆':('event', '◆', 0,0x0B),
-    '▲':('box-break-delay', '▲', 1,0x0C),
-    '◇':('fade-out', '◇', 1,0x0E),
-    '@':('name', 0x874F,0,0x0F),
-    'Å':('ocarina',0x81F0,0,0x10),
-    '♭':('sound', '♭', 2,0x12),
-    '★':('icon', '★', 1,0x13),
-    '☝':('speed', 0x86C9, 1, 0x14),
-    '〠':('background',0x86B3,3,0x15),
-    '大⃝':('marathon',0x8791,0,0x16),
-    '小⃝':('race',0x8792,0,0x17),
-    '㊘':('points',0x879B,0,0x18),
-    '♠':('skulltula',0x86A3,0,0x19),
-    '☆':('unskippable', '☆', 0,0x1A),
-    '⊂':('two-choice', '⊂', 0,0x1B),
-    '∈':('three-choice', '∈', 0,0x1C),
-    '♣':('fish',0x86A4,0,0x1D),
-    '♤':('highscore',0x869F,1,0x1E),
-    '■':('time', '■', 0, 0x1F),
-    '㍓':('silver_rupee', 0x87F0, 1, 0xF0),
-    '♧':('key_count', 0x87F1, 1, 0xF1),
-    '☼':('outgoing_item_filename', 0x87F2, 0, 0xF2),
-    '▷':('farores_wind_destination', 0x87F3, 0, 0xF3),
+    '　': ('pad', '　', 0, 0x00),
+    '&': ('line-break', 0x0A, 0, 0x01),
+    '｝': ('end', '｝', 0, 0x02),
+    '^': ('box-break', '▼', 0, 0x04),
+    '#': ('color', 0x0B, 1, 0x05),
+    '☞': ('gap', 0x86C7, 1, 0x06),
+    '⇒': ('goto', '⇒', 2, 0x07),
+    '♂': ('instant', '♂', 0, 0x08),
+    '♀': ('un-instant', '♀', 0, 0x09),
+    '☜': ('keep-open', 0x86C8, 0, 0x0A),
+    '◆': ('event', '◆', 0, 0x0B),
+    '▲': ('box-break-delay', '▲', 1, 0x0C),
+    '◇': ('fade-out', '◇', 1, 0x0E),
+    '@': ('name', 0x874F, 0, 0x0F),
+    'Å': ('ocarina', 0x81F0, 0, 0x10),
+    '♭': ('sound', '♭', 2, 0x12),
+    '★': ('icon', '★', 1, 0x13),
+    '☝': ('speed', 0x86C9, 1, 0x14),
+    '〠': ('background', 0x86B3, 3, 0x15),
+    '大⃝': ('marathon', 0x8791, 0, 0x16),
+    '小⃝': ('race', 0x8792, 0, 0x17),
+    '㊘': ('points', 0x879B, 0, 0x18),
+    '♠': ('skulltula', 0x86A3, 0, 0x19),
+    '☆': ('unskippable', '☆', 0, 0x1A),
+    '⊂': ('two-choice', '⊂', 0, 0x1B),
+    '∈': ('three-choice', '∈', 0, 0x1C),
+    '♣': ('fish', 0x86A4, 0, 0x1D),
+    '♤': ('highscore', 0x869F, 1, 0x1E),
+    '■': ('time', '■', 0, 0x1F),
+    '㍓': ('silver_rupee', 0x87F0, 1, 0xF0),
+    '♧': ('key_count', 0x87F1, 1, 0xF1),
+    '☼': ('outgoing_item_filename', 0x87F2, 0, 0xF2),
+    '▷': ('farores_wind_destination', 0x87F3, 0, 0xF3),
 }
 
 CC_PARSE_JP: Dict[int, Tuple[str, int, Callable[[Any], str]]] = {}
@@ -116,7 +116,7 @@ for _k, (name_jp, byte, ext_len_jp, code) in CONTROL_CHARS_JP.items():
         print_fmt = CONTROL_CODES[code][2]
     except KeyError:
         raise ValueError(f"The Value respondes with {name_jp!r} doesn't exist in CONTROL_CODES[{code:#04x}]")
-    CC_PARSE_JP[byte_key] = (name_jp, ext_len_jp, print_fmt,_k)
+    CC_PARSE_JP[byte_key] = (name_jp, ext_len_jp, print_fmt, _k)
 
 
 # Maps unicode characters to corresponding bytes in OOTR's character set.
@@ -175,7 +175,7 @@ for char, byte in CHARACTER_MAP.items():
     REVERSE_MAP[byte] = char
 
 try:
-    CHARACTER_MAP_JP,REVERSE_MAP_JP=json.load(open("./jp_char_map.otrx",mode="r+"))
+    CHARACTER_MAP_JP, REVERSE_MAP_JP = json.load(open("./jp_char_map.otrx", mode="r+"))
 except:
     CHARACTER_MAP_JP: Dict[str, int] = {}
     for cp in range(0x110000):
@@ -209,7 +209,7 @@ except:
     for code, token in SCJP.items():
         if code < 0x10000:
             REVERSE_MAP_JP[code] = token
-    json.dump([CHARACTER_MAP_JP,REVERSE_MAP_JP],open("./jp_char_map.otrx",mode="w"))
+    json.dump([CHARACTER_MAP_JP, REVERSE_MAP_JP], open("./jp_char_map.otrx", mode="w"))
 
 # [0x0500,0x0560] (inclusive) are reserved for plandomakers
 GOSSIP_STONE_MESSAGES: list[int] = list(range(0x0401, 0x04FF))  # ids of the actual hints
@@ -244,14 +244,14 @@ new_messages = [] # Used to keep track of new/updated messages to prevent duplic
 
 
 COLOR_MAP: dict[str, list[str, str]] = {
-    'White':      ['\x40',"00"],
-    'Red':        ['\x41',"01"],
-    'Green':      ['\x42',"02"],
-    'Blue':       ['\x43',"03"],
-    'Light Blue': ['\x44',"04"],
-    'Pink':       ['\x45',"05"],
-    'Yellow':     ['\x46',"06"],
-    'Black':      ['\x47',"07"],
+    'White':      ['\x40', "00"],
+    'Red':        ['\x41', "01"],
+    'Green':      ['\x42', "02"],
+    'Blue':       ['\x43', "03"],
+    'Light Blue': ['\x44', "04"],
+    'Pink':       ['\x45', "05"],
+    'Yellow':     ['\x46', "06"],
+    'Black':      ['\x47', "07"],
 }
 
 
@@ -281,11 +281,11 @@ def encode_text_string_jp(text: str) -> list[int]:
             c += ch
             q -= 1
             if len(c) == 4 or (q == 0 and c != ""):
-                result.append(int(f"{c}",16))
+                result.append(int(f"{c}", 16))
                 c = ""
             continue
         if ch in CONTROL_CHARS_JP.keys():
-            _,h,q,_ = CONTROL_CHARS_JP[ch]
+            _, h, q, _ = CONTROL_CHARS_JP[ch]
             if q % 2 == 1:
                 c += "0C" if ch == "#" else "00"
             q *= 2
@@ -360,14 +360,14 @@ def parse_control_codes(text: list[int] | bytearray | str, lang: int) -> list[Te
             if next_char in CC_PARSE_JP:
                 extra_bytes = ceil(CC_PARSE_JP[next_char][1]/2)
                 if extra_bytes > 0:
-                    dt=[]
+                    dt = []
                     for x in text_bytes[index: index + extra_bytes]:
-                        dt+=[x>>8&0xFF,x&0xFF]
+                        dt += [x >> 8 & 0xFF, x & 0xFF]
                     data = bytes_to_int(dt)
                     index += extra_bytes
         text_code = TextCode(next_char, data, lang)
         text_codes.append(text_code)
-        if text_code.code == [0x8170,0x02][lang]:  # message end code
+        if text_code.code == [0x8170, 0x02][lang]:  # message end code
             break
     return text_codes
 
@@ -406,9 +406,9 @@ class TextCode:
         elif self.code >= 0x7F and self.lang:
             return '?'
         else:
-            if self.code==0x86D3:
+            if self.code == 0x86D3:
                 return '?'
-            return chr(self.code) if self.lang else int_to_bytes(self.code,2).decode("cp932")
+            return chr(self.code) if self.lang else int_to_bytes(self.code, 2).decode("cp932")
 
     def get_python_string(self) -> str:
         if self.code in self.CC:
@@ -424,7 +424,7 @@ class TextCode:
         elif self.code >= 0x7F and self.lang:
             return '?'
         else:
-            return chr(self.code) if self.lang else int_to_bytes(self.code,2).decode("cp932")
+            return chr(self.code) if self.lang else int_to_bytes(self.code, 2).decode("cp932")
 
     def get_string(self) -> str:
         if self.code in self.CC:
@@ -459,15 +459,15 @@ class TextCode:
 
     # writes the code to the given offset, and returns the offset of the next byte
     def write(self, rom: Rom, text_start: int, offset: int) -> int:
-        rom.write_bytes(text_start + offset, list(map(int,int_to_bytes(self.code,2-self.lang))))
+        rom.write_bytes(text_start + offset, list(map(int, int_to_bytes(self.code, 2 - self.lang))))
 
         extra_bytes = 0
         if self.code in self.CC:
-            extra_bytes = self.CC[self.code][1] if self.lang else ceil(self.CC[self.code][1]/2)*2
+            extra_bytes = self.CC[self.code][1] if self.lang else ceil(self.CC[self.code][1] / 2) * 2
             bytes_to_write = int_to_bytes(self.data, extra_bytes)
-            rom.write_bytes(text_start + offset + (2-self.lang), bytes_to_write)
+            rom.write_bytes(text_start + offset + (2 - self.lang), bytes_to_write)
 
-        return offset + (2-self.lang) + extra_bytes
+        return offset + (2 - self.lang) + extra_bytes
 
     __str__ = __repr__ = display
 
@@ -530,7 +530,7 @@ class Message:
 
     # check if this is an unused message that just contains it's own id as text
     def is_id_message(self) -> bool:
-        if self.unpadded_length != [10,5][self.lang] or self.id == 0xFFFC:
+        if self.unpadded_length != [10, 5][self.lang] or self.id == 0xFFFC:
             return False
         for i in range(4):
             code = self.text_codes[i].code
@@ -556,26 +556,26 @@ class Message:
         index = 0
         for text_code in self.text_codes:
             index += text_code.size()
-            if text_code.code == [0x8170,0x02][self.lang]:  # message end code
+            if text_code.code == [0x8170, 0x02][self.lang]:  # message end code
                 break
-            if text_code.code == [0x81CB,0x07][self.lang]:  # goto
+            if text_code.code == [0x81CB, 0x07][self.lang]:  # goto
                 self.has_goto = True
                 self.ending = text_code
-            if text_code.code == [0x86C8,0x0A][self.lang]:  # keep-open
+            if text_code.code == [0x86C8, 0x0A][self.lang]:  # keep-open
                 self.has_keep_open = True
                 self.ending = text_code
-            if text_code.code == [0x819F,0x0B][self.lang]:  # event
+            if text_code.code == [0x819F, 0x0B][self.lang]:  # event
                 self.has_event = True
                 self.ending = text_code
-            if text_code.code == [0x819E,0x0E][self.lang]:  # fade out
+            if text_code.code == [0x819E, 0x0E][self.lang]:  # fade out
                 self.has_fade = True
                 self.ending = text_code
-            if text_code.code == [0x81F0,0x10][self.lang]:  # ocarina
+            if text_code.code == [0x81F0, 0x10][self.lang]:  # ocarina
                 self.has_ocarina = True
                 self.ending = text_code
-            if text_code.code == [0x81BC,0x1B][self.lang]:  # two choice
+            if text_code.code == [0x81BC, 0x1B][self.lang]:  # two choice
                 self.has_two_choice = True
-            if text_code.code == [0x81B8,0x1C][self.lang]:  # three choice
+            if text_code.code == [0x81B8, 0x1C][self.lang]:  # three choice
                 self.has_three_choice = True
         self.text = display_code_list(self.text_codes)
         self.unpadded_length = index
@@ -608,7 +608,7 @@ class Message:
             ignores += ending_codes
         # ignore the "make unskippable flag"
         if always_allow_skip:
-            ignores += [[0x8199], [0x1A]][self.lang]
+            ignores += [[0x8199, 0x1A][self.lang]]
         # ignore anything that slows down text
         if speed_up_text:
             ignores += slows_text
@@ -625,12 +625,12 @@ class Message:
         for i, code in enumerate(self.text_codes):
             # ignore the color change if the next code is color as well
             if code.code == [0x0B, 0x05][self.lang]:
-                if self.text_codes[i+1].code == code.code or all(tc.code == [0x8140, 0x20][self.lang] or tc.code in ignores for tc in itertools.takewhile(lambda tc: tc.code != code.code, self.text_codes[i+1:])) or current_color == code.data:
+                if self.text_codes[i + 1].code == code.code or all(tc.code == [0x8140, 0x20][self.lang] or tc.code in ignores for tc in itertools.takewhile(lambda tc: tc.code != code.code, self.text_codes[i + 1:])) or current_color == code.data:
                     continue
                 current_color = code.data
             # ignore ending codes if it's going to be replaced
             if speed_up_text and code.code == 0x81CB and not self.lang:
-                text_codes.append(TextCode([0x818A,0x09][self.lang], 0, self.lang))
+                text_codes.append(TextCode([0x818A, 0x09][self.lang], 0, self.lang))
                 text_codes.append(code)
                 continue
             if code.code in ignores:
@@ -647,7 +647,7 @@ class Message:
                 else:
                     text_codes.append(TextCode([0x81A5, 0x04][self.lang], 0, self.lang))  # un-delayed break
                     text_codes.append(instant_text_code)  # allow instant
-            elif speed_up_text and code.code == [0x819A,0x13][self.lang] and code.data in slow_icons:
+            elif speed_up_text and code.code == [0x819A, 0x13][self.lang] and code.data in slow_icons:
                 text_codes.append(code)
                 text_codes.pop(find_last(text_codes, instant_text_code))  # remove last instance of instant text
                 text_codes.append(instant_text_code)  # allow instant
@@ -657,9 +657,9 @@ class Message:
         if replace_ending:
             if ending:
                 if speed_up_text and ending.code == [0x81F0, 0x10][self.lang]:  # ocarina
-                    text_codes.append(TextCode([0x818A,0x09][self.lang], 0, self.lang))  # disallow instant text
+                    text_codes.append(TextCode([0x818A, 0x09][self.lang], 0, self.lang))  # disallow instant text
                 text_codes.append(ending)  # write special ending
-            text_codes.append(TextCode([0x8170,0x02][self.lang], 0, self.lang))  # write end code
+            text_codes.append(TextCode([0x8170, 0x02][self.lang], 0, self.lang))  # write end code
 
         self.text_codes = text_codes
 
@@ -719,9 +719,9 @@ class Message:
     @classmethod
     def from_bytearray(cls, text: bytearray, lang: str, id: int = 0, opts: int = 0x00) -> Message:
         lang_int = 0 if lang == "jp" else 1
-        bytes = bytearray_to_list(text,lang_int)
-        if bytes[-1] != [0x8170,0x02][lang_int]:
-            bytes += [0x8170,0x02][lang_int]
+        bytes = bytearray_to_list(text, lang_int)
+        if bytes[-1] != [0x8170, 0x02][lang_int]:
+            bytes += [0x8170, 0x02][lang_int]
         length = len(bytes) + 1
         if lang != "en":
             length *= 2
@@ -944,8 +944,8 @@ def make_player_message(text: str, lang: Language) -> str:
 # make sure to call this AFTER move_shop_item_messages()
 def update_item_messages(messages: list[Message], world: World) -> None:
     lang = world.language
-    if lang.PLANE_TEXTS!=[]:
-        for (id, text, opt) in lang.PLANE_TEXTS:
+    if lang.PLAIN_TEXTS != []:
+        for id, (text, opt) in lang.PLAIN_TEXTS:
             update_message_by_id(messages, id, text, lang, opt, force_left=True)
 
     new_item_messages = lang.ITEM_MESSAGES + lang.KEYSANITY_MESSAGES
@@ -1180,19 +1180,19 @@ def update_warp_song_text(messages: list[Message], world: World) -> None:
         0x4004: 'LH Owl Flight -> Hyrule Field',
     }
 
-    if world.settings.logic_rules != "glitched": # Entrances not set on glitched logic so following code will error
+    if world.settings.owl_drops:
         for id, entr in msg_list.items():
             if 'warp_songs_and_owls' in world.settings.misc_hints or not world.settings.warp_songs:
                 destination = world.get_entrance(entr).connected_region
                 destination_name = world.HintAreaLang.at(destination)
                 color = COLOR_MAP[destination_name.color][lang_num]
                 if destination_name.preposition(True) is not None:
-                    destination_name = lang.format_from_id("PATCH_TEXTS.warp_to",{"destination_name":destination_name})
+                    destination_name = lang.format_from_id("PATCH_TEXTS.warp_to", {"destination_name": destination_name})
             else:
                 destination_name = lang.PATCH_TEXTS["warp_mysterious"]
                 color = COLOR_MAP['White'][lang_num]
 
-            new_msg = lang.format_from_id("PATCH_TEXTS.warp_msg",{"destination_name":destination_name, "color":color})
+            new_msg = lang.format_from_id("PATCH_TEXTS.warp_msg", {"destination_name": destination_name, "color": color})
             update_message_by_id(messages, id, new_msg, world.language)
 
     if world.settings.owl_drops:
@@ -1202,10 +1202,10 @@ def update_warp_song_text(messages: list[Message], world: World) -> None:
                 destination_name = world.HintAreaLang.at(destination)
                 color = COLOR_MAP[destination_name.color][lang_num]
                 if destination_name.preposition(True) is not None:
-                    destination_name = lang.format_from_id("PATCH_TEXTS.warp_to",{"destination_name":destination_name})
+                    destination_name = lang.format_from_id("PATCH_TEXTS.warp_to", {"destination_name": destination_name})
             else:
                 destination_name = lang.PATCH_TEXTS["warp_mysterious"]
                 color = COLOR_MAP['White'][lang_num]
 
-            new_msg = lang.format_from_id("PATCH_TEXTS.warp_owl",{"destination_name":destination_name, "color":color})
+            new_msg = lang.format_from_id("PATCH_TEXTS.warp_owl", {"destination_name": destination_name, "color": color})
             update_message_by_id(messages, id, new_msg, world.language)

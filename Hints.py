@@ -348,7 +348,7 @@ def color_text(gossip_text: GossipText, lang: Language) -> str:
     text = gossip_text.text
     colors = list(gossip_text.colors) if gossip_text.colors is not None else []
     color = 'White'
-    if lang.base=="jp":
+    if lang.base == "jp":
         index = 0
         while "#" in text[index:]:
             pre_text = text[:index]
@@ -493,27 +493,27 @@ class HintArea(Enum):
         if world is None:
             if pre_suf[0] == lang.hint_text["own_prefix"]:
                 if use_2nd_person:
-                    text = lang.format_from_id("hint_text.second_own",{"suffix":pre_suf[1]})
+                    text = lang.format_from_id("hint_text.second_own", {"suffix": pre_suf[1]})
                 else:
-                    text = lang.format_from_id("hint_text.player_own",{"suffix":pre_suf[1]})
+                    text = lang.format_from_id("hint_text.player_own", {"suffix": pre_suf[1]})
         else:
             replace_prefixes = flatten(lang.prefix["prefix"])
             move_prefixes = lang.hint_text["move_prefixes"]
             if pre_suf[0] in replace_prefixes:
-                text = lang.format_from_id("hint_text.world's",{"world":world,"suffix":pre_suf[1]})
+                text = lang.format_from_id("hint_text.world's", {"world": world, "suffix": pre_suf[1]})
             elif pre_suf[0] in move_prefixes:
-                text = lang.format_from_id("hint_text.move_world",{"prefix":pre_suf[0],"world":world,"suffix":pre_suf[1]})
+                text = lang.format_from_id("hint_text.move_world", {"prefix": pre_suf[0], "world": world, "suffix": pre_suf[1]})
             elif pre_suf[0] == lang.hint_text["own_prefix"]:
-                text = lang.format_from_id("hint_text.player's",{"world":world,"suffix":pre_suf[1]})
+                text = lang.format_from_id("hint_text.player's", {"world": world, "suffix": pre_suf[1]})
             else:
-                text = lang.format_from_id("hint_text.world's",{"world":world,"suffix":text})
+                text = lang.format_from_id("hint_text.world's", {"world": world, "suffix": text})
         if '#' not in text:
             text = f'#{text}#'
         if preposition and self.preposition(clearer_hints) is not None:
             if prep_pos == "first":
-                text = f"{self.preposition(clearer_hints)}{' ' if lang.base=='en' else '　'}{text}"
+                text = f"{self.preposition(clearer_hints)}{' ' if lang.base == 'en' else '　'}{text}"
             elif prep_pos == "last":
-                text = f"{text}{' ' if lang.base=='en' else '　'}{self.preposition(clearer_hints)}"
+                text = f"{text}{' ' if lang.base == 'en' else '　'}{self.preposition(clearer_hints)}"
         return text
 
 
@@ -907,11 +907,11 @@ def get_woth_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintRetu
         lang.format_from_id(
             "hint_text.way_of_hero",
             {
-                "location_text":location_text
+                "location_text": location_text
                 }
             ),
         lang, ['Light Blue'], [location.name],
-        [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+        [location.item.name], prefix = lang.hint_text["gossip_prefix"]), [location]
 
 
 def get_checked_areas(world: World, checked: set[str]) -> set[HintAreaDefault | str]:
@@ -1064,7 +1064,7 @@ def get_goal_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintRetu
                 "goal_text": goal_text,
                 "location_text": location_text
             }),
-        lang, ['Light Blue', goal.color], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+        lang, ['Light Blue', goal.color], [location.name], [location.item.name], prefix = lang.hint_text["gossip_prefix"]), [location]
 
 
 def get_barren_hint(spoiler: Spoiler, world: World, checked: set[str], all_checked: set[str]) -> HintReturn:
@@ -1132,7 +1132,7 @@ def get_barren_hint(spoiler: Spoiler, world: World, checked: set[str], all_check
             {
                 "area": area.text(world.language, world.settings.clearer_hints)
             }),
-        lang, ['Pink'],prefix=lang.hint_text["gossip_prefix"]), None
+        lang, ['Pink'], prefix = lang.hint_text["gossip_prefix"]), None
 
 
 def is_checked(locations: Iterable[Location], checked: set[HintArea | str]) -> bool:
@@ -1176,20 +1176,20 @@ def get_good_item_hint(spoiler: Spoiler, world: World, checked: set[str]) -> Hin
             lang.format_from_id(
                 "hint_text.hoards",
                 {
-                    "location_text":location_text,
-                    "item_text":item_text
+                    "location_text": location_text,
+                    "item_text": item_text
                 }),
-            lang, ['Red', 'Green'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+            lang, ['Red', 'Green'], [location.name], [location.item.name], prefix = lang.hint_text["gossip_prefix"]), [location]
     else:
         location_text = hint_area.text(lang, world.settings.clearer_hints, preposition=True)
         return GossipText(
             lang.format_from_id(
                 "hint_text.can_be_found",
                 {
-                    "location_text":location_text,
-                    "item_text":item_text
+                    "location_text": location_text,
+                    "item_text": item_text
                 }),
-            lang, ['Green', 'Red'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+            lang, ['Green', 'Red'], [location.name], [location.item.name], prefix = lang.hint_text["gossip_prefix"]), [location]
 
 
 def get_specific_item_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintReturn:
@@ -1240,25 +1240,25 @@ def get_specific_item_hint(spoiler: Spoiler, world: World, checked: set[str]) ->
         hint_area = world.HintAreaLang.at(location)
         if world.hint_dist_user.get('vague_named_items', False):
             location_text = hint_area.text(lang, world.settings.clearer_hints)
-            return GossipText(lang.format_from_id("hint_text.hero_path",{"location_text":location_text}), lang, ['Green'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+            return GossipText(lang.format_from_id("hint_text.hero_path", {"location_text": location_text}), lang, ['Green'], [location.name], [location.item.name], prefix = lang.hint_text["gossip_prefix"]), [location]
         elif hint_area.is_dungeon:
             location_text = hint_area.text(lang, world.settings.clearer_hints)
             return GossipText(
                 lang.format_from_id(
                 "hint_text.hoards",
                     {
-                        "location_text":location_text,
-                        "item_text":item_text
-                    }), lang, ['Red', 'Green'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+                        "location_text": location_text,
+                        "item_text": item_text
+                    }), lang, ['Red', 'Green'], [location.name], [location.item.name], prefix = lang.hint_text["gossip_prefix"]), [location]
         else:
             location_text = hint_area.text(lang, world.settings.clearer_hints, preposition=True)
             return GossipText(
                 lang.format_from_id(
                 "hint_text.can_be_found",
                     {
-                        "location_text":location_text,
-                        "item_text":item_text
-                    }), lang, ['Green', 'Red'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+                        "location_text": location_text,
+                        "item_text": item_text
+                    }), lang, ['Green', 'Red'], [location.name], [location.item.name], prefix = lang.hint_text["gossip_prefix"]), [location]
 
     else:
         while True:
@@ -1333,25 +1333,25 @@ def get_specific_item_hint(spoiler: Spoiler, world: World, checked: set[str]) ->
         hint_area = world.HintAreaLang.at(location)
         if world.hint_dist_user.get('vague_named_items', False):
             location_text = hint_area.text(lang, world.settings.clearer_hints, world=location.world.id + 1)
-            return GossipText(lang.format_from_id("hint_text.hero_path",{"location_text":location_text}), lang, ['Green'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+            return GossipText(lang.format_from_id("hint_text.hero_path", {"location_text": location_text}), lang, ['Green'], [location.name], [location.item.name], prefix = lang.hint_text["gossip_prefix"]), [location]
         elif hint_area.is_dungeon:
             location_text = hint_area.text(lang, world.settings.clearer_hints, world=location.world.id + 1)
             return GossipText(
                 lang.format_from_id(
                     "hint_text.hoards",
                     {
-                        "location_text":location_text,
-                        "item_text":item_text
-                    }), lang, ['Red', 'Green'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+                        "location_text": location_text,
+                        "item_text": item_text
+                    }), lang, ['Red', 'Green'], [location.name], [location.item.name], prefix = lang.hint_text["gossip_prefix"]), [location]
         else:
             location_text = hint_area.text(lang, world.settings.clearer_hints, preposition=True, world=location.world.id + 1)
             return GossipText(
                 lang.format_from_id(
                     "hint_text.can_be_found",
                     {
-                        "location_text":location_text,
-                        "item_text":item_text
-                    }), lang, ['Green', 'Red'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+                        "location_text": location_text,
+                        "item_text": item_text
+                    }), lang, ['Green', 'Red'], [location.name], [location.item.name], prefix = lang.hint_text["gossip_prefix"]), [location]
 
 
 def get_random_location_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintReturn:
@@ -1379,18 +1379,18 @@ def get_random_location_hint(spoiler: Spoiler, world: World, checked: set[str]) 
         return GossipText(lang.format_from_id(
                                 "hint_text.hoards",
                                 {
-                                    "location_text":location_text,
-                                    "item_text":item_text
-                                }),  lang, ['Red', 'Green'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+                                    "location_text": location_text,
+                                    "item_text": item_text
+                                }),  lang, ['Red', 'Green'], [location.name], [location.item.name], prefix = lang.hint_text["gossip_prefix"]), [location]
     else:
         location_text = hint_area.text(lang, world.settings.clearer_hints, preposition=True)
         return GossipText(
             lang.format_from_id(
                         "hint_text.can_be_found",
                         {
-                            "location_text":location_text,
-                            "item_text":item_text
-                        }), lang, ['Green', 'Red'], [location.name], [location.item.name],prefix=lang.hint_text["gossip_prefix"]), [location]
+                            "location_text": location_text,
+                            "item_text": item_text
+                        }), lang, ['Green', 'Red'], [location.name], [location.item.name], prefix = lang.hint_text["gossip_prefix"]), [location]
 
 
 def get_specific_hint(spoiler: Spoiler, world: World, checked: set[str], hint_type: str) -> HintReturn:
@@ -1436,9 +1436,9 @@ def get_specific_hint(spoiler: Spoiler, world: World, checked: set[str], hint_ty
                       world.language.format_from_id(
                           "hint_text.always",
                           {
-                              "location":location_text,
-                              "item":item_text
-                        }), world.language, ['Red', 'Green'], [location.name], [location.item.name],prefix=world.language.hint_text["gossip_prefix"]), [location]
+                              "location": location_text,
+                              "item": item_text
+                        }), world.language, ['Red', 'Green'], [location.name], [location.item.name], prefix = world.language.hint_text["gossip_prefix"]), [location]
 
 
 def get_sometimes_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintReturn:
@@ -1506,8 +1506,8 @@ def get_specific_multi_hint(spoiler: Spoiler, world: World, checked: set[str], h
     location_count = len(locations)
     colors = ['Red'] + ['Green']*location_count
     items = [location.item for location in locations]
-    gossip_string = natjoin([multi_text] + [get_hint(get_item_generic_name(item), world.language, world.settings.clearer_hints).text for item in items],conjunction=world.language.hint_text["conjunction"],conjunction_more=world.language.hint_text["conjunction_more"])
-    return GossipText(gossip_string, world.language, colors, [location.name for location in locations], [item.name for item in items],prefix=world.language.hint_text["gossip_prefix"]), locations
+    gossip_string = natjoin([multi_text] + [get_hint(get_item_generic_name(item), world.language, world.settings.clearer_hints).text for item in items], conjunction = world.language.hint_text["conjunction"], conjunction_more = world.language.hint_text["conjunction_more"])
+    return GossipText(gossip_string, world.language, colors, [location.name for location in locations], [item.name for item in items], prefix = world.language.hint_text["gossip_prefix"]), locations
 
 
 def get_dual_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintReturn:
@@ -1555,7 +1555,7 @@ def get_entrance_hint(spoiler: Spoiler, world: World, checked: set[str]) -> Hint
                 "region": region_text
             }
         ),
-        world.language, ['Green', 'Light Blue'],prefix=world.language.hint_text["gossip_prefix"]), None
+        world.language, ['Green', 'Light Blue'], prefix = world.language.hint_text["gossip_prefix"]), None
 
 
 def get_junk_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintReturn:
@@ -1567,7 +1567,7 @@ def get_junk_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintRetu
     hint = random.choice(hints)
     checked.add(hint.name)
 
-    return GossipText(hint.text, world.language,prefix=''), None
+    return GossipText(hint.text, world.language, prefix = ''), None
 
 
 def get_important_check_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintReturn:
@@ -1622,10 +1622,10 @@ def get_important_check_hint(spoiler: Spoiler, world: World, checked: set[str]) 
         lang.format_from_id(
             "hint_text.major_items" if item_count != 1 else "hint_text.major_item",
             {
-                "hint_loc":hint_loc,
-                "item_count":item_count
+                "hint_loc": hint_loc,
+                "item_count": item_count
              }),
-        lang, ['Green', numcolor],prefix=lang.hint_text["gossip_prefix"]), None
+        lang, ['Green', numcolor], prefix = lang.hint_text["gossip_prefix"]), None
 
 
 hint_func: dict[str, HintFunc | BarrenFunc] = {
@@ -2028,16 +2028,16 @@ def build_world_gossip_hints(spoiler: Spoiler, world: World, checked_locations: 
     # Add trial hints, only if hint copies > 0
     if hint_dist['trial'][1] > 0:
         if world.settings.trials_random and world.settings.trials == 6:
-            add_hint(spoiler, world, stone_groups, GossipText(world.language.format_from_id("hint_text.trial_all"), world.language, ['Pink'],prefix=world.language.hint_text["gossip_prefix"]), hint_dist['trial'][1], force_reachable=True, hint_type='trial')
+            add_hint(spoiler, world, stone_groups, GossipText(world.language.format_from_id("hint_text.trial_all"), world.language, ['Pink'], prefix=world.language.hint_text["gossip_prefix"]), hint_dist['trial'][1], force_reachable=True, hint_type='trial')
         elif world.settings.trials_random and world.settings.trials == 0:
-            add_hint(spoiler, world, stone_groups, GossipText(world.language.format_from_id("hint_text.trial_none"), world.language, ['Yellow'],prefix=world.language.hint_text["gossip_prefix"]), hint_dist['trial'][1], force_reachable=True, hint_type='trial')
+            add_hint(spoiler, world, stone_groups, GossipText(world.language.format_from_id("hint_text.trial_none"), world.language, ['Yellow'], prefix=world.language.hint_text["gossip_prefix"]), hint_dist['trial'][1], force_reachable=True, hint_type='trial')
         elif 3 < world.settings.trials < 6:
             if world.hint_dist_user['combine_trial_hints'] and world.settings.trials < 5:
                 add_hint(spoiler, world, stone_groups,
                          GossipText(
                              world.language.format_from_id("hint_text.trial_combine_sheik", {"trials": natjoin((world.language.trials[trial] for trial, skipped in world.skipped_trials.items() if skipped), world.language.hint_text["conjunction"], world.language.hint_text["conjunction_more"])}),
                              world.language,
-                             ['Yellow'],prefix=world.language.hint_text["gossip_prefix"]),
+                             ['Yellow'], prefix=world.language.hint_text["gossip_prefix"]),
                          hint_dist['trial'][1], force_reachable=True, hint_type='trial')
             else:
                 for trial, skipped in world.skipped_trials.items():
@@ -2045,7 +2045,7 @@ def build_world_gossip_hints(spoiler: Spoiler, world: World, checked_locations: 
                         add_hint(spoiler, world, stone_groups,
                                  GossipText(world.language.format_from_id("hint_text.trial_sheik", {"trial": world.language.trials[trial]}),
                                             world.language,
-                                            ['Yellow'],prefix=world.language.hint_text["gossip_prefix"]),
+                                            ['Yellow'], prefix=world.language.hint_text["gossip_prefix"]),
                                  hint_dist['trial'][1], force_reachable=True, hint_type='trial')
         elif 0 < world.settings.trials <= 3:
             if world.hint_dist_user['combine_trial_hints'] and world.settings.trials > 1:
@@ -2053,7 +2053,7 @@ def build_world_gossip_hints(spoiler: Spoiler, world: World, checked_locations: 
                          GossipText(
                              world.language.format_from_id("hint_text.trial_combine_ganon", {"trials": natjoin((world.language.trials[trial] for trial, skipped in world.skipped_trials.items() if skipped), world.language.hint_text["conjunction"], world.language.hint_text["conjunction_more"])}),
                              world.language,
-                             ['Pink'],prefix=world.language.hint_text["gossip_prefix"]),
+                             ['Pink'], prefix=world.language.hint_text["gossip_prefix"]),
                          hint_dist['trial'][1], force_reachable=True, hint_type='trial')
             else:
                 for trial, skipped in world.skipped_trials.items():
@@ -2061,7 +2061,7 @@ def build_world_gossip_hints(spoiler: Spoiler, world: World, checked_locations: 
                         add_hint(spoiler, world, stone_groups,
                                  GossipText(world.language.format_from_id("hint_text.trial_ganon", {"trial": world.language.trials[trial]}),
                                             world.language,
-                                            ['Pink'],prefix=world.language.hint_text["gossip_prefix"]),
+                                            ['Pink'], prefix=world.language.hint_text["gossip_prefix"]),
                                  hint_dist['trial'][1], force_reachable=True, hint_type='trial')
 
     # Add user-specified hinted item locations if using a built-in hint distribution
@@ -2199,7 +2199,7 @@ def build_altar_hints(world: World, messages: list[Message], include_rewards: bo
             adult_text += build_boss_string(reward, color, world)
     if include_wincons:
         adult_text += build_bridge_reqs_string(world)
-        adult_text += '^' if world.language.base=="jp" else "\x04"
+        adult_text += '^' if world.language.base == "jp" else "\x04"
         adult_text += build_ganon_boss_key_string(world)
     else:
         adult_text += get_hint('Adult Altar Text End', world.language, world.settings.clearer_hints).text
@@ -2216,7 +2216,7 @@ def build_boss_string(reward: str, color: str, world: World) -> str:
                 world.language.format_from_id(
                     "hint_text.boss_pocket_clear",
                     {
-                        "item_icon": format(item_icon, '02x') if world.language.base=="jp" else chr(item_icon)
+                        "item_icon": format(item_icon, '02x') if world.language.base == "jp" else chr(item_icon)
                     }),
                 world.language,
                 [color],
@@ -2226,7 +2226,7 @@ def build_boss_string(reward: str, color: str, world: World) -> str:
                 world.language.format_from_id(
                     "hint_text.boss_pocket_vague",
                     {
-                        "item_icon": format(item_icon, '02x') if world.language.base=="jp" else chr(item_icon)
+                        "item_icon": format(item_icon, '02x') if world.language.base == "jp" else chr(item_icon)
                     }),
                 world.language,
                 [color],
@@ -2294,13 +2294,13 @@ def build_bridge_reqs_string(world: World) -> str:
             string = world.language.format_from_id(
                 "hint_text.bridge_clear",
                 {
-                    "item_req":item_req_string
+                    "item_req": item_req_string
                     })
         else:
             string = world.language.format_from_id(
                 "hint_text.bridge_vague",
                 {
-                    "item_req":item_req_string
+                    "item_req": item_req_string
                     })
     return str(GossipText(string, world.language, ['Green'], prefix=''))
 
@@ -2331,8 +2331,8 @@ def build_ganon_boss_key_string(world: World) -> str:
             bk_location_string = world.language.format_from_id(
                 "hint_text.ganon_lacs_bk",
                 {
-                    "item_req":item_req_string,
-                    "verb":verb_singular if count == 1 else verb_plural
+                    "item_req": item_req_string,
+                    "verb": verb_singular if count == 1 else verb_plural
                     })
         elif world.settings.shuffle_ganon_bosskey in ('stones', 'medallions', 'dungeons', 'tokens', 'hearts'):
             count, singular, plural, verb_singular, verb_plural = {
@@ -2351,14 +2351,14 @@ def build_ganon_boss_key_string(world: World) -> str:
             bk_location_string = world.language.format_from_id(
                 "hint_text.ganon_grant_bk",
                 {
-                    "item_req":item_req_string,
-                    "verb":verb_singular if count == 1 else verb_plural
+                    "item_req": item_req_string,
+                    "verb": verb_singular if count == 1 else verb_plural
                     })
         else:
             bk_location_string = get_hint('ganonBK_' + world.settings.shuffle_ganon_bosskey,
                                           world.language,
                                           world.settings.clearer_hints).text
-        string += world.language.format_from_id("hint_text.ganon_base",{"bk_location_string":bk_location_string})
+        string += world.language.format_from_id("hint_text.ganon_base", {"bk_location_string": bk_location_string})
     return str(GossipText(string, world.language, ['Yellow'], prefix=''))
 
 
@@ -2384,27 +2384,27 @@ def build_misc_item_hints(world: World, messages: list[Message], allow_duplicate
             item = world.misc_hint_items[hint_type]
             if item in world.distribution.effective_starting_items and world.distribution.effective_starting_items[item].count > 0:
                 if item == data['default_item']:
-                    text = world.language.format_from_text(d['default_item_text'],{"area":world.language.hint_text["pocket"]})
+                    text = world.language.format_from_text(d['default_item_text'], {"area": world.language.hint_text["pocket"]})
                 else:
-                    text = world.language.format_from_text(d['custom_item_text'],{"area":world.language.hint_text["pocket"], "item":item})
+                    text = world.language.format_from_text(d['custom_item_text'], {"area": world.language.hint_text["pocket"], "item": item})
             elif hint_type in world.misc_hint_item_locations:
                 location = world.misc_hint_item_locations[hint_type]
                 area = world.HintAreaLang.at(location, use_alt_hint=data['use_alt_hint']).text(world.language, world.settings.clearer_hints, world=None if location.world.id == world.id else location.world.id + 1)
                 if item == data['default_item']:
-                    text = world.language.format_from_text(d['default_item_text'],{"area":area})
+                    text = world.language.format_from_text(d['default_item_text'], {"area": area})
                 else:
                     text = world.language.format_from_text(
                         d['custom_item_text'],
                         {
-                            "area":area,
-                            "item":get_hint(get_item_generic_name(location.item), world.language, world.settings.clearer_hints).text,
+                            "area": area,
+                            "item": get_hint(get_item_generic_name(location.item), world.language, world.settings.clearer_hints).text,
                         }
                     )
             elif 'custom_item_fallback' in data:
                 if 'default_item_fallback' in data and item == data['default_item']:
                     text = d['default_item_fallback']
                 else:
-                    text = world.language.format_from_text(d['custom_item_fallback'],{"item":item})
+                    text = world.language.format_from_text(d['custom_item_fallback'], {"item": item})
             else:
                 text = get_hint('Validation Line', world.language, world.settings.clearer_hints).text
                 for location in world.get_filled_locations():
@@ -2431,12 +2431,12 @@ def build_misc_location_hints(world: World, messages: list[Message]) -> None:
                 text = world.language.format_from_text(
                     d['location_text'],
                     {
-                        "item":get_hint(get_item_generic_name(item), world.language, world.settings.clearer_hints).text,
-                        "poe_points":poe_points,
+                        "item": get_hint(get_item_generic_name(item), world.language, world.settings.clearer_hints).text,
+                        "poe_points": poe_points,
                     }
                 )
             else:
-                text = world.language.format_from_text(d['location_fallback'],{"poe_points":poe_points})
+                text = world.language.format_from_text(d['location_fallback'], {"poe_points": poe_points})
             update_message_by_id(messages, data['id'], text, world.language, data['text_style'])
             return
         else:
@@ -2446,7 +2446,7 @@ def build_misc_location_hints(world: World, messages: list[Message]) -> None:
                     text = world.language.format_from_text(
                     d['location_text'],
                     {
-                        "item":get_hint(get_item_generic_name(item), world.language, world.settings.clearer_hints).text,
+                        "item": get_hint(get_item_generic_name(item), world.language, world.settings.clearer_hints).text,
                     }
                 )
             update_message_by_id(messages, data['id'], str(GossipText(text, world.language, ['Green'], prefix='')), world.language, data['text_style'])
@@ -2463,15 +2463,15 @@ def build_misc_dual_hints(world: World, messages: list[Message]) -> None:
                 text = world.language.format_from_text(
                     d['location_text'],
                     {
-                        "item_1":get_hint(get_item_generic_name(item_1), world.language, world.settings.clearer_hints).text,
-                        "item_2":get_hint(get_item_generic_name(item_2), world.language, world.settings.clearer_hints).text,
+                        "item_1": get_hint(get_item_generic_name(item_1), world.language, world.settings.clearer_hints).text,
+                        "item_2": get_hint(get_item_generic_name(item_2), world.language, world.settings.clearer_hints).text,
                     }
                 )
             else:
                 text = world.language.format_from_text(
                     ds[hint_type1]['location_text'],
                     {
-                        "item":get_hint(get_item_generic_name(item_1), world.language, world.settings.clearer_hints).text,
+                        "item": get_hint(get_item_generic_name(item_1), world.language, world.settings.clearer_hints).text,
                     }
                 )
         else:
@@ -2479,7 +2479,7 @@ def build_misc_dual_hints(world: World, messages: list[Message]) -> None:
                 text = world.language.format_from_text(
                     ds[hint_type2]['location_text'],
                     {
-                        "item":get_hint(get_item_generic_name(item_2), world.language, world.settings.clearer_hints).text
+                        "item": get_hint(get_item_generic_name(item_2), world.language, world.settings.clearer_hints).text
                     },
                 )
             else:

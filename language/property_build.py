@@ -465,7 +465,7 @@ PATCH_TEXTS: dict[str:str] = {
                                     ],
     "claim":                        "Brrrring me the Claim Check...\x01to rrreceive anotherrrrrr item...",
     "brought_poe":                  "\x1AOh, you brought a Poe today!\x04\x1AHmmmm!\x04\x1AVery interesting!\x01This is a \x05\x41Big Poe\x05\x40!\x04\x1AI'll buy it for \x05\x4150 Rupees\x05\x40.\x04On top of that, I'll put \x05\x41100\x01points \x05\x40on your card.\x04\x1AIf you earn \x05\x41{poe} points\x05\x40, you'll\x01be a happy man! Heh heh.",
-    "enough_poe":                   "\x1AWait a minute! WOW!\x04\x1AYou have earned \x05\x41{poe} points\x05\x40!\x04\x1AYoung man, you are a genuine\x01\x05\x41Ghost Hunter\x05\x40!\x04\x1AIs that what you expected me to\x01say? Heh heh heh!\x04\x1ABecause of you, I have extra\x01inventory of \x05\x41Big Poes\x05\x40, so this will\x01be the last time I can buy a \x01ghost.\x04\x1AYou're thinking about what I \x01promised would happen when you\x01earned {poe} points. Heh heh.\x04\x1ADon't worry, I didn't forget.\x01Just take this.",
+    "enough_poes":                  "\x1AWait a minute! WOW!\x04\x1AYou have earned \x05\x41{poe} points\x05\x40!\x04\x1AYoung man, you are a genuine\x01\x05\x41Ghost Hunter\x05\x40!\x04\x1AIs that what you expected me to\x01say? Heh heh heh!\x04\x1ABecause of you, I have extra\x01inventory of \x05\x41Big Poes\x05\x40, so this will\x01be the last time I can buy a \x01ghost.\x04\x1AYou're thinking about what I \x01promised would happen when you\x01earned {poe} points. Heh heh.\x04\x1ADon't worry, I didn't forget.\x01Just take this.",
     "child_anju":                   "\x08What should I do!?\x01My \x05\x41Cuccos\x05\x40 have all flown away!\x04You, little boy, please!\x01Please gather at least \x05\x41{chicken} Cuccos\x05\x40\x01for me.\x02",
     "ruto_nothing":                 "\x08Princess Ruto got \x01\x05\x43nothing\x05\x40!\x01Well, that's disappointing...\x02",
     "ruto_fool":                    "\x08Princess Ruto is a \x05\x43FOOL\x05\x40!\x01But why Princess Ruto?\x02",
@@ -2541,7 +2541,8 @@ verb_mapping = {
 search = "you"
 
 # Extra texts that is included in game (Other than English and Japanese needs these)
-PLANE_TEXTS = []
+# Format: list[tuple[int, tuple[str | bytearray, int]]]
+PLAIN_TEXTS = []
 
 d = {
     'lang_property': lang_property,
@@ -2566,7 +2567,7 @@ d = {
     "search": search,
     "pronoun_mapping": pronoun_mapping,
     "verb_mapping": verb_mapping,
-    "PLANE_TEXTS": PLANE_TEXTS,
+    "PLAIN_TEXTS": PLAIN_TEXTS,
 }
 
-json.dump(d,open("property.json",mode="w+"), ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ': '))
+json.dump(d, open("property.json", mode="w+"), ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ': '))

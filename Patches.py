@@ -402,7 +402,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             part1 = msg[0].split('/')
             if len(part1[-1]) + len(msg[1]) < line_len:
                 msg = ["/".join(part1[:-1]) + "/", part1[-1] + msg[1]]
-    for idx,part in enumerate(msg):
+    for idx, part in enumerate(msg):
         part_bytes = list(ord(c) for c in part) + [0] * (line_len+1)
         part_bytes = part_bytes[:(line_len+1)]
         symbol = rom.sym('CFG_CUSTOM_MESSAGE_{}'.format(idx+1))
@@ -610,7 +610,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     # Forbid Sun's Song from a bunch of cutscenes
     Suns_scenes = [0x2016FC9, 0x2017219, 0x20173D9, 0x20174C9, 0x2017679, 0x20C1539, 0x20C15D9, 0x21A0719, 0x21A07F9, 0x2E90129, 0x2E901B9, 0x2E90249, 0x225E829, 0x225E939, 0x306D009]
     for address in Suns_scenes:
-        rom.write_byte(address,0x01)
+        rom.write_byte(address, 0x01)
 
     # Tell Sheik at Ice Cavern we are always an Adult
     rom.write_int32(0xC7B9C0, 0x00000000)
@@ -643,7 +643,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
                 command = rom.read_byte(current)
                 if command == 0x18:  # Alternate header list
                     header_list = scene_start + (rom.read_int32(current + 4) & 0x00FFFFFF)
-                    for alt_id in range(0,3):
+                    for alt_id in range(0, 3):
                         header_offset = rom.read_int32(header_list) & 0x00FFFFFF
                         if header_offset != 0:
                             add_scene_exits(scene_start, header_offset)
@@ -840,8 +840,8 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     rom.write_byte(0xBEEF45, 0x0B)
 
     # Fix stupid alcove cameras in Ice Cavern -- thanks to krim and mzx for the help
-    rom.write_byte(0x2BECA25,0x01)
-    rom.write_byte(0x2BECA2D,0x01)
+    rom.write_byte(0x2BECA25, 0x01)
+    rom.write_byte(0x2BECA2D, 0x01)
 
     configure_dungeon_info(rom, world)
 
@@ -1181,13 +1181,13 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     # update dialogue
     # 0x70F5 is done in build_misc_location_hints
     if world.settings.big_poe_count != 10:
-        new_message = lang.format_from_id("PATCH_TEXTS.brought_poe",{"poe": poe_points})
+        new_message = lang.format_from_id("PATCH_TEXTS.brought_poe", {"poe": poe_points})
         update_message_by_id(messages, 0x70f7, new_message, lang)
-        new_message = lang.format_from_id("PATCH_TEXTS.enough_poe",{"poe": poe_points})
+        new_message = lang.format_from_id("PATCH_TEXTS.enough_poes", {"poe": poe_points})
         update_message_by_id(messages, 0x70f8, new_message, lang)
 
     # Update Child Anju's dialogue
-    new_message = lang.format_from_id("PATCH_TEXTS.child_anju",{"chicken":world.settings.chicken_count})
+    new_message = lang.format_from_id("PATCH_TEXTS.child_anju", {"chicken": world.settings.chicken_count})
     update_message_by_id(messages, 0x5036, new_message, lang)
 
     # Update "Princess Ruto got the Spiritual Stone!" text before the midboss in Jabu
@@ -1202,7 +1202,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         jabu_item = location.item
         reward_text = get_hint(get_item_generic_name(location.item), lang, True).text
         reward_color = REWARD_COLORS.get(location.item.name, 'Blue')
-        new_message = lang.format_from_id("PATCH_TEXTS.ruto_text",{"color":COLOR_MAP[reward_color][1 if lang.base == "jp" else 0],"reward_text":reward_text})
+        new_message = lang.format_from_id("PATCH_TEXTS.ruto_text", {"color": COLOR_MAP[reward_color][1 if lang.base == "jp" else 0], "reward_text": reward_text})
     update_message_by_id(messages, 0x4050, new_message, lang)
 
     # Set Dungeon Reward Actor in Jabu Jabu to be accurate
@@ -1577,9 +1577,9 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             item_text = get_hint(get_item_generic_name(location.item), lang, True).text
             wrapped_item_text = line_wrap(item_text, lang.base, False, False, False)
             if wrapped_item_text != item_text:
-                update_message_by_id(messages, 0x405E, lang.format_from_id("PATCH_TEXTS.bean_wrapped",{"item":wrapped_item_text}),lang)
+                update_message_by_id(messages, 0x405E, lang.format_from_id("PATCH_TEXTS.bean_wrapped", {"item": wrapped_item_text}), lang)
             else:
-                update_message_by_id(messages, 0x405E, lang.format_from_id("PATCH_TEXTS.bean_item",{"item":item_text}),lang)
+                update_message_by_id(messages, 0x405E, lang.format_from_id("PATCH_TEXTS.bean_item", {"item": item_text}), lang)
         update_message_by_id(messages, 0x4069, lang.format_from_id("PATCH_TEXTS.bean_low"), lang)
         update_message_by_id(messages, 0x406C, lang.format_from_id("PATCH_TEXTS.bean_enough"), lang)
         # Change first magic bean to cost 60 (is used as the price for the one time item when beans are shuffled)
@@ -1595,9 +1595,9 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             item_text = get_hint(get_item_generic_name(location.item), lang, True).text
             wrapped_item_text = line_wrap(item_text, lang.base, False, False, False)
             if wrapped_item_text != item_text:
-                update_message_by_id(messages, 0x6077, lang.format_from_id("PATCH_TEXTS.carpet_wrapped",{"item":wrapped_item_text}),lang)
+                update_message_by_id(messages, 0x6077, lang.format_from_id("PATCH_TEXTS.carpet_wrapped", {"item": wrapped_item_text}), lang)
             else:
-                update_message_by_id(messages, 0x6077, lang.format_from_id("PATCH_TEXTS.carpet_item",{"item":item_text}),lang)
+                update_message_by_id(messages, 0x6077, lang.format_from_id("PATCH_TEXTS.carpet_item", {"item": item_text}), lang)
         update_message_by_id(messages, 0x6078, lang.format_from_id("PATCH_TEXTS.carpet_enough"), lang)
 
         rom.write_byte(rom.sym('SHUFFLE_MEDIGORON'), 0x01)
@@ -1611,9 +1611,9 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             item_text = get_hint(get_item_generic_name(location.item), lang, True).text
             wrapped_item_text = line_wrap(item_text, lang.base, False, False, False)
             if wrapped_item_text != item_text:
-                update_message_by_id(messages, 0x304F, lang.format_from_id("PATCH_TEXTS.medigoron_wrapped",{"item":wrapped_item_text}),lang)
+                update_message_by_id(messages, 0x304F, lang.format_from_id("PATCH_TEXTS.medigoron_wrapped", {"item": wrapped_item_text}), lang)
             else:
-                update_message_by_id(messages, 0x304F, lang.format_from_id("PATCH_TEXTS.medigoron_item",{"item":item_text}),lang)
+                update_message_by_id(messages, 0x304F, lang.format_from_id("PATCH_TEXTS.medigoron_item", {"item": item_text}), lang)
 
         rom.write_byte(rom.sym('SHUFFLE_GRANNYS_POTION_SHOP'), 0x01)
         if 'unique_merchants' not in world.settings.misc_hints:
@@ -1623,9 +1623,9 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             item_text = get_hint(get_item_generic_name(location.item), lang, True).text
             wrapped_item_text = line_wrap(item_text, lang.base, False, False, False)
             if wrapped_item_text != item_text:
-                update_message_by_id(messages, 0x500C, lang.format_from_id("PATCH_TEXTS.granny_wrapped",{"item":wrapped_item_text}),lang)
+                update_message_by_id(messages, 0x500C, lang.format_from_id("PATCH_TEXTS.granny_wrapped", {"item": wrapped_item_text}), lang)
             else:
-                update_message_by_id(messages, 0x500C, lang.format_from_id("PATCH_TEXTS.granny_item",{"item":item_text}),lang)
+                update_message_by_id(messages, 0x500C, lang.format_from_id("PATCH_TEXTS.granny_item", {"item": item_text}), lang)
 
     new_message = lang.format_from_id("PATCH_TEXTS.play")
     update_message_by_id(messages, 0x908B, new_message, lang, 0x00)
@@ -1636,16 +1636,16 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             rom.write_byte(rom.sym('SHUFFLE_CHEST_GAME'), 0x01)
         # Update Chest Game Salesman to better fit the fact he sells a randomized item
         if 'unique_merchants' not in world.settings.misc_hints:
-            update_message_by_id(messages, 0x6D, lang.format_from_id("PATCH_TEXTS.salesman_mysterious"),lang)
+            update_message_by_id(messages, 0x6D, lang.format_from_id("PATCH_TEXTS.salesman_mysterious"), lang)
         else:
             location = world.get_location("Market Treasure Chest Game Salesman")
             item_text = get_hint(get_item_generic_name(location.item), lang, True).text
             wrapped_item_text = line_wrap(item_text, lang.base, False, False, False)
             if wrapped_item_text != item_text:
-                update_message_by_id(messages, 0x6D, lang.format_from_id("PATCH_TEXTS.salesman_wrapped",{"item":wrapped_item_text}),lang)
+                update_message_by_id(messages, 0x6D, lang.format_from_id("PATCH_TEXTS.salesman_wrapped", {"item": wrapped_item_text}), lang)
             else:
-                update_message_by_id(messages, 0x6D, lang.format_from_id("PATCH_TEXTS.salesman_item",{"item":item_text}),lang)
-        update_message_by_id(messages, 0x908B, lang.format_from_id("PATCH_TEXTS.salesman_ok"), lang, 0x00, allow_duplicates=True)
+                update_message_by_id(messages, 0x6D, lang.format_from_id("PATCH_TEXTS.salesman_item", {"item": item_text}), lang)
+        update_message_by_id(messages, 0x908B, lang.format_from_id("PATCH_TEXTS.salesman_ok"), lang, 0x00, allow_duplicates = True)
         update_message_by_id(messages, 0x6E, lang.format_from_id("PATCH_TEXTS.salesman_limit"), lang)
         update_message_by_id(messages, 0x704C, lang.format_from_id("PATCH_TEXTS.salesman_hope"), lang)
 
@@ -1899,10 +1899,10 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         chars_in_section = 1
         for code in get_message_by_id(messages, message_id).text_codes:
             if code.code == [0x04, 0x81A5][lang_num]:  # box-break
-                text_codes.append(TextCode([0x0c,0x81A3][lang_num], 80 + chars_in_section, lang.base))
+                text_codes.append(TextCode([0x0C, 0x81A3][lang_num], 80 + chars_in_section, lang.base))
                 chars_in_section = 1
-            elif code.code == [0x02,0x8170][lang_num]:  # end
-                text_codes.append(TextCode([0x0e,0x819E][lang_num], 80 + chars_in_section, lang.base))
+            elif code.code == [0x02, 0x8170][lang_num]:  # end
+                text_codes.append(TextCode([0x0E, 0x819E][lang_num], 80 + chars_in_section, lang.base))
                 text_codes.append(code)
             else:
                 chars_in_section += 1
@@ -2496,13 +2496,15 @@ def create_fake_name(name: str, censor: list[str]) -> str:
     KANJI = "力加倍陪精清目日牛午矢失地池輪輸本体弓弔"
 
     M = {}
-    bases = ["かきくけこ","さしすせそ","たちつてと","はひふへほ","はひふへほ"]
-    dak  = ["がぎぐげご","ざじずぜぞ","だぢづでど","ばびぶべぼ","ぱぴぷぺぽ"]
+    bases = ["かきくけこ", "さしすせそ", "たちつてと", "はひふへほ", "はひふへほ"]
+    dak  = ["がぎぐげご", "ざじずぜぞ", "だぢづでど", "ばびぶべぼ", "ぱぴぷぺぽ"]
     for b_str, d_str in zip(bases, dak):
         for b, d in zip(b_str, d_str):
             M[b] = d; M[d] = b
     M |= {k.upper(): v.upper() for k, v in M.items()}
-    for s, f in zip("ぁぃぅぇぉゃゅょァィゥェォャュョ","あいうえおやゆよアイウエオヤユヨ"):M[s] = f; M[f] = s
+    for s, f in zip("ぁぃぅぇぉゃゅょァィゥェォャュョ", "あいうえおやゆよアイウエオヤユヨ"):
+        M[s] = f
+    M[f] = s
     vowels = 'aeiou'
     list_name = list(name)
     vowel_indexes = [i for i, c in enumerate(list_name) if c in vowels]
@@ -2510,24 +2512,24 @@ def create_fake_name(name: str, censor: list[str]) -> str:
         c = list_name[i]
         list_name[i] = random.choice([v for v in vowels if v != c])
 
-    idx = [i for i,ch in enumerate(name) if PAT.match(ch) and ch in M]
+    idx = [i for i, ch in enumerate(name) if PAT.match(ch) and ch in M]
     if idx:
         i = random.choice(idx)
         list_name[i] = M[list_name[i]]
 
     if KANA.search(name):
-        idx = [i for i,ch in enumerate(name) if KANA.match(ch)]
+        idx = [i for i, ch in enumerate(name) if KANA.match(ch)]
         i = random.choice(idx)
         cp = ord(name[i])
         delta = 0x60
-        new = chr(cp+delta) if cp < 0x30A0 else chr(cp-delta)
+        new = chr(cp + delta) if cp < 0x30A0 else chr(cp - delta)
         list_name[i] = new
 
-    idx = [i for i,ch in enumerate(name) if ch in KANJI]
+    idx = [i for i, ch in enumerate(name) if ch in KANJI]
     if idx:
         i = random.choice(idx)
         n = KANJI.index(name[i])
-        n += 1 if n%2==0 else -1
+        n += 1 if n % 2 == 0 else -1
         list_name[i] = KANJI[n]
 
     # keeping the game E...
@@ -2604,9 +2606,9 @@ def place_shop_items(rom: Rom, world: World, shop_items, messages, locations, in
 
             if item_display.dungeonitem:
                 base_name, extra_name = item_display.name[:-1].split('(')
-                base_name = world.language.hintTable.get(base_name,["",base_name])[1]
-                base_name = world.language.hintTable.get(base_name.replace(" ",""),["",base_name])[1]
-                extra_name = world.language.region_list.get(extra_name,extra_name)
+                base_name = world.language.hintTable.get(base_name, ["", base_name])[1]
+                base_name = world.language.hintTable.get(base_name.replace(" ", ""), ["", base_name])[1]
+                extra_name = world.language.region_list.get(extra_name, extra_name)
 
                 extra_name = world.language.SHOP_TEXTS["dungeon-item_extra"].get(extra_name, extra_name)
 
@@ -2703,10 +2705,10 @@ def configure_dungeon_info(rom: Rom, world: World) -> None:
             if location is None:
                 area = HintAreaDefault.ROOT
             else:
-                if HintAreaDefault.at(location,get_name=True):
-                    area = HintAreaDefault[HintAreaDefault.at(location,get_name=True)]
+                if HintAreaDefault.at(location, get_name = True):
+                    area = HintAreaDefault[HintAreaDefault.at(location, get_name = True)]
                 else:
-                    area = HintAreaDefault[HintAreaDefault.at(location,get_name=True)]
+                    area = HintAreaDefault[HintAreaDefault.at(location, get_name = True)]
             dungeon_reward_areas += area.short_name.encode('ascii').ljust(0x16) + b'\0'
             dungeon_reward_worlds.append((world.id if location is None else location.world.id) + 1)
             if location is not None and location.world.id == world.id and area.is_dungeon:
