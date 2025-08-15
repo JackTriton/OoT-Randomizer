@@ -409,13 +409,13 @@
         "custom_ice_trap_count": 100,
         "ice_trap_appearance": "anything"
     },
-    "Standard Weekly (2025-06-07)": {
+    "Standard Weekly (2025-08-16)": {
         "aliases": [
             "Standard Weekly (Latest)",
             "weekly"
         ],
         "show_seed_info": true,
-        "user_message": "Standard Weekly (2025-06-07)",
+        "user_message": "Standard Weekly (2025-08-16)",
         "world_count": 1,
         "create_spoiler": true,
         "password_lock": false,
@@ -431,7 +431,7 @@
         "lacs_rewards": 9,
         "lacs_tokens": 100,
         "lacs_hearts": 20,
-        "bridge": "dungeons",
+        "bridge": "vanilla",
         "bridge_medallions": 6,
         "bridge_stones": 3,
         "bridge_rewards": 9,
@@ -439,7 +439,7 @@
         "bridge_hearts": 20,
         "trials_random": false,
         "trials": 0,
-        "shuffle_ganon_bosskey": "remove",
+        "shuffle_ganon_bosskey": "medallions",
         "ganon_bosskey_medallions": 6,
         "ganon_bosskey_stones": 3,
         "ganon_bosskey_rewards": 9,
@@ -456,12 +456,9 @@
         "mq_dungeons_mode": "vanilla",
         "mq_dungeons_specific": [],
         "mq_dungeons_count": 0,
-        "empty_dungeons_mode": "rewards",
+        "empty_dungeons_mode": "none",
         "empty_dungeons_specific": [],
-        "empty_dungeons_rewards": [
-            "Shadow Medallion",
-            "Spirit Medallion"
-        ],
+        "empty_dungeons_rewards": [],
         "empty_dungeons_count": 2,
         "shuffle_interior_entrances": "off",
         "shuffle_hideout_entrances": false,
@@ -475,8 +472,7 @@
         "owl_drops": false,
         "warp_songs": false,
         "spawn_positions": [
-            "child",
-            "adult"
+            "child"
         ],
         "free_bombchu_drops": false,
         "shuffle_song_items": "song",
@@ -566,14 +562,14 @@
         "complete_mask_quest": false,
         "useful_cutscenes": false,
         "fast_chests": true,
-        "scarecrow_behavior": "free",
+        "scarecrow_behavior": "vanilla",
         "fast_bunny_hood": true,
         "auto_equip_masks": false,
-        "plant_beans": true,
+        "plant_beans": false,
         "easier_fire_arrow_entry": false,
         "fae_torch_count": 3,
-        "ruto_already_f1_jabu": true,
-        "fast_shadow_boat": true,
+        "ruto_already_f1_jabu": false,
+        "fast_shadow_boat": false,
         "chicken_count_random": false,
         "chicken_count": 3,
         "big_poe_count_random": false,
@@ -583,9 +579,7 @@
         "hint_dist": "weekly",
         "item_hints": [],
         "hint_dist_user": {},
-        "plandomized_locations": {
-            "ToT Reward from Rauru": "Light Medallion"
-        },
+        "plandomized_locations": {},
         "misc_hints": [
             "altar",
             "ganondorf",
