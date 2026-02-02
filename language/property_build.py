@@ -3706,4 +3706,4 @@ lang_info = {
     "PLAIN_TEXTS": PLAIN_TEXTS,
 }
 
-json.dump(lang_info, open("property.json", mode="w+"), ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ': '))
+json.dump(lang_info, open("property.json", mode="w+", encoding='utf-8', newline=''), ensure_ascii=False, indent=4, sort_keys=True)

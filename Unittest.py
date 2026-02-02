@@ -1011,13 +1011,13 @@ def extract_first_second_level_keys(data: dict) -> list:
 class TestLanguageFile(unittest.TestCase):
     def test_langfiles(self):
         base_keys = extract_first_second_level_keys(language.property_build.lang_info)
-        bin_patch = list(json.load(open(data_path("bin_patch.json"))).keys()) + ["blue_fire_arrow_item_name_jap.ia4", "blue_fire_arrow_item_name_eng.ia4"]
+        bin_patch = list(json.load(open(data_path("bin_patch.json"), encoding='utf-8')).keys()) + ["blue_fire_arrow_item_name_jap.ia4", "blue_fire_arrow_item_name_eng.ia4"]
         for lang in os.listdir(lang_path()):
             if os.path.isdir(os.path.join(lang_path(), lang)) and lang != "__pycache__":
                 lang_files = os.listdir(os.path.join(lang_path(), lang))
                 self.assertIn("property.json", lang_files, msg = "\n{}: property.json is not included".format(lang))
                 lang_files.remove("property.json")
-                property_keys = extract_first_second_level_keys(json.load(open(os.path.join(lang_path(), lang, "property.json"))))
+                property_keys = extract_first_second_level_keys(json.load(open(os.path.join(lang_path(), lang, "property.json"), encoding='utf-8')))
                 only_in_base = list(sorted(set(base_keys) - set(property_keys)))
                 only_in_lang = list(sorted(set(property_keys) - set(base_keys)))
                 diff_keys = []
