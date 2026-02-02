@@ -66,7 +66,7 @@ class World:
         self.distribution: WorldDistribution = settings.distribution.world_dists[world_id]
 
         # language property...
-        self.language: Language = Language(settings.language_selection)
+        self.language: Language = Language(settings.language)
         def update_dict(a: dict, b: dict) -> dict:
             c = {}
             for key, subdict in a.items():

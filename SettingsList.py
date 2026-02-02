@@ -55,8 +55,8 @@ class SettingInfos:
     output_file = SettingInfoStr(None, None)
     seed = SettingInfoStr(None, None)
 
-    language_selection = Combobox(
-        gui_text       = 'Language Selection',
+    language = Combobox(
+        gui_text       = 'Language',
         default        = 'English',
         choices        = get_language(),
         gui_tooltip    = '''\
