@@ -1264,9 +1264,9 @@ def update_warp_song_text(messages: list[Message], world: World) -> None:
         for id, entr in msg_list.items():
             if 'warp_songs_and_owls' in world.settings.misc_hints or not world.settings.warp_songs:
                 destination = world.get_entrance(entr).connected_region
-                destination_name = world.HintAreaLang.at(destination)
+                destination_name = HintArea.at(destination)
                 color = COLOR_MAP[destination_name.color][lang_num]
-                if destination_name.preposition(True) is not None:
+                if destination_name.preposition(lang, True) is not None:
                     destination_name = lang.format_from_id("PATCH_TEXTS.warp_to", {"destination_name": destination_name})
             else:
                 destination_name = lang.PATCH_TEXTS["warp_mysterious"]
@@ -1279,9 +1279,9 @@ def update_warp_song_text(messages: list[Message], world: World) -> None:
         for id, entr in owl_messages.items():
             if 'warp_songs_and_owls' in world.settings.misc_hints:
                 destination = world.get_entrance(entr).connected_region
-                destination_name = world.HintAreaLang.at(destination)
+                destination_name = HintArea.at(destination)
                 color = COLOR_MAP[destination_name.color][lang_num]
-                if destination_name.preposition(True) is not None:
+                if destination_name.preposition(lang, True) is not None:
                     destination_name = lang.format_from_id("PATCH_TEXTS.warp_to", {"destination_name": destination_name})
             else:
                 destination_name = lang.PATCH_TEXTS["warp_mysterious"]
@@ -1389,9 +1389,9 @@ def update_map_compass_messages(messages: list[Message], world: World):
                             vanilla_reward = world.get_location(dungeon.vanilla_boss_name).vanilla_item
                             vanilla_reward_location = world.hinted_dungeon_reward_locations[vanilla_reward]
                             if vanilla_reward_location is None:
-                                area = world.HintAreaLang.ROOT
+                                area = HintArea.ROOT
                             else:
-                                area = world.HintAreaLang.at(vanilla_reward_location)
+                                area = HintArea.at(vanilla_reward_location)
                             area = GossipText(area.text(lang, world.settings.clearer_hints, preposition=True, use_2nd_person=True), lang, [area.color], prefix='', capitalize=False)
                             if 'compass_boss_location' in world.settings.enhance_map_compass and world.settings.shuffle_bosses != 'off':
                                 boss_room = world.get_entrance(boss_entrance).connected_region.name

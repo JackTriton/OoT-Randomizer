@@ -15,7 +15,7 @@ from typing import Literal, Optional, Any, overload
 
 from EntranceShuffle import EntranceShuffleError
 from Fill import ShuffleError
-from Hints import HintAreaDefault, build_misc_item_hints
+from Hints import HintArea, build_misc_item_hints
 from Item import ItemInfo
 from ItemPool import remove_junk_items, remove_junk_ludicrous_items, ludicrous_items_base, ludicrous_items_extended, trade_items, ludicrous_exclusions
 from LocationList import location_is_viewable
@@ -530,14 +530,14 @@ class TestPlandomizer(unittest.TestCase):
             "empty-dungeons-half-songs-dungeon"
         ]
         dungeons = {
-            HintAreaDefault.DEKU_TREE: "Queen Gohma",
-            HintAreaDefault.DODONGOS_CAVERN: "King Dodongo",
-            HintAreaDefault.JABU_JABUS_BELLY: "Barinade",
-            HintAreaDefault.FOREST_TEMPLE: "Phantom Ganon",
-            HintAreaDefault.FIRE_TEMPLE: "Volvagia",
-            HintAreaDefault.WATER_TEMPLE: "Morpha",
-            HintAreaDefault.SHADOW_TEMPLE: "Bongo Bongo",
-            HintAreaDefault.SPIRIT_TEMPLE: "Twinrova"
+            HintArea.DEKU_TREE: "Queen Gohma",
+            HintArea.DODONGOS_CAVERN: "King Dodongo",
+            HintArea.JABU_JABUS_BELLY: "Barinade",
+            HintArea.FOREST_TEMPLE: "Phantom Ganon",
+            HintArea.FIRE_TEMPLE: "Volvagia",
+            HintArea.WATER_TEMPLE: "Morpha",
+            HintArea.SHADOW_TEMPLE: "Bongo Bongo",
+            HintArea.SPIRIT_TEMPLE: "Twinrova"
         }
         for filename in filenames:
             with self.subTest(filename):
@@ -558,7 +558,7 @@ class TestPlandomizer(unittest.TestCase):
                     continue
                 for dungeon in dungeons:
                     if spoiler['empty_dungeons'][dungeon.dungeon_name]:
-                        self.assertIn(str(dungeon), spoiler[':barren_regions'])
+                        self.assertIn(dungeon.name, spoiler[':barren_regions'])
 
     def test_fix_broken_drops(self):
         # Setting off
@@ -579,7 +579,7 @@ class TestHints(unittest.TestCase):
         # just exclude all other locations to see if HC is barren.
         _, spoiler = generate_with_plandomizer("skip-zelda")
         woth = spoiler[':barren_regions']
-        self.assertIn('Hyrule Castle', woth)
+        self.assertIn('HYRULE_CASTLE', woth)
 
     def test_ganondorf(self):
         if not os.path.isfile('./ZOOTDEC.z64'):
@@ -650,7 +650,7 @@ class TestHints(unittest.TestCase):
         _, spoiler = generate_with_plandomizer(filename, live_copy=True)
         world = spoiler.worlds[0]
         location = spoiler.worlds[0].misc_hint_item_locations["ganondorf"]
-        area = HintAreaDefault.at(location, use_alt_hint=True).text(world.language, world.settings.clearer_hints, world=None if not location.world or location.world.id == world.id else location.world.id + 1)
+        area = HintArea.at(location, use_alt_hint=True).text(world.language, world.settings.clearer_hints, world=None if not location.world or location.world.id == world.id else location.world.id + 1)
         self.assertEqual(area, "#Ganondorf's Chamber#")
         # Build a test message with the same ID as the ganondorf hint (0x70CC)
         messages = [Message("Test", 0, 0x70CC, 0, 0, 0, "en")]
