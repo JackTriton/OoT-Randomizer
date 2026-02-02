@@ -27,7 +27,7 @@ from Spoiler import Spoiler
 from Rom import Rom
 from Audiobank import *
 from Language import Language
-import language.property_build
+import data.lang.property_build
 from Utils import lang_path, data_path
 
 test_dir = os.path.join(os.path.dirname(__file__), 'tests')
@@ -1010,7 +1010,7 @@ def extract_first_second_level_keys(data: dict) -> list:
 
 class TestLanguageFile(unittest.TestCase):
     def test_langfiles(self):
-        base_keys = extract_first_second_level_keys(language.property_build.lang_info)
+        base_keys = extract_first_second_level_keys(data.lang.property_build.lang_info)
         bin_patch = list(json.load(open(data_path("bin_patch.json"), encoding='utf-8')).keys()) + ["blue_fire_arrow_item_name_jap.ia4", "blue_fire_arrow_item_name_eng.ia4"]
         for lang in os.listdir(lang_path()):
             if os.path.isdir(os.path.join(lang_path(), lang)) and lang != "__pycache__":
