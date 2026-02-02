@@ -11,7 +11,7 @@ import itertools
 from ItemList import REWARD_COLORS
 from HintList import misc_item_hint_table, misc_location_hint_table
 from TextBox import line_wrap
-from Utils import find_last
+from Utils import find_last, data_path
 from Language import Language
 
 if TYPE_CHECKING:
@@ -176,7 +176,7 @@ for char, byte in CHARACTER_MAP.items():
     REVERSE_MAP[byte] = char
 
 try:
-    CHARACTER_MAP_JP, REVERSE_MAP_JP = json.load(open("./jp_char_map.otrx", mode="r+"))
+    CHARACTER_MAP_JP, REVERSE_MAP_JP = json.load(open(data_path('generated/jp_char_map.otrx'), mode="r+"))
 except:
     CHARACTER_MAP_JP: Dict[str, int] = {}
     for cp in range(0x110000):
@@ -210,7 +210,7 @@ except:
     for code, token in SCJP.items():
         if code < 0x10000:
             REVERSE_MAP_JP[code] = token
-    json.dump([CHARACTER_MAP_JP, REVERSE_MAP_JP], open("./jp_char_map.otrx", mode="w"))
+    json.dump([CHARACTER_MAP_JP, REVERSE_MAP_JP], open(data_path('generated/jp_char_map.otrx'), mode="w"))
 
 # [0x0500,0x0560] (inclusive) are reserved for plandomakers
 GOSSIP_STONE_MESSAGES: list[int] = list(range(0x0401, 0x04FF))  # ids of the actual hints
