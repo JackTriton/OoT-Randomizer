@@ -67,14 +67,6 @@ class World:
 
         # language property...
         self.language: Language = Language(settings.language)
-        def update_dict(a: dict, b: dict) -> dict:
-            c = {}
-            for key, subdict in a.items():
-                merged = subdict.copy()
-                if key in b:
-                    merged.update(b[key])
-                c[key] = merged
-            return c
 
         # rename a few attributes...
         self.keysanity: bool = settings.shuffle_smallkeys in ('keysanity', 'remove', 'any_dungeon', 'overworld', 'regional')
