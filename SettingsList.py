@@ -37,7 +37,7 @@ settings_versioning = [
 
 def get_language() -> dict[str, str]:
     return {
-        lang: lang.capitalize()
+        lang: lang
         for lang in os.listdir(lang_path())
         if os.path.isdir(os.path.join(lang_path(), lang))
         and os.path.isfile(os.path.join(lang_path(), lang, 'property.json'))
