@@ -62,7 +62,8 @@ class SettingInfos:
         gui_tooltip    = '''\
             Sets the language used within the game.
         ''',
-        shared         = True,
+        shared         = False,
+        visual_shared  = True,
     )
 
     # GUI Only Buttons/Text
@@ -398,7 +399,8 @@ class SettingInfos:
 
     user_message = Textinput(
         gui_text       = "User-Configurable Message",
-        shared         = True,
+        shared         = False,
+        visual_shared  = True,
         gui_tooltip    = """\
             Add a custom message to the seed info.
         """,
@@ -3155,7 +3157,8 @@ class SettingInfos:
             'Maps/Compasses: Start With': The dungeon information
             is available immediately from the dungeon menu.
         ''',
-        shared         = True,
+        shared         = False,
+        visual_shared  = True,
         gui_params     = {
             'randomize_key': 'randomize_settings',
         },
@@ -3807,7 +3810,8 @@ class SettingInfos:
             Boss keys will remain in their fancy chest, while small key will be in a
             smaller version of the fancy chest.
         ''',
-        shared         = True,
+        shared         = False,
+        visual_shared  = True,
         disable        = {
             'off': {'settings': ['minor_items_as_major_chest', 'chest_textures_specific']},
             'classic': {'settings': ['chest_textures_specific']},
@@ -3830,7 +3834,8 @@ class SettingInfos:
             Any unchecked option will make all items in the category
             appear in brown chests.
         ''',
-        shared          = True,
+        shared          = False,
+        visual_shared   = True,
         gui_params     = {
             "hide_when_disabled": True,
         },
@@ -3842,7 +3847,8 @@ class SettingInfos:
             Textures for chests will only be correct
             when Stone of Agony is found.
         ''',
-        shared         = True,
+        shared          = False,
+        visual_shared   = True,
         gui_params     = {
             "hide_when_disabled": True,
         },
@@ -3877,7 +3883,8 @@ class SettingInfos:
             Lens of Truth. Lens is not logically
             required for normally visible chests.
         ''',
-        shared         = True,
+        shared          = False,
+        visual_shared   = True,
     )
 
     correct_potcrate_appearances = Combobox(
@@ -3907,7 +3914,8 @@ class SettingInfos:
             original texture once the item is collected.
             Beehives will wiggle until their item is collected.
         ''',
-        shared         = True,
+        shared          = False,
+        visual_shared   = True,
         disable        = {
             '!textures_content': {'settings': ['potcrate_textures_specific', 'soa_unlocks_potcrate_texture']},
         },
@@ -3919,7 +3927,8 @@ class SettingInfos:
             Small keys and boss keys (not key rings)
             will use custom models to match their dungeon.
         ''',
-        shared         = True,
+        shared          = False,
+        visual_shared   = True,
     )
 
     potcrate_textures_specific = MultipleSelect(
@@ -3937,7 +3946,8 @@ class SettingInfos:
             Any unchecked option will make all items in the category
             appear in regular pots/crates.
         ''',
-        shared          = True,
+        shared          = False,
+        visual_shared   = True,
         gui_params     = {
             "hide_when_disabled": True,
         },
@@ -3949,7 +3959,8 @@ class SettingInfos:
             Textures for pots and crates will only be correct
             when Stone of Agony is found.
         ''',
-        shared         = True,
+        shared          = False,
+        visual_shared   = True,
         gui_params     = {
             "hide_when_disabled": True,
         },
@@ -4004,7 +4015,8 @@ class SettingInfos:
             key text, Good Deal! items sold in shops, random
             price scrubs, chicken count and poe count.
         ''',
-        shared         = True,
+        shared          = False,
+        visual_shared   = True,
     )
 
     damage_multiplier = Combobox(
@@ -4296,7 +4308,8 @@ class SettingInfos:
 
             'Anything': Ice Traps may appear as anything.
         ''',
-        shared         = True,
+        shared          = False,
+        visual_shared   = True,
     )
 
     # Cosmetics

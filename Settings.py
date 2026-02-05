@@ -70,6 +70,18 @@ def get_preset_files() -> list[str]:
             if fn.endswith('.json'))
 
 
+def _jsonify_starting_item_record(record):
+    if isinstance(record, int):
+        return record
+    if isinstance(record, dict):
+        return {k: _jsonify_starting_item_record(v) for k, v in record.items()}
+    if hasattr(record, "count") and isinstance(record.count, int):
+        return record.count
+    if hasattr(record, "to_json"):
+        return record.to_json()
+    return record
+
+
 # holds the particular choices for a run's settings
 class Settings(SettingInfos):
     # add the settings as fields, and calculate information based on them
@@ -96,7 +108,10 @@ class Settings(SettingInfos):
             self.world_count = 255
 
         self._disabled: set[str] = set()
-        self.settings_string: str = self.get_settings_string()
+
+        self.visual_settings_string: str = self.get_visual_settings_string()
+
+        self.settings_string: str = self.get_gameplay_settings_string()
         self.distribution: Distribution = Distribution(self)
         self.update_seed(self.seed)
         self.custom_seed: bool = False
@@ -107,12 +122,29 @@ class Settings(SettingInfos):
         return settings
 
     def update(self, settings_dict: dict[str, Any], *, initialize: bool = False) -> None:
+        touched_gameplay = False
+        touched_visual = False
+
         for info in self.setting_infos.values():
             if info.type is type(None):
                 continue
             if not initialize and info.name not in settings_dict:
                 continue
-            setattr(self, info.name, settings_dict[info.name] if info.name in settings_dict else info.default)
+
+            val = settings_dict[info.name] if info.name in settings_dict else info.default
+            setattr(self, info.name, val)
+
+            if info.bitwidth > 0:
+                if getattr(info, "shared", False):
+                    touched_gameplay = True
+                if getattr(info, "visual_shared", False) or getattr(info, "cosmetic", False):
+                    touched_visual = True
+
+        if not initialize and (touched_gameplay or touched_visual):
+            self._refresh_settings_strings()
+
+            if touched_gameplay:
+                self.numeric_seed = self.get_numeric_seed()
 
     def get_settings_display(self) -> str:
         padding = 0
@@ -129,12 +161,22 @@ class Settings(SettingInfos):
             output += name + val + '\n'
         return output
 
-    def get_settings_string(self) -> str:
+    def _refresh_settings_strings(self) -> None:
+        self.visual_settings_string = self.get_visual_settings_string()
+        self.settings_string = self.get_gameplay_settings_string()  # backward compat
+
+    def get_gameplay_settings_string(self) -> str:
+        return self._encode_settings_string(lambda s: s.shared and s.bitwidth > 0)
+
+    def get_visual_settings_string(self) -> str:
+        return self._encode_settings_string(lambda s: s.visual_shared and s.bitwidth > 0)
+
+    def _encode_settings_string(self, pred) -> str:
         bits = []
-        for setting in filter(lambda s: s.shared and s.bitwidth > 0, self.setting_infos.values()):
+        for setting in filter(pred, self.setting_infos.values()):
             value = getattr(self, setting.name)
             i_bits = []
-            if setting.name in LEGACY_STARTING_ITEM_SETTINGS:
+            if setting.shared and setting.name in LEGACY_STARTING_ITEM_SETTINGS:
                 items = LEGACY_STARTING_ITEM_SETTINGS[setting.name]
                 value = []
                 for entry in items.values():
@@ -192,10 +234,31 @@ class Settings(SettingInfos):
             bits += i_bits
         return bit_string_to_text(bits)
 
+    def get_settings_string(self) -> str:
+        return self.get_gameplay_settings_string()
+
     def update_with_settings_string(self, text: str) -> None:
+        self.update_with_gameplay_settings_string(text)
+
+    def update_with_gameplay_settings_string(self, text: str) -> None:
+        self._decode_settings_string(text, lambda s: s.shared and s.bitwidth > 0)
+        self._refresh_settings_strings()
+        self.numeric_seed = self.get_numeric_seed()
+
+    def update_with_visual_settings_string(self, text: str) -> None:
+        self._decode_settings_string(text, lambda s: s.visual_shared and s.bitwidth > 0)
+        self._refresh_settings_strings()
+        self.numeric_seed = self.get_numeric_seed()
+
+    def _decode_settings_string(self, text: str, pred) -> None:
         bits = text_to_bit_string(text)
 
-        for setting in filter(lambda s: s.shared and s.bitwidth > 0, self.setting_infos.values()):
+        targets = [s for s in self.setting_infos.values() if pred(s)]
+        need = sum(s.bitwidth for s in targets)
+        if len(bits) < need:
+            bits += [0] * (need - len(bits))
+
+        for setting in targets:
             cur_bits = bits[:setting.bitwidth]
             bits = bits[setting.bitwidth:]
             value = None
@@ -205,6 +268,11 @@ class Settings(SettingInfos):
                 index = 0
                 for b in range(setting.bitwidth):
                     index |= cur_bits[b] << b
+                if index >= len(setting.choice_list):
+                    try:
+                        index = setting.choice_list.index(setting.default)
+                    except ValueError:
+                        index = 0
                 value = setting.choice_list[index]
             elif setting.type == int:
                 value = 0
@@ -226,7 +294,8 @@ class Settings(SettingInfos):
                         value = [item for item in setting.choice_list if item not in value]
                         break
 
-                    value.append(setting.choice_list[index-1])
+                    if 0 < index <= len(setting.choice_list):
+                        value.append(setting.choice_list[index - 1])
                     cur_bits = bits[:setting.bitwidth]
                     bits = bits[setting.bitwidth:]
             else:
@@ -236,8 +305,6 @@ class Settings(SettingInfos):
 
         setattr(self, 'starting_items', {})  # Settings string contains the GUI format, so clear the current value of the dict format.
         self.distribution.reset()  # convert starting_items
-        self.settings_string = self.get_settings_string()
-        self.numeric_seed = self.get_numeric_seed()
 
     def get_numeric_seed(self) -> int:
         # salt seed with the settings, and hash to get a numeric seed
@@ -309,7 +376,7 @@ class Settings(SettingInfos):
                     setattr(self, info.name, new_value)
                     self._disabled.add(info.name)
 
-        self.settings_string = self.get_settings_string()
+        self._refresh_settings_strings()
         self.numeric_seed = self.get_numeric_seed()
 
     def resolve_random_settings(self, cosmetic: bool, randomize_key: Optional[str] = None) -> None:
@@ -371,14 +438,13 @@ class Settings(SettingInfos):
             settings = self
         return {  # TODO: This should be done in a way that is less insane than a double-digit line dictionary comprehension.
             setting.name: (
-                {name: (
-                    {name: record.to_json() for name, record in record.items()} if isinstance(record, dict) else record.to_json()
-                ) for name, record in getattr(settings, setting.name).items()}
+                {name: _jsonify_starting_item_record(record)
+                for name, record in getattr(settings, setting.name).items()}
                 if setting.name == 'starting_items' and not legacy_starting_items else
                 getattr(settings, setting.name)
             )
             for setting in self.setting_infos.values()
-            if setting.shared and (
+            if (setting.shared or setting.visual_shared) and (
                 setting.name not in self._disabled or
                 # We want to still include settings disabled by randomized settings options if they're specified in distribution
                 ('_settings' in self.distribution.src_dict and setting.name in self.distribution.src_dict['_settings'].keys())
@@ -399,7 +465,9 @@ def get_settings_from_command_line_args() -> tuple[Settings, bool, str, bool, st
     parser.add_argument('--gui', help='Launch the GUI', action='store_true')
     parser.add_argument('--loglevel', default='info', const='info', nargs='?', choices=['error', 'info', 'warning', 'debug'], help='Select level of logging for output.')
     parser.add_argument('--settings_string', help='Provide sharable settings using a settings string. This will override all flags that it specifies.')
+    parser.add_argument('--visual_settings_string', help='Visual settings string (seed-neutral).')
     parser.add_argument('--convert_settings', help='Only convert the specified settings to a settings string. If a settings string is specified output the used settings instead.', action='store_true')
+    parser.add_argument('--convert_visual_settings', help='Only convert the specified settings to a VISUAL settings string. If a visual settings string is specified output the used visual settings instead.', action='store_true')
     parser.add_argument('--settings', help='Use the specified settings file to use for generation')
     parser.add_argument('--settings_preset', help="Use the given preset for base settings. Anything defined in the --settings file or the --settings_string will override the preset.")
     parser.add_argument('--seed', help='Generate the specified seed.')
@@ -449,13 +517,29 @@ def get_settings_from_command_line_args() -> tuple[Settings, bool, str, bool, st
     settings.output_settings = args.output_settings
 
     if args.settings_string is not None:
-        settings.update_with_settings_string(args.settings_string)
+        settings.update_with_gameplay_settings_string(args.settings_string)
+
+    if args.visual_settings_string is not None:
+        settings.update_with_visual_settings_string(args.visual_settings_string)
+
 
     if args.seed is not None:
         settings.update_seed(args.seed)
         settings.custom_seed = True
 
-    if args.convert_settings:
+    if args.convert_settings or args.convert_visual_settings:
+        if args.convert_visual_settings:
+            if args.visual_settings_string is not None:
+                settings.update_with_visual_settings_string(args.visual_settings_string)
+                out = {
+                    info.name: getattr(settings, info.name)
+                    for info in settings.setting_infos.values()
+                    if getattr(info, "visual_shared", False) and info.bitwidth > 0
+                }
+                print(json.dumps(out))
+            else:
+                print(settings.get_visual_settings_string())
+            sys.exit(0)
         if args.settings_string is not None:
             # used by the GUI which doesn't support the new dict-style starting items yet
             print(json.dumps(settings.to_json(legacy_starting_items=True)))

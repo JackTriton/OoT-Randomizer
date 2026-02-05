@@ -62,6 +62,15 @@ function dumpSettingsToFile(settingsObj) {
   fs.writeFileSync(pythonSourcePath + "settings.sav", JSON.stringify(settingsObj, null, 4));
 }
 
+function dumpSettingsToFileForPython(settingsObj) {
+  // Avoid feeding UI-only string fields into python Settings
+  let obj = Object.assign({}, settingsObj);
+  delete obj["settings_string"];
+  delete obj["visual_settings_string"];
+  obj["check_version"] = true;
+  fs.writeFileSync(pythonSourcePath + "settings.sav", JSON.stringify(obj, null, 4));
+}
+
 function dumpPresetsToFile(presetsString: string) {
   fs.writeFileSync(pythonSourcePath + "presets.sav", presetsString);
 }
@@ -239,7 +248,7 @@ post.on('convertSettingsToString', function (event) {
     return false;
 
   //Write settings obj to settings.sav
-  dumpSettingsToFile(data);
+  dumpSettingsToFileForPython(data);
 
   //console.log("generate string with settings obj", data);
 
@@ -256,6 +265,21 @@ post.on('convertSettingsToString', function (event) {
     post.send(window, 'convertSettingsToStringError', err);
   });
 
+  return true;
+});
+
+post.on('convertVisualSettingsToString', function (event) {
+  let data = event.data;
+  if (!data || typeof (data) != "object" || Object.keys(data).length < 1) return false;
+  dumpSettingsToFileForPython(data);
+  generator.parseVisualSettings(pythonPath, pythonGeneratorPath).then(res => {
+    post.send(window, 'convertVisualSettingsToStringSuccess', res);
+  }).catch((err) => {
+    if (typeof err === "string" && err.includes("ImportError: No module named tkinter")) {
+      displayPythonErrorAndExit(true);
+    }
+    post.send(window, 'convertVisualSettingsToStringError', err);
+  });
   return true;
 });
 
@@ -305,6 +329,20 @@ post.on('convertStringToSettings', function (event) {
   return true;
 });
 
+post.on('convertStringToVisualSettings', function (event) {
+  let data = event.data;
+  if (!data || typeof (data) != "string" || data.length < 1) return false;
+  generator.getVisualSettings(pythonPath, pythonGeneratorPath, data).then(res => {
+    post.send(window, 'convertStringToVisualSettingsSuccess', res);
+  }).catch((err) => {
+    if (typeof err === "string" && err.includes("ImportError: No module named tkinter")) {
+      displayPythonErrorAndExit(true);
+    }
+    post.send(window, 'convertStringToVisualSettingsError', err);
+  });
+  return true;
+});
+
 post.on('saveCurrentPresetsToFile', function (event) {
 
   let data = event.data;
@@ -331,8 +369,8 @@ post.on('generateSeed', function (event) {
     return false;
 
   //Write settings obj to settings.sav
-  dumpSettingsToFile(settingsFile);
-
+  dumpSettingsToFileForPython(settingsFile);
+  
   //console.log("generate seed with settings:", data);
 
   generator.romBuilding(pythonPath, pythonGeneratorPath, data).then(res => {

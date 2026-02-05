@@ -72,6 +72,7 @@ def get_setting_json(setting: str, web_version: bool, as_array: bool = False) ->
         'tooltip': remove_trailing_lines('<br>'.join(line.strip() for line in setting_info.gui_tooltip.split('\n'))),
         'type':          setting_info.gui_type,
         'shared':        setting_info.shared,
+        'visual_shared': getattr(setting_info, 'visual_shared', False),
     }
 
     if as_array:
@@ -198,6 +199,8 @@ def get_section_json(section: dict[str, Any], web_version: bool, as_array: bool 
 
     for setting in section['settings']:
         setting_json = get_setting_json(setting, web_version, as_array)
+        if setting_json is None:
+            continue
         if as_array:
             section_json['settings'].append(setting_json)
         else:

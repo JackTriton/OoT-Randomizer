@@ -14,6 +14,12 @@ function promiseFromChildProcess(child) {
   });
 }
 
+function _extractStringToken(output) {
+  // allow URL-safe base64 chars as well (-, _)
+  let m = output.match(/[A-Za-z0-9_-]+/g);
+  return (m && m[0]) ? m[0] : "";
+}
+
 function isMulti(args) {
 
   if (("world_count" in args) && args["world_count"] > 1)
@@ -337,13 +343,51 @@ function parseSettings(pythonPath, randoPath) {
         reject(output);
       }
       else {
-        resolve(output.match(/([a-zA-Z0-9])\w+/g)[0]);
+        resolve(_extractStringToken(output));
       }
 
     }).catch(err => {
       console.error('[parseSettings] settingsPY promise rejected: ' + err);
       reject(err);
     });
+  });
+}
+
+function getVisualSettings(pythonPath, randoPath, visualSettingsString) {
+  return new Promise(function (resolve, reject) {
+    let output = "";
+    let error = false;
+    let args = ['--convert_visual_settings', '--visual_settings_string', visualSettingsString];
+    let settingsPY = spawn(pythonPath + ' ' + '"' + randoPath + '"', args, { shell: true })
+      .on('error', err => {
+        console.error("[getVisualSettings] Error spawning process:", err);
+        reject(err);
+      });
+    settingsPY.stdout.on('data', data => { output += data.toString(); error = false; });
+    settingsPY.stderr.on('data', data => { output += data.toString(); error = true; });
+    promiseFromChildProcess(settingsPY).then(function () {
+      if (error) reject(output);
+      else resolve(output.replace(/\r?\n|\r/g, "\r\n"));
+    }).catch(err => reject(err));
+  });
+}
+
+function parseVisualSettings(pythonPath, randoPath) {
+  return new Promise(function (resolve, reject) {
+    let output = "";
+    let error = false;
+    let args = ['--convert_visual_settings'];
+    let settingsPY = spawn(pythonPath + ' ' + '"' + randoPath + '"', args, { shell: true })
+      .on('error', err => {
+        console.error("[parseVisualSettings] Error spawning process:", err);
+        reject(err);
+      });
+    settingsPY.stdout.on('data', data => { output += data.toString(); error = false; });
+    settingsPY.stderr.on('data', data => { output += data.toString(); error = true; });
+    promiseFromChildProcess(settingsPY).then(() => {
+      if (error) reject(output);
+      else resolve(_extractStringToken(output));
+    }).catch(err => reject(err));
   });
 }
 
@@ -394,6 +438,8 @@ module.exports = new EventEmitter();
 
 module.exports.getSettings = getSettings;
 module.exports.parseSettings = parseSettings;
+module.exports.getVisualSettings = getVisualSettings;
+module.exports.parseVisualSettings = parseVisualSettings;
 module.exports.romBuilding = romBuilding;
 module.exports.cancelRomBuilding = cancelRomBuilding;
 module.exports.testPythonPath = testPythonPath;
