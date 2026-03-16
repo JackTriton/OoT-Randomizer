@@ -4,8 +4,8 @@ import json
 # Property of the Language
 lang_property = {
     "base": "en", # base of the language [en, jp]
-    "display_name": "English", # Name that displayed as selection
-    "description": "Play with English language.", # Not implemented, it will be description which you can see while hovering above
+    "display_name": "Spanish", # Name that displayed as selection
+    "description": "Play with Spanish language.", # Not implemented, it will be description which you can see while hovering above
     "align_text": "Left" # alignation of the texts [Left, Center, Right]
 }
 
@@ -3734,7 +3734,10 @@ def replace_char_in_dict(d: dict, replace_list: list[list[str, str]]) -> dict:
 
     return replace_recursive(d)
 
-replace_list = []
+replace_list = [
+    [ô, ñ],
+    [Ô, Ñ]
+]
 lang_info = replace_char_in_dict(lang_info, replace_list)
 
 
