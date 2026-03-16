@@ -4,8 +4,8 @@ import json
 # Property of the Language
 lang_property = {
     "base": "en", # base of the language [en, jp]
-    "display_name": "English", # Name that displayed as selection
-    "description": "Play with English language.", # Not implemented, it will be description which you can see while hovering above
+    "display_name": "French", # Name that displayed as selection
+    "description": "Play with French language.", # Not implemented, it will be description which you can see while hovering above
     "align_text": "Left" # alignation of the texts [Left, Center, Right]
 }
 
