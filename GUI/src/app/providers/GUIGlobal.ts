@@ -615,8 +615,10 @@ export class GUIGlobal implements OnDestroy {
 
     //Add GUI only options
     this.generator_settingsMap["settings_string"] = userSettings && "settings_string" in userSettings ? userSettings["settings_string"] : "";
+    this.generator_settingsMap["visual_settings_string"] = userSettings && "visual_settings_string" in userSettings ? userSettings["visual_settings_string"] : "";
     this.generator_settingsMap["theme"] = userSettings && "theme" in userSettings ? userSettings["theme"] : "";
     this.generator_settingsVisibilityMap["settings_string"] = true;
+    this.generator_settingsVisibilityMap["visual_settings_string"] = true;
 
     console.log("JSON Settings Data:", guiSettings);
     console.log("Last User Settings:", userSettings);
@@ -1121,6 +1123,7 @@ export class GUIGlobal implements OnDestroy {
 
       //Not mapped settings need to be deleted manually
       delete settingsFile["settings_string"];
+      delete settingsFile["visual_settings_string"];
       delete settingsFile["theme"]
 
       //Delete all shared = false keys from map since they aren't included in the seed
@@ -1200,6 +1203,40 @@ export class GUIGlobal implements OnDestroy {
     });
   }
 
+
+  convertVisualSettingsToString() {
+    var self = this;
+    return new Promise<string>(function (resolve, reject) {
+      if (self.getGlobalVar('electronAvailable')) {
+        //Electron
+        post.send(window, 'convertVisualSettingsToString', self.createSettingsFileObject(true, false, false, true)).then(_event => {
+          var listenerSuccess = post.once('convertVisualSettingsToStringSuccess', function (event) {
+            listenerError.cancel();
+            resolve(event.data);
+          });
+          var listenerError = post.once('convertVisualSettingsToStringError', function (event) {
+            listenerSuccess.cancel();
+            console.error("[convertVisualSettingsToString] Python Error:", event.data);
+            reject(event.data);
+          });
+        }).catch(err => {
+          console.error("[convertVisualSettingsToString] Post-Robot Error:", err);
+          reject(err);
+        });
+      } else {
+        //Web
+        let url = (<any>window).location.protocol + "//" + (<any>window).location.host
+          + "/settings/parse?version=" + self.getGlobalVar("webSourceVersion") + "&visual=1";
+        self.http.post(url, JSON.stringify(self.createSettingsFileObject(false, false, true)), {
+          responseType: "text", headers: { "Content-Type": "application/json" }
+        }).toPromise().then(res => resolve(res)).catch(err => {
+          console.error("[convertVisualSettingsToString] Web Error:", err);
+          reject(err);
+        });
+      }
+    });
+  }
+
   convertStringToSettings(settingsString: string) {
     var self = this;
 
@@ -1240,6 +1277,38 @@ export class GUIGlobal implements OnDestroy {
           resolve(res);
         }).catch(err => {
           console.error("[convertStringToSettings] Web Error:", err);
+          reject(err);
+        });
+      }
+    });
+  }
+
+  convertStringToVisualSettings(visualSettingsString: string) {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+      if (self.getGlobalVar('electronAvailable')) { //Electron
+        post.send(window, 'convertStringToVisualSettings', visualSettingsString).then(_event => {
+          var listenerSuccess = post.once('convertStringToVisualSettingsSuccess', function (event) {
+            listenerError.cancel();
+            let data = JSON.parse(event.data);
+            resolve(data);
+          });
+          var listenerError = post.once('convertStringToVisualSettingsError', function (event) {
+            listenerSuccess.cancel();
+            console.error("[convertStringToVisualSettings] Python Error:", event.data);
+            reject(event.data);
+          });
+        }).catch(err => {
+          console.error("[convertStringToVisualSettings] Post-Robot Error:", err);
+          reject(err);
+        });
+      } else { //Web
+        let url = (<any>window).location.protocol + "//" + (<any>window).location.host
+          + "/settings/get?version=" + self.getGlobalVar("webSourceVersion")
+          + "&settingsString=" + encodeURIComponent(visualSettingsString)
+          + "&visual=1";
+        self.http.get(url, { responseType: "json" }).toPromise().then(res => resolve(res)).catch(err => {
+          console.error("[convertStringToVisualSettings] Web Error:", err);
           reject(err);
         });
       }
@@ -1292,6 +1361,10 @@ export class GUIGlobal implements OnDestroy {
         reject({ short: "Generation aborted.", long: "Generation aborted." });
         return;
       }
+
+      // UI-only strings: never send to python
+      delete settingsMap["settings_string"];
+      delete settingsMap["visual_settings_string"];
 
       //Hack: fromPatchFile forces generation count to 1 to avoid wrong percentage calculation
       if (fromPatchFile)
@@ -1559,6 +1632,10 @@ export class GUIGlobal implements OnDestroy {
       throw { error: "The generation was aborted due to previous errors!" };
     }
 
+    // UI-only strings: never send to python
+    delete settingsFile["settings_string"];
+    delete settingsFile["visual_settings_string"];
+
     //Add distribution file back into map as string if available, else clear it
     if (plandoFileSeed) {
       settingsFile["distribution_file"] = plandoFileSeed;
@@ -1660,6 +1737,10 @@ export class GUIGlobal implements OnDestroy {
     if (!settingsFile) {
       throw { error: "The patching was aborted due to previous errors!" };
     }
+
+    // UI-only strings: never send to python
+    delete settingsFile["settings_string"];
+    delete settingsFile["visual_settings_string"];
 
     //Add cosmetics plando file back into map as string if available, else clear it
     if (plandoFileCosmetics) {

@@ -65,12 +65,12 @@
   }
 
   .settingsTabset {
-    height: calc(91vh - 260px);
+    height: calc(91vh - 310px);
     min-height: 490px;
     padding: 0 7px !important;
 
     @media (max-width: 400px) {
-      height: calc(88vh - 260px);
+      height: calc(88vh - 310px);
       min-height: 460px;
     }
 
@@ -89,7 +89,7 @@
     margin-top: 5px;
 
     @media (max-width: 700px) {
-      height: 210px;
+      height: 310px;
     }
 
     nb-tab {

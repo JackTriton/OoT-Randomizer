@@ -101,7 +101,7 @@ export class GeneratorComponent implements OnInit {
 
     //Electron only: Ensure settings string is up-to-date on app launch
     if (this.global.getGlobalVar('electronAvailable'))
-      this.getSettingsString();
+      this.getSettingsStrings();
     else //Web only: Check if we should auto import settings/presets from a prior version
       this.checkAutoImportSettings();
   }
@@ -432,8 +432,55 @@ export class GeneratorComponent implements OnInit {
     });
   }
 
+  private normalizeSettingsString(value: any): string {
+    if (typeof value !== "string") return "";
+    let s = value.trim().replace(/[^a-zA-Z0-9_-]/g, "");
+    if (s.length > 0 && s.length < 8) s = s.padEnd(8, "A");
+    return s;
+  }
+
   copySettingsString() {
     this.global.copyToClipboard(this.global.generator_settingsMap["settings_string"]);
+  }
+
+
+  copyVisualSettingsString() {
+    this.global.copyToClipboard(this.global.generator_settingsMap["visual_settings_string"]);
+  }
+
+  getSettingsStrings() {
+    this.settingsLocked = true;
+    this.global.convertSettingsToString()
+      .then(settingsStr => {
+        this.global.generator_settingsMap["settings_string"] = settingsStr;
+        return this.global.convertVisualSettingsToString();
+      })
+      .then(visualStr => {
+        this.global.generator_settingsMap["visual_settings_string"] = this.normalizeSettingsString(visualStr);
+        this.global.saveCurrentSettingsToFile();
+        this.settingsLocked = false;
+        if (this.settingsBusy) {
+          this.settingsBusy = false;
+          this.afterSettingChange(this.settingsBusySaveOnly);
+          this.settingsBusySaveOnly = true;
+        }
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+      })
+      .catch(err => {
+        this.settingsLocked = false;
+        if (this.settingsBusy) {
+          this.settingsBusy = false;
+          this.afterSettingChange(this.settingsBusySaveOnly);
+          this.settingsBusySaveOnly = true;
+        }
+        this.cd.markForCheck();
+        this.cd.detectChanges();
+        this.dialogService.open(ErrorDetailsWindowComponent, {
+          autoFocus: true, closeOnBackdropClick: true, closeOnEsc: true,
+          hasBackdrop: true, hasScroll: false, context: { errorMessage: err }
+        });
+      });
   }
 
   getSettingsString() {
@@ -476,12 +523,43 @@ export class GeneratorComponent implements OnInit {
     });
   }
 
+
+  getVisualSettingsString() {
+    this.settingsLocked = true;
+    this.global.convertVisualSettingsToString().then(res => {
+      this.global.generator_settingsMap["visual_settings_string"] = this.normalizeSettingsString(res);
+      this.global.saveCurrentSettingsToFile();
+      this.settingsLocked = false;
+      if (this.settingsBusy) {
+        this.settingsBusy = false;
+        this.afterSettingChange(this.settingsBusySaveOnly);
+        this.settingsBusySaveOnly = true;
+      }
+      this.cd.markForCheck();
+      this.cd.detectChanges();
+    }).catch((err) => {
+      this.settingsLocked = false;
+      if (this.settingsBusy) {
+        this.settingsBusy = false;
+        this.afterSettingChange(this.settingsBusySaveOnly);
+        this.settingsBusySaveOnly = true;
+      }
+      this.cd.markForCheck();
+      this.cd.detectChanges();
+      this.dialogService.open(ErrorDetailsWindowComponent, {
+        autoFocus: true, closeOnBackdropClick: true, closeOnEsc: true,
+        hasBackdrop: true, hasScroll: false, context: { errorMessage: err }
+      });
+    });
+  }
+
   importSettingsString() {
 
     this.generatorBusy = true;
 
-    this.global.convertStringToSettings(this.global.generator_settingsMap["settings_string"]).then(res => {
-
+    const normalized = this.normalizeSettingsString(this.global.generator_settingsMap["settings_string"]);
+    this.global.generator_settingsMap["settings_string"] = normalized;
+    this.global.convertStringToSettings(normalized).then(res => {
       //console.log(res);
 
       this.global.applySettingsObject(res);
@@ -502,6 +580,30 @@ export class GeneratorComponent implements OnInit {
 
       this.dialogService.open(DialogWindowComponent, {
         autoFocus: true, closeOnBackdropClick: true, closeOnEsc: true, hasBackdrop: true, hasScroll: false, context: { dialogHeader: "Error", dialogMessage: "The entered settings string seems to be invalid!" }
+      });
+    });
+  }
+
+
+  importVisualSettingsString() {
+    this.generatorBusy = true;
+    const normalized = this.normalizeSettingsString(this.global.generator_settingsMap["visual_settings_string"]);
+    this.global.generator_settingsMap["visual_settings_string"] = normalized;
+    this.global.convertStringToVisualSettings(normalized).then(res => {
+      this.global.applySettingsObject(res);
+      this.global.saveCurrentSettingsToFile();
+      this.recheckAllSettings("", false, true);
+      this.generatorBusy = false;
+      this.cd.markForCheck();
+      this.cd.detectChanges();
+    }).catch((_err) => {
+      this.generatorBusy = false;
+      this.cd.markForCheck();
+      this.cd.detectChanges();
+      this.dialogService.open(DialogWindowComponent, {
+        autoFocus: true, closeOnBackdropClick: true, closeOnEsc: true,
+        hasBackdrop: true, hasScroll: false,
+        context: { dialogHeader: "Error", dialogMessage: "The entered visual settings string seems to be invalid!" }
       });
     });
   }
@@ -1463,7 +1565,7 @@ export class GeneratorComponent implements OnInit {
           this.cd.detectChanges();
         }
         else {
-          this.getSettingsString();
+          this.getSettingsStrings();
         }
       }, 0);
     }

@@ -53,6 +53,10 @@ per_world_keys = (
 )
 
 
+def normalize_settings_string(s: str):
+    return s + "A" * (8 - len(s))
+
+
 class Record:
     def __init__(self, properties: Optional[dict[str, Any]] = None, src_dict: Optional[dict[str, Any]] = None) -> None:
         self.properties: dict[str, Any] = properties if properties is not None else getattr(self, "properties")
@@ -1302,6 +1306,7 @@ class Distribution:
             'password': CollapseList(self.password),
             ':seed': self.settings.seed,
             ':settings_string': self.settings.settings_string,
+            ':visual_settings_string': normalize_settings_string(self.settings.visual_settings_string),
             ':enable_distribution_file': self.settings.enable_distribution_file,
             'settings': self.settings.to_json(),
         }

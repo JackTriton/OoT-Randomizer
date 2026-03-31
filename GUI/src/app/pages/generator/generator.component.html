@@ -271,6 +271,12 @@
             <button class="footerButton" nbButton status="info" size="small" (click)="importSettingsString()">Import</button>
             <!--Padding-->
             <div class="settingPadding"></div>
+            <p class="footerInputLabel">Visual Settings String</p>
+            <input class="footerInput" nbInput type="text" maxlength="2000" fieldSize="small" (focus)="inputFocusIn('visual_settings_string')" (focusout)="inputFocusOut('visual_settings_string', true)" [(ngModel)]="global.generator_settingsMap['visual_settings_string']">
+            <button class="footerButton" nbButton status="info" size="small" (click)="copyVisualSettingsString()">Copy</button>
+            <button class="footerButton" nbButton status="info" size="small" (click)="importVisualSettingsString()">Import</button>
+            <!--Padding-->
+            <div class="settingPadding"></div>
             <p class="footerInputLabel">Seed</p>
             <input class="footerInput" nbInput type="text" maxlength="260" fieldSize="small" [(ngModel)]="seedString">
             <!--Padding-->
@@ -283,6 +289,16 @@
             <button class="footerButton" nbButton status="info" size="small" (click)="copySettingsString()">Copy</button>
             <button class="footerButton" nbButton status="info" size="small" (click)="settingsBusy = true; getSettingsString()">Get</button>
             <button class="footerButton" nbButton status="info" size="small" (click)="importSettingsString()">Import</button>
+            <!--Padding-->
+            <div class="settingPadding"></div>
+            <p class="footerInputLabel">Visual Settings String</p>
+            <input class="footerInputShort" nbInput type="text" maxlength="2000" fieldSize="small" 
+                  (focus)="inputFocusIn('visual_settings_string')"
+                  (focusout)="inputFocusOut('visual_settings_string', true)"
+                  [(ngModel)]="global.generator_settingsMap['visual_settings_string']">
+            <button class="footerButton" nbButton status="info" size="small" (click)="copyVisualSettingsString()">Copy</button>
+            <button class="footerButton" nbButton status="info" size="small" (click)="settingsBusy = true; getVisualSettingsString()">Get</button>
+            <button class="footerButton" nbButton status="info" size="small" (click)="importVisualSettingsString()">Import</button>
             <!--Padding-->
             <div class="settingPadding"></div>
             <p class="footerInputLabel">Seed</p>
