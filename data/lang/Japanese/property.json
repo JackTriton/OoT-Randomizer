@@ -9596,6 +9596,14 @@
         }
     },
     "prefix": {
+        "case": {
+            "definite": {
+                "no_gender": ""
+            },
+            "indefinite": {
+                "no_gender": ""
+            }
+        },
         "gender": [
             "no_gender"
         ],

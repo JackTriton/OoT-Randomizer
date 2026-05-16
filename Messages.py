@@ -145,7 +145,7 @@ CHARACTER_MAP.update((chr(c), c) for c in range(0x20, 0x7e))
 CHARACTER_MAP.update((c, ix) for ix, c in enumerate(
         (
             '\u203e'             # 0x7f
-            'ÀîÂÄÇÈÉÊËÏÔÖÙÛÜß'   # 0x80 .. #0x8f
+            'ÀÁÂÄÇÈÉÊËÏÔÖÙÛÜß'   # 0x80 .. #0x8f
             'àáâäçèéêëïôöùûü'    # 0x90 .. #0x9e
         ),
         start=0x7f
