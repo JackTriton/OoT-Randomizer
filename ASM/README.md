@@ -9,6 +9,14 @@ Advanced modifications to the Randomzier source require a bit more software than
 - Download the armips assembler: <https://github.com/Kingcom/armips>
   - [Windows automated builds](https://buildbot.orphis.net/armips/)
   - On other platforms you'll need either `clang` or `gcc`, `cmake`, and either `ninja` or `make` installed. All of these should be available in the package repositories of every major Linux distribution and Homebrew on macOS. After, follow the [building from source instructions](https://github.com/Kingcom/armips#22-building-from-source).
+  - On macOS, if you use the OoTR Homebrew tap, install armips and link it into this repository:
+
+        brew tap OoTRandomizer/tap
+        brew install --HEAD OoTRandomizer/tap/armips
+        mkdir -p ASM/tools
+        ln -sf "$(which armips)" ASM/tools/armips
+
+    If Homebrew refuses to use the tap until it is trusted, run `brew trust --formula ootrandomizer/tap/armips` and retry the install command.
 - Put the armips executable in the `tools` directory, or somewhere in your PATH.
 - Put the ROM you want to patch at `roms/base.z64`. This needs to be an uncompressed ROM; OoTRandomizer will produce one at ZOOTDEC.z64 when you run it with a compressed ROM.
 - Run `python build.py --no-compile-c`, which will:
@@ -37,6 +45,24 @@ Recompiling the C code for randomizer requires the N64 development tools to be i
   - **Using WSL**: Install the latest Debian Linux from the Windows Store and follow the below instructions for Debian.
 - **Debian**: [Follow this how-to](https://practicerom.com/public/packages/debian/howto.txt) on adding the toolchain's package repository and installing the pre-built binaries.
   - You will also need to run `apt install build-essential` or `apt install make` if `make` is not installed.
+- **macOS Apple Silicon (arm64)**: Build n64 from source into `ASM/tools/n64`. Homebrew installs GNU make as `gmake`, and the n64 build will automatically use the Apple Silicon-compatible toolchain subset.
+  - Use a conservative path for the repository. Avoid spaces and underscores in the full path while building the n64 toolchain.
+  - Install the usual macOS prerequisites first:
+
+        xcode-select --install
+        brew install git make wget xz diffutils texinfo coreutils
+
+  - Then build n64:
+
+        cd /path/to/OoT-Randomizer
+        git clone https://github.com/glankk/n64.git ASM/tools/n64
+        cd ASM/tools/n64
+        ./configure --prefix="/path/to/OoT-Randomizer/ASM/tools/n64"
+        gmake toolchain-all
+        gmake toolchain-install
+        gmake install-sys
+
+  - The Apple Silicon build installs the compiler/binutils and the C headers required for compile-only patch builds. It does not install target `libgcc` or `newlib` runtime libraries.
 - **Any platform with a gcc compiler**: Build from source from the [glankk/n64](https://github.com/glankk/n64) repository. Simply follow the readme.
   - The dependency install script may not install all the necessary libraries depending on your OS version. Take a look at the output from the configure step to see if anything is missing.
   - It is easiest if you use `--prefix=/the/path/to/OoT-Randomizer/ASM/tools` for the `./configure` step. This will install all the toolchain in a way the build script can use, however this is inconvenient if you plan to use the toolchain for other projects as well.
@@ -45,7 +71,9 @@ Recompiling the C code for randomizer requires the N64 development tools to be i
 
 You can substitute using the `tools` folder with adding the `n64/bin` folder to your environment PATH if you need an advanced setup.
 ### Running
-To recompile the C modules, use `python build.py` in this directory, or adjust the path to `build.py` relative to your terminal's working directory.
+To recompile the C modules, use `python build.py` in this directory, or adjust the path to `build.py` relative to your terminal's working directory. On macOS, use `python3` if `python` is not available.
+
+Before building, you can run `python3 build.py --check-toolchain` from the `ASM` directory, or `python3 ASM/build.py --check-toolchain` from the repository root, to check that `armips`, GNU make, the MIPS64 toolchain, and the target C standard headers are visible.
 
 ## Debugging Symbols for Project64
 To generate symbols for the Project64 debugger, use the `--pj64sym` option:
