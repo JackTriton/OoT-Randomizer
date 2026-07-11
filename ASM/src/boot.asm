@@ -3,7 +3,7 @@
 ;   - this isn't strictly necessary, but adds flexibility for the future
 .orga 0xD1B0
 .area 0x100, 0
-    .word 0x03480000, 0x03480000 + PAYLOAD_END - PAYLOAD_START, 0x03480000, 0
+    .word PAYLOAD_ROM_START, PAYLOAD_ROM_START + PAYLOAD_END - PAYLOAD_START, PAYLOAD_ROM_START, 0
 .endarea
 
 ; Load new code from ROM

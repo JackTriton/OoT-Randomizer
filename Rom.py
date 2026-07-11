@@ -181,6 +181,24 @@ class Rom(BigStream):
     def sym_length(self, symbol_name: str) -> int:
         return self.symbols[symbol_name]['length']
 
+    def payload_vram_to_rom(self, address: int) -> int:
+        """Convert a pointer inside the ASM payload from VRAM to ROM."""
+        payload_start = int(self.patch_symbols.get('PAYLOAD_START', 0x80400000))
+        payload_end = int(self.patch_symbols.get('PAYLOAD_END', payload_start + 0x200000))
+        payload_rom_start = int(self.patch_symbols.get('PAYLOAD_ROM_START', 0x03480000))
+
+        if payload_start <= address < payload_end:
+            return address - payload_start + payload_rom_start
+
+        # Compatibility with older generated patch_symbols.json files.
+        if 0x80400000 <= address < 0x80600000:
+            return address - 0x80400000 + 0x03480000
+
+        raise ValueError(
+            f'Address {address:#010x} is outside payload range '
+            f'{payload_start:#010x}-{payload_end:#010x}'
+        )
+
     def write_to_file(self, file: str) -> None:
         self.verify_dmadata()
         self.update_header()
